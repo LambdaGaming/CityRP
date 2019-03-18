@@ -1,6 +1,4 @@
 
-ischallenged = false
-
 hook.Add( "PlayerSpawn", "CheckChallenge", function( ply )
 	if !file.Exists( "challenge", "DATA" ) then
 		file.CreateDir( "challenge" )
