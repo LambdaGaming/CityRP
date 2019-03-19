@@ -1,7 +1,7 @@
 
-function BombingRun()
-	local expos = {}
-	if SERVER then
+if SERVER then
+	function BombingRun()
+		local expos = {}
 		DarkRP.notifyAll( 1, 10, "Bomber incoming! Seek shelter!" )
 		for k,v in pairs( player.GetAll() ) do
 			v:SendLua( "surface.PlaySound( 'nazi_invasion/air_raid_siren_distant.ogg' )" )
