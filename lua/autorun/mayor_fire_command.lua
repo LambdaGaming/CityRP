@@ -1,16 +1,21 @@
 
 if SERVER then
 	hook.Add( "PlayerSay", "playersayfiremayor", function( ply, text, public )
-		if text == "!firemayor" and ply:Team() == TEAM_BOUNTY then
-			for k,v in pairs( player.GetAll() ) do
-				if v:Team() != TEAM_MAYOR then return end
-				if v:Team() == TEAM_MAYOR then
-					v:teamBan( TEAM_MAYOR, 600 )
-					v:changeTeam( GAMEMODE.DefaultTeam, true, false )
+		if text == "!firemayor" then
+			if ply:Team() == TEAM_BOUNTY then
+				if team.NumPlayers( TEAM_MAYOR ) == 0 then
+					DarkRP.notify( ply, 1, 6, "There isn't a mayor to fire!" )
+					return ""
 				end
-				DarkRP.notify( v, 0, 6, "Internal affairs has fired the mayor for being corrupt!" )
+				local mayor = team.GetPlayers( TEAM_MAYOR )
+				mayor:teamBan( TEAM_MAYOR, 600 )
+				mayor:changeTeam( GAMEMODE.DefaultTeam, true, false )
+				DarkRP.notifyAll( 0, 6, "Internal affairs has fired the mayor for being corrupt!" )
+				return ""
+			else
+				DarkRP.notify( ply, 1, 6, "You must be an IA Agent to fire the mayor!" )
+				return ""
 			end
-			return ""
-        end
+        	end
 	end )
 end
