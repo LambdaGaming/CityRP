@@ -1,5 +1,4 @@
 
-CookFish = nil
 util.PrecacheModel( "models/props_interiors/pot02a.mdl" ) --We need to precache the pot model so it can be spawned on the stove when the player uses it
 
 function CookInit(ply, before, after)
