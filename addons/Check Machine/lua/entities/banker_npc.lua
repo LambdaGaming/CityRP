@@ -27,11 +27,11 @@ function ENT:AcceptInput( activator, caller )
 	if !caller:IsPlayer() then return end
 	if caller:Team() == TEAM_BANKER and GetGlobalString( "ActiveEvent" ) == "Money Transfer" and !self.checkused then
 		local check = ents.Create("check")
-		check:Spawn()
+		check:Spawn() --Spawns an event check when the player uses the banker NPC if the event is active
 		check:SetPos( caller:GetPos() + Vector(30, 0, 0) )
-		check.IsEventCheck = true
+		check.IsEventCheck = true --Important feature to make sure that players don't cash this check in for more money than it's actually worth
 		DarkRP.notify( caller, 0, 6, "Take this check to the check machine to for a reward." )
-		self.checkused = true
+		self.checkused = true --Added to prevent players from spawning multiple checks
 	end
 end
 
