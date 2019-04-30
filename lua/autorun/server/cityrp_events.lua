@@ -199,9 +199,8 @@ EventPos["rp_newexton2_v4h"] = {
 	}
 }
 
-local ply = player.GetAll()
-
 local function GetCurrentEvent()
+
     return GetGlobalString( "ActiveEvent" )
 end
 
@@ -273,7 +272,7 @@ function OverturnedTruck()
 		event_trailer.IsEventTrailer = true
 		event_trailer:GetPhysicsObject():SetMass( 10000 )
 		
-		for k,v in pairs( ply ) do
+		for k,v in pairs( player.GetAll() ) do
 			if v:Team() == TEAM_TOWER or v:isCP() then
 				DarkRP.notify( v, 0, 6, "A truck has been reported to have overturned somewhere on the map, find it and clear the road!" )
 			end
@@ -297,7 +296,7 @@ function OverturnedTruckEnd()
 	if IsValid( event_truck ) then event_truck:Remove() end
 	if IsValid( event_trailer ) then event_trailer:Remove() end
 	DarkRP.notifyAll( 0, 6, "The overturned truck has been cleared from the road!" )
-	for k,v in pairs( ply ) do
+	for k,v in pairs( player.GetAll() ) do
 		if v:Team() == TEAM_TOWER then
 			v:addMoney( 600 )
 			DarkRP.notify( v, 0, 6, "You have been awarded $600 for clearing the road of the overturned truck." )
@@ -340,6 +339,16 @@ hook.Add( "Think", "OverturnedTruckThink", function()
 	end
 end )
 
+hook.Add( "PlayerInitialSpawn", "ActiveShooterRelationship", function( ply )
+	if GetGlobalBool( "EventActive" ) and GetGlobalString( "ActiveEvent" ) == "Active Shooter" then
+		for k,v in pairs( ents.FindByClass( "npc_citizen" ) ) do
+			if v.IsEventNPC then
+				v:AddEntityRelationship( ply, D_HT, 99 )
+			end
+		end
+	end
+end )
+
 function ActiveShooter()
 	local numcops = team.NumPlayers( TEAM_POLICEBOSS ) + team.NumPlayers( TEAM_SWATBOSS ) + team.NumPlayers( TEAM_OFFICER ) + team.NumPlayers( TEAM_SWAT ) + team.NumPlayers( TEAM_FBI ) + team.NumPlayers( TEAM_UNDERCOVER )
 	if numcops == 0 then return end
@@ -368,7 +377,7 @@ function ActiveShooter()
 	shooter:Activate()
 	shooter:Give( "weapon_smg1" )
 	shooter:SetHealth( math.random( 100, 500 ) )
-	for k,v in pairs( ply ) do
+	for k,v in pairs( player.GetAll() ) do
 		shooter:AddEntityRelationship( v, D_HT, 99 )
 	end
 	shooter.IsEventNPC = true
@@ -380,7 +389,7 @@ end
 function ActiveShooterEnd( killer )
 	killer:addMoney( 600 )
 	DarkRP.notify( killer, 0, 6, "You have been rewarded $600 for stopping the threat." )
-	for k,v in pairs( ply ) do
+	for k,v in pairs( player.GetAll() ) do
 		if v != killer then
 			DarkRP.notify( v, 0, 6, killer:Nick().." has killed the active shooter and ended the threat!" )
 		end
@@ -409,7 +418,7 @@ function HouseFire()
 	if numems == 0 then PickRandomEvent() return end
 	if vFiresCount > 0 then PickRandomEvent() return end
 	CreateVFireBall( 1200, 200, RandFire() + Vector( 0, 0, 100 ), Vector( 0, 0, 0 ), nil )
-	for k,v in pairs( ply ) do
+	for k,v in pairs( player.GetAll() ) do
 		if v:IsEMS() then
 			DarkRP.notify( v, 0, 6, "A fire has been reported to have broken out in a residential building. Find the fire and put it out!" )
 		end
@@ -419,7 +428,7 @@ function HouseFire()
 end
 
 --[[ function HouseFireEnd() --Currently can't get the entity that extinguished the fire, so awards can't work
-    for k,v in pairs( ply ) do
+    for k,v in pairs( player.GetAll() ) do
     	if v:IsEMS() then
     		v:addMoney( 500 )
     		DarkRP.notify( v, 0, 6, "You have been awarded $500 for extinguishing a house fire." )
@@ -437,7 +446,7 @@ end ) ]]
 
 function MoneyTransfer()
 	if team.NumPlayers( TEAM_BANKER ) == 0 then return end
-	for k,v in pairs( ply ) do
+	for k,v in pairs( player.GetAll() ) do
 		if v:isCP() or v:Team() == TEAM_BANKER then
 			DarkRP.notify( v, 0, 6, "A check needs tranfered from the banker NPC to the check machine!" )
 		end
