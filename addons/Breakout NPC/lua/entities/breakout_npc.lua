@@ -17,7 +17,7 @@ function ENT:Initialize()
 		self:SetUseType(SIMPLE_USE)
 		self:DropToFloor()
 	end
-	beingused = false
+	self.beingused = false
 end
 
 local function StartCooldown( self )
@@ -37,16 +37,16 @@ function ENT:AcceptInput(inputname, caller)
 		DarkRP.notify( caller, 1, 6, "Cooldown timer: "..string.ToMinutesSeconds( ( timer.TimeLeft( "BreakoutCooldown" ) ) ) )
 		return
 	end
-	if beingused then
+	if self.beingused then
 		DarkRP.notify( caller, 1, 6, "This NPC is already being used!")
 		return
 	end
 	caller:wanted(nil, "Breaking out of jail.") --Wants the player through DarkRP if they are a criminal job.
 	DarkRP.notify( caller, 0, 6, "Please wait for your release.")
-	beingused = true
+	self.beingused = true
 	self:StartRelease( caller, self )
 	timer.Create( "BreakoutTimer", 180, 1, function() 
-		if beingused then
+		if self.beingused then
 			caller:ChatPrint( "Release complete. You have been rewarded $500." )
 			caller:addMoney( 500 )
 			if caller:isWanted() then caller:unWanted() end
@@ -56,7 +56,7 @@ function ENT:AcceptInput(inputname, caller)
 			elseif caller:IsHandcuffed() then
 				caller:StripWeapon( "weapon_handcuffed" )
 			end
-			beingused = false
+			self.beingused = false
 		end
 	end )
 	timer.Create( "BreakoutLoop", 30, 9, function()
@@ -65,7 +65,7 @@ function ENT:AcceptInput(inputname, caller)
 end
 
 function ENT:StartRelease( caller, self )
-	if IsValid( caller ) and beingused then
+	if IsValid( caller ) and self.beingused then
 		hook.Add( "Think", "BreakoutThink", function()
 			if caller:GetPos():DistToSqr( self:GetPos() ) > 250000 then --DistToSqr is better for performance than just Distance
 				DarkRP.notifyAll(1, 5, caller:Nick()..' exited the release area!')
