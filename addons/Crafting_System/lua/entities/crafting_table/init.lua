@@ -62,7 +62,7 @@ net.Receive( "StartCrafting", function( len, ply )
 			end
 		end
 		for k,v in pairs( ents.FindInSphere( self:GetPos(), 120 ) ) do
-			if v:GetClass() == "crafting_book" and v:GetEntName() == ent then
+			if v:GetClass() == "crafting_blueprint" and v:GetEntName() == ent then
 				self.gotblueprint = true
 				v:Remove()
 				break
