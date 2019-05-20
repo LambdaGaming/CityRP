@@ -76,7 +76,7 @@ function ENT:Use( caller, activator )
 	end
 	self:EmitSound( "physics/metal/metal_large_debris1.wav" )
 	local randwep = table.Random( BLUEPRINT_CONFIG_TIER1 )
-	local e = ents.Create( "crafting_book" )
+	local e = ents.Create( "crafting_blueprint" )
 	e:SetPos( self:GetPos() + Vector( 0, 30, 0 ) )
 	e:Spawn()
 	e:SetEntName( randwep[1] )
