@@ -12,7 +12,7 @@ ENT.Category = "Superadmin Only"
 function ENT:SpawnFunction( ply, tr )
 	if !tr.Hit then return end
 	local SpawnPos = tr.HitPos + tr.HitNormal * 1
-	local ent = ents.Create( "crafting_book" )
+	local ent = ents.Create( "crafting_blueprint" )
 	ent:SetPos( SpawnPos )
 	ent:Spawn()
 	ent:Activate()
@@ -43,7 +43,7 @@ function ENT:Initialize()
 end
 
 function ENT:Use( caller, activator )
-
+	DarkRP.notify( caller, 0, 6, "Place this near a crafting table to use it." )
 end
 
 if CLIENT then
