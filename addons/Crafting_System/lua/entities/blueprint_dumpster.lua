@@ -22,7 +22,7 @@ BLUEPRINT_CONFIG_TIER1 = { --Blueprints you can get from the dumpster
 	{ "cw_shorty", "Serbu Super-Shorty (Shotgun)" }
 }
 
-BLUEPRINT_CONFIG_TIER2 = { --Blueprints you can get from things like the smuggle system
+BLUEPRINT_CONFIG_TIER2 = { --Blueprints you can get from smuggling weapons, pd bank, and random events
 	{ "cw_ak74", "AK-74 (Rifle)" },
 	{ "cw_m3super90", "M3 Super 90 (Shotgun)" },
 	{ "cw_scarh", "SCAR-H (Rifle)" },
@@ -34,7 +34,7 @@ BLUEPRINT_CONFIG_TIER2 = { --Blueprints you can get from things like the smuggle
 	{ "cw_attpack_various", "40mm Grenade Launcher Rifle Attachment" }
 }
 
-BLUEPRINT_CONFIG_TIER3 = { --Blueprints you can get from things like robbing the gov bank and deposit boxes
+BLUEPRINT_CONFIG_TIER3 = { --Blueprints you can get from gov bank and deposit boxes
 	{ "cw_frag_grenade", "Frag Grenade" },
 	{ "usm_c4", "Timed C4 (Explosive)" },
 	{ "weapon_slam", "SLAM Remote Explosive" },
@@ -55,13 +55,14 @@ function ENT:SpawnFunction( ply, tr )
 end
 
 function ENT:Initialize()
-    self:SetModel( "models/error.mdl" )
+    self:SetModel( "models/props_junk/dumpster.mdl" )
 	self:SetMoveType(MOVETYPE_VPHYSICS)
 	self:SetSolid(SOLID_VPHYSICS)
 	if SERVER then
 		self:PhysicsInit(SOLID_VPHYSICS)
 		self:SetUseType(SIMPLE_USE)
 	end
+	self:SetMaterial( "phoenix_storms/metalset_1-2" )
  
     local phys = self:GetPhysicsObject()
 	if (phys:IsValid()) then
@@ -78,14 +79,38 @@ function ENT:Use( caller, activator )
 	local randwep = table.Random( BLUEPRINT_CONFIG_TIER1 )
 	local e = ents.Create( "crafting_blueprint" )
 	e:SetPos( self:GetPos() + Vector( 0, 30, 0 ) )
+	e:SetAngles( self:GetAngles() + Angle( 0, 180, 0 ) )
 	e:Spawn()
 	e:SetEntName( randwep[1] )
 	e:SetRealName( randwep[2] )
 	timer.Create( "BlueprintCooldown", BLUEPRINT_CONFIG_COOLDOWN_TIME, 1, function() end )
 end
 
+function ENT:OnRemove()
+	if timer.Exists( "BlueprintCooldown" ) then timer.Remove( "BlueprintCooldown" ) end
+end
+
 if CLIENT then
     function ENT:Draw()
         self:DrawModel()
+		local plyShootPos = LocalPlayer():GetShootPos()
+		if self:GetPos():DistToSqr( plyShootPos ) < 562500 then
+			local pos = self:GetPos() + Vector( 25, 0, -38 )
+			pos.z = (pos.z + 15)
+			local ang = self:GetAngles()
+			
+			surface.SetFont("Bebas40Font")
+			local title = "Blueprint Dumpster"
+			local title2 = "$5000 For Each"
+			local tw = surface.GetTextSize(title)
+			
+			ang:RotateAroundAxis(ang:Forward(), 90)
+			ang:RotateAroundAxis(ang:Right(), -90)
+			
+			cam.Start3D2D(pos + ang:Right() * -20, ang, 0.2)
+				draw.WordBox(2, -tw *0.5 + 5, -180, title, "Bebas40Font", VOTING.Theme.ControlColor, color_white)
+				draw.WordBox(2, -tw *0.5 + 30, -140, title2, "Bebas40Font", VOTING.Theme.ControlColor, color_white)
+			cam.End3D2D()
+		end
     end
 end
