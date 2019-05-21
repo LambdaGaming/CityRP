@@ -200,7 +200,6 @@ EventPos["rp_newexton2_v4h"] = {
 }
 
 local function GetCurrentEvent()
-
     return GetGlobalString( "ActiveEvent" )
 end
 
@@ -300,6 +299,14 @@ function OverturnedTruckEnd()
 		if v:Team() == TEAM_TOWER then
 			v:addMoney( 600 )
 			DarkRP.notify( v, 0, 6, "You have been awarded $600 for clearing the road of the overturned truck." )
+			local randwep = table.Random( BLUEPRINT_CONFIG_TIER2 )
+			local e = ents.Create( "crafting_blueprint" )
+			e:SetPos( v:GetPos() + Vector( 0, 30, 0 ) )
+			e:SetAngles( v:GetAngles() + Angle( 0, 180, 0 ) )
+			e:Spawn()
+			e:SetEntName( randwep[1] )
+			e:SetRealName( randwep[2] )
+			DarkRP.notify( v, 0, 6, "You have also been rewarded with a crafting blueprint." )
 			for a,b in pairs( ents.FindInSphere( v:GetPos(), 200 ) ) do
 				if b:IsPlayer() and b:isCP() then
 					b:addMoney( 300 )
@@ -389,6 +396,14 @@ end
 function ActiveShooterEnd( killer )
 	killer:addMoney( 600 )
 	DarkRP.notify( killer, 0, 6, "You have been rewarded $600 for stopping the threat." )
+	local randwep = table.Random( BLUEPRINT_CONFIG_TIER2 )
+	local e = ents.Create( "crafting_blueprint" )
+	e:SetPos( killer:GetPos() + Vector( 0, 30, 0 ) )
+	e:SetAngles( killer:GetAngles() + Angle( 0, 180, 0 ) )
+	e:Spawn()
+	e:SetEntName( randwep[1] )
+	e:SetRealName( randwep[2] )
+	DarkRP.notify( v, 0, 6, "You have also been rewarded with a crafting blueprint." )
 	for k,v in pairs( player.GetAll() ) do
 		if v != killer then
 			DarkRP.notify( v, 0, 6, killer:Nick().." has killed the active shooter and ended the threat!" )
