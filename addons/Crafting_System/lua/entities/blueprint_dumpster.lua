@@ -10,6 +10,7 @@ ENT.AdminOnly = true
 ENT.Category = "Superadmin Only"
 
 local BLUEPRINT_CONFIG_COOLDOWN_TIME = 300
+local BLUEPRINT_CONFIG_PRICE = 5000
 
 BLUEPRINT_CONFIG_TIER1 = { --Blueprints you can get from the dumpster
 	{ "cw_ar15", "AR-15 (Rifle)" },
@@ -75,7 +76,11 @@ function ENT:Use( caller, activator )
 		DarkRP.notify( caller, 1, 6, "Please wait "..string.ToMinutesSeconds( timer.TimeLeft( "BlueprintCooldown" ) ).." for the cooldown to end." )
 		return
 	end
-	self:EmitSound( "physics/metal/metal_large_debris1.wav" )
+	if caller:getDarkRPVar( "money" ) < BLUEPRINT_CONFIG_PRICE then
+		DarkRP.notify( caller, 1, 6, "You don't have enough money to use the dumpster!" )
+		return
+	end
+	self:EmitSound( "physics/metal/metal_large_debris"..math.random( 1, 2 )..".wav" )
 	local randwep = table.Random( BLUEPRINT_CONFIG_TIER1 )
 	local e = ents.Create( "crafting_blueprint" )
 	e:SetPos( self:GetPos() + Vector( 0, 30, 0 ) )
@@ -83,6 +88,7 @@ function ENT:Use( caller, activator )
 	e:Spawn()
 	e:SetEntName( randwep[1] )
 	e:SetRealName( randwep[2] )
+	caller:addMoney( -5000 )
 	timer.Create( "BlueprintCooldown", BLUEPRINT_CONFIG_COOLDOWN_TIME, 1, function() end )
 end
 
@@ -95,21 +101,19 @@ if CLIENT then
         self:DrawModel()
 		local plyShootPos = LocalPlayer():GetShootPos()
 		if self:GetPos():DistToSqr( plyShootPos ) < 562500 then
-			local pos = self:GetPos() + Vector( 25, 0, -38 )
-			pos.z = (pos.z + 15)
-			local ang = self:GetAngles()
-			
 			surface.SetFont("Bebas40Font")
 			local title = "Blueprint Dumpster"
 			local title2 = "$5000 For Each"
-			local tw = surface.GetTextSize(title)
 			
-			ang:RotateAroundAxis(ang:Forward(), 90)
-			ang:RotateAroundAxis(ang:Right(), -90)
-			
-			cam.Start3D2D(pos + ang:Right() * -20, ang, 0.2)
-				draw.WordBox(2, -tw *0.5 + 5, -180, title, "Bebas40Font", VOTING.Theme.ControlColor, color_white)
-				draw.WordBox(2, -tw *0.5 + 30, -140, title2, "Bebas40Font", VOTING.Theme.ControlColor, color_white)
+			local ang = self:GetAngles()
+			ang:RotateAroundAxis( self:GetAngles():Right(),270 )
+			ang:RotateAroundAxis( self:GetAngles():Forward(),90 )
+			local pos = self:GetPos() + ang:Right() * -20 + ang:Up() * 26 + ang:Forward() * -25
+			cam.Start3D2D(pos,ang,0.1)
+				draw.RoundedBox( 0, 50, -120, 400, 150, VOTING.Theme.ControlColor )
+				//draw.RoundedBox( 0, 20, 20, 450 -40, 200-40, VOTING.Theme.ControlColor )
+				draw.SimpleText( title, "Bebas40Font", 260, -80, color_white, 1, 1 )
+				draw.SimpleText( title2, "Bebas40Font", 260, -20, color_white, 1, 1 )
 			cam.End3D2D()
 		end
     end
