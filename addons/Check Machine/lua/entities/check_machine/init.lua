@@ -59,6 +59,14 @@ function ENT:Touch( ent )
 			if ply:Team() == TEAM_BANKER then --Only allows the banker to deliver the check to the machine. If players wish to steal the check, they can press their use key on it to get the money
 				ply:addMoney( 400 )
 				DarkRP.notify( ply, 0, 6, "Check successfully delivered. You have been awarded $400!" )
+				local randwep = table.Random( BLUEPRINT_CONFIG_TIER2 )
+				local e = ents.Create( "crafting_blueprint" )
+				e:SetPos( self:GetPos() + Vector( 0, 30, 0 ) )
+				e:SetAngles( self:GetAngles() + Angle( 0, 180, 0 ) )
+				e:Spawn()
+				e:SetEntName( randwep[1] )
+				e:SetRealName( randwep[2] )
+				DarkRP.notify( ply, 0, 6, "You have also been rewarded with a crafting blueprint." )
 				ent:Remove()
 				MoneyTransferEnd() --Calls the end of the banker event
 			end
