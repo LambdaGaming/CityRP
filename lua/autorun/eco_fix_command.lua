@@ -2,18 +2,27 @@
 timer.Simple( 10, function()
 	if SERVER then
 		hook.Add( "PlayerSay", "playersayfixeco", function( ply, text, public )
-			if ( text == "!fixeco" ) and ply:Team() == TEAM_MAYOR then
-				if !timer.Exists("ecofix_cooldown") or GetGlobalInt("MAYOR_Money") <= 300 and GetGlobalInt("MAYOR_EcoPoints") >= -30 then
-					if GetGlobalInt("MAYOR_Money") >= 1000 or GetGlobalInt("MAYOR_EcoPoints") < -30 or timer.Exists("ecofix_cooldown") then return end
-					timer.Create("ecofix_cooldown", 600, 1, function() end )
-					SetGlobalInt("MAYOR_EcoPoints", GetGlobalInt("MAYOR_EcoPoints") - 30 )
-					SetGlobalInt("MAYOR_Money", GetGlobalInt("MAYOR_Money") + 1000 )
-					for k,ply in pairs(player.GetAll()) do
-						DarkRP.notify(ply, 1, 6, "The mayor has increased the city's bank, at the cost of reputation.")
+			if text == "!fixeco" and ply:Team() == TEAM_MAYOR then
+				local eco = GetGlobalInt( "MAYOR_EcoPoints" )
+				local funds = GetGlobalInt( "MAYOR_Money" )
+				if !timer.Exists("ecofix_cooldown") then
+					if funds >= 300 then
+						if eco < 0 then
+							timer.Create("ecofix_cooldown", 600, 1, function() end )
+							SetGlobalInt("MAYOR_EcoPoints", eco + 30 )
+							SetGlobalInt("MAYOR_Money", funds - 300 )
+							DarkRP.notifyAll( 0, 6, "The mayor has increased the economy by 30 points at the cost of $300 from the mayor funds.")
+							return ""
+						else
+							DarkRP.notify( ply, 1, 6, "You cannot fix the eco at this time. The eco isn't low enough to require a fix." )
+							return ""
+						end
+					else
+						DarkRP.notify( ply, 1, 6, "You cannot fix the eco at this time. Not enough money in the mayor funds." )
+						return ""
 					end
-					return ""
 				else
-					DarkRP.notify(ply, 2, 6, "You cannot perform this action.")
+					DarkRP.notify( ply, 1, 6, "You cannot fix the eco at this time. The 10 minute cooldown is still in effect." )
 					return ""
 				end
 			end
