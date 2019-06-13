@@ -158,7 +158,7 @@ local function ArrestTime()
         end
 		
 		local Button6 = vgui.Create( "DButton", Frame )
-        Button6:SetText( "8 Minutes" )
+        Button6:SetText( "6 Minutes" )
         Button6:SetTextColor( color_white )
         Button6:SetPos( 175, 50 )
         Button6:SetSize( 100, 30 )
@@ -167,13 +167,13 @@ local function ArrestTime()
         end
         Button6.DoClick = function()
         	net.Start( "ArrestNet" )
-        	    net.WriteString( "480" )
+        	    net.WriteString( "360" )
         	net.SendToServer()
 			Frame:Remove()
         end
 		
 		local Button7 = vgui.Create( "DButton", Frame )
-        Button7:SetText( "10 Minutes" )
+        Button7:SetText( "7 Minutes" )
         Button7:SetTextColor( color_white )
         Button7:SetPos( 175, 100 )
         Button7:SetSize( 100, 30 )
@@ -182,13 +182,13 @@ local function ArrestTime()
         end
         Button7.DoClick = function()
         	net.Start( "ArrestNet" )
-        	    net.WriteString( "600" )
+        	    net.WriteString( "420" )
         	net.SendToServer()
 			Frame:Remove()
         end
 		
 		local Button8 = vgui.Create( "DButton", Frame )
-        Button8:SetText( "12 Minutes" )
+        Button8:SetText( "8 Minutes" )
         Button8:SetTextColor( color_white )
         Button8:SetPos( 175, 150 )
         Button8:SetSize( 100, 30 )
@@ -197,13 +197,13 @@ local function ArrestTime()
         end
         Button8.DoClick = function()
         	net.Start( "ArrestNet" )
-        	    net.WriteString( "720" )
+        	    net.WriteString( "480" )
         	net.SendToServer()
 			Frame:Remove()
         end
 		
 		local Button9 = vgui.Create( "DButton", Frame )
-        Button9:SetText( "15 Minutes" )
+        Button9:SetText( "9 Minutes" )
         Button9:SetTextColor( color_white )
         Button9:SetPos( 175, 200 )
         Button9:SetSize( 100, 30 )
@@ -212,13 +212,13 @@ local function ArrestTime()
         end
         Button9.DoClick = function()
         	net.Start( "ArrestNet" )
-        	    net.WriteString( "900" )
+        	    net.WriteString( "540" )
         	net.SendToServer()
 			Frame:Remove()
         end
 		
 		local Button10 = vgui.Create( "DButton", Frame )
-        Button10:SetText( "20 Minutes" )
+        Button10:SetText( "10 Minutes" )
         Button10:SetTextColor( color_white )
         Button10:SetPos( 175, 250 )
         Button10:SetSize( 100, 30 )
@@ -227,7 +227,7 @@ local function ArrestTime()
         end
         Button10.DoClick = function()
         	net.Start( "ArrestNet" )
-        	    net.WriteString( "1200" )
+        	    net.WriteString( "600" )
         	net.SendToServer()
 			Frame:Remove()
         end
