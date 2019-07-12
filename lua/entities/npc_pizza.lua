@@ -16,7 +16,6 @@ function ENT:Initialize()
 		"models/player/group01/female_04.mdl",
 		"models/player/group01/female_05.mdl",
 		"models/player/group01/female_06.mdl",
-		"models/player/group01/female_07.mdl",
 		"models/player/group01/male_01.mdl",
 		"models/player/group01/male_02.mdl",
 		"models/player/group01/male_03.mdl",
@@ -66,14 +65,6 @@ function ENT:AcceptInput( activator, caller )
 					caller:addMoney( 2000 )
 					self:Remove()
 					FoodDeliveryEnd()
-					local randwep = table.Random( BLUEPRINT_CONFIG_TIER2 )
-					local e = ents.Create( "crafting_blueprint" )
-					e:SetPos( caller:GetPos() + Vector( 0, 0, 35 ) )
-					e:SetAngles( caller:GetAngles() + Angle( 0, 180, 0 ) )
-					e:Spawn()
-					e:SetEntName( randwep[1] )
-					e:SetRealName( randwep[2] )
-					DarkRP.notify( ply, 0, 6, "You have also been rewarded with a crafting blueprint." )
 				else
 					caller:ChatPrint( "Incorrect pizza type." )
 				end
