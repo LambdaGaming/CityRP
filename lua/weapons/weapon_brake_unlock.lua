@@ -25,7 +25,7 @@ SWEP.Secondary.Automatic = false
 function SWEP:PrimaryAttack()
 	if !IsFirstTimePredicted() then return end
     local tr = self.Owner:GetEyeTrace().Entity
-	if ply:GetPos():DistToSqr( tr:GetPos() ) > 90000 then return end
+	if self.Owner:GetPos():DistToSqr( tr:GetPos() ) > 90000 then return end
     if tr:GetClass() == "prop_vehicle_jeep" then
     	if SERVER then
     		tr:Fire( "HandBrakeOff", "", 0.01 )
