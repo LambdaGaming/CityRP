@@ -479,9 +479,9 @@ end
 
 function FoodDelivery()
 	if team.NumPlayers( TEAM_COOK ) == 0 then return end
+	if #ents.FindByClass( "npc_pizza" ) >= 1 then return end
 	local e = ents.Create( "npc_pizza" )
 	e:SetPos( RandFood() )
-	--e:SetModel( "models/humans/group01/male_09.mdl" )
 	e:Spawn()
 	e:Activate()
 	DarkRP.notify( team.GetPlayers( TEAM_COOK ), 0, 6, "A hungry customer wants a "..e:GetNWString( "SetPizza" ).."!" )
