@@ -66,9 +66,13 @@ net.Receive( "StartCrafting", function( len, ply )
 				self.gotblueprint = true
 				break
 			end
-			if  v:GetClass() == "crafting_blueprint" and v:GetEntName() == ent then
+			if v:GetClass() == "crafting_blueprint" and v:GetEntName() == ent then
 				self.gotblueprint = true
-				v:Remove()
+				if v:GetUses() == 1 then
+					v:Remove()
+				else
+					v:SetUses( v:GetUses() - 1 )
+				end
 				break
 			end
 		end

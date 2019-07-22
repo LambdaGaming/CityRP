@@ -9,8 +9,8 @@ ENT.Spawnable = true
 ENT.AdminOnly = true
 ENT.Category = "Superadmin Only"
 
-local BLUEPRINT_CONFIG_COOLDOWN_TIME = 300
-local BLUEPRINT_CONFIG_PRICE = 1000
+local BLUEPRINT_CONFIG_COOLDOWN_TIME = 180
+local BLUEPRINT_CONFIG_PRICE = 1500
 
 BLUEPRINT_CONFIG_TIER1 = { --Blueprints you can get from the dumpster
 	{ "cw_ar15", "AR-15 (Rifle)" },
@@ -88,6 +88,7 @@ function ENT:Use( caller, activator )
 	e:Spawn()
 	e:SetEntName( randwep[1] )
 	e:SetRealName( randwep[2] )
+	e:SetUses( 3 )
 	caller:addMoney( -BLUEPRINT_CONFIG_PRICE )
 	timer.Create( "BlueprintCooldown", BLUEPRINT_CONFIG_COOLDOWN_TIME, 1, function() end )
 end
@@ -103,7 +104,7 @@ if CLIENT then
 		if self:GetPos():DistToSqr( plyShootPos ) < 562500 then
 			surface.SetFont("Bebas40Font")
 			local title = "Blueprint Dumpster"
-			local title2 = "$1000 For Each"
+			local title2 = "$"..BLUEPRINT_CONFIG_PRICE.." For Each"
 			
 			local ang = self:GetAngles()
 			ang:RotateAroundAxis( self:GetAngles():Right(),270 )

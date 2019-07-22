@@ -22,6 +22,7 @@ end
 function ENT:SetupDataTables()
 	self:NetworkVar( "String", 0, "EntName" )
 	self:NetworkVar( "String", 1, "RealName" )
+	self:NetworkVar( "Int", 0, "Uses" )
 end
 
 function ENT:Initialize()
@@ -53,14 +54,16 @@ if CLIENT then
 			surface.SetFont("Bebas40Font")
 			local title = "Crafting Blueprint"
 			local title2 = self:GetRealName()
-			local tw = surface.GetTextSize(title)
+			local title3 = "Uses left: "..self:GetUses()
+			local tw = surface.GetTextSize( title )
 
-			Ang:RotateAroundAxis(Ang:Forward(), 90)
-			Ang:RotateAroundAxis(Ang:Right(), -90)
+			Ang:RotateAroundAxis( Ang:Forward(), 90 )
+			Ang:RotateAroundAxis( Ang:Right(), -90 )
 		
-			cam.Start3D2D(self:GetPos() + ( self:GetUp() * 6 ) + self:GetRight() * -2, Ang, 0.05)
-				draw.WordBox(2, -tw *0.5 + 5, -60, title, "Bebas40Font", VOTING.Theme.ControlColor, color_white)
-				draw.WordBox(2, -tw *0.5 + 5, -20, title2, "Bebas40Font", VOTING.Theme.ControlColor, color_white)
+			cam.Start3D2D( self:GetPos() + ( self:GetUp() * 6 ) + self:GetRight() * -2, Ang, 0.05 )
+				draw.WordBox( 2, -tw *0.5 + 5, -60, title, "Bebas40Font", VOTING.Theme.ControlColor, color_white )
+				draw.WordBox( 2, -tw *0.5 + 5, -20, title2, "Bebas40Font", VOTING.Theme.ControlColor, color_white )
+				draw.WordBox( 2, -tw *0.5 + 5, 20, title3, "Bebas40Font", VOTING.Theme.ControlColor, color_white )
 			cam.End3D2D()
 		end
     end
