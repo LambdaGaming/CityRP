@@ -48,7 +48,7 @@ CRAFT_CONFIG_BUTTON_TEXT_COLOR = color_white --Using a global for optimization, 
 
 --Entities that are allowed to be placed on the table. Don't forget to configure the items in the shared.lua as well! Failure to do so will result in errors!
 CRAFT_CONFIG_ALLOWED_ENTS = {
-    "ironbar",
-	"wrench",
-	"swm_log"
+    ["ironbar"] = true,
+	["wrench"] = true,
+	["swm_log"] = true
 }
