@@ -280,6 +280,7 @@ function SWEP:PlzWork()
 	if arrestok and jailtime > 0 then
         entarrest:arrest(jailtime, self:GetOwner())
         DarkRP.notify(entarrest, 0, 20, DarkRP.getPhrase("youre_arrested_by", self:GetOwner():Nick()))
+		entarrest:ChatPrint( "TIP: You can break out of jail by going up to the breakout NPC in the PD lobby." )
 		jailtime = 0
 		arrestok = false
     
