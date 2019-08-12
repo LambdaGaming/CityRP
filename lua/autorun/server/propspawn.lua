@@ -39,3 +39,7 @@ hook.Add( "PlayerSpawnProp", "RestrictPropSpawn", function( ply, model )
 		return true
 	end
 end )
+
+hook.Add( "InitPostEntity", "KeepPropSpawnEnabled", function()
+	SetGlobalBool( "PropRestrictBypass", true )
+end )
