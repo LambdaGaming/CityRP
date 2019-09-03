@@ -306,6 +306,7 @@ function OverturnedTruckEnd()
 			e:Spawn()
 			e:SetEntName( randwep[1] )
 			e:SetRealName( randwep[2] )
+			e:SetUses( 3 )
 			DarkRP.notify( v, 0, 6, "You have also been rewarded with a crafting blueprint." )
 			for a,b in pairs( ents.FindInSphere( v:GetPos(), 200 ) ) do
 				if b:IsPlayer() and b:isCP() then
@@ -403,7 +404,8 @@ function ActiveShooterEnd( killer )
 	e:Spawn()
 	e:SetEntName( randwep[1] )
 	e:SetRealName( randwep[2] )
-	DarkRP.notify( v, 0, 6, "You have also been rewarded with a crafting blueprint." )
+	e:SetUses( 3 )
+	DarkRP.notify( killer, 0, 6, "You have also been rewarded with a crafting blueprint." )
 	for k,v in pairs( player.GetAll() ) do
 		if v != killer then
 			DarkRP.notify( v, 0, 6, killer:Nick().." has killed the active shooter and ended the threat!" )
