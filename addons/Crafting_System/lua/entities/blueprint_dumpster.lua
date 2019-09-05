@@ -13,36 +13,36 @@ local BLUEPRINT_CONFIG_COOLDOWN_TIME = 180
 local BLUEPRINT_CONFIG_PRICE = 1500
 
 BLUEPRINT_CONFIG_TIER1 = { --Blueprints you can get from the dumpster
-	{ "cw_ar15", "AR-15 (Rifle)" },
-	{ "cw_g3a3", "G3A3 (Rifle)" },
-	{ "cw_g36c", "G36C (Rifle)" },
-	{ "cw_m14", "M14 (Rifle)" },
-	{ "cw_vss", "VSS (Rifle)" },
+	{ "cw_ar15", "AR-15" },
+	{ "cw_g3a3", "G3A3" },
+	{ "cw_g36c", "G36C" },
+	{ "cw_m14", "M14" },
+	{ "cw_vss", "VSS" },
 	{ "factory_lockpick", "Premium Lockpick" },
-	{ "cw_mr96", "MR-96 (Revolver)" },
-	{ "cw_shorty", "Serbu Super-Shorty (Shotgun)" }
+	{ "cw_mr96", "MR-96" },
+	{ "cw_shorty", "Serbu Super-Shorty" }
 }
 
 BLUEPRINT_CONFIG_TIER2 = { --Blueprints you can get from smuggling weapons, pd bank, and random events
-	{ "cw_ak74", "AK-74 (Rifle)" },
-	{ "cw_m3super90", "M3 Super 90 (Shotgun)" },
-	{ "cw_scarh", "SCAR-H (Rifle)" },
+	{ "cw_ak74", "AK-74" },
+	{ "cw_m3super90", "M3 Super 90" },
+	{ "cw_scarh", "SCAR-H" },
 	{ "cw_frag_grenade", "Frag Grenade" },
-	{ "cw_l115", "L115 (Sniper Rifle)" },
-	{ "cw_m14", "M14 (Rifle)" },
-	{ "cw_ar15", "AR-15 (Rifle)" },
-	{ "cw_shorty", "Serbu Super-Shorty (Shotgun)" },
-	{ "cw_attpack_various", "40mm Grenade Launcher Rifle Attachment" }
+	{ "cw_l115", "L115" },
+	{ "cw_m14", "M14" },
+	{ "cw_ar15", "AR-15" },
+	{ "cw_shorty", "Serbu Super-Shorty" },
+	{ "cw_attpack_various", "40mm Grenade Launcher Attachment" }
 }
 
 BLUEPRINT_CONFIG_TIER3 = { --Blueprints you can get from gov bank and deposit boxes
 	{ "cw_frag_grenade", "Frag Grenade" },
-	{ "usm_c4", "Timed C4 (Explosive)" },
+	{ "usm_c4", "Timed C4" },
 	{ "weapon_slam", "SLAM Remote Explosive" },
-	{ "cw_m249_official", "M249 (LMG)" },
-	{ "cw_attpack_various", "40mm Grenade Launcher Rifle Attachment" },
+	{ "cw_m249_official", "M249" },
+	{ "cw_attpack_various", "40mm Grenade Launcher Attachment" },
 	{ "car_bomb", "Car Bomb" },
-	{ "ins2_atow_rpg7", "RPG-7 (Explosive)" }
+	{ "ins2_atow_rpg7", "RPG-7" }
 }
 
 function ENT:SpawnFunction( ply, tr )
