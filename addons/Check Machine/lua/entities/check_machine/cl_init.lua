@@ -30,7 +30,7 @@ local function CheckMenu()
 	frame:Center()
 	frame:MakePopup()
 	frame.Paint = function( self, w, h )
-		draw.RoundedBox( 0, 0, 0, w, h, Color( 49, 53, 61, 200 ) ) --Warns the player about the usage of the check machine
+		draw.RoundedBox( 0, 0, 0, w, h, Color( 49, 53, 61, 200 ) )
 		draw.SimpleText( "This machine generates checks worth $2000 each,", "Trebuchet18", 150, 45, Color( 255, 255, 255, 255 ), TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP, 1, Color( 25, 25, 25 ) )
 		draw.SimpleText( "and it is only to be used in emergencies,", "Trebuchet18", 150, 58, Color( 255, 255, 255, 255 ), TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP, 1, Color( 25, 25, 25 ) )
 		draw.SimpleText( "such as hostage situations. Do you wish to proceed?", "Trebuchet18", 150, 71, Color( 255, 255, 255, 255 ), TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP, 1, Color( 25, 25, 25 ) )
@@ -46,7 +46,7 @@ local function CheckMenu()
 	end
 	button.DoClick = function()
 		net.Start( "CheckAccept" )
-		net.SendToServer() --Sends the spawn request to the server if the player clicks the proceed button
+		net.SendToServer()
 		frame:Close()
 	end
 end
