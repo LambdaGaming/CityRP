@@ -51,27 +51,53 @@ function ENT:Initialize()
 	self:SetMaterial( "models/debug/debugwhite" )
 end
 
+local cop = {
+	TEAM_POLICEBOSS,
+	TEAM_OFFICER,
+	TEAM_UNDERCOVER,
+	TEAM_SWATBOSS,
+	TEAM_SWAT,
+	TEAM_FBI,
+	TEAM_MAYOR,
+	TEAM_BOUNTY
+}
+
+local civi = {
+	TEAM_CITIZEN,
+	TEAM_TOWER,
+	TEAM_CAMERA,
+	TEAM_BANKER,
+	TEAM_FIREBOSS,
+	TEAM_FIRE,
+	TEAM_DETECTIVE,
+	TEAM_COOK,
+	TEAM_UTILITY,
+	TEAM_HITMAN,
+	TEAM_BUS,
+	TEAM_SHOP
+}
+
 function ENT:Use( activator, caller )
-	local iscop = table.HasValue( cop, caller:Team() )
-	local iscivi = table.HasValue( civi, caller:Team() )
+	local iscop = table.HasValue( cop, activator:Team() )
+	local iscivi = table.HasValue( civi, activator:Team() )
 	local purity = self:GetNWInt( "Purity" )
-	if IsValid(caller) and caller:IsPlayer() then
+	if IsValid(activator) and activator:IsPlayer() then
 		for k, v in pairs( ents.FindInSphere( self:GetPos(), 128 ) ) do
 			if ( v:GetClass() == "rp_dealer" ) then
 				local rand = math.random( 1, 10 )
-				if rand <= 3 and !caller:isWanted() and iscivi then
-					caller:wanted( actor, "Seen selling drugs.", 600 )
+				if rand <= 3 and !activator:isWanted() and iscivi then
+					activator:wanted( actor, "Seen selling drugs.", 600 )
 				end
 				if iscop then
-					caller:ChatPrint( "Processing drugs....standby for payment...." )
+					activator:ChatPrint( "Processing drugs....standby for payment...." )
 					timer.Simple( 30, function()
 						DarkRP.createMoneyBag( v:GetPos() + Vector( 35, 0, 10 ), PurityPayout( purity ) )
-						caller:ChatPrint( "You have sold cocaine for "..DarkRP.formatMoney( PurityPayout( purity ) ).." as a government official." )
+						activator:ChatPrint( "You have sold cocaine for "..DarkRP.formatMoney( PurityPayout( purity ) ).." as a government official." )
 					end )
 				end
 				if iscivi then
-					caller:addMoney( PurityPayout( purity ) )
-					caller:ChatPrint( "You have sold cocaine for "..DarkRP.formatMoney( PurityPayout( purity ) ).."." )
+					activator:addMoney( PurityPayout( purity ) )
+					activator:ChatPrint( "You have sold cocaine for "..DarkRP.formatMoney( PurityPayout( purity ) ).."." )
 				end
 				self:Remove()
 			end
