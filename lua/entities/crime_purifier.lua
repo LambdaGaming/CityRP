@@ -7,7 +7,7 @@ ENT.PrintName = "Purifier"
 ENT.Author = "Lambda Gaming"
 ENT.Spawnable = true
 ENT.AdminOnly = true
-ENT.Category = "Crime +"
+ENT.Category = "Crime+"
 
 function ENT:SpawnFunction( ply, tr )
 	if !tr.Hit then return end
@@ -128,11 +128,11 @@ if CLIENT then
 			local textang = ang
 			
 			cam.Start3D2D(pos + ang:Right() * -10, ang, 0.2)
-				draw.WordBox(2, -tw *0.5 + 5, -180, title, "Bebas40Font", VOTING.Theme.ControlColor, color_white)
+				draw.WordBox(2, -tw *0.5 + 20, -180, title, "Bebas40Font", VOTING.Theme.ControlColor, color_white)
 			cam.End3D2D()
 			cam.Start3D2D(pos + ang:Right() * 1, ang, 0.2)
 				draw.WordBox(2, -tw *0.5 - 120, -180, "Current Weed Amount: "..self:GetNWInt( "WeedAmount" ).."/6", "Bebas40Font", VOTING.Theme.ControlColor, color_white)
-				draw.WordBox(2, -tw *0.5 - 120, -140, "Current Cocaine Amount: "..BoolToNumber( self:GetNWBool( "HasCocaine" ) ).."/1", "Bebas40Font", VOTING.Theme.ControlColor, color_white)
+				draw.WordBox(2, -tw *0.5 - 135, -140, "Current Cocaine Amount: "..BoolToNumber( self:GetNWBool( "HasCocaine" ) ).."/1", "Bebas40Font", VOTING.Theme.ControlColor, color_white)
 			cam.End3D2D()
 		end
 	end
