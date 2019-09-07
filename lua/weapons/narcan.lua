@@ -66,6 +66,8 @@ function SWEP:PrimaryAttack()
 		ent:ChatPrint( "Your effects from the overdose have been cured by narcan." )
 		self.Owner:ChatPrint( "The narcan successfully reversed the effects of the overdose." )
 		ent.od = 0
+		ent:SetNWBool( "HasOD", false )
+		if timer.Exists( "ODGroan"..ent:EntIndex() ) then timer.Remove( "ODGroan"..ent:EntIndex() ) end
 	else
 		self.Owner:ChatPrint( "This player does not appear to have overdosed." )
 	end
