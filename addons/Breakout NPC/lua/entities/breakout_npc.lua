@@ -3,7 +3,7 @@ AddCSLuaFile()
 ENT.Type = "ai"
 ENT.Base = "base_ai"
 ENT.PrintName = "Breakout NPC"
-ENT.Category = "Superadmin Only"
+ENT.Category = "Misc NPCs"
 ENT.Spawnable = true
 ENT.AdminOnly = true
 ENT.AutomaticFrameAdvance = true
