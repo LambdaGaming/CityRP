@@ -7,7 +7,7 @@ ENT.PrintName = "Blueprint Dumpster"
 ENT.Author = "Lambda Gaming"
 ENT.Spawnable = true
 ENT.AdminOnly = true
-ENT.Category = "Superadmin Only"
+ENT.Category = "Crafting Table"
 
 local BLUEPRINT_CONFIG_COOLDOWN_TIME = 180
 local BLUEPRINT_CONFIG_PRICE = 1500

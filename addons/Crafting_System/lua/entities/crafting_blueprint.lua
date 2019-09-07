@@ -5,9 +5,8 @@ ENT.Type = "anim"
 ENT.Base = "base_gmodentity"
 ENT.PrintName = "Crafting Blueprint"
 ENT.Author = "Lambda Gaming"
-ENT.Spawnable = true
+ENT.Spawnable = false
 ENT.AdminOnly = true
-ENT.Category = "Superadmin Only"
 
 function ENT:SpawnFunction( ply, tr )
 	if !tr.Hit then return end
