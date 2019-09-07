@@ -83,7 +83,6 @@ function ENT:OnTakeDamage( dmg )
 end
 
 if CLIENT then
-	surface.CreateFont("Bebas40Font", {font = "Bebas Neue", size= 40, weight = 400, antialias = true } )
 	local function CalcPercentage( y, x )
 		local p = y / x
 		local realp = p * 100

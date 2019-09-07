@@ -83,7 +83,6 @@ function ENT:OnTakeDamage( dmg )
 end
 
 if CLIENT then
-	surface.CreateFont("Bebas40Font", {font = "Bebas Neue", size= 40, weight = 400, antialias = true } )
 	local function CalcPercentage( y, x )
 		local p = y / x
 		local realp = p * 100
@@ -99,7 +98,7 @@ if CLIENT then
 			surface.SetFont("Bebas40Font")
 			local title = "Coca Plant"
 			local title2 = "Progress: "..CalcPercentage( growth, 1200 ).."%"
-			local title3 = "Type: Consumable"
+			local title3 = "Type: Marketable"
 			
 			local ang = self:GetAngles()
 			ang:RotateAroundAxis( self:GetAngles():Right(),270 )
