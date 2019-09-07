@@ -7,7 +7,7 @@ ENT.PrintName = "Announcement Speaker"
 ENT.Author = "Lambda Gaming"
 ENT.Spawnable = true
 ENT.AdminOnly = true
-ENT.Category = "Superadmin Only"
+ENT.Category = "Announcement System"
 
 function ENT:SpawnFunction( ply, tr )
 	if !tr.Hit then return end
