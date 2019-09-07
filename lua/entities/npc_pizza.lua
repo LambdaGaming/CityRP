@@ -72,6 +72,7 @@ function ENT:AcceptInput( activator, caller )
 					e:Spawn()
 					e:SetEntName( randwep[1] )
 					e:SetRealName( randwep[2] )
+					e:SetUses( 3 )
 					DarkRP.notify( ply, 0, 6, "You have also been rewarded with a crafting blueprint." )
 				else
 					caller:ChatPrint( "Incorrect pizza type." )
