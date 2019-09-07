@@ -7,7 +7,7 @@ ENT.PrintName = "Iron Refiner"
 ENT.Author = "Lambda Gaming"
 ENT.Spawnable = true
 ENT.AdminOnly = true
-ENT.Category = "Superadmin Only"
+ENT.Category = "Mining System"
 
 function ENT:SpawnFunction( ply, tr )
 	if not tr.Hit then return end
