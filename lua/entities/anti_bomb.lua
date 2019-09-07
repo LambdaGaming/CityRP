@@ -7,7 +7,7 @@ ENT.PrintName = "Car Bomb Protection"
 ENT.Author = "Lambda Gaming"
 ENT.Spawnable = true
 ENT.AdminOnly = true
-ENT.Category = "Superadmin Only"
+ENT.Category = "Car Bomb"
 
 function ENT:SpawnFunction( ply, tr )
 	if !tr.Hit then return end
