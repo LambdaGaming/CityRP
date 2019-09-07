@@ -31,7 +31,11 @@ local defaultweapons = {
 	"pocket",
 	"gmod_tool",
 	"gmod_camera",
-	"weapon_physcannon"
+	"weapon_physcannon",
+	"rphands",
+	"itemstore_pickup",
+	"weapon_keypadchecker",
+	"keys"
 }
 
 if SERVER then
