@@ -7,7 +7,7 @@ ENT.PrintName = "Life Alert"
 ENT.Author = "Lambda Gaming"
 ENT.Spawnable = true
 ENT.AdminOnly = true
-ENT.Category = "Superadmin Only"
+ENT.Category = "Life Alert System"
 ENT.DoNotDuplicate = true
 
 function ENT:SpawnFunction( ply, tr )
