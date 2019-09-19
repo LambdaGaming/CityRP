@@ -48,8 +48,10 @@ function ENT:Initialize()
 		if self:GetNWBool( "TurnedOn" ) then
 			local rand = math.random( 1, 100 )
 			if rand <= 20 then
-				self:Ignite()
-				DarkRP.notify( self.Owner, 1, 6, "Your heat lamp is on fire!" )
+				if SERVER then
+					self:Ignite()
+					DarkRP.notify( self.Owner, 1, 6, "Your heat lamp is on fire!" )
+				end
 			end
 		end
 	end )
