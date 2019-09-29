@@ -365,7 +365,6 @@ function ActiveShooter()
 		"models/humans/group03/female_02.mdl",
 		"models/humans/group03/female_03.mdl",
 		"models/humans/group03/female_04.mdl",
-		"models/humans/group03/female_05.mdl",
 		"models/humans/group03/female_06.mdl",
 		"models/humans/group03/female_07.mdl",
 		"models/humans/group03/male_01.mdl",
