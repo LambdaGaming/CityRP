@@ -56,7 +56,9 @@ local allowedweps = {
 	"cw_m249_official",
 	"weapon_slam",
 	"car_bomb",
-	"ins2_atow_rpg7"
+	"ins2_atow_rpg7",
+	"nik_m1garandnew",
+	"cw_kks_doi_mg42"
 }
 
 local wepvalues = {
@@ -78,7 +80,9 @@ local wepvalues = {
 	["cw_m249_official"] = 16,
 	["weapon_slam"] = 13,
 	["car_bomb"] = 10,
-	["ins2_atow_rpg7"] = 42
+	["ins2_atow_rpg7"] = 42,
+	["nik_m1garandnew"] = 11,
+	["cw_kks_doi_mg42"] = 17
 }
 
 local allowedents = {
@@ -142,7 +146,6 @@ end
 if CLIENT then
     function ENT:Draw()
 		self:DrawModel()
-
 		local plyShootPos = LocalPlayer():GetShootPos()
 		if self:GetPos():DistToSqr( plyShootPos ) < 562500 then
 			local pos = self:GetPos()
