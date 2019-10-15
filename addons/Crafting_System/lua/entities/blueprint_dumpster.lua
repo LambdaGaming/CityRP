@@ -32,7 +32,8 @@ BLUEPRINT_CONFIG_TIER2 = { --Blueprints you can get from smuggling weapons, pd b
 	{ "cw_m14", "M14" },
 	{ "cw_ar15", "AR-15" },
 	{ "cw_shorty", "Serbu Super-Shorty" },
-	{ "cw_attpack_various", "40mm Grenade Launcher Attachment" }
+	{ "cw_attpack_various", "40mm Grenade Launcher Attachment" },
+	{ "nik_m1garandnew", "M1 Garand" }
 }
 
 BLUEPRINT_CONFIG_TIER3 = { --Blueprints you can get from gov bank and deposit boxes
@@ -42,7 +43,8 @@ BLUEPRINT_CONFIG_TIER3 = { --Blueprints you can get from gov bank and deposit bo
 	{ "cw_m249_official", "M249" },
 	{ "cw_attpack_various", "40mm Grenade Launcher Attachment" },
 	{ "car_bomb", "Car Bomb" },
-	{ "ins2_atow_rpg7", "RPG-7" }
+	{ "ins2_atow_rpg7", "RPG-7" },
+	{ "cw_kks_doi_mg42", "MG 42" }
 }
 
 function ENT:SpawnFunction( ply, tr )
