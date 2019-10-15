@@ -79,6 +79,40 @@ CraftingCategory[8] = { --Be sure to change the number, the lower the number, th
 
 --On top of configuring your item here, don't forget to add the entity name to the list of allowed ents in craft_config.lua! Failure to do so will result in errors!
 
+CraftingTable["cw_kks_doi_mg42"] = {
+	Name = "MG 42",
+	Description = "Needs 5 wrenches and 12 iron",
+	NeedsBlueprint = true,
+	Category = "Rifles",
+	Materials = {
+		wrench = 5,
+		ironbar = 12,
+	},
+	SpawnFunction =
+		function( ply, self )
+			local e = ents.Create( "cw_kks_doi_mg42" )
+			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
+			e:Spawn()
+		end
+}
+
+CraftingTable["nik_m1garandnew"] = {
+	Name = "M1 Garand",
+	Description = "Needs 4 wrenches, and 7 iron",
+	NeedsBlueprint = true,
+	Category = "Rifles",
+	Materials = {
+		ironbar = 7,
+		wrench = 4,
+	},
+	SpawnFunction =
+		function( ply, self )
+			local e = ents.Create( "nik_m1garandnew" )
+			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
+			e:Spawn()
+		end
+}
+
 CraftingTable["cw_ak74"] = {
 	Name = "AK-74",
 	Description = "Needs 4 wood, 2 wrenches, and 6 iron",
