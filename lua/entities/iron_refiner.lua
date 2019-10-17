@@ -92,7 +92,9 @@ local allowedents = {
 	"cw_attpack_ammotypes_rifles",
 	"cw_attpack_ammotypes_shotguns",
 	"cw_attpack_sights_longrange",
-	"cw_attpack_various"
+	"cw_attpack_various",
+	"dronesrewrite_nanodr",
+	"dronesrewrite_spyspider"
 }
 
 local entvalues = {
@@ -101,7 +103,9 @@ local entvalues = {
 	["cw_attpack_ammotypes_rifles"] = 4,
 	["cw_attpack_ammotypes_shotguns"] = 7,
 	["cw_attpack_sights_longrange"] = 5,
-	["cw_attpack_various"] = 7
+	["cw_attpack_various"] = 7,
+	["dronesrewrite_nanodr"] = 11,
+	["dronesrewrite_spyspider"] = 11
 }
 
 function ENT:Touch( ent )
