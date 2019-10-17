@@ -20,7 +20,8 @@ BLUEPRINT_CONFIG_TIER1 = { --Blueprints you can get from the dumpster
 	{ "cw_vss", "VSS" },
 	{ "factory_lockpick", "Premium Lockpick" },
 	{ "cw_mr96", "MR-96" },
-	{ "cw_shorty", "Serbu Super-Shorty" }
+	{ "cw_shorty", "Serbu Super-Shorty" },
+	{ "dronesrewrite_nanodr", "Nano Drone" }
 }
 
 BLUEPRINT_CONFIG_TIER2 = { --Blueprints you can get from smuggling weapons, pd bank, and random events
@@ -33,7 +34,8 @@ BLUEPRINT_CONFIG_TIER2 = { --Blueprints you can get from smuggling weapons, pd b
 	{ "cw_ar15", "AR-15" },
 	{ "cw_shorty", "Serbu Super-Shorty" },
 	{ "cw_attpack_various", "40mm Grenade Launcher Attachment" },
-	{ "nik_m1garandnew", "M1 Garand" }
+	{ "nik_m1garandnew", "M1 Garand" },
+	{ "dronesrewrite_nanodr", "Nano Drone" }
 }
 
 BLUEPRINT_CONFIG_TIER3 = { --Blueprints you can get from gov bank and deposit boxes
