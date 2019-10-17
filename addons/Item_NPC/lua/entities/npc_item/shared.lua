@@ -661,7 +661,74 @@ ItemNPC["weapon_announcement"] = {
 		end
 }
 
+ItemNPC["dronesrewrite_bird"] = {
+	Name = "Camera Drone",
+	Description = "Drone with a camera on it, nothing special.",
+	Model = "models/dronesrewrite/birddr/birddr.mdl",
+	Price = 1000,
+	Type = 1,
+	SpawnFunction =
+		function( ply, self )
+			local e = ents.Create( "dronesrewrite_bird" )
+			e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
+			e:Spawn()
+			e:SetupOwner( ply )
+		end
+}
+
+ItemNPC["dronesrewrite_spy"] = {
+	Name = "Spy Drone",
+	Description = "Identifies and points out entities by their class name.",
+	Model = "models/dronesrewrite/spydr/spydr.mdl",
+	Price = 3000,
+	Type = 1,
+	SpawnFunction =
+		function( ply, self )
+			local e = ents.Create( "dronesrewrite_spy" )
+			e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
+			e:Spawn()
+			e:SetupOwner( ply )
+		end
+}
+
+ItemNPC["weapon_drr_fuelcan"] = {
+	Name = "Drone Fuel",
+	Description = "Fuels drones.",
+	Model = "models/props_junk/gascan001a.mdl",
+	Price = 400,
+	Type = 1,
+	SpawnFunction =
+		function( ply, self )
+			ply:Give( "weapon_drr_fuelcan" )
+		end
+}
+
+ItemNPC["weapon_drr_repairtool"] = {
+	Name = "Drone Repair Tool",
+	Description = "Repairs drones.",
+	Price = 200,
+	Type = 1,
+	SpawnFunction =
+		function( ply, self )
+			ply:Give( "weapon_drr_repairtool" )
+		end
+}
+
 -----CONTRABAND ITEMS-----
+ItemNPC["dronesrewrite_console"] = {
+	Name = "Drone Console",
+	Description = "Provides a greater control range and hacking abilities.",
+	Model = "models/dronesrewrite/console/console.mdl",
+	Price = 5000,
+	Type = 2,
+	SpawnFunction =
+		function( ply, self )
+			local e = ents.Create( "dronesrewrite_console" )
+			e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
+			e:Spawn()
+		end
+}
+
 ItemNPC["printer_paper"] = {
 	Name = "Money Printer Paper",
 	Description = "Paper required for the money printer to work.",
