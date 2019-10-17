@@ -50,5 +50,6 @@ CRAFT_CONFIG_BUTTON_TEXT_COLOR = color_white --Using a global for optimization, 
 CRAFT_CONFIG_ALLOWED_ENTS = {
     ["ironbar"] = true,
 	["wrench"] = true,
-	["swm_log"] = true
+	["swm_log"] = true,
+	["dronesrewrite_spy"] = true
 }
