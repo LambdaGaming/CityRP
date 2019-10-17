@@ -28,15 +28,17 @@ function ENT:SetupDataTables()
 end
 
 local function SpawnVehicle( ply, class, model, script, pos, ang, spawnfunc )
-	local e = ents.Create( "prop_vehicle_jeep" )
-	e:SetKeyValue( "vehiclescript", script )
-	e:SetPos( pos )
-	e:SetAngles( ang )
-	e:SetModel( model )
-	e:Spawn()
-	e:Activate()
-	e.VehicleTable = list.Get( "Vehicles" )[class]
-	ply:EnterVehicle( e )
+	if SERVER then
+		local e = ents.Create( "prop_vehicle_jeep" )
+		e:SetKeyValue( "vehiclescript", script )
+		e:SetPos( pos )
+		e:SetAngles( ang )
+		e:SetModel( model )
+		e:Spawn()
+		e:Activate()
+		e.VehicleTable = list.Get( "Vehicles" )[class]
+		ply:EnterVehicle( e )
+	end
 end
 
 ItemNPC = {} --Initializes the item table, don't touch
@@ -1733,17 +1735,17 @@ ItemNPC["ambulance"] = {
 		end
 }
 
-ItemNPC["tahoe_med"] = {
-	Name = "2015 Chevrolet Tahoe Medical",
-	Description = "Chevy Tahoe SUV with EMS lighting.",
-	Model = "models/lonewolfie/chev_tahoe.mdl",
+ItemNPC["crownvic_med"] = {
+	Name = "2011 CVPI Medic",
+	Description = "Ford Crown Victoria with EMS lighting.",
+	Model = "models/tdmcars/emergency/for_crownvic_fh3.mdl",
 	Price = 0,
 	Type = 5,
 	SpawnFunction =
 		function( ply, self )
-			local class = "2015 Chevrolet Tahoe Medical"
-			local model = "models/lonewolfie/chev_tahoe.mdl"
-			local script = "scripts/vehicles/lwcars/chev_tahoe.txt"
+			local class = "2011 CVPI Medic"
+			local model = "models/tdmcars/emergency/for_crownvic_fh3.mdl"
+			local script = "scripts/vehicles/TDMCars/for_crownvic_fh3.txt"
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( 318, -4842, 64 ), Angle( 0, 90, 0 ) )
 			elseif map == chaoscity then
