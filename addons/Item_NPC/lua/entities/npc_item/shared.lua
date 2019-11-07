@@ -213,18 +213,6 @@ ItemNPC["cw_mp5"] = {
 		end
 }
 
-ItemNPC["cn_repair"] = {
-	Name = "Tire Repair Tool",
-	Description = "Use on popped tires to fix them.",
-	Model = "models/props_c17/tools_wrench01a.mdl",
-	Price = 50,
-	Type = 1,
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "cn_repair" )
-		end
-}
-
 ItemNPC["mediaplayer_tv"] = {
 	Name = "Media Player",
 	Description = "Watch meme videos and torture prisoners with Undertale cringe.",
