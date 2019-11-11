@@ -100,6 +100,7 @@ function ENT:OnTakeDamage( dmg )
 	if health > 0 then
 		self:SetHealth( health - d )
 	else
+		self:TurnOff()
 		local e = ents.Create( "env_explosion" )
 		e:SetPos( self:GetPos() )
 		e:Spawn()
