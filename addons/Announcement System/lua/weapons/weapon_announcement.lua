@@ -24,7 +24,9 @@ SWEP.Secondary.Automatic	=  false
 
 function SWEP:Deploy()
 	self.Owner:DrawViewModel( false )
-	self.Owner:ChatPrint( "Current Channel: "..self:GetNWInt( "Channel" ) )
+	if IsFirstTimePredicted() and SERVER then
+		self.Owner:ChatPrint( "Current Channel: "..self:GetNWInt( "Announce_Channel" ) )
+	end
 end
 
 function SWEP:DrawWorldModel()
@@ -33,29 +35,31 @@ end
 
 function SWEP:Initialize()
 	self:SetHoldType("magic")
-	self:SetNWInt( "Channel", 1 )
+	self:SetNWInt( "Announce_Channel", 1 )
 end
 
 function SWEP:PrimaryAttack()
 	if IsFirstTimePredicted() and SERVER then
-		local channel = self:GetNWInt( "Channel" )
-		if channel == 1 then
-			self:SetNWInt( "Channel", 5 )
+		local channel = self:GetNWInt( "Announce_Channel" )
+		if channel == 5 then
+			self:SetNWInt( "Announce_Channel", 1 )
 		else
-			self:SetNWInt( "Channel", channel - 1 )
+			self:SetNWInt( "Announce_Channel", channel + 1 )
 		end
 		self.Owner:ChatPrint( "New Channel: "..channel )
 	end
+	self:SetNextPrimaryFire( CurTime() + 1 )
 end
 
 function SWEP:SecondaryAttack()
 	if IsFirstTimePredicted() and SERVER then
-		local channel = self:GetNWInt( "Channel" )
-		if channel == 5 then
-			self:SetNWInt( "Channel", 1 )
+		local channel = self:GetNWInt( "Announce_Channel" )
+		if channel == 1 then
+			self:SetNWInt( "Announce_Channel", 5 )
 		else
-			self:SetNWInt( "Channel", channel + 1 )
+			self:SetNWInt( "Announce_Channel", channel - 1 )
 		end
 		self.Owner:ChatPrint( "New Channel: "..channel )
 	end
+	self:SetNextSecondaryFire( CurTime() + 1 )
 end

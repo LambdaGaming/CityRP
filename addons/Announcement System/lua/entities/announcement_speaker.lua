@@ -27,25 +27,28 @@ function ENT:Initialize()
 	if SERVER then
 		self:PhysicsInit(SOLID_VPHYSICS)
 		self:SetUseType(SIMPLE_USE)
+		self:SetHealth( 100 )
+		self:SetMaxHealth( 100 )
 	end
  
     local phys = self:GetPhysicsObject()
 	if (phys:IsValid()) then
 		phys:Wake()
 	end
-	self:SetHealth( 100 )
-	self:SetMaxHealth( 100 )
-	self:SetNWInt( "Channel", 1 )
+	self:SetNWInt( "Announce_Channel", 1 )
 end
 
+local cooldown = 0
 function ENT:Use( activator, caller )
-	local channel = self:GetNWInt( "Channel" )
+	if cooldown > CurTime() then return end
+	local channel = self:GetNWInt( "Announce_Channel" )
 	if channel == 5 then
-		self:SetNWInt( "Channel", 1 )
+		self:SetNWInt( "Announce_Channel", 1 )
 	else
-		self:SetNWInt( "Channel", channel + 1 )
+		self:SetNWInt( "Announce_Channel", channel + 1 )
 	end
 	activator:ChatPrint( "New Speaker Channel: "..channel )
+	cooldown = CurTime() + 1
 end
 
 function ENT:OnTakeDamage( dmg )
