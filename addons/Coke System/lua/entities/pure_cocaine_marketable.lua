@@ -19,7 +19,7 @@ function ENT:SpawnFunction( ply, tr )
 	return ent
 end
 
-local COKE_GOOD_PURITY = 0xD7 --Number randomly selected between 70 and 590, changes every few sessions
+local COKE_GOOD_PURITY = file.Read( "cokekey.txt", "DATA" )
 local COKE_GOOD_PURITY_LESS = COKE_GOOD_PURITY - 10
 local COKE_GOOD_PURITY_MORE = COKE_GOOD_PURITY + 10
 local COKE_PAYOUT = 30000
