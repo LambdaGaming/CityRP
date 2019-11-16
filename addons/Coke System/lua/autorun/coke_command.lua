@@ -7,5 +7,7 @@ hook.Add( "PlayerSay", "CokeReset", function( ply, text )
 		end
 		local rand = math.random( 70, 590 )
 		file.Write( "cokekey.txt", rand )
+		DarkRP.notify( ply, 0, 6, "You have successfully changed the pure number for the coke system." )
+		return ""
 	end
 end )
