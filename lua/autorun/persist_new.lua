@@ -27,7 +27,7 @@ if SERVER then
 	hook.Add( "InitPostEntity", "LoadNewPersist", function()
 	    local files, directories = file.Find( "newpersist/"..game.GetMap().."/*.txt", "DATA" ) --Looks at all of the txt files in the specified directory
 		for a,b in pairs( files ) do
-			--print(b) --Testing purposes only, prints a list of found files to the console
+			print(b) --Testing purposes only, prints a list of found files to the console
 			local readtxt = file.Read( "newpersist/"..game.GetMap().."/"..b, "DATA" ) --Reads the files that were found above
 			local readunpack = util.JSONToTable( readtxt ) --Converts the JSON format back into a lua table
 			local split = string.Explode( "-", b ) --Splits the file names for use below
@@ -39,6 +39,7 @@ if SERVER then
 			e:Activate()
 			e:SetMoveType( MOVETYPE_NONE )
 			e:SetSolid( SOLID_VPHYSICS )
+			e.IsPermaProp = true
 		end
     end )
 end
