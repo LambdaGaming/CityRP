@@ -1003,7 +1003,7 @@ ItemNPC["coca_plant_marketable"] = {
 }
 
 ItemNPC["coca_plant_consumable"] = {
-	Name = "Coca Plant (Marketable)",
+	Name = "Coca Plant (Consumable)",
 	Description = "Use heat lamp to grow, can be consumed for ability buffs.",
 	Model = "models/props/cs_office/plant01.mdl",
 	Price = 500,
