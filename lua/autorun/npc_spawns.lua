@@ -22,7 +22,7 @@ if SERVER then
 				release:Spawn()
 
 				local shop = ents.Create( "npc_item" )
-				shop:SetPos( Vector( 1613, 6072, 574 ) )
+				shop:SetPos( Vector( 1613, 6095, 574 ) )
 				shop:SetAngles( Angle( 0, -90, 0 ) )
 				shop:Spawn()
 				shop:ApplyType( 1 )
@@ -158,7 +158,7 @@ if SERVER then
 				release:Spawn()
 
 				local shop = ents.Create( "npc_item" )
-				shop:SetPos( Vector( 8197, 6239, 70 ) )
+				shop:SetPos( Vector( 8197, 6212, 70 ) )
 				shop:SetAngles( Angle( 0, 90, 0 ) )
 				shop:Spawn()
 				shop:ApplyType( 1 )
@@ -294,7 +294,7 @@ if SERVER then
 				release:Spawn()
 
 				local shop = ents.Create( "npc_item" )
-				shop:SetPos( Vector( 15073, 9856, 8 ) )
+				shop:SetPos( Vector( 15073, 9818, 8 ) )
 				shop:SetAngles( Angle( 0, 90, 0 ) )
 				shop:Spawn()
 				shop:ApplyType( 1 )
@@ -331,7 +331,7 @@ if SERVER then
 
 				local tow = ents.Create( "npc_item" )
 				tow:SetPos( Vector( 9660, 13737, 0 ) )
-				tow:SetAngles( Angle( 0, 0, 0 ) )
+				tow:SetAngles( Angle( 0, 180, 0 ) )
 				tow:Spawn()
 				tow:ApplyType( 7 )
 
