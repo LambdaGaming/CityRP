@@ -74,8 +74,10 @@ end
 hook.Add( "PhysgunPickup", "disallow_pickup", PlayerPickup)
 
 local function ToolRestrict( ply, tr, tool )
-	if IsValid( tr.Entity ) and ( defaultblock[tr.Entity:GetClass()] or tr.Entity:CreatedByMap() ) then
-		return false
+	if IsValid( tr.Entity ) and SERVER then
+		if defaultblock[tr.Entity:GetClass()] or tr.Entity:CreatedByMap() then
+			return false
+		end
 	end
 end
 hook.Add( "CanTool", "disallow_maptools", ToolRestrict )
