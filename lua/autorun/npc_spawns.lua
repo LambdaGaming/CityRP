@@ -170,14 +170,14 @@ if SERVER then
 				contraband:ApplyType( 2 )
 
 				local fire = ents.Create( "npc_item" )
-				fire:SetPos( Vector( 5363, 13248, 68 ) )
+				fire:SetPos( Vector( 4506, 13469, 68 ) )
 				fire:SetAngles( Angle( 0, 0, 0 ) )
 				fire:Spawn()
 				fire:ApplyType( 3 )
 
 				local gov = ents.Create( "npc_item" )
 				gov:SetPos( Vector( -242, -1888, 76 ) )
-				gov:SetAngles( Angle( 0, 0, 0 ) )
+				gov:SetAngles( Angle( 0, 180, 0 ) )
 				gov:Spawn()
 				gov:ApplyType( 4 )
 
