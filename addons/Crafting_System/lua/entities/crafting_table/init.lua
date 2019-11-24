@@ -118,15 +118,20 @@ net.Receive( "DropItem", function( len, ply )
 	ent:EmitSound( CRAFT_CONFIG_DROP_SOUND )
 end )
 
-function ENT:StartTouch( ent )
-	if CRAFT_CONFIG_ALLOWED_ENTS[ent:GetClass()] then
-		self:SetNWInt( "Craft_"..ent:GetClass(), self:GetNWInt( "Craft_"..ent:GetClass() ) + 1 )
-		self:EmitSound( CRAFT_CONFIG_PLACE_SOUND )
-		local effectdata = EffectData()
-		effectdata:SetOrigin( ent:GetPos() )
-		effectdata:SetScale( 2 )
-		util.Effect( "ManhackSparks", effectdata )
-		ent:Remove()
+function ENT:Touch( ent )
+	for k,v in pairs( CraftingIngredient ) do
+		if self.TouchCooldown and self.TouchCooldown > CurTime() then return end
+		if k == ent:GetClass() then
+			self:SetNWInt( "Craft_"..ent:GetClass(), self:GetNWInt( "Craft_"..ent:GetClass() ) + 1 )
+			self:EmitSound( CRAFT_CONFIG_PLACE_SOUND )
+			local effectdata = EffectData()
+			effectdata:SetOrigin( ent:GetPos() )
+			effectdata:SetScale( 2 )
+			util.Effect( "ManhackSparks", effectdata )
+			ent:Remove()
+			self.TouchCooldown = CurTime() + 0.1 --Small cooldown since ent:Touch runs multiple times before the for loop has time to break
+			break
+		end
 	end
 end
 

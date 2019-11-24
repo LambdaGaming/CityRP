@@ -33,39 +33,37 @@ DrawItems = function( ent )
 
 	local mainframescroll = vgui.Create( "DScrollPanel", mainframe )
 	mainframescroll:Dock( FILL )
-	for k,v in pairs( CraftingTable ) do
-		for a,b in pairs( v.Materials ) do
-			if table.HasValue( itemtable, a ) then
-				continue
-			end --Prevents two or more of the same materials from being listed if they are used in more than one recipe
-			local scrollbutton = vgui.Create( "DButton", mainframescroll )
-			if ent:GetNWInt( "Craft_"..a ) == nil then
-				scrollbutton:SetText( a..": 0" )
-			else
-				scrollbutton:SetText( a..": "..ent:GetNWInt( "Craft_"..a ) )
-			end
-			scrollbutton:SetTextColor( CRAFT_CONFIG_BUTTON_TEXT_COLOR )
-			scrollbutton:Dock( TOP )
-			scrollbutton:DockMargin( 0, 0, 0, 5 )
-			scrollbutton.Paint = function( self, w, h )
-				draw.RoundedBox( 0, 0, 0, w, h, CRAFT_CONFIG_BUTTON_COLOR )
-			end
-			scrollbutton.DoClick = function()
-				if ent:GetNWInt( "Craft_"..a ) == nil or ent:GetNWInt( "Craft_"..a ) == 0 then
-					surface.PlaySound( CRAFT_CONFIG_FAIL_SOUND )
-					return
-				end
-				net.Start( "DropItem" )
-				net.WriteEntity( ent )
-				net.WriteString( a )
-				net.SendToServer()
-				timer.Simple( 0.3, function() --Small timer to let the net message go through
-					mainframe:Close()
-					DrawItems( ent )
-				end )
-			end
-			table.insert( itemtable, a )
+	for k,v in pairs( CraftingIngredient ) do
+		if table.HasValue( itemtable, k ) then
+			continue
+		end --Prevents two or more of the same materials from being listed if they are used in more than one recipe
+		local scrollbutton = vgui.Create( "DButton", mainframescroll )
+		if ent:GetNWInt( "Craft_"..v.Name ) == nil then
+			scrollbutton:SetText( v.Name..": 0" )
+		else
+			scrollbutton:SetText( v.Name..": "..ent:GetNWInt( "Craft_"..v.Name ) )
 		end
+		scrollbutton:SetTextColor( CRAFT_CONFIG_BUTTON_TEXT_COLOR )
+		scrollbutton:Dock( TOP )
+		scrollbutton:DockMargin( 0, 0, 0, 5 )
+		scrollbutton.Paint = function( self, w, h )
+			draw.RoundedBox( 0, 0, 0, w, h, CRAFT_CONFIG_BUTTON_COLOR )
+		end
+		scrollbutton.DoClick = function()
+			if ent:GetNWInt( "Craft_"..v.Name ) == nil or ent:GetNWInt( "Craft_"..v.Name ) == 0 then
+				surface.PlaySound( CRAFT_CONFIG_FAIL_SOUND )
+				return
+			end
+			net.Start( "DropItem" )
+			net.WriteEntity( ent )
+			net.WriteString( k )
+			net.SendToServer()
+			timer.Simple( 0.3, function() --Small timer to let the net message go through
+				mainframe:Close()
+				DrawItems( ent )
+			end )
+		end
+		table.insert( itemtable, k )
 	end
 end
 
@@ -168,7 +166,7 @@ end
 DrawMainMenu = function( ent )
 	local mainframe = vgui.Create( "DFrame" )
 	mainframe:SetTitle( "Crafting Table - Main Menu" )
-	mainframe:SetSize( 500, 300 )
+	mainframe:SetSize( 300, 150 )
 	mainframe:Center()
 	mainframe:MakePopup()
 	mainframe.Paint = function( self, w, h )
@@ -199,19 +197,6 @@ DrawMainMenu = function( ent )
 	end
 	itemsbutton.DoClick = function()
 		DrawItems( ent )
-		mainframe:Close()
-		surface.PlaySound( CRAFT_CONFIG_UI_SOUND )
-	end
-	local closebutton = vgui.Create( "DButton", mainframe )
-	closebutton:SetText( "Exit Table" )
-	closebutton:SetTextColor( CRAFT_CONFIG_BUTTON_TEXT_COLOR )
-	closebutton:SetPos( 25, 150 )
-	closebutton:SetSize( 150, 15 )
-	closebutton:CenterHorizontal()
-	closebutton.Paint = function( self, w, h )
-		draw.RoundedBox( 0, 0, 0, w, h, CRAFT_CONFIG_BUTTON_COLOR )
-	end
-	closebutton.DoClick = function()
 		mainframe:Close()
 		surface.PlaySound( CRAFT_CONFIG_UI_SOUND )
 	end

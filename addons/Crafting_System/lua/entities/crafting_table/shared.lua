@@ -8,76 +8,98 @@ ENT.Category = "Crafting Table"
 
 CraftingTable = {}
 CraftingCategory = {}
+CraftingIngredient = {}
 
---Template Category
+--Template Ingredient
 --[[
-	CraftingCategory[1] = { --Be sure to change the number, the lower the number, the higher up in the list it is
-		Name = "Pistols", --Name of the category
-		Color = Color( 49, 53, 61, 255 ) --Color of the category box
+	CraftingIngredient["iron"] = {
+		Name = "Iron"
 	}
 ]]
 
-CraftingCategory[1] = { --Be sure to change the number, the lower the number, the higher up in the list it is
-	Name = "Pistols", --Name of the category
-	Color = Color( 49, 53, 61, 255 ) --Color of the category box
+CraftingIngredient["ironbar"] = {
+	Name = "Iron"
 }
 
-CraftingCategory[2] = { --Be sure to change the number, the lower the number, the higher up in the list it is
-	Name = "Rifles", --Name of the category
-	Color = Color( 49, 53, 61, 255 ) --Color of the category box
+CraftingIngredient["wrench"] = {
+	Name = "Wrench"
 }
 
-CraftingCategory[3] = { --Be sure to change the number, the lower the number, the higher up in the list it is
-	Name = "Shotguns", --Name of the category
-	Color = Color( 49, 53, 61, 255 ) --Color of the category box
+CraftingIngredient["swm_log"] = {
+	Name = "Wood"
 }
 
-CraftingCategory[4] = { --Be sure to change the number, the lower the number, the higher up in the list it is
-	Name = "Explosives", --Name of the category
-	Color = Color( 49, 53, 61, 255 ) --Color of the category box
+CraftingIngredient["dronesrewrite_spy"] = {
+	Name = "Spy Drone"
 }
 
-CraftingCategory[5] = { --Be sure to change the number, the lower the number, the higher up in the list it is
-	Name = "Crafting Ingredients", --Name of the category
-	Color = Color( 49, 53, 61, 255 ) --Color of the category box
+--Template Category
+--[[
+	CraftingCategory[1] = {
+		Name = "Pistols",
+		Color = Color( 49, 53, 61, 255 )
+	}
+]]
+
+CraftingCategory[1] = {
+	Name = "Pistols",
+	Color = Color( 49, 53, 61, 255 )
 }
 
-CraftingCategory[6] = { --Be sure to change the number, the lower the number, the higher up in the list it is
-	Name = "Tools", --Name of the category
-	Color = Color( 49, 53, 61, 255 ) --Color of the category box
+CraftingCategory[2] = {
+	Name = "Rifles",
+	Color = Color( 49, 53, 61, 255 )
 }
 
-CraftingCategory[7] = { --Be sure to change the number, the lower the number, the higher up in the list it is
-	Name = "Ammo & Upgrades", --Name of the category
-	Color = Color( 49, 53, 61, 255 ) --Color of the category box
+CraftingCategory[3] = {
+	Name = "Shotguns",
+	Color = Color( 49, 53, 61, 255 )
 }
 
-CraftingCategory[8] = { --Be sure to change the number, the lower the number, the higher up in the list it is
-	Name = "Other", --Name of the category
-	Color = Color( 49, 53, 61, 255 ) --Color of the category box
+CraftingCategory[4] = {
+	Name = "Explosives",
+	Color = Color( 49, 53, 61, 255 )
+}
+
+CraftingCategory[5] = {
+	Name = "Crafting Ingredients",
+	Color = Color( 49, 53, 61, 255 )
+}
+
+CraftingCategory[6] = {
+	Name = "Tools",
+	Color = Color( 49, 53, 61, 255 )
+}
+
+CraftingCategory[7] = {
+	Name = "Ammo & Upgrades",
+	Color = Color( 49, 53, 61, 255 )
+}
+
+CraftingCategory[8] = {
+	Name = "Other",
+	Color = Color( 49, 53, 61, 255 )
 }
 
 --Template Item
 --[[
-	CraftingTable["weapon_crowbar"] = { --Add the entity name of the item in the brackets with quotes
-	Name = "Crowbar", --Name of the item, different from the item's entity name
-	Description = "Requires 1 ball.", --Description of the item
+	CraftingTable["weapon_crowbar"] = {
+	Name = "Crowbar",
+	Description = "Requires 1 ball.",
 	NeedsBlueprint = true,
 	Category = "Tools",
-	Materials = { --Entities that are required to craft this item, make sure you leave the entity names WITHOUT quotes!
+	Materials = {
 		sent_ball = 2,
 		edit_fog = 1
 	},
-	SpawnFunction = --Function to spawn the item, don't modify anything outside of the entity name unless you know what you're doing
-		function( ply, self ) --In this function you are able to modify the player who is crafting, the table itself, and the item that is being crafted
-			local e = ents.Create( "weapon_crowbar" ) --Replace the entity name with the one at the very top inside the brackets
-			e:SetPos( self:GetPos() - Vector( 0, 0, -5 ) ) --A negative Z coordinate is added here to prevent items from spawning on top of the table and being consumed, you'll have to change it if you use a different model otherwise keep it as it is
+	SpawnFunction =
+		function( ply, self )
+			local e = ents.Create( "weapon_crowbar" )
+			e:SetPos( self:GetPos() - Vector( 0, 0, -5 ) )
 			e:Spawn()
 		end
 	}
 ]]
-
---On top of configuring your item here, don't forget to add the entity name to the list of allowed ents in craft_config.lua! Failure to do so will result in errors!
 
 CraftingTable["dronesrewrite_spyspider"] = {
 	Name = "Spider Drone",
