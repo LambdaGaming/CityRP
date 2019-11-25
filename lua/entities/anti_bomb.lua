@@ -19,8 +19,6 @@ function ENT:SpawnFunction( ply, tr )
 	return ent
 end
 
-hasbombprotection = false
-
 function ENT:Initialize()
     self:SetModel( "models/props_junk/metal_paintcan001a.mdl" )
 	self:SetMoveType(MOVETYPE_VPHYSICS)
