@@ -1031,6 +1031,29 @@ ItemNPC["heat_lamp"] = {
 		end
 }
 
+ItemNPC["contraband_package"] = {
+	Name = "Contraband Package",
+	Description = "You don't know what's in it, and you don't need to. Just take it to it's target without question and get rewarded.",
+	Model = "models/props_junk/cardboard_box001a.mdl",
+	Price = 3000,
+	Type = 2,
+	SpawnCheck =
+		function( ply, self )
+			if ply:isWanted() then
+				DarkRP.notify( ply, 1, 6, "You cannot buy this item while wanted!" )
+				return false
+			end
+			return true
+		end,
+	SpawnFunction =
+		function( ply, self )
+			local e = ents.Create( "contraband_package" )
+			e:SetPos( ply:GetPos() + Vector( 0, 30, 35 ) )
+			e:Spawn()
+			e.Owner = ply
+		end
+}
+
 -----FIRE TRUCK NPC ITEMS-----
 ItemNPC["fire_truck"] = {
 	Name = "2014 Seagrave Marauder II Engine",
