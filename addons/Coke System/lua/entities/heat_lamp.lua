@@ -24,7 +24,7 @@ function ENT:Initialize()
 	sound.Add( {
 		name = "heat_lamp_idle",
 		channel = CHAN_STATIC,
-		volume = 0.65,
+		volume = 0.85,
 		level = 75,
 		pitch = { 95, 110 },
 		sound = "ambient/atmosphere/laundry_amb.wav"
