@@ -47,36 +47,41 @@ CraftingCategory[1] = {
 }
 
 CraftingCategory[2] = {
-	Name = "Rifles",
+	Name = "SMGs",
 	Color = Color( 49, 53, 61, 255 )
 }
 
 CraftingCategory[3] = {
-	Name = "Shotguns",
+	Name = "Rifles",
 	Color = Color( 49, 53, 61, 255 )
 }
 
 CraftingCategory[4] = {
-	Name = "Explosives",
+	Name = "Shotguns",
 	Color = Color( 49, 53, 61, 255 )
 }
 
 CraftingCategory[5] = {
-	Name = "Crafting Ingredients",
+	Name = "Explosives",
 	Color = Color( 49, 53, 61, 255 )
 }
 
 CraftingCategory[6] = {
-	Name = "Tools",
+	Name = "Crafting Ingredients",
 	Color = Color( 49, 53, 61, 255 )
 }
 
 CraftingCategory[7] = {
-	Name = "Ammo & Upgrades",
+	Name = "Tools",
 	Color = Color( 49, 53, 61, 255 )
 }
 
 CraftingCategory[8] = {
+	Name = "Ammo & Upgrades",
+	Color = Color( 49, 53, 61, 255 )
+}
+
+CraftingCategory[9] = {
 	Name = "Other",
 	Color = Color( 49, 53, 61, 255 )
 }
@@ -84,22 +89,92 @@ CraftingCategory[8] = {
 --Template Item
 --[[
 	CraftingTable["weapon_crowbar"] = {
-	Name = "Crowbar",
-	Description = "Requires 1 ball.",
-	NeedsBlueprint = true,
-	Category = "Tools",
+		Name = "Crowbar",
+		Description = "Requires 1 ball.",
+		NeedsBlueprint = true,
+		Category = "Tools",
+		Materials = {
+			sent_ball = 2,
+			edit_fog = 1
+		},
+		SpawnFunction =
+			function( ply, self )
+				local e = ents.Create( "weapon_crowbar" )
+				e:SetPos( self:GetPos() - Vector( 0, 0, -5 ) )
+				e:Spawn()
+			end
+		}
+]]
+
+CraftingTable["cw_l85a2"] = {
+	Name = "L85A2",
+	Description = "Requires 7 iron and 1 wrench.",
+	Category = "SMGs",
 	Materials = {
-		sent_ball = 2,
-		edit_fog = 1
+		ironbar = 7,
+		wrench = 1
 	},
 	SpawnFunction =
 		function( ply, self )
-			local e = ents.Create( "weapon_crowbar" )
-			e:SetPos( self:GetPos() - Vector( 0, 0, -5 ) )
-			e:Spawn()
+			ply:Give( "cw_l85a2" )
 		end
 	}
-]]
+
+CraftingTable["cw_ump45"] = {
+	Name = "UMP 45",
+	Description = "Requires 5 iron and 1 wrench.",
+	Category = "SMGs",
+	Materials = {
+		ironbar = 5,
+		wrench = 1
+	},
+	SpawnFunction =
+		function( ply, self )
+			ply:Give( "cw_ump45" )
+		end
+	}
+
+CraftingTable["cw_ws_mosin"] = {
+	Name = "Mosin Nagant",
+	Description = "Requires 5 iron and 2 wrenches.",
+	Category = "Rifles",
+	Materials = {
+		ironbar = 5,
+		wrench = 2
+	},
+	SpawnFunction =
+		function( ply, self )
+			ply:Give( "cw_ws_mosin" )
+		end
+	}
+
+CraftingTable["cw_mp5"] = {
+	Name = "MP5",
+	Description = "Requires 5 iron and 1 wrench.",
+	Category = "SMGs",
+	Materials = {
+		ironbar = 5,
+		wrench = 1
+	},
+	SpawnFunction =
+		function( ply, self )
+			ply:Give( "cw_mp5" )
+		end
+	}
+
+CraftingTable["cw_mac11"] = {
+	Name = "MAC-11",
+	Description = "Requires 4 iron and 1 wrench.",
+	Category = "SMGs",
+	Materials = {
+		ironbar = 4,
+		wrench = 1
+	},
+	SpawnFunction =
+		function( ply, self )
+			ply:Give( "cw_mac11" )
+		end
+	}
 
 CraftingTable["dronesrewrite_spyspider"] = {
 	Name = "Spider Drone",
@@ -148,9 +223,7 @@ CraftingTable["cw_kks_doi_mg42"] = {
 	},
 	SpawnFunction =
 		function( ply, self )
-			local e = ents.Create( "cw_kks_doi_mg42" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-			e:Spawn()
+			ply:Give( "cw_kks_doi_mg42" )
 		end
 }
 
@@ -165,9 +238,7 @@ CraftingTable["nik_m1garandnew"] = {
 	},
 	SpawnFunction =
 		function( ply, self )
-			local e = ents.Create( "nik_m1garandnew" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-			e:Spawn()
+			ply:Give( "nik_m1garandnew" )
 		end
 }
 
@@ -183,9 +254,7 @@ CraftingTable["cw_ak74"] = {
 	},
 	SpawnFunction =
 		function( ply, self )
-			local e = ents.Create( "cw_ak74" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-			e:Spawn()
+			ply:Give( "cw_ak74" )
 		end
 }
 
@@ -200,9 +269,7 @@ CraftingTable["cw_ar15"] = {
 	},
 	SpawnFunction =
 		function( ply, self )
-			local e = ents.Create( "cw_ar15" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-			e:Spawn()
+			ply:Give( "cw_ar15" )
 		end
 }
 
@@ -217,9 +284,7 @@ CraftingTable["cw_m3super90"] = {
 	},
 	SpawnFunction =
 		function( ply, self )
-			local e = ents.Create( "cw_m3super90" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-			e:Spawn()
+			ply:Give( "cw_m3super90" )
 		end
 }
 
@@ -249,9 +314,7 @@ CraftingTable["cw_scarh"] = {
 	},
 	SpawnFunction =
 		function( ply, self )
-			local e = ents.Create( "cw_scarh" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-			e:Spawn()
+			ply:Give( "cw_scarh" )
 		end
 }
 
@@ -266,9 +329,7 @@ CraftingTable["cw_g3a3"] = {
 	},
 	SpawnFunction =
 		function( ply, self )
-			local e = ents.Create( "cw_g3a3" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-			e:Spawn()
+			ply:Give( "cw_g3a3" )
 		end
 }
 
@@ -283,9 +344,7 @@ CraftingTable["cw_g36c"] = {
 	},
 	SpawnFunction =
 		function( ply, self )
-			local e = ents.Create( "cw_g36c" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-			e:Spawn()
+			ply:Give( "cw_g36c" )
 		end
 }
 
@@ -300,9 +359,7 @@ CraftingTable["cw_frag_grenade"] = {
 	},
 	SpawnFunction =
 		function( ply, self )
-			local e = ents.Create( "cw_frag_grenade" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-			e:Spawn()
+			ply:Give( "cw_frag_grenade" )
 		end
 }
 
@@ -317,9 +374,7 @@ CraftingTable["cw_l115"] = {
 	},
 	SpawnFunction =
 		function( ply, self )
-			local e = ents.Create( "cw_l115" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-			e:Spawn()
+			ply:Give( "cw_l115" )
 		end
 }
 
@@ -334,9 +389,7 @@ CraftingTable["cw_m14"] = {
 	},
 	SpawnFunction =
 		function( ply, self )
-			local e = ents.Create( "cw_m14" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-			e:Spawn()
+			ply:Give( "cw_m14" )
 		end
 }
 
@@ -351,9 +404,7 @@ CraftingTable["cw_vss"] = {
 	},
 	SpawnFunction =
 		function( ply, self )
-			local e = ents.Create( "cw_vss" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-			e:Spawn()
+			ply:Give( "cw_vss" )
 		end
 }
 
@@ -381,9 +432,7 @@ CraftingTable["lockpick"] = {
 	},
 	SpawnFunction =
 		function( ply, self )
-			local e = ents.Create( "lockpick" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-			e:Spawn()
+			ply:Give( "lockpick" )
 		end
 }
 
@@ -397,9 +446,7 @@ CraftingTable["factory_lockpick"] = {
 	},
 	SpawnFunction =
 		function( ply, self )
-			local e = ents.Create( "factory_lockpick" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-			e:Spawn()
+			ply:Give( "factory_lockpick" )
 		end
 }
 
@@ -414,9 +461,7 @@ CraftingTable["usm_c4"] = {
 	},
 	SpawnFunction =
 		function( ply, self )
-			local e = ents.Create( "usm_c4" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-			e:Spawn()
+			ply:Give( "usm_c4" )
 		end
 }
 
@@ -430,9 +475,7 @@ CraftingTable["cw_extrema_ratio_official"] = {
 	},
 	SpawnFunction =
 		function( ply, self )
-			local e = ents.Create( "cw_extrema_ratio_official" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-			e:Spawn()
+			ply:Give( "cw_extrema_ratio_official" )
 		end
 }
 
@@ -447,9 +490,7 @@ CraftingTable["cw_mr96"] = {
 	},
 	SpawnFunction =
 		function( ply, self )
-			local e = ents.Create( "cw_mr96" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-			e:Spawn()
+			ply:Give( "cw_mr96" )
 		end
 }
 
@@ -480,9 +521,7 @@ CraftingTable["cw_shorty"] = {
 	},
 	SpawnFunction =
 		function( ply, self )
-			local e = ents.Create( "cw_shorty" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-			e:Spawn()
+			ply:Give( "cw_shorty" )
 		end
 }
 
@@ -512,9 +551,7 @@ CraftingTable["cw_m249_official"] = {
 	},
 	SpawnFunction =
 		function( ply, self )
-			local e = ents.Create( "cw_m249_official" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-			e:Spawn()
+			ply:Give( "cw_m249_official" )
 		end
 }
 
@@ -559,9 +596,7 @@ CraftingTable["weapon_slam"] = {
 	},
 	SpawnFunction =
 		function( ply, self )
-			local e = ents.Create( "weapon_slam" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-			e:Spawn()
+			ply:Give( "weapon_slam" )
 		end
 }
 
@@ -625,9 +660,7 @@ CraftingTable["car_bomb"] = {
 	},
 	SpawnFunction =
 		function( ply, self )
-			local e = ents.Create( "car_bomb" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-			e:Spawn()
+			ply:Give( "car_bomb" )
 		end
 }
 
