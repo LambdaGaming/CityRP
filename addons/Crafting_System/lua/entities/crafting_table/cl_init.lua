@@ -31,6 +31,7 @@ DrawItems = function( ent )
 		surface.PlaySound( CRAFT_CONFIG_UI_SOUND )
 	end
 
+	local MenuReloadCooldown = 0
 	local mainframescroll = vgui.Create( "DScrollPanel", mainframe )
 	mainframescroll:Dock( FILL )
 	for k,v in pairs( CraftingIngredient ) do
@@ -54,6 +55,7 @@ DrawItems = function( ent )
 				surface.PlaySound( CRAFT_CONFIG_FAIL_SOUND )
 				return
 			end
+			if MenuReloadCooldown > CurTime() then return end
 			net.Start( "DropItem" )
 			net.WriteEntity( ent )
 			net.WriteString( k )
@@ -62,6 +64,7 @@ DrawItems = function( ent )
 				mainframe:Close()
 				DrawItems( ent )
 			end )
+			MenuReloadCooldown = CurTime() + 1
 		end
 		table.insert( itemtable, k )
 	end
