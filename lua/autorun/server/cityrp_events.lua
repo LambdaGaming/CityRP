@@ -391,6 +391,7 @@ function ActiveShooter()
 	
 	SetGlobalBool( "EventActive", true )
 	SetGlobalString( "ActiveEvent", "Active Shooter" )
+	DarkRP.notifyAll( 0, 6, "Shots fired reported somewhere in the city! Suspect is holding out in a nearby building!" )
 end
 
 function ActiveShooterEnd( killer )
