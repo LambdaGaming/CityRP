@@ -1,6 +1,6 @@
 
 hook.Add( "PlayerSay", "CokeReset", function( ply, text )
-	if text == "!cokereset"
+	if text == "!cokereset" then
 		if !ply:IsSuperAdmin() then
 			DarkRP.notify( ply, 1, 6, "Only superadmins can use this command!" )
 			return ""
