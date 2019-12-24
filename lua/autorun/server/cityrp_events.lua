@@ -1,6 +1,6 @@
 
 local function PickRandomEvent()
-	local rand2 = math.random( 1, 5 )
+	local rand2 = math.random( 1, 6 )
 	if rand2 == 1 then
 		OverturnedTruck()
 	elseif rand2 == 2 then
@@ -9,8 +9,10 @@ local function PickRandomEvent()
 		HouseFire()
 	elseif rand2 == 4 then
 		MoneyTransfer()
-	else
+	elseif rand2 == 5 then
 		FoodDelivery()
+	else
+		RoadWork()
 	end
 end
 
@@ -51,6 +53,12 @@ EventPos["rp_rockford_v2b"] = {
 		Vector( -9536, -5775, 8 ),
 		Vector( 5156, -11509, 322 ),
 		Vector( 8562, 3765, 1544 )
+	},
+	Road = { --Need 4 positions
+		Vector( -3919, -6921, 0 ),
+		Vector( -8019, 4866, 0 ),
+		Vector( -2499, 12990, 519 ),
+		Vector( 8875, 4412, 1536 )
 	}
 }
 
@@ -80,6 +88,12 @@ EventPos["rp_chaos_city_v33x_03"] = {
 		Vector( 4288, -5536, -1868 ),
 		Vector( -7994, 14441, -1481 ),
 		Vector( -9625, -1610, -2135 )
+	},
+	Road = {
+		Vector( 4962, -495, -1876 ),
+		Vector( -10590, 13953, -1489 ),
+		Vector( -9200, -5642, -2139 ),
+		Vector( 3404, -7267, -1876 )
 	}
 }
 
@@ -109,6 +123,12 @@ EventPos["rp_evocity2_v5p"] = {
 		Vector( 320, -232, 76 ),
 		Vector( -6994, 1481, 140 ),
 		Vector( 2169, 12760, 64 )
+	},
+	Road = {
+		Vector( -1599, 2003, 68 ),
+		Vector( -6294, 9766, 196 ),
+		Vector( 11053, 6183, -1823 ),
+		Vector( 6007, 7670, 68 )
 	}
 }
 
@@ -138,6 +158,12 @@ EventPos["rp_florida_v2"] = {
 		Vector( 5382, -852, 136 ),
 		Vector( -100, -10064, 137 ),
 		Vector( -5480, -29, 136 )
+	},
+	Road = {
+		Vector( 2871, -1864, 128 ),
+		Vector( 5241, 10570, 128 ),
+		Vector( -7706, 757, 128 ),
+		Vector( 7162, -9455, 128 )
 	}
 }
 
@@ -167,6 +193,12 @@ EventPos["rp_truenorth_v1a"] = {
 		Vector( 14139, 1583, 19 ),
 		Vector( -9772, 7037, 0 ),
 		Vector( 12820, 3541, 6397 )
+	},
+	Road = {
+		Vector( 6275, 5781, 0 ),
+		Vector( 8494, 15230, 0 ),
+		Vector( -6757, -10766, 0 ),
+		Vector( -10804, 15175, 2560 )
 	}
 }
 
@@ -196,6 +228,12 @@ EventPos["rp_newexton2_v4h"] = {
 		Vector( 9360, 7625, 1032 ),
 		Vector( 14688, -4537, 276 ),
 		Vector( -5418, -9387, -511 )
+	},
+	Road = {
+		Vector( -8789, 6240, 1016 ),
+		Vector( 3249, 3879, 1016 ),
+		Vector( 15187, 3764, -7 ),
+		Vector( -5695, -3282, -519 )
 	}
 }
 
@@ -237,6 +275,14 @@ local function RandFood()
 	for k,v in pairs( EventPos ) do
 		if k == tostring( game.GetMap() ) then
 			return table.Random( v.Food )
+		end
+	end
+end
+
+local function RandRoad()
+	for k,v in pairs( EventPos ) do
+		if k == tostring( game.GetMap() ) then
+			return table.Random( v.Road )
 		end
 	end
 end
@@ -494,4 +540,30 @@ end
 function FoodDeliveryEnd()
 	ResetEventStatus()
 	DarkRP.notify( team.GetPlayers( TEAM_COOK ), 0, 6, "The hungry customer has been served!" )
+end
+
+function RoadWork()
+	if team.NumPlayers( TEAM_UTILITY ) == 0 then return end
+	if #ents.FindByClass( "pot_hole" ) >= 1 then return end
+	local e = ents.Create( "pot_hole" )
+	e:SetPos( RandRoad() + Vector( 0, 0, 50 ) )
+	e:Spawn()
+	DarkRP.notify( team.GetPlayers( TEAM_UTILITY ), 0, 6, "Citizens have reported a large pothole in the area. Find and repair it." )
+	SetGlobalBool( "EventActive", true )
+	SetGlobalString( "ActiveEvent", "Pot Hole" )
+end
+
+function RoadWorkEnd( ply, ent )
+	local pos = ent:GetPos()
+	ply:addMoney( 400 )
+	DarkRP.notify( ply, 0, 6, "You have been rewarded $400 for removing a pothole." )
+	local randwep = table.Random( BLUEPRINT_CONFIG_TIER2 )
+	local e = ents.Create( "crafting_blueprint" )
+	e:SetPos( pos + Vector( 0, 30, 0 ) )
+	e:Spawn()
+	e:SetEntName( randwep[1] )
+	e:SetRealName( randwep[2] )
+	e:SetUses( 3 )
+	DarkRP.notify( ply, 0, 6, "You have also been rewarded with a crafting blueprint." )
+	ResetEventStatus()
 end
