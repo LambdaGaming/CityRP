@@ -19,10 +19,17 @@ function ENT:SpawnFunction( ply, tr )
 	return ent
 end
 
-local COKE_GOOD_PURITY = file.Read( "cokekey.txt", "DATA" )
-local COKE_GOOD_PURITY_LESS = COKE_GOOD_PURITY - 10
-local COKE_GOOD_PURITY_MORE = COKE_GOOD_PURITY + 10
-local COKE_PAYOUT = 30000
+local COKE_GOOD_PURITY
+local COKE_GOOD_PURITY_LESS
+local COKE_GOOD_PURITY_MORE
+local COKE_PAYOUT
+
+if SERVER then
+	COKE_GOOD_PURITY = file.Read( "cokekey.txt", "DATA" )
+	COKE_GOOD_PURITY_LESS = COKE_GOOD_PURITY - 10
+	COKE_GOOD_PURITY_MORE = COKE_GOOD_PURITY + 10
+	COKE_PAYOUT = 30000
+end
 
 local function PurityPayout( purity )
 	if purity == COKE_GOOD_PURITY then
