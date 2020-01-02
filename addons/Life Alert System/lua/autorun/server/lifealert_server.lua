@@ -3,26 +3,37 @@ util.AddNetworkString( "LifeAlertSound" )
 local function LifeAlert( ply )
 	ply:SetNWBool( "LifeAlertActive", true )
 	local emsjobs = {
-		TEAM_FIREBOSS,
-		TEAM_FIRE
+		[TEAM_FIREBOSS] = true,
+		[TEAM_FIRE] = true
 	}
 	for k,v in pairs( player.GetAll() ) do
-		if v:isCP() or table.HasValue( emsjobs, v:Team() ) then
+		if v:isCP() or emsjobs[v:Team()] then
 			DarkRP.talkToPerson( v, Color( 255, 0, 0 ), "[Life Alert]", color_white, "A life alert owned by "..ply:Nick().." has just been activated. It has been marked on your screen. Respond code 3." )
 			net.Start( "LifeAlertSound" )
 			net.Send( v )
 		end
 	end
-	timer.Simple( 180, function() ply:SetNWBool( "LifeAlertActive", false ) end )
+	timer.Simple( 180, function()
+		ply:SetNWBool( "LifeAlertActive", false )
+		ply:SetNWBool( "LifeAlertActiveDeath", false )
+		ply:SetNWVector( "LifeAlertDeathPos", nil )
+	end )
 end
 
 hook.Add( "PlayerDeath", "LifeAlertReset", function( ply )
+	local pos = ply:GetPos()
 	if ply.haslifealert then
+		ply:SetNWBool( "LifeAlertActiveDeath", true )
+		ply:SetNWVector( "LifeAlertDeathPos", pos )
+		LifeAlert( ply )
 		ply.haslifealert = false
-		ply:SetNWBool( "LifeAlertActive", false )
-		--if ply:GetNWBool( "LifeAlertActive" ) then return end
-		--LifeAlert( ply ) --Death alert disabled until I can find a way to get the death pos
 	end
+end )
+
+hook.Add( "PlayerSpawn", "LifeAlertRespawn", function( ply )
+	ply:SetNWBool( "LifeAlertActive", false )
+	ply:SetNWBool( "LifeAlertActiveDeath", false )
+	ply:SetNWVector( "LifeAlertDeathPos", nil )
 end )
 
 hook.Add( "PlayerSay", "LifeAlertCheck", function( ply, text, public )

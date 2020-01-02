@@ -12,20 +12,25 @@ local function AlertImage()
 	local ply = player.GetAll()
 	local plypos = Vector( 0, 0, 0 )
 	local emsjobs = {
-		TEAM_FIREBOSS,
-		TEAM_FIRE
+		[TEAM_FIREBOSS] = true,
+		[TEAM_FIRE] = true
 	}
 	
 	local hisPos = pl:GetShootPos()
-	if pl:isCP() or table.HasValue( emsjobs, pl:Team() ) then
+	if pl:isCP() or emsjobs[pl:Team()] then
 		for k,v in pairs( ply ) do
-			if v:GetNWBool( "LifeAlertActive" ) then
+			if v:GetNWBool( "LifeAlertActiveDeath" ) then
 				local pos = hisPos - shootPos
 				local unitPos = pos:GetNormalized()
-				local trace = util.QuickTrace(shootPos, pos, pl)
-
+				local trace = util.QuickTrace( shootPos, pos, pl )
 				plypos = v:GetPos()
-	 
+				plypos.z = plypos.z + 15
+				plypos = plypos:ToScreen()
+			elseif v:GetNWBool( "LifeAlertActive" ) then
+				local pos = hisPos - shootPos
+				local unitPos = pos:GetNormalized()
+				local trace = util.QuickTrace( shootPos, pos, pl )
+				plypos = v:GetNWVector( "LifeAlertDeathPos" )
 				plypos.z = plypos.z + 15
 				plypos = plypos:ToScreen()
 			end
