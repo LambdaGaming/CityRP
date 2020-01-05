@@ -2,23 +2,22 @@ include('shared.lua')
 
 function ENT:Draw()
     self:DrawModel()
-
 	local plyShootPos = LocalPlayer():GetShootPos()
 	if self:GetPos():DistToSqr( plyShootPos ) < 562500 then
 		local pos = self:GetPos()
-		pos.z = (pos.z + 15)
+		pos.z = pos.z + 15
 		local ang = self:GetAngles()
 		
-		surface.SetFont("Bebas40Font")
+		surface.SetFont( "Bebas40Font" )
 		local title = "Check Machine"
-		local tw = surface.GetTextSize(title)
+		local tw = surface.GetTextSize( title )
 		
-		ang:RotateAroundAxis(ang:Forward(), 90)
-		ang:RotateAroundAxis(ang:Right(), -90)
+		ang:RotateAroundAxis( ang:Forward(), 90 )
+		ang:RotateAroundAxis( ang:Right(), -90 )
 		local textang = ang
 		
-		cam.Start3D2D(pos + ang:Right() * 0, ang, 0.2)
-			draw.WordBox(2, -tw *0.5 + 5, -180, title, "Bebas40Font", VOTING.Theme.ControlColor, color_white)
+		cam.Start3D2D( pos + ang:Right() * 0, ang, 0.2 )
+			draw.WordBox( 2, -tw * 0.5 + 5, -180, title, "Bebas40Font", color_theme, color_white )
 		cam.End3D2D()
 	end
 end

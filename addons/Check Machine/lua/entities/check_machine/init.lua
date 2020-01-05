@@ -14,7 +14,7 @@ function ENT:Initialize()
 	self:SetTrigger( true )
 
 	local phys = self:GetPhysicsObject()
-	if (phys:IsValid()) then
+	if phys:IsValid() then
 		phys:Wake()
 	end
 end
@@ -32,22 +32,13 @@ util.AddNetworkString( "CheckMenu" )
 function ENT:Use( caller, activator )
 	if caller:IsPlayer() and !timer.Exists("Check_Timer") then
 		timer.Create("Check_Timer", cooldowntimer, 1, function() end )
-		--[[ local check = ents.Create("check")
-		check:Spawn()
-		check:SetPos( caller:GetPos() + Vector(30, 0, 0) )
-		DarkRP.notify(caller, 1, 6, "Check successfully spawned.")
-		for k,v in pairs( player.GetAll() ) do
-			if v:Team() == TEAM_CITIZEN or v:Team() == TEAM_TOWER or v:Team() == TEAM_CAMERA then
-				DarkRP.notify( v, 1, 6, "The check machine has just produced a check." )
-			end
-		end ]]
 		if caller:Team() == TEAM_BANKER or caller:isCP() then
 			net.Start( "CheckMenu" )
 			net.WriteEntity( self )
 			net.Send( caller )
 		end
 	elseif timer.Exists("Check_Timer") then
-		DarkRP.notify(caller, 1, 3, "Wait "..string.ToMinutesSeconds( math.Round( timer.TimeLeft( "Check_Timer" ) ) ).." minutes before spawning another check.")
+		DarkRP.notify(caller, 1, 3, "Wait "..string.ToMinutesSeconds( timer.TimeLeft( "Check_Timer" ) ).." before spawning another check.")
 	end
 end
 
