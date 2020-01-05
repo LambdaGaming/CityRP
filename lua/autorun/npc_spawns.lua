@@ -423,4 +423,5 @@ if SERVER then
 			end
 		end )
 	end )
+	MsgC( color_orange, "[CityRP] Spawned NPCs." )
 end

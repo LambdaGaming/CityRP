@@ -13,13 +13,9 @@ if SERVER then
 			if tr:IsWorld() or tr:IsPlayer() then ply:ChatPrint( "Save aborted. Cannot save world or players." ) return end --Stops code if the map itself or other players are the target
 			
 			tbl = { tr:GetPos(), tr:GetAngles(), tr:GetModel() } --Puts the vector and angles of the target into a table for later use
-			
 		    file.CreateDir( "newpersist/"..game.GetMap() ) --Creates the filepath directory if it doesn't already exist
-		    
 		    file.Write( "newpersist/"..game.GetMap().."/"..name.."-"..entnum[2]..".txt", util.TableToJSON( tbl ) ) --Writes a txt file in JSON format, contains the table of vectors and angles from before
-			
 			ply:ChatPrint( [[Entity "]]..name..[[" saved successfully.]] )
-			
 			return ""
         end
 	end )
@@ -27,7 +23,7 @@ if SERVER then
 	hook.Add( "InitPostEntity", "LoadNewPersist", function()
 	    local files, directories = file.Find( "newpersist/"..game.GetMap().."/*.txt", "DATA" ) --Looks at all of the txt files in the specified directory
 		for a,b in pairs( files ) do
-			print(b) --Testing purposes only, prints a list of found files to the console
+			--print(b) --Testing purposes only, prints a list of found files to the console
 			local readtxt = file.Read( "newpersist/"..game.GetMap().."/"..b, "DATA" ) --Reads the files that were found above
 			local readunpack = util.JSONToTable( readtxt ) --Converts the JSON format back into a lua table
 			local split = string.Explode( "-", b ) --Splits the file names for use below
@@ -43,3 +39,5 @@ if SERVER then
 		end
     end )
 end
+
+MsgC( color_orange, "[CityRP] Loaded perma prop system." )

@@ -93,3 +93,5 @@ if SERVER then
 		end )
 	end
 end
+
+MsgC( color_orange, "[CityRP] Loaded North Korea mayor event bombing functions." )

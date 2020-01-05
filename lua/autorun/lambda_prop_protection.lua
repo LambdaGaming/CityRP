@@ -81,3 +81,5 @@ local function ToolRestrict( ply, tr, tool )
 	end
 end
 hook.Add( "CanTool", "disallow_maptools", ToolRestrict )
+
+MsgC( color_orange, "[CityRP] Loaded prop protection." )

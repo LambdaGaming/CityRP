@@ -35,7 +35,6 @@ if SERVER then
 				return ""
 			end
 			table.insert( TotalVotes, ply:UniqueID() )
-			print( numvotes )
 			if numvotes == minvotes then
 				for k,v in pairs( player.GetAll() ) do
 					if v:Team() == mayor then
@@ -56,3 +55,5 @@ if SERVER then
 		end
 	end )
 end
+
+MsgC( color_orange, "[CityRP] Loaded mayor fire chat commands." )

@@ -29,3 +29,5 @@ timer.Simple( 10, function()
 		end )
 	end
 end )
+
+MsgC( color_orange, "[CityRP] Loaded !fixeco chat command." )
