@@ -851,9 +851,10 @@ ItemNPC["rp_pot_sell"] = {
 	Type = 2,
 	SpawnFunction =
 		function( ply, self )
-			local e = ents.Create( "rp_pot_sell" )
+			local e = ents.Create( "rp_pot" )
 			e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
 			e:Spawn()
+			e.IsMarketable = true
 		end
 }
 
