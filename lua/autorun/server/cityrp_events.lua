@@ -567,3 +567,5 @@ function RoadWorkEnd( ply, ent )
 	DarkRP.notify( ply, 0, 6, "You have also been rewarded with a crafting blueprint." )
 	ResetEventStatus()
 end
+
+MsgC( color_orange, "[CityRP] Loaded server events." )

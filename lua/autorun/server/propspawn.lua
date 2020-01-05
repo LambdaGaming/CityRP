@@ -43,3 +43,5 @@ end )
 hook.Add( "InitPostEntity", "KeepPropSpawnEnabled", function()
 	SetGlobalBool( "PropRestrictBypass", true )
 end )
+
+MsgC( color_orange, "[CityRP] Loaded shopkeeper prop restriction functions." )
