@@ -8,10 +8,10 @@ ENT.Spawnable = true
 ENT.AdminOnly = true
 ENT.Category = "Cooking Stove"
 
-function ENT:SpawnFunction( ply, tr )
+function ENT:SpawnFunction( ply, tr, name )
 	if !tr.Hit then return end
 	local SpawnPos = tr.HitPos + tr.HitNormal * 1
-	local ent = ents.Create( "cooked_fish" )
+	local ent = ents.Create( name )
 	ent:SetPos( SpawnPos )
 	ent:Spawn()
 	ent:Activate()
@@ -20,22 +20,22 @@ end
 
 function ENT:Initialize()
     self:SetModel( "models/props/CS_militia/fishriver01.mdl" )
-	self:SetMoveType(MOVETYPE_VPHYSICS)
-	self:SetSolid(SOLID_VPHYSICS)
+	self:SetMoveType( MOVETYPE_VPHYSICS )
+	self:SetSolid( SOLID_VPHYSICS )
 	if SERVER then
-		self:PhysicsInit(SOLID_VPHYSICS)
-		self:SetUseType(SIMPLE_USE)
+		self:PhysicsInit( SOLID_VPHYSICS )
+		self:SetUseType( SIMPLE_USE )
 	end
 	local phys = self:GetPhysicsObject()
-	if IsValid(phys) then
+	if IsValid( phys ) then
 		phys:Wake()
 	end
 end
 
-function ENT:Use(caller, activator)
-	caller:SetHealth( math.Clamp( caller:Health() + 50, 0, 100) )
-	caller:setSelfDarkRPVar( "Energy", math.Clamp( caller:getDarkRPVar("Energy") + 20, 0, 100 ) )
-	self:EmitSound("eating_and_drinking/eating.wav")
+function ENT:Use( caller, activator )
+	caller:SetHealth( math.Clamp( caller:Health() + 50, 0, 100 ) )
+	caller:setSelfDarkRPVar( "Energy", math.Clamp( caller:getDarkRPVar( "Energy" ) + 20, 0, 100 ) )
+	self:EmitSound( "eating_and_drinking/eating.wav" )
 	self:Remove()
 end
 
