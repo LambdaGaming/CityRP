@@ -11,3 +11,5 @@ hook.Add( "PlayerCanHearPlayersVoice", "AnnouncementSystemVoice", function( list
 		end
 	end
 end )
+
+MsgC( color_orange, "[CityRP] Loaded announcement system." )

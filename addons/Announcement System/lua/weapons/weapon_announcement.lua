@@ -7,7 +7,6 @@ SWEP.PrintName		= "Announcement Microphone"
 SWEP.Slot			= 2
 SWEP.DrawAmmo		= false
 SWEP.DrawCrosshair	= true
-SWEP.HoldType		= "pistol"
 SWEP.Spawnable		= true
 SWEP.AdminOnly		= true
 SWEP.UseHands 		= true
@@ -34,7 +33,7 @@ function SWEP:DrawWorldModel()
 end
 
 function SWEP:Initialize()
-	self:SetHoldType("magic")
+	self:SetHoldType( "magic" )
 	self:SetNWInt( "Announce_Channel", 1 )
 end
 
