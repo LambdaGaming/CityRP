@@ -9,10 +9,10 @@ ENT.Spawnable = true
 ENT.AdminOnly = true
 ENT.Category = "Crime+"
 
-function ENT:SpawnFunction( ply, tr )
+function ENT:SpawnFunction( ply, tr, name )
 	if !tr.Hit then return end
 	local SpawnPos = tr.HitPos + tr.HitNormal * 1
-	local ent = ents.Create( "crime_purifier" )
+	local ent = ents.Create( name )
 	ent:SetPos( SpawnPos )
 	ent:Spawn()
 	ent:Activate()
@@ -21,16 +21,16 @@ end
 
 function ENT:Initialize()
     self:SetModel( "models/props_wasteland/laundry_washer003.mdl" )
-	self:SetMoveType(MOVETYPE_VPHYSICS)
-	self:SetSolid(SOLID_VPHYSICS)
+	self:SetMoveType( MOVETYPE_VPHYSICS )
+	self:SetSolid( SOLID_VPHYSICS )
 	if SERVER then
-		self:PhysicsInit(SOLID_VPHYSICS)
+		self:PhysicsInit( SOLID_VPHYSICS )
 		self:SetTrigger( true )
 		self:SetUseType( SIMPLE_USE )
 	end
  
     local phys = self:GetPhysicsObject()
-	if (phys:IsValid()) then
+	if phys:IsValid() then
 		phys:Wake()
 	end
 	self:SetNWInt( "WeedAmount", 0 )
@@ -116,23 +116,23 @@ if CLIENT then
 		local plyShootPos = LocalPlayer():GetShootPos()
 		if self:GetPos():DistToSqr( plyShootPos ) < 562500 then
 			local pos = self:GetPos()
-			pos.z = (pos.z + 15)
+			pos.z = pos.z + 15
 			local ang = self:GetAngles()
 			
-			surface.SetFont("Bebas40Font")
+			surface.SetFont( "Bebas40Font" )
 			local title = "Purifier"
-			local tw = surface.GetTextSize(title)
+			local tw = surface.GetTextSize( title )
 			
-			ang:RotateAroundAxis(ang:Forward(), 90)
-			ang:RotateAroundAxis(ang:Right(), 180)
+			ang:RotateAroundAxis( ang:Forward(), 90 )
+			ang:RotateAroundAxis( ang:Right(), 180 )
 			local textang = ang
 			
-			cam.Start3D2D(pos + ang:Right() * -10, ang, 0.2)
-				draw.WordBox(2, -tw *0.5 + 20, -180, title, "Bebas40Font", VOTING.Theme.ControlColor, color_white)
+			cam.Start3D2D( pos + ang:Right() * -10, ang, 0.2 )
+				draw.WordBox( 2, -tw *0.5 + 20, -180, title, "Bebas40Font", color_theme, color_white )
 			cam.End3D2D()
-			cam.Start3D2D(pos + ang:Right() * 1, ang, 0.2)
-				draw.WordBox(2, -tw *0.5 - 120, -180, "Current Weed Amount: "..self:GetNWInt( "WeedAmount" ).."/6", "Bebas40Font", VOTING.Theme.ControlColor, color_white)
-				draw.WordBox(2, -tw *0.5 - 135, -140, "Current Cocaine Amount: "..BoolToNumber( self:GetNWBool( "HasCocaine" ) ).."/1", "Bebas40Font", VOTING.Theme.ControlColor, color_white)
+			cam.Start3D2D( pos + ang:Right() * 1, ang, 0.2 )
+				draw.WordBox( 2, -tw *0.5 - 120, -180, "Current Weed Amount: "..self:GetNWInt( "WeedAmount" ).."/6", "Bebas40Font", color_theme, color_white )
+				draw.WordBox( 2, -tw *0.5 - 135, -140, "Current Cocaine Amount: "..BoolToNumber( self:GetNWBool( "HasCocaine" ) ).."/1", "Bebas40Font", color_theme, color_white )
 			cam.End3D2D()
 		end
 	end
