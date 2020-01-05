@@ -9,10 +9,10 @@ ENT.Spawnable = true
 ENT.AdminOnly = true
 ENT.Category = "Cocaine System"
 
-function ENT:SpawnFunction( ply, tr )
+function ENT:SpawnFunction( ply, tr, name )
 	if !tr.Hit then return end
 	local SpawnPos = tr.HitPos + tr.HitNormal * 10
-	local ent = ents.Create( "heat_lamp" )
+	local ent = ents.Create( name )
 	ent:SetPos( SpawnPos )
 	ent:Spawn()
 	ent:Activate()
@@ -30,17 +30,17 @@ function ENT:Initialize()
 		sound = "ambient/atmosphere/laundry_amb.wav"
 	} )
     self:SetModel( "models/props/de_nuke/IndustrialLight01.mdl" )
-	self:SetMoveType(MOVETYPE_VPHYSICS)
-	self:SetSolid(SOLID_VPHYSICS)
+	self:SetMoveType( MOVETYPE_VPHYSICS )
+	self:SetSolid( SOLID_VPHYSICS )
 	if SERVER then
-		self:PhysicsInit(SOLID_VPHYSICS)
-		self:SetUseType(SIMPLE_USE)
+		self:PhysicsInit( SOLID_VPHYSICS )
+		self:SetUseType( SIMPLE_USE )
 		self:SetHealth( 200 )
 		self:SetMaxHealth( 200 )
 	end
  
     local phys = self:GetPhysicsObject()
-	if (phys:IsValid()) then
+	if phys:IsValid() then
 		phys:Wake()
 	end
 	self:SetNWBool( "TurnedOn", false )

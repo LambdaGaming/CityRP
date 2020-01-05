@@ -9,10 +9,10 @@ ENT.Spawnable = true
 ENT.AdminOnly = true
 ENT.Category = "Cocaine System"
 
-function ENT:SpawnFunction( ply, tr )
+function ENT:SpawnFunction( ply, tr, name )
 	if !tr.Hit then return end
 	local SpawnPos = tr.HitPos + tr.HitNormal * 1
-	local ent = ents.Create( "pure_cocaine_marketable" )
+	local ent = ents.Create( name )
 	ent:SetPos( SpawnPos )
 	ent:Spawn()
 	ent:Activate()
@@ -44,65 +44,62 @@ end
 
 function ENT:Initialize()
     self:SetModel( "models/props/cs_assault/Money.mdl" )
-	self:SetMoveType(MOVETYPE_VPHYSICS)
-	self:SetSolid(SOLID_VPHYSICS)
+	self:SetMoveType( MOVETYPE_VPHYSICS )
+	self:SetSolid( SOLID_VPHYSICS )
 	if SERVER then
-		self:PhysicsInit(SOLID_VPHYSICS)
-		self:SetUseType(SIMPLE_USE)
+		self:PhysicsInit( SOLID_VPHYSICS )
+		self:SetUseType( SIMPLE_USE )
 	end
  
     local phys = self:GetPhysicsObject()
-	if (phys:IsValid()) then
+	if phys:IsValid() then
 		phys:Wake()
 	end
 	self:SetMaterial( "models/debug/debugwhite" )
 end
 
 local cop = {
-	TEAM_POLICEBOSS,
-	TEAM_OFFICER,
-	TEAM_UNDERCOVER,
-	TEAM_SWATBOSS,
-	TEAM_SWAT,
-	TEAM_FBI,
-	TEAM_MAYOR,
-	TEAM_BOUNTY
+	[TEAM_POLICEBOSS] = true,
+	[TEAM_OFFICER] = true,
+	[TEAM_UNDERCOVER] = true,
+	[TEAM_SWATBOSS] = true,
+	[TEAM_SWAT] = true,
+	[TEAM_FBI] = true,
+	[TEAM_MAYOR] = true,
+	[TEAM_BOUNTY] = true
 }
 
 local civi = {
-	TEAM_CITIZEN,
-	TEAM_TOWER,
-	TEAM_CAMERA,
-	TEAM_BANKER,
-	TEAM_FIREBOSS,
-	TEAM_FIRE,
-	TEAM_DETECTIVE,
-	TEAM_COOK,
-	TEAM_UTILITY,
-	TEAM_HITMAN,
-	TEAM_BUS,
-	TEAM_SHOP
+	[TEAM_CITIZEN] = true,
+	[TEAM_TOWER] = true,
+	[TEAM_CAMERA] = true,
+	[TEAM_BANKER] = true,
+	[TEAM_FIREBOSS] = true,
+	[TEAM_FIRE] = true,
+	[TEAM_DETECTIVE] = true,
+	[TEAM_COOK] = true,
+	[TEAM_UTILITY] = true,
+	[TEAM_HITMAN] = true,
+	[TEAM_BUS] = true,
+	[TEAM_SHOP] = true
 }
 
 function ENT:Use( activator, caller )
-	local iscop = table.HasValue( cop, activator:Team() )
-	local iscivi = table.HasValue( civi, activator:Team() )
 	local purity = self:GetNWInt( "Purity" )
 	if IsValid(activator) and activator:IsPlayer() then
 		for k, v in pairs( ents.FindInSphere( self:GetPos(), 128 ) ) do
 			if ( v:GetClass() == "rp_dealer" ) then
 				local rand = math.random( 1, 10 )
-				if rand <= 3 and !activator:isWanted() and iscivi then
+				if rand <= 3 and !activator:isWanted() and civi[activator:Team()] then
 					activator:wanted( actor, "Seen selling drugs.", 600 )
 				end
-				if iscop then
+				if cop[activator:Team()] then
 					activator:ChatPrint( "Processing drugs....standby for payment...." )
 					timer.Simple( 30, function()
 						DarkRP.createMoneyBag( v:GetPos() + Vector( 35, 0, 10 ), PurityPayout( purity ) )
 						activator:ChatPrint( "You have sold cocaine for "..DarkRP.formatMoney( PurityPayout( purity ) ).." as a government official." )
 					end )
-				end
-				if iscivi then
+				elseif civi[activator:Team()] then
 					activator:addMoney( PurityPayout( purity ) )
 					activator:ChatPrint( "You have sold cocaine for "..DarkRP.formatMoney( PurityPayout( purity ) ).."." )
 				end

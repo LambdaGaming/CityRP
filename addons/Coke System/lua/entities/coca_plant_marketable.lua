@@ -9,10 +9,10 @@ ENT.Spawnable = true
 ENT.AdminOnly = true
 ENT.Category = "Cocaine System"
 
-function ENT:SpawnFunction( ply, tr )
+function ENT:SpawnFunction( ply, tr, name )
 	if !tr.Hit then return end
 	local SpawnPos = tr.HitPos + tr.HitNormal * 1
-	local ent = ents.Create( "coca_plant_marketable" )
+	local ent = ents.Create( name )
 	ent:SetPos( SpawnPos )
 	ent:Spawn()
 	ent:Activate()
@@ -21,18 +21,18 @@ end
 
 function ENT:Initialize()
     self:SetModel( "models/props/cs_office/plant01.mdl" )
-	self:SetMoveType(MOVETYPE_VPHYSICS)
-	self:SetSolid(SOLID_VPHYSICS)
+	self:SetMoveType( MOVETYPE_VPHYSICS )
+	self:SetSolid( SOLID_VPHYSICS )
 	if SERVER then
-		self:PhysicsInit(SOLID_VPHYSICS)
-		self:SetUseType(SIMPLE_USE)
+		self:PhysicsInit( SOLID_VPHYSICS )
+		self:SetUseType( SIMPLE_USE )
 		self:SetHealth( 100 )
 		self:SetMaxHealth( 100 )
 		self:PrecacheGibs()
 	end
  
     local phys = self:GetPhysicsObject()
-	if (phys:IsValid()) then
+	if phys:IsValid() then
 		phys:Wake()
 	end
 	self:SetNWInt( "Growth", 0 )
@@ -77,7 +77,7 @@ function ENT:OnTakeDamage( dmg )
 	if health > 0 then
 		self:SetHealth( health - d )
 	else
-		self:GibBreakClient( Vector( 0, 0, 0 ) )
+		self:GibBreakClient( vector_origin )
 		self:Remove()
 	end
 end
@@ -101,10 +101,10 @@ if CLIENT then
 			local title3 = "Type: Marketable"
 			
 			local ang = self:GetAngles()
-			ang:RotateAroundAxis( self:GetAngles():Right(),270 )
-			ang:RotateAroundAxis( self:GetAngles():Forward(),90 )
+			ang:RotateAroundAxis( self:GetAngles():Right(), 270 )
+			ang:RotateAroundAxis( self:GetAngles():Forward(), 90 )
 			local pos = self:GetPos() + ang:Right() * -20 + ang:Up() * 26 + ang:Forward() * -25
-			cam.Start3D2D(pos,ang,0.1)
+			cam.Start3D2D( pos, ang, 0.1 )
 				draw.RoundedBox( 0, 60, -120, 350, 100, Color( 38, 41, 49, 220 ) )
 				draw.SimpleText( title, "Bebas40Font", 240, -100, color_white, 1, 1 )
 				if self:GetNWInt( "Growth" ) == 1200 then
