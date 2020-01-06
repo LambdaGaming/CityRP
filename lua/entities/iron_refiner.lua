@@ -9,10 +9,10 @@ ENT.Spawnable = true
 ENT.AdminOnly = true
 ENT.Category = "Mining System"
 
-function ENT:SpawnFunction( ply, tr )
+function ENT:SpawnFunction( ply, tr, name )
 	if not tr.Hit then return end
 	local SpawnPos = tr.HitPos + tr.HitNormal * 1
-	local ent = ents.Create( "iron_refiner" )
+	local ent = ents.Create( name )
 	ent:SetPos( SpawnPos )
 	ent:Spawn()
 	ent:Activate()
@@ -29,7 +29,7 @@ function ENT:Initialize()
 	end
  
     local phys = self:GetPhysicsObject()
-	if (phys:IsValid()) then
+	if phys:IsValid() then
 		phys:Wake()
 	end
 	
@@ -38,27 +38,27 @@ function ENT:Initialize()
 end
 
 local allowedweps = {
-	"cw_ak74",
-	"cw_ar15",
-	"cw_m3super90",
-	"cw_scarh",
-	"cw_g3a3",
-	"cw_g36c",
-	"cw_l115",
-	"cw_m14",
-	"cw_vss",
-	"lockpick",
-	"factory_lockpick",
-	"usm_c4",
-	"cw_extrema_ratio_official",
-	"cw_mr96",
-	"cw_shorty",
-	"cw_m249_official",
-	"weapon_slam",
-	"car_bomb",
-	"ins2_atow_rpg7",
-	"nik_m1garandnew",
-	"cw_kks_doi_mg42"
+	["cw_ak74"] = true,
+	["cw_ar15"] = true,
+	["cw_m3super90"] = true,
+	["cw_scarh"] = true,
+	["cw_g3a3"] = true,
+	["cw_g36c"] = true,
+	["cw_l115"] = true,
+	["cw_m14"] = true,
+	["cw_vss"] = true,
+	["lockpick"] = true,
+	["factory_lockpick"] = true,
+	["usm_c4"] = true,
+	["cw_extrema_ratio_official"] = true,
+	["cw_mr96"] = true,
+	["cw_shorty"] = true,
+	["cw_m249_official"] = true,
+	["weapon_slam"] = true,
+	["car_bomb"] = true,
+	["ins2_atow_rpg7"] = true,
+	["nik_m1garandnew"] = true,
+	["cw_kks_doi_mg42"] = true
 }
 
 local wepvalues = {
@@ -86,15 +86,15 @@ local wepvalues = {
 }
 
 local allowedents = {
-	"spawned_weapon",
-	"wrench",
-	"cw_attpack_suppressors",
-	"cw_attpack_ammotypes_rifles",
-	"cw_attpack_ammotypes_shotguns",
-	"cw_attpack_sights_longrange",
-	"cw_attpack_various",
-	"dronesrewrite_nanodr",
-	"dronesrewrite_spyspider"
+	["spawned_weapon"] = true,
+	["wrench"] = true,
+	["cw_attpack_suppressors"] = true,
+	["cw_attpack_ammotypes_rifles"] = true,
+	["cw_attpack_ammotypes_shotguns"] = true,
+	["cw_attpack_sights_longrange"] = true,
+	["cw_attpack_various"] = true,
+	["dronesrewrite_nanodr"] = true,
+	["dronesrewrite_spyspider"] = true
 }
 
 local entvalues = {
@@ -110,8 +110,8 @@ local entvalues = {
 
 function ENT:Touch( ent )
 	if self.refining then return end
-	if table.HasValue( allowedents, ent:GetClass() ) then
-		if ent:GetClass() == "spawned_weapon" and table.HasValue( allowedweps, ent:GetWeaponClass() ) then
+	if allowedents[ent:GetClass()] then
+		if ent:GetClass() == "spawned_weapon" and allowedweps[ent:GetWeaponClass()] then
 			for k,v in pairs( wepvalues ) do
 				if k == tostring( ent:GetWeaponClass() ) then
 					self:SetNWString( "CurRefining", k )
@@ -165,10 +165,10 @@ if CLIENT then
 			local textang = ang
 			
 			cam.Start3D2D(pos + ang:Right() * -20, ang, 0.2)
-				draw.WordBox(2, -tw *0.5 + 5, -180, title, "Bebas40Font", VOTING.Theme.ControlColor, color_white)
+				draw.WordBox(2, -tw *0.5 + 5, -180, title, "Bebas40Font", color_theme, color_white)
 			cam.End3D2D()
 			cam.Start3D2D(pos + ang:Right() * -10, ang, 0.2)
-				draw.WordBox(2, -tw *0.5 + -110, -180, "Currently Refining: "..self:GetNWString( "CurRefining" ), "Bebas40Font", VOTING.Theme.ControlColor, color_white)
+				draw.WordBox(2, -tw *0.5 + -110, -180, "Currently Refining: "..self:GetNWString( "CurRefining" ), "Bebas40Font", color_theme, color_white)
 			cam.End3D2D()
 		end
 	end
