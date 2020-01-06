@@ -30,14 +30,15 @@ if SERVER then
 			local e = ents.Create( split[1] ) --Creates the entity, the name is found by looking at the first word in the filename after splitting
 			e:SetPos( readunpack[1] ) --Reads the vector, the first value in the table
 			e:SetAngles( readunpack[2] ) --Reads the angle, the second value in the table
-			e:SetModel( readunpack[3] )
 			e:Spawn()
 			e:Activate()
+			if readunpack[3] then
+				e:SetModel( readunpack[3] )
+			end
 			e:SetMoveType( MOVETYPE_NONE )
 			e:SetSolid( SOLID_VPHYSICS )
 			e.IsPermaProp = true
 		end
+		MsgC( color_orange, "[CityRP] Loaded perma props." )
     end )
 end
-
-MsgC( color_orange, "[CityRP] Loaded perma prop system." )
