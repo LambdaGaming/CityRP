@@ -854,7 +854,7 @@ ItemNPC["rp_pot_sell"] = {
 			local e = ents.Create( "rp_pot" )
 			e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
 			e:Spawn()
-			e.IsMarketable = true
+			e:SetNWBool( "IsMarketable", true )
 		end
 }
 
@@ -1083,17 +1083,17 @@ ItemNPC["fire_truck"] = {
 		end
 }
 
-ItemNPC["fire_truck_ford"] = {
-	Name = "Ford F-150 Fire",
-	Description = "Pickup truck with red and white emergency lights. Useful for getting places the big engine can't reach.",
-	Model = "models/stcars/15f150.mdl",
+ItemNPC["fire_truck_tesla"] = {
+	Name = "Tesla Cybertruck - FD",
+	Description = "Truck with red and white emergency lights. Useful for getting places the big engine can't reach.",
+	Model = "models/sentry/cybertruck.mdl",
 	Price = 0,
 	Type = 3,
 	SpawnFunction =
 		function( ply, self )
-			local class = "Ford F-150 Fire"
-			local model = "models/stcars/15f150.mdl"
-			local script = "scripts/vehicles/stcars/15f150.txt"
+			local class = "Tesla Cybertruck - FD"
+			local model = "models/sentry/cybertruck.mdl"
+			local script = "scripts/vehicles/sentry/cybertruck.txt"
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -5257, -3349, 8 ), Angle( 0, 180, 0 ) )
 			elseif map == chaoscity then
@@ -1516,33 +1516,6 @@ ItemNPC["transport_truck"] = {
 		end
 }
 
-ItemNPC["jeep_cherokee"] = {
-	Name = "Jeep Cherokee Unmarked",
-	Description = "Unmarked jeep.",
-	Model = "models/tdmcars/jeep_grandche.mdl",
-	Price = 0,
-	Type = 4,
-	SpawnFunction =
-		function( ply, self )
-			local class = "Jeep Cherokee Unmarked"
-			local model = "models/tdmcars/jeep_grandche.mdl"
-			local script = "scripts/vehicles/TDMCars/grandche.txt"
-			if map == rockford then
-				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
-			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 3246, -4439, -2124 ), Angle( 0, 90, 0 ) )
-			elseif map == evocity then
-				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
-			elseif map == florida then
-				SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
-			elseif map == truenorth then
-				SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
-			elseif map == newexton then
-				SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
-			end
-		end
-}
-
 ItemNPC["ford_explorer"] = {
 	Name = "2016 Ford Police Interceptor Utility",
 	Description = "Modern police SUV.",
@@ -1581,33 +1554,6 @@ ItemNPC["ford_taurus"] = {
 			local class = "2010 Ford Taurus Police Interceptor"
 			local model = "models/sentry/taurussho.mdl"
 			local script = "scripts/vehicles/sentry/taurus.txt"
-			if map == rockford then
-				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
-			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 3246, -4439, -2124 ), Angle( 0, 90, 0 ) )
-			elseif map == evocity then
-				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
-			elseif map == florida then
-				SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
-			elseif map == truenorth then
-				SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
-			elseif map == newexton then
-				SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
-			end
-		end
-}
-
-ItemNPC["jeep_wrangler"] = {
-	Name = "Wrangler Unmarked",
-	Description = "Unmarked jeep.",
-	Model = "models/tdmcars/wrangler.mdl",
-	Price = 0,
-	Type = 4,
-	SpawnFunction =
-		function( ply, self )
-			local class = "Wrangler Unmarked"
-			local model = "models/tdmcars/wrangler.mdl"
-			local script = "scripts/vehicles/TDMCars/wrangler.txt"
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
 			elseif map == chaoscity then
