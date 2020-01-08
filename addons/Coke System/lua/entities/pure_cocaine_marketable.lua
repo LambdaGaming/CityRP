@@ -80,8 +80,7 @@ local civi = {
 	[TEAM_COOK] = true,
 	[TEAM_UTILITY] = true,
 	[TEAM_HITMAN] = true,
-	[TEAM_BUS] = true,
-	[TEAM_SHOP] = true
+	[TEAM_BUS] = true
 }
 
 function ENT:Use( activator, caller )
