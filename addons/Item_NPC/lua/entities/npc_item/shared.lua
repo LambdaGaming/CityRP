@@ -27,7 +27,7 @@ function ENT:SetupDataTables()
 	self:NetworkVar( "Int", 0, "NPCType" )
 end
 
-local function SpawnVehicle( ply, class, model, script, pos, ang, spawnfunc )
+local function SpawnVehicle( ply, class, model, script, pos, ang )
 	if SERVER then
 		local e = ents.Create( "prop_vehicle_jeep" )
 		e:SetKeyValue( "vehiclescript", script )
@@ -699,6 +699,19 @@ ItemNPC["weapon_drr_repairtool"] = {
 	SpawnFunction =
 		function( ply, self )
 			ply:Give( "weapon_drr_repairtool" )
+		end
+}
+
+ItemNPC["automod_fuel"] = {
+	Name = "Fuel Can",
+	Description = "Fuels up to 75% of a vehicle's fuel capacity.",
+	Price = 200,
+	Type = 1,
+	SpawnFunction =
+		function( ply, self )
+			local e = ents.Create( "automod_fuel" )
+			e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
+			e:Spawn()
 		end
 }
 
