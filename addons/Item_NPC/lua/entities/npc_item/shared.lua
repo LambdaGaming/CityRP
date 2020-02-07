@@ -1901,7 +1901,7 @@ ItemNPC["peterbilt_tow"] = {
 			local model = "models/sentry/p379_tow.mdl"
 			local script = "scripts/vehicles/sentry/p379_tow.txt"
 			if map == rockford then
-				SpawnVehicle( ply, class, model, script, Vector( -7496, 587, 4 ), angle_zero )
+				SpawnVehicle( ply, class, model, script, Vector( -7533, 703, 3 ), angle_zero )
 			elseif map == chaoscity then
 				SpawnVehicle( ply, class, model, script, Vector( -7411, 8812, -1489 ), angle_zero )
 			elseif map == evocity then
