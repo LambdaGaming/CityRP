@@ -705,6 +705,7 @@ ItemNPC["weapon_drr_repairtool"] = {
 ItemNPC["automod_fuel"] = {
 	Name = "Fuel Can",
 	Description = "Fuels up to 75% of a vehicle's fuel capacity.",
+	Model = "models/props_junk/gascan001a.mdl",
 	Price = 200,
 	Type = 1,
 	SpawnFunction =
