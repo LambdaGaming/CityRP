@@ -16,7 +16,7 @@ ENT.Spawnable = true
 ENT.Category = "Item NPC"
 
 local rockford = "rp_rockford_v2b"
-local chaoscity = "rp_chaos_city_v33x_03"
+local chaoscity = "rp_southside"
 local evocity = "rp_evocity2_v5p"
 local florida = "rp_florida_v2"
 local truenorth = "rp_truenorth_v1a"
@@ -1084,7 +1084,7 @@ ItemNPC["fire_truck"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -5257, -3349, 8 ), Angle( 0, 180, 0 ) )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 7231, -3436, -1742 ), Angle( 0, -90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 9431, 1260, -103 ), Angle( 0, -90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( 5363, 13248, 68 ), angle_zero )
 			elseif map == florida then
@@ -1111,7 +1111,7 @@ ItemNPC["fire_truck_tesla"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -5257, -3349, 8 ), Angle( 0, 180, 0 ) )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 7231, -3436, -1742 ), Angle( 0, -90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 9431, 1260, -103 ), Angle( 0, -90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( 5363, 13248, 68 ), angle_zero )
 			elseif map == florida then
@@ -1139,7 +1139,7 @@ ItemNPC["chevy_impala"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 3246, -4439, -2124 ), Angle( 0, 90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
 			elseif map == florida then
@@ -1166,7 +1166,7 @@ ItemNPC["chevy_tahoe"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 3246, -4439, -2124 ), Angle( 0, 90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
 			elseif map == florida then
@@ -1193,7 +1193,7 @@ ItemNPC["swat_van"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 3246, -4439, -2124 ), Angle( 0, 90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
 			elseif map == florida then
@@ -1220,7 +1220,7 @@ ItemNPC["ford_crownvic"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 3246, -4439, -2124 ), Angle( 0, 90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
 			elseif map == florida then
@@ -1247,7 +1247,7 @@ ItemNPC["ford_crownvic_slick"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 3246, -4439, -2124 ), Angle( 0, 90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
 			elseif map == florida then
@@ -1274,7 +1274,7 @@ ItemNPC["ford_crownvic_und"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 3246, -4439, -2124 ), Angle( 0, 90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
 			elseif map == florida then
@@ -1301,7 +1301,7 @@ ItemNPC["ford_f150"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 3246, -4439, -2124 ), Angle( 0, 90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
 			elseif map == florida then
@@ -1328,7 +1328,7 @@ ItemNPC["jaguar_und"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 3246, -4439, -2124 ), Angle( 0, 90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
 			elseif map == florida then
@@ -1355,7 +1355,7 @@ ItemNPC["charger_police"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 3246, -4439, -2124 ), Angle( 0, 90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
 			elseif map == florida then
@@ -1382,7 +1382,7 @@ ItemNPC["charger_und"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 3246, -4439, -2124 ), Angle( 0, 90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
 			elseif map == florida then
@@ -1409,7 +1409,7 @@ ItemNPC["lambosine"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 3246, -4439, -2124 ), Angle( 0, 90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
 			elseif map == florida then
@@ -1436,7 +1436,7 @@ ItemNPC["lambo_veneno"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 3246, -4439, -2124 ), Angle( 0, 90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
 			elseif map == florida then
@@ -1463,7 +1463,7 @@ ItemNPC["jaguar_police"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 3246, -4439, -2124 ), Angle( 0, 90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
 			elseif map == florida then
@@ -1490,7 +1490,7 @@ ItemNPC["dodge_monaco"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 3246, -4439, -2124 ), Angle( 0, 90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
 			elseif map == florida then
@@ -1517,7 +1517,7 @@ ItemNPC["transport_truck"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 3246, -4439, -2124 ), Angle( 0, 90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
 			elseif map == florida then
@@ -1544,7 +1544,7 @@ ItemNPC["ford_explorer"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 3246, -4439, -2124 ), Angle( 0, 90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
 			elseif map == florida then
@@ -1571,7 +1571,7 @@ ItemNPC["ford_taurus"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 3246, -4439, -2124 ), Angle( 0, 90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
 			elseif map == florida then
@@ -1598,7 +1598,7 @@ ItemNPC["lambo_huracan"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 3246, -4439, -2124 ), Angle( 0, 90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
 			elseif map == florida then
@@ -1625,7 +1625,7 @@ ItemNPC["dodge_challenger"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 3246, -4439, -2124 ), Angle( 0, 90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
 			elseif map == florida then
@@ -1652,7 +1652,7 @@ ItemNPC["hummer"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 3246, -4439, -2124 ), Angle( 0, 90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
 			elseif map == florida then
@@ -1679,7 +1679,7 @@ ItemNPC["chevy_impala_taxi"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 3246, -4439, -2124 ), Angle( 0, 90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
 			elseif map == florida then
@@ -1706,7 +1706,7 @@ ItemNPC["laferrari"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 3246, -4439, -2124 ), Angle( 0, 90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
 			elseif map == florida then
@@ -1733,7 +1733,7 @@ ItemNPC["charger_old"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 3246, -4439, -2124 ), Angle( 0, 90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
 			elseif map == florida then
@@ -1761,7 +1761,7 @@ ItemNPC["ambulance"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( 318, -4842, 64 ), Angle( 0, 90, 0 ) )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 7214, -3728, -1742 ), Angle( 0, -90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 7308, 4544, -63 ), Angle( 0, 90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( -3191, 417, 76 ), angle_zero )
 			elseif map == florida then
@@ -1788,7 +1788,7 @@ ItemNPC["crownvic_med"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( 318, -4842, 64 ), Angle( 0, 90, 0 ) )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 7214, -3728, -1742 ), Angle( 0, -90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 7308, 4544, -63 ), Angle( 0, 90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( -3191, 417, 76 ), angle_zero )
 			elseif map == florida then
@@ -1877,7 +1877,7 @@ ItemNPC["dodge_tow"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -7496, 587, 4 ), angle_zero )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( -7411, 8812, -1489 ), angle_zero )
+				SpawnVehicle( ply, class, model, script, Vector( -1656, 6421, 14 ), angle_zero )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( -3282, 2636, 76 ), angle_zero )
 			elseif map == florida then
@@ -1904,7 +1904,7 @@ ItemNPC["peterbilt_tow"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -7533, 703, 3 ), angle_zero )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( -7411, 8812, -1489 ), angle_zero )
+				SpawnVehicle( ply, class, model, script, Vector( -1656, 6421, 14 ), angle_zero )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( -3282, 2636, 76 ), angle_zero )
 			elseif map == florida then
@@ -1932,7 +1932,7 @@ ItemNPC["international"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -1434, 4509, 536 ), Angle( 0, 90, 0 ) )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( -10991, 12199, -1489 ), Angle( 0, 180, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 701, -3806, -231 ), Angle( 0, -90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( 8638, 4530, -1817 ), Angle( 0, 180, 0 ) )
 			elseif map == florida then
@@ -1959,7 +1959,7 @@ ItemNPC["kenworth"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -1434, 4509, 536 ), Angle( 0, 90, 0 ) )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( -10991, 12199, -1489 ), Angle( 0, 180, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 701, -3806, -231 ), Angle( 0, -90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( 8638, 4530, -1817 ), Angle( 0, 180, 0 ) )
 			elseif map == florida then
@@ -1986,7 +1986,7 @@ ItemNPC["peterbilt"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -1434, 4509, 536 ), Angle( 0, 90, 0 ) )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( -10991, 12199, -1489 ), Angle( 0, 180, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 701, -3806, -231 ), Angle( 0, -90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( 8638, 4530, -1817 ), Angle( 0, 180, 0 ) )
 			elseif map == florida then
@@ -2013,7 +2013,7 @@ ItemNPC["gmc_moving"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -1434, 4509, 536 ), Angle( 0, 90, 0 ) )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( -10991, 12199, -1489 ), Angle( 0, 180, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 701, -3806, -231 ), Angle( 0, -90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( 8638, 4530, -1817 ), Angle( 0, 180, 0 ) )
 			elseif map == florida then
@@ -2040,7 +2040,7 @@ ItemNPC["trailer_beverage"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -851, 4153, 536 ), angle_zero )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( -11800, 11833, -1489 ), Angle( 0, -90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 701, -3806, -231 ), Angle( 0, -90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( 8042, 4464, -1823 ), Angle( 0, 180, 0 ) )
 			elseif map == florida then
@@ -2067,7 +2067,7 @@ ItemNPC["trailer_car"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -851, 4153, 536 ), angle_zero )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( -11800, 11833, -1489 ), Angle( 0, -90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 701, -3806, -231 ), Angle( 0, -90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( 8042, 4464, -1823 ), Angle( 0, 180, 0 ) )
 			elseif map == florida then
@@ -2094,7 +2094,7 @@ ItemNPC["trailer_storage"] = {
 			if map == rockford then
 				SpawnVehicle( ply, class, model, script, Vector( -851, 4153, 536 ), angle_zero )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( -11800, 11833, -1489 ), Angle( 0, -90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 701, -3806, -231 ), Angle( 0, -90, 0 ) )
 			elseif map == evocity then
 				SpawnVehicle( ply, class, model, script, Vector( 8042, 4464, -1823 ), Angle( 0, 180, 0 ) )
 			elseif map == florida then
