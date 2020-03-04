@@ -1,6 +1,6 @@
 
 local function PickRandomEvent()
-	local rand2 = math.random( 1, 6 )
+	local rand2 = math.random( 1, 7 )
 	if rand2 == 1 then
 		OverturnedTruck()
 	elseif rand2 == 2 then
@@ -11,8 +11,10 @@ local function PickRandomEvent()
 		MoneyTransfer()
 	elseif rand2 == 5 then
 		FoodDelivery()
-	else
+	elseif rand2 == 6 then
 		RoadWork()
+	else
+		Robbery()
 	end
 end
 
@@ -59,7 +61,8 @@ EventPos["rp_rockford_v2b"] = {
 		Vector( -8019, 4866, 0 ),
 		Vector( -2499, 12990, 519 ),
 		Vector( 8875, 4412, 1536 )
-	}
+	},
+	Robbery = Vector( -3526, -3217, 40 ) --Need 1 position
 }
 
 EventPos["RP_SouthSide"] = {
@@ -94,7 +97,8 @@ EventPos["RP_SouthSide"] = {
 		Vector( 2392, 9194, 120 ),
 		Vector( -1408, 6163, 0 ),
 		Vector( -2608, 2182, -111 )
-	}
+	},
+	Robbery = Vector( -1029, 2484, -102 )
 }
 
 EventPos["rp_evocity2_v5p"] = {
@@ -129,7 +133,8 @@ EventPos["rp_evocity2_v5p"] = {
 		Vector( -6294, 9766, 196 ),
 		Vector( 11053, 6183, -1823 ),
 		Vector( 6007, 7670, 68 )
-	}
+	},
+	Robbery = Vector( 1552, -31, 150 )
 }
 
 EventPos["rp_florida_v2"] = {
@@ -164,7 +169,8 @@ EventPos["rp_florida_v2"] = {
 		Vector( 5241, 10570, 128 ),
 		Vector( -7706, 757, 128 ),
 		Vector( 7162, -9455, 128 )
-	}
+	},
+	Robbery = Vector( 4734, -6663, 137 )
 }
 
 EventPos["rp_truenorth_v1a"] = {
@@ -199,7 +205,8 @@ EventPos["rp_truenorth_v1a"] = {
 		Vector( 8494, 15230, 0 ),
 		Vector( -6757, -10766, 0 ),
 		Vector( -10804, 15175, 2560 )
-	}
+	},
+	Robbery = Vector( 6737, 2556, 20 )
 }
 
 EventPos["rp_newexton2_v4h"] = {
@@ -234,7 +241,8 @@ EventPos["rp_newexton2_v4h"] = {
 		Vector( 3249, 3879, 1016 ),
 		Vector( 15187, 3764, -7 ),
 		Vector( -5695, -3282, -519 )
-	}
+	},
+	Robbery = Vector( -9838, -2134, 1420 )
 }
 
 local function GetCurrentEvent()
@@ -393,39 +401,11 @@ hook.Add( "Think", "OverturnedTruckThink", function()
 	end
 end )
 
-hook.Add( "PlayerInitialSpawn", "ActiveShooterRelationship", function( ply )
-	if GetGlobalBool( "EventActive" ) and GetGlobalString( "ActiveEvent" ) == "Active Shooter" then
-		for k,v in pairs( ents.FindByClass( "npc_citizen" ) ) do
-			if v.IsEventNPC then
-				v:AddEntityRelationship( ply, D_HT, 99 )
-			end
-		end
-	end
-end )
-
 function ActiveShooter()
 	local numcops = team.NumPlayers( TEAM_POLICEBOSS ) + team.NumPlayers( TEAM_SWATBOSS ) + team.NumPlayers( TEAM_OFFICER ) + team.NumPlayers( TEAM_SWAT ) + team.NumPlayers( TEAM_FBI ) + team.NumPlayers( TEAM_UNDERCOVER )
 	if numcops == 0 then return end
-	local models = {
-		"models/humans/group03/female_01.mdl",
-		"models/humans/group03/female_02.mdl",
-		"models/humans/group03/female_03.mdl",
-		"models/humans/group03/female_04.mdl",
-		"models/humans/group03/female_06.mdl",
-		"models/humans/group03/female_07.mdl",
-		"models/humans/group03/male_01.mdl",
-		"models/humans/group03/male_02.mdl",
-		"models/humans/group03/male_03.mdl",
-		"models/humans/group03/male_04.mdl",
-		"models/humans/group03/male_05.mdl",
-		"models/humans/group03/male_06.mdl",
-		"models/humans/group03/male_07.mdl",
-		"models/humans/group03/male_08.mdl",
-		"models/humans/group03/male_09.mdl"
-	}
 	local shooter = ents.Create( "npc_citizen" )
 	shooter:SetPos( RandShooter() )
-	shooter:SetModel( table.Random( models ) )
 	shooter:Spawn()
 	shooter:Activate()
 	shooter:Give( "weapon_smg1" )
@@ -459,17 +439,6 @@ function ActiveShooterEnd( killer )
 	end
 	ResetEventStatus()
 end
-
-hook.Add( "OnNPCKilled", "ShooterKilled", function( npc, attacker, inflictor )
-	if npc:GetClass() == "npc_citizen" and npc.IsEventNPC then
-		ActiveShooterEnd( attacker )
-		for k,v in pairs( ents.FindInSphere( npc:GetPos(), 50 ) ) do
-			if v:GetClass() == "weapon_smg1" then
-				v:Remove()
-			end
-		end
-	end
-end )
 
 local meta = FindMetaTable( "Player" )
 function meta:IsEMS()
@@ -567,5 +536,109 @@ function RoadWorkEnd( ply, ent )
 	DarkRP.notify( ply, 0, 6, "You have also been rewarded with a crafting blueprint." )
 	ResetEventStatus()
 end
+
+local RobberCount = 0
+function Robbery()
+	local numcops = team.NumPlayers( TEAM_POLICEBOSS ) + team.NumPlayers( TEAM_SWATBOSS ) + team.NumPlayers( TEAM_OFFICER ) + team.NumPlayers( TEAM_SWAT ) + team.NumPlayers( TEAM_FBI ) + team.NumPlayers( TEAM_UNDERCOVER )
+	if numcops == 0 and team.NumPlayers( TEAM_BANKER ) == 0 then return end
+	local models = {
+		"models/humans/group03/male_01.mdl",
+		"models/humans/group03/male_02.mdl",
+		"models/humans/group03/male_03.mdl",
+		"models/humans/group03/male_04.mdl",
+		"models/humans/group03/male_05.mdl",
+		"models/humans/group03/male_06.mdl",
+		"models/humans/group03/male_07.mdl",
+		"models/humans/group03/male_08.mdl",
+		"models/humans/group03/male_09.mdl"
+	}
+	local randwep = {
+		"weapon_smg1",
+		"weapon_pistol",
+		"weapon_shotgun"
+	}
+	local origin = EventPos[game.GetMap()].Robbery
+	for i=1, math.random( 2, 6 ) do
+		local shooter = ents.Create( "npc_citizen" )
+		shooter:SetPos( Vector( origin.x, origin.y + ( i * 30 ), origin.z ) )
+		shooter:Spawn()
+		shooter:Activate()
+		shooter:SetModel( table.Random( models ) )
+		shooter:Give( table.Random( randwep ) )
+		shooter:SetHealth( 100 )
+		for k,v in pairs( player.GetAll() ) do
+			shooter:AddEntityRelationship( v, D_HT, 99 )
+		end
+		shooter.IsRobber = true
+		RobberCount = RobberCount + 1
+	end
+	
+	SetGlobalBool( "EventActive", true )
+	SetGlobalString( "ActiveEvent", "Bank Robbery" )
+	DarkRP.notifyAll( 0, 6, RobberCount.." armed men are attempting to rob the bank!" )
+end
+
+function RobberyEnd()
+	DarkRP.notifyAll( 0, 6, "The bank robbers have been killed!" )
+	RobberCount = 0
+	ResetEventStatus()
+end
+
+hook.Add( "PlayerInitialSpawn", "ActiveShooterRelationship", function( ply )
+	local event = GetGlobalString( "ActiveEvent" )
+	if GetGlobalBool( "EventActive" ) and ( event == "Active Shooter" or event == "Bank Robbery" ) then
+		for k,v in pairs( ents.FindByClass( "npc_citizen" ) ) do
+			if v.IsEventNPC or v.IsRobber then
+				v:AddEntityRelationship( ply, D_HT, 99 )
+			end
+		end
+	end
+end )
+
+hook.Add( "OnNPCKilled", "ShooterKilled", function( npc, attacker, inflictor )
+	if npc:GetClass() == "npc_citizen" then
+		if npc.IsEventNPC then
+			ActiveShooterEnd( attacker )
+			for k,v in pairs( ents.FindInSphere( npc:GetPos(), 50 ) ) do
+				if v:GetClass() == "weapon_smg1" then
+					v:Remove()
+				end
+			end
+		end
+		if npc.IsRobber then
+			for k,v in pairs( ents.FindInSphere( npc:GetPos(), 50 ) ) do
+				timer.Simple( 1, function()
+					if IsValid( v ) then
+						local weplist = {
+							["weapon_smg1"] = true,
+							["weapon_pistol"] = true,
+							["weapon_shotgun"] = true
+						}
+						if weplist[v:GetClass()] and !IsValid( v:GetOwner() ) then
+							v:Remove()
+						end
+					end
+				end )
+			end
+			if attacker:IsPlayer() then
+				attacker:addMoney( 200 )
+				DarkRP.notify( attacker, 0, 6, "You have been rewarded $200 for killing a robber." )
+				local randwep = table.Random( BLUEPRINT_CONFIG_TIER2 )
+				local e = ents.Create( "crafting_blueprint" )
+				e:SetPos( attacker:GetPos() + Vector( 0, 30, 0 ) )
+				e:SetAngles( attacker:GetAngles() + Angle( 0, 180, 0 ) )
+				e:Spawn()
+				e:SetEntName( randwep[1] )
+				e:SetRealName( randwep[2] )
+				e:SetUses( 3 )
+				DarkRP.notify( attacker, 0, 6, "You have also been rewarded with a crafting blueprint." )
+			end
+			RobberCount = RobberCount - 1
+			if RobberCount == 0 then
+				RobberyEnd()
+			end
+		end
+	end
+end )
 
 MsgC( color_orange, "[CityRP] Loaded server events." )
