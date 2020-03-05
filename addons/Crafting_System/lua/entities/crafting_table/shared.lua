@@ -649,7 +649,7 @@ CraftingTable["cw_ammo_40mm"] = {
 		end
 }
 
-CraftingTable["car_bomb"] = {
+CraftingTable["weapon_car_bomb"] = {
 	Name = "Car Bomb",
 	Description = "Needs 6 iron and 4 wrenches",
 	NeedsBlueprint = true,
@@ -660,7 +660,7 @@ CraftingTable["car_bomb"] = {
 	},
 	SpawnFunction =
 		function( ply, self )
-			ply:Give( "car_bomb" )
+			ply:Give( "weapon_car_bomb" )
 		end
 }
 
