@@ -28,6 +28,11 @@ function SWEP:PrimaryAttack()
     local tr = self.Owner:GetEyeTrace().Entity
 	if self.Owner:GetPos():DistToSqr( tr:GetPos() ) > 40000 or !IsValid( tr ) then return end
     if tr:IsVehicle() then
+		if tr.hasbombprotection then
+			DarkRP.notify( self.Owner, 1, 6, "You cannot place the bomb on this vehicle as it has bomb protection." )
+			self:SetNextPrimaryFire( CurTime() + 0.5 )
+			return
+		end
 		tr.HasCarBomb = true
 		self.Owner:EmitSound( "physics/metal/metal_box_impact_soft"..math.random( 1, 3 )..".wav" )
 		DarkRP.notify( self.Owner, 0, 6, "Car bomb successfully planted." )
