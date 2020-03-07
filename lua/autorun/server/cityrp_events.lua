@@ -540,7 +540,7 @@ end
 local RobberCount = 0
 function Robbery()
 	local numcops = team.NumPlayers( TEAM_POLICEBOSS ) + team.NumPlayers( TEAM_SWATBOSS ) + team.NumPlayers( TEAM_OFFICER ) + team.NumPlayers( TEAM_SWAT ) + team.NumPlayers( TEAM_FBI ) + team.NumPlayers( TEAM_UNDERCOVER )
-	if numcops == 0 and team.NumPlayers( TEAM_BANKER ) == 0 then return end
+	if numcops == 0 or team.NumPlayers( TEAM_BANKER ) == 0 then return end
 	local models = {
 		"models/humans/group03/male_01.mdl",
 		"models/humans/group03/male_02.mdl",
