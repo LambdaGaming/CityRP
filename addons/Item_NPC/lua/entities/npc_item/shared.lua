@@ -27,7 +27,7 @@ function ENT:SetupDataTables()
 	self:NetworkVar( "Int", 0, "NPCType" )
 end
 
-local function SpawnVehicle( ply, class, model, script, pos, ang )
+local function SpawnVehicle( ply, class, model, script, pos, ang, noenter )
 	if SERVER then
 		local e = ents.Create( "prop_vehicle_jeep" )
 		e:SetKeyValue( "vehiclescript", script )
@@ -37,8 +37,10 @@ local function SpawnVehicle( ply, class, model, script, pos, ang )
 		e:Spawn()
 		e:Activate()
 		e.VehicleTable = list.Get( "Vehicles" )[class]
-		timer.Simple( 1, function() e:Fire( "HandBrakeOff", "", 0.01 ) end )
-		ply:EnterVehicle( e )
+		e:Fire( "HandBrakeOff", "", 0.01 )
+		if !noenter then
+			ply:EnterVehicle( e )
+		end
 	end
 end
 
@@ -2044,17 +2046,17 @@ ItemNPC["trailer_beverage"] = {
 			local model = "models/sentry/trailers/bevtrailer.mdl"
 			local script = "scripts/vehicles/sentry/bevtrailer.txt"
 			if map == rockford then
-				SpawnVehicle( ply, class, model, script, Vector( -851, 4153, 536 ), angle_zero )
+				SpawnVehicle( ply, class, model, script, Vector( -851, 4153, 536 ), angle_zero, true )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 701, -3806, -231 ), Angle( 0, -90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 701, -3806, -231 ), Angle( 0, -90, 0 ), true )
 			elseif map == evocity then
-				SpawnVehicle( ply, class, model, script, Vector( 8042, 4464, -1823 ), Angle( 0, 180, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 8042, 4464, -1823 ), Angle( 0, 180, 0 ), true )
 			elseif map == florida then
-				SpawnVehicle( ply, class, model, script, Vector( -1481, 7813, 128 ), Angle( 0, 90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( -1481, 7813, 128 ), Angle( 0, 90, 0 ), true )
 			elseif map == truenorth then
-				SpawnVehicle( ply, class, model, script, Vector( 12993, -10200, 0 ), Angle( 0, 180, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 12993, -10200, 0 ), Angle( 0, 180, 0 ), true )
 			elseif map == newexton then
-				SpawnVehicle( ply, class, model, script, Vector( 15593, 12228, -7 ), Angle( 0, 90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 15593, 12228, -7 ), Angle( 0, 90, 0 ), true )
 			end
 		end
 }
@@ -2071,17 +2073,17 @@ ItemNPC["trailer_car"] = {
 			local model = "models/sentry/trailers/carcarrier.mdl"
 			local script = "scripts/vehicles/sentry/trailer.txt"
 			if map == rockford then
-				SpawnVehicle( ply, class, model, script, Vector( -851, 4153, 536 ), angle_zero )
+				SpawnVehicle( ply, class, model, script, Vector( -851, 4153, 536 ), angle_zero, true )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 701, -3806, -231 ), Angle( 0, -90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 701, -3806, -231 ), Angle( 0, -90, 0 ), true )
 			elseif map == evocity then
-				SpawnVehicle( ply, class, model, script, Vector( 8042, 4464, -1823 ), Angle( 0, 180, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 8042, 4464, -1823 ), Angle( 0, 180, 0 ), true )
 			elseif map == florida then
-				SpawnVehicle( ply, class, model, script, Vector( -1481, 7813, 128 ), Angle( 0, 90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( -1481, 7813, 128 ), Angle( 0, 90, 0 ), true )
 			elseif map == truenorth then
-				SpawnVehicle( ply, class, model, script, Vector( 12993, -10200, 0 ), Angle( 0, 180, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 12993, -10200, 0 ), Angle( 0, 180, 0 ), true )
 			elseif map == newexton then
-				SpawnVehicle( ply, class, model, script, Vector( 15593, 12228, -7 ), Angle( 0, 90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 15593, 12228, -7 ), Angle( 0, 90, 0 ), true )
 			end
 		end
 }
@@ -2098,17 +2100,17 @@ ItemNPC["trailer_storage"] = {
 			local model = "models/sentry/trailers/stortrailer.mdl"
 			local script = "scripts/vehicles/sentry/stortrailer.txt"
 			if map == rockford then
-				SpawnVehicle( ply, class, model, script, Vector( -851, 4153, 536 ), angle_zero )
+				SpawnVehicle( ply, class, model, script, Vector( -851, 4153, 536 ), angle_zero, true )
 			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 701, -3806, -231 ), Angle( 0, -90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 701, -3806, -231 ), Angle( 0, -90, 0 ), true )
 			elseif map == evocity then
-				SpawnVehicle( ply, class, model, script, Vector( 8042, 4464, -1823 ), Angle( 0, 180, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 8042, 4464, -1823 ), Angle( 0, 180, 0 ), true )
 			elseif map == florida then
-				SpawnVehicle( ply, class, model, script, Vector( -1481, 7813, 128 ), Angle( 0, 90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( -1481, 7813, 128 ), Angle( 0, 90, 0 ), true )
 			elseif map == truenorth then
-				SpawnVehicle( ply, class, model, script, Vector( 12993, -10200, 0 ), Angle( 0, 180, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 12993, -10200, 0 ), Angle( 0, 180, 0 ), true )
 			elseif map == newexton then
-				SpawnVehicle( ply, class, model, script, Vector( 15593, 12228, -7 ), Angle( 0, 90, 0 ) )
+				SpawnVehicle( ply, class, model, script, Vector( 15593, 12228, -7 ), Angle( 0, 90, 0 ), true )
 			end
 		end
 }
