@@ -70,7 +70,7 @@ if SERVER then
 				truck:ApplyType( 8 )
 			end
 
-			if game.GetMap() == "rp_southside" then
+			if game.GetMap() == "RP_SouthSide" then
 				local drug = ents.Create( "rp_dealer" )
 				drug:SetPos( Vector( 3711, 923, -96 ) )
 				drug:SetAngles( Angle( 0, 0, 0 ) )
@@ -90,16 +90,16 @@ if SERVER then
 				release:Spawn()
 
 				local shop = ents.Create( "npc_item" )
-				shop:SetPos( Vector( -5900, 1548, -15 ) )
+				shop:SetPos( Vector( -5911, 1437, -22 ) )
 				shop:SetAngles( Angle( 0, -90, 0 ) )
 				shop:Spawn()
 				shop:ApplyType( 1 )
 
-				local shop = ents.Create( "npc_item" )
-				shop:SetPos( Vector( 455, 13979, 128 ) )
-				shop:SetAngles( Angle( 0, 0, 0 ) )
-				shop:Spawn()
-				shop:ApplyType( 1 )
+				local shop2 = ents.Create( "npc_item" )
+				shop2:SetPos( Vector( 551, 13973, 128 ) )
+				shop2:SetAngles( Angle( 0, 0, 0 ) )
+				shop2:Spawn()
+				shop2:ApplyType( 1 )
 
 				local contraband = ents.Create( "npc_item" )
 				contraband:SetPos( Vector( -9452, 1698, 0 ) )
