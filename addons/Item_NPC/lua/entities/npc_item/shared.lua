@@ -16,7 +16,7 @@ ENT.Spawnable = true
 ENT.Category = "Item NPC"
 
 local rockford = "rp_rockford_v2b"
-local chaoscity = "rp_southside"
+local chaoscity = "RP_SouthSide"
 local evocity = "rp_evocity2_v5p"
 local florida = "rp_florida_v2"
 local truenorth = "rp_truenorth_v1a"
@@ -37,6 +37,7 @@ local function SpawnVehicle( ply, class, model, script, pos, ang )
 		e:Spawn()
 		e:Activate()
 		e.VehicleTable = list.Get( "Vehicles" )[class]
+		timer.Simple( 1, function() e:Fire( "HandBrakeOff", "", 0.01 ) end )
 		ply:EnterVehicle( e )
 	end
 end
@@ -419,7 +420,7 @@ ItemNPC["slot_machine"] = {
 		end
 }
 
-ItemNPC["fs_apple_seeds"] = {
+ItemNPC["apple_seeds"] = {
 	Name = "Apple Seeds",
 	Description = "Grows an apple tree.",
 	Model = "models/props/de_inferno/crate_fruit_break_gib2.mdl",
@@ -427,40 +428,42 @@ ItemNPC["fs_apple_seeds"] = {
 	Type = 1,
 	SpawnFunction =
 		function( ply, self )
-			local e = ents.Create( "fs_apple_seeds" )
+			local e = ents.Create( "farm_plant" )
 			e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
+			e:SetPlantType( 1 )
 			e:Spawn()
 		end
 }
 
-ItemNPC["fs_cabbage_seeds"] = {
+ItemNPC["cabbage_seeds"] = {
 	Name = "Cabbage Seeds",
 	Description = "Grows a cabbage plant.",
 	Price = 350,
 	Type = 1,
 	SpawnFunction =
 		function( ply, self )
-			local e = ents.Create( "fs_cabbage_seeds" )
+			local e = ents.Create( "farm_plant" )
 			e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
+			e:SetPlantType( 2 )
 			e:Spawn()
 		end
 }
 
-ItemNPC["fs_melon_seeds"] = {
-	Name = "Melon Seeds",
-	Description = "Grows a melon plant.",
-	Model = "models/props_junk/watermelon01.mdl",
+ItemNPC["cantaloupe_seeds"] = {
+	Name = "Cantaloupe Seeds",
+	Description = "Grows a cantaloupe plant.",
 	Price = 800,
 	Type = 1,
 	SpawnFunction =
 		function( ply, self )
-			local e = ents.Create( "fs_melon_seeds" )
+			local e = ents.Create( "farm_plant" )
 			e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
+			e:SetPlantType( 3 )
 			e:Spawn()
 		end
 }
 
-ItemNPC["fs_potato_seeds"] = {
+ItemNPC["potato_seeds"] = {
 	Name = "Potato Seeds",
 	Description = "Grows potatos.",
 	Model = "models/props_phx/misc/potato.mdl",
@@ -468,13 +471,14 @@ ItemNPC["fs_potato_seeds"] = {
 	Type = 1,
 	SpawnFunction =
 		function( ply, self )
-			local e = ents.Create( "fs_potato_seeds" )
+			local e = ents.Create( "farm_plant" )
 			e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
+			e:SetPlantType( 4 )
 			e:Spawn()
 		end
 }
 
-ItemNPC["fs_watermelon_seeds"] = {
+ItemNPC["watermelon_seeds"] = {
 	Name = "Watermelon Seeds",
 	Description = "Grows a watermelon plant.",
 	Model = "models/props_junk/watermelon01.mdl",
@@ -482,8 +486,9 @@ ItemNPC["fs_watermelon_seeds"] = {
 	Type = 1,
 	SpawnFunction =
 		function( ply, self )
-			local e = ents.Create( "fs_watermelon_seeds" )
+			local e = ents.Create( "farm_plant" )
 			e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
+			e:SetPlantType( 5 )
 			e:Spawn()
 		end
 }
