@@ -504,6 +504,7 @@ ItemNPC["farm_box"] = {
 			local e = ents.Create( "farm_box" )
 			e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
 			e:Spawn()
+			e:SetNWEntity( "owner", ply )
 		end
 }
 
