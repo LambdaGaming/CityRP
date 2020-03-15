@@ -63,5 +63,5 @@ PlantTypes = {
 }
 
 hook.Add( "ItemStoreCanPickup", "Farm_NoPlantInventory", function( ply, item, ent )
-	if ent:GetPlanted() then return false end
+	if ent:GetClass() == "farm_plant" and ent:GetPlanted() then return false end
 end )
