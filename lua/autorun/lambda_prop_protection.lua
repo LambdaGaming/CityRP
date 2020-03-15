@@ -49,7 +49,8 @@ local defaultblock = { --Blocked for all players including superadmins
 	["func_button"] = true,
 	["smuggle_item"] = true,
 	["func_tracktrain"] = true,
-	["func_movelinear"] = true
+	["func_movelinear"] = true,
+	["gas_pump"] = true
 }
 
 local function PlayerPickup( ply, ent )
