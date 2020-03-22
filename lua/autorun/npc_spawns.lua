@@ -70,7 +70,7 @@ if SERVER then
 				truck:ApplyType( 8 )
 			end
 
-			if game.GetMap() == "RP_SouthSide" then
+			if game.GetMap() == "rp_southside" then
 				local drug = ents.Create( "rp_dealer" )
 				drug:SetPos( Vector( 3711, 923, -96 ) )
 				drug:SetAngles( angle_zero )

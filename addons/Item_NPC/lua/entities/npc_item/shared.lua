@@ -16,7 +16,7 @@ ENT.Spawnable = true
 ENT.Category = "Item NPC"
 
 local rockford = "rp_rockford_v2b"
-local chaoscity = "RP_SouthSide"
+local chaoscity = "rp_southside"
 local evocity = "rp_evocity2_v5p"
 local florida = "rp_florida_v2"
 local truenorth = "rp_truenorth_v1a"
