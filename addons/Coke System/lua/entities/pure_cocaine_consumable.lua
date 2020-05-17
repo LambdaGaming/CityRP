@@ -57,6 +57,7 @@ function ENT:Use( activator, caller )
 			activator:SetRunSpeed( 163 )
 			if !activator:GetNWBool( "HasOD" ) then
 				timer.Create( "ODGroan"..activator:EntIndex(), 5, 0, function()
+					if !IsValid( activator ) then return end
 					activator:EmitSound( "vo/npc/male01/moan0"..math.random( 1, 5 )..".wav" )
 				end )
 				activator:SetNWBool( "HasOD", true )

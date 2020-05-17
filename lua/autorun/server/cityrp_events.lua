@@ -250,8 +250,14 @@ local function GetCurrentEvent()
 end
 
 hook.Add( "PlayerSay", "CurEvent", function( ply, text )
+	local event
+	if GetCurrentEvent() == "" then
+		event = "N/A"
+	else
+		event = GetCurrentEvent()
+	end
 	if text == "!currentevent" then
-		ply:ChatPrint( "Event that is currently active: "..GetCurrentEvent()  )
+		ply:ChatPrint( "Event that is currently active: "..event )
 	end
 end )
 
