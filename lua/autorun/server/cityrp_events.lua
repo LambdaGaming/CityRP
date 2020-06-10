@@ -1,6 +1,6 @@
 
 local function PickRandomEvent()
-	local rand2 = math.random( 1, 7 )
+	local rand2 = math.random( 1, 8 )
 	if rand2 == 1 then
 		OverturnedTruck()
 	elseif rand2 == 2 then
@@ -13,8 +13,10 @@ local function PickRandomEvent()
 		FoodDelivery()
 	elseif rand2 == 6 then
 		RoadWork()
-	else
+	elseif rand2 == 7 then
 		Robbery()
+	else
+		DrunkDriver()
 	end
 end
 
@@ -62,10 +64,11 @@ EventPos["rp_rockford_v2b"] = {
 		Vector( -2499, 12990, 519 ),
 		Vector( 8875, 4412, 1536 )
 	},
-	Robbery = Vector( -3526, -3217, 40 ) --Need 1 position
+	Robbery = Vector( -3526, -3217, 40 ), --Need 1 position
+	Drunk = Vector( -2381, -6509, 0 ) --Need 1 position
 }
 
-EventPos["RP_SouthSide"] = {
+EventPos["rp_southside"] = {
 	Truck = {
 		Vector( 2310, 9275, 150 ),
 		Vector( -3233, 10219, 150 ),
@@ -98,7 +101,8 @@ EventPos["RP_SouthSide"] = {
 		Vector( -1408, 6163, 0 ),
 		Vector( -2608, 2182, -111 )
 	},
-	Robbery = Vector( -1029, 2484, -102 )
+	Robbery = Vector( -1029, 2484, -102 ),
+	Drunk = Vector( -11449, 1758, -47 )
 }
 
 EventPos["rp_evocity2_v5p"] = {
@@ -134,7 +138,8 @@ EventPos["rp_evocity2_v5p"] = {
 		Vector( 11053, 6183, -1823 ),
 		Vector( 6007, 7670, 68 )
 	},
-	Robbery = Vector( 1552, -31, 150 )
+	Robbery = Vector( 1552, -31, 150 ),
+	Drunk = Vector( 3290, -2166, 68 )
 }
 
 EventPos["rp_florida_v2"] = {
@@ -170,7 +175,8 @@ EventPos["rp_florida_v2"] = {
 		Vector( -7706, 757, 128 ),
 		Vector( 7162, -9455, 128 )
 	},
-	Robbery = Vector( 4734, -6663, 137 )
+	Robbery = Vector( 4734, -6663, 137 ),
+	Drunk = Vector( 11995, -6350, 129 )
 }
 
 EventPos["rp_truenorth_v1a"] = {
@@ -206,7 +212,8 @@ EventPos["rp_truenorth_v1a"] = {
 		Vector( -6757, -10766, 0 ),
 		Vector( -10804, 15175, 2560 )
 	},
-	Robbery = Vector( 6737, 2556, 20 )
+	Robbery = Vector( 6737, 2556, 20 ),
+	Drunk = Vector( -10234, -7658, 0 )
 }
 
 EventPos["rp_newexton2_v4h"] = {
@@ -242,7 +249,8 @@ EventPos["rp_newexton2_v4h"] = {
 		Vector( 15187, 3764, -7 ),
 		Vector( -5695, -3282, -519 )
 	},
-	Robbery = Vector( -9838, -2134, 1420 )
+	Robbery = Vector( -9838, -2134, 1420 ),
+	Drunk = Vector( -8743, -9520, 1016 )
 }
 
 local function GetCurrentEvent()
@@ -590,6 +598,64 @@ function RobberyEnd()
 	ResetEventStatus()
 end
 
+function DrunkDriver()
+	local numcops = team.NumPlayers( TEAM_POLICEBOSS ) + team.NumPlayers( TEAM_SWATBOSS ) + team.NumPlayers( TEAM_OFFICER ) + team.NumPlayers( TEAM_SWAT ) + team.NumPlayers( TEAM_FBI ) + team.NumPlayers( TEAM_UNDERCOVER )
+	if numcops == 0 then return end
+	RunConsoleCommand( "bot" )
+	local veh = list.Get( "Vehicles" )
+	local randveh, name = table.Random( veh )
+
+	timer.Simple( 1, function() --The server crashes without this timer, I guess the vehicle needs time to fully inititialize
+		local e = ents.Create( "prop_vehicle_jeep" )
+		e:SetKeyValue( "vehiclescript", randveh.KeyValues.vehiclescript )
+		e:SetPos( EventPos[game.GetMap()].Drunk )
+		e:SetModel( randveh.Model )
+		e:Spawn()
+		e:Activate()
+		e.VehicleTable = veh[name]
+		e.DrunkVeh = true
+		e:Fire( "HandBrakeOff", "", 0.01 )
+	end )
+	timer.Simple( 1, function() --Add another timer here just to be safe
+		for k,v in pairs( player.GetBots() ) do
+			v.DrunkDriver = true
+			v:GodEnable() --Bots won't move if they're damaged
+			for a,b in pairs( ents.FindByModel( randveh.Model ) ) do
+				if b.DrunkVeh then
+					v:EnterVehicle( b )
+					AM_ToggleGodMode( b )
+				end
+			end
+		end
+	end )
+	DarkRP.notifyAll( 0, 6, "A drunk driver has been reported to be in the area! Be on the lookout and report anything suspicious to police!" )
+end
+
+function EndDrunkDriver( bot, ply )
+	bot:Kick( "Arrested by "..ply:Nick().."." )
+	for k,v in pairs( ents.FindByClass( "prop_vehicle_jeep" ) ) do
+		if v.DrunkVeh then v:Remove() end
+	end
+	ply:addMoney( 500 )
+	DarkRP.notify( ply, 0, 6, "You have been rewarded $500 for arresting the drunk driver." )
+	local randwep = table.Random( BLUEPRINT_CONFIG_TIER2 )
+	local e = ents.Create( "crafting_blueprint" )
+	e:SetPos( ply:GetPos() + Vector( 0, 30, 0 ) )
+	e:SetAngles( ply:GetAngles() + Angle( 0, 180, 0 ) )
+	e:Spawn()
+	e:SetEntName( randwep[1] )
+	e:SetRealName( randwep[2] )
+	e:SetUses( 3 )
+	DarkRP.notify( ply, 0, 6, "You have also been rewarded with a crafting blueprint." )
+	DarkRP.notifyAll( 0, 6, "The drunk driver has been found and arrested by "..ply:Nick().."!" )
+end
+
+hook.Add( "OnHandcuffed", "DrunkDriverHandcuff", function( ply, bot, handcuffs )
+	if bot:IsBot() and bot.DrunkDriver then
+		EndDrunkDriver( bot, ply )
+	end
+end )
+
 hook.Add( "PlayerInitialSpawn", "ActiveShooterRelationship", function( ply )
 	local event = GetGlobalString( "ActiveEvent" )
 	if GetGlobalBool( "EventActive" ) and ( event == "Active Shooter" or event == "Bank Robbery" ) then
@@ -647,4 +713,4 @@ hook.Add( "OnNPCKilled", "ShooterKilled", function( npc, attacker, inflictor )
 	end
 end )
 
-MsgC( color_orange, "[CityRP] Loaded server events." )
+MsgC( color_red, "\n[CityRP] Loaded server events.\n" )
