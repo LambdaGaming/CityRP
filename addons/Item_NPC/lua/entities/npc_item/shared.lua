@@ -296,15 +296,15 @@ ItemNPC["enterprise_crowbar"] = {
 		end
 }
 
-ItemNPC["weapon_extinguisher"] = {
-	Name = "Civilian Fire Extinguisher",
-	Description = "Puts out fires. Has limited ammo.",
+ItemNPC["weapon_extinguisher_infinite"] = {
+	Name = "Fire Extinguisher",
+	Description = "Puts out fires.",
 	Model = "models/weapons/w_fire_extinguisher.mdl",
-	Price = 50,
+	Price = 100,
 	Type = 1,
 	SpawnFunction =
 		function( ply, self )
-			ply:Give( "weapon_extinguisher" )
+			ply:Give( "weapon_extinguisher_infinite" )
 		end
 }
 

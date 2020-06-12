@@ -24,7 +24,7 @@ BLUEPRINT_CONFIG_TIER1 = { --Blueprints you can get from the dumpster
 	{ "dronesrewrite_nanodr", "Nano Drone" }
 }
 
-BLUEPRINT_CONFIG_TIER2 = { --Blueprints you can get from smuggling weapons, pd bank, and random events
+BLUEPRINT_CONFIG_TIER2 = { --Blueprints you can get from smuggling weapons and random events
 	{ "cw_ak74", "AK-74" },
 	{ "cw_m3super90", "M3 Super 90" },
 	{ "cw_scarh", "SCAR-H" },
@@ -38,7 +38,7 @@ BLUEPRINT_CONFIG_TIER2 = { --Blueprints you can get from smuggling weapons, pd b
 	{ "dronesrewrite_nanodr", "Nano Drone" }
 }
 
-BLUEPRINT_CONFIG_TIER3 = { --Blueprints you can get from gov bank and deposit boxes
+BLUEPRINT_CONFIG_TIER3 = { --Blueprints you can get from gov bank, PD bank, and deposit boxes
 	{ "cw_frag_grenade", "Frag Grenade" },
 	{ "usm_c4", "Timed C4" },
 	{ "weapon_slam", "SLAM Remote Explosive" },
