@@ -25,7 +25,11 @@ end
 function ENT:Use( activator, caller )
 	local price
 	if activator:isCP() then
-		price = 0
+		if GetGlobalInt( "MAYOR_SalesTax" ) >= 50 then
+			price = 300
+		else
+			price = 0
+		end
 	else
 		price = 300
 	end
@@ -33,16 +37,21 @@ function ENT:Use( activator, caller )
 		local pos = self:GetPos()
 		local findveh = ents.FindInSphere( pos, 300 )
 		local totalveh = 0
+		price = price + ( price * ( GetGlobalInt( "MAYOR_SalesTax" ) * 0.01 ) )
 		for k,v in pairs( findveh ) do
 			if v:GetClass() == "prop_vehicle_jeep" then
 				totalveh = totalveh + 1
 				v:SetNWInt( "AM_FuelAmount", 100 )
 				activator:addMoney( -price )
-				DarkRP.notify( activator, 0, 6, "You have purchased a full fuel tank for $"..price.."." )
+				if price == 0 then
+					DarkRP.notify( activator, 0, 6, "You have purchased a full fuel tank. You have not been charged." )
+				else
+					DarkRP.notify( activator, 0, 6, "You have purchased a full fuel tank for $"..price.."." )
+				end
 				break
 			end
 		end
-		if #findveh == 0 or totalveh == 0 then
+		if totalveh == 0 then
 			DarkRP.notify( activator, 1, 6, "No vehicle detected. Move it closer." )
 		end
 	else

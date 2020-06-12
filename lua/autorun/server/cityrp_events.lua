@@ -258,14 +258,15 @@ local function GetCurrentEvent()
 end
 
 hook.Add( "PlayerSay", "CurEvent", function( ply, text )
-	local event
-	if GetCurrentEvent() == "" then
-		event = "N/A"
-	else
-		event = GetCurrentEvent()
-	end
 	if text == "!currentevent" then
+		local event
+		if GetCurrentEvent() == "" then
+			event = "N/A"
+		else
+			event = GetCurrentEvent()
+		end
 		ply:ChatPrint( "Event that is currently active: "..event )
+		return ""
 	end
 end )
 
@@ -366,7 +367,7 @@ function OverturnedTruckEnd()
 	for k,v in pairs( player.GetAll() ) do
 		if v:Team() == TEAM_TOWER then
 			v:addMoney( 600 )
-			DarkRP.notify( v, 0, 6, "You have been awarded $600 for clearing the road of the overturned truck." )
+			DarkRP.notify( v, 0, 6, "You have been rewarded $600 for clearing the road of the overturned truck." )
 			local randwep = table.Random( BLUEPRINT_CONFIG_TIER2 )
 			local e = ents.Create( "crafting_blueprint" )
 			e:SetPos( v:GetPos() + Vector( 0, 30, 0 ) )
@@ -379,7 +380,7 @@ function OverturnedTruckEnd()
 			for a,b in pairs( ents.FindInSphere( v:GetPos(), 200 ) ) do
 				if b:IsPlayer() and b:isCP() then
 					b:addMoney( 300 )
-					DarkRP.notify( b, 0, 6, "You have been awarded $300 for assisting the tow truck driver." )
+					DarkRP.notify( b, 0, 6, "You have been rewarded $300 for assisting the tow truck driver." )
 				end
 			end
 		end
@@ -459,36 +460,53 @@ function meta:IsEMS()
 	return self:Team() == TEAM_FIREBOSS or self:Team() == TEAM_FIRE
 end
 
+local FirePicked = false
 function HouseFire()
 	local numems = team.NumPlayers( TEAM_FIRE ) + team.NumPlayers( TEAM_FIREBOSS )
 	if numems == 0 then PickRandomEvent() return end
 	if vFiresCount > 0 then PickRandomEvent() return end
+	SetGlobalBool( "EventActive", true )
+	SetGlobalString( "ActiveEvent", "House Fire" )
+	FirePicked = false
 	CreateVFireBall( 1200, 200, RandFire() + Vector( 0, 0, 100 ), Vector( 0, 0, 0 ), nil )
 	for k,v in pairs( player.GetAll() ) do
 		if v:IsEMS() then
 			DarkRP.notify( v, 0, 6, "A fire has been reported to have broken out in a residential building. Find the fire and put it out!" )
 		end
 	end
-	--SetGlobalBool( "EventActive", true )
-	--SetGlobalString( "ActiveEvent", "House Fire" )
 end
 
---[[ function HouseFireEnd() --Currently can't get the entity that extinguished the fire, so awards can't work
+function HouseFireEnd()
     for k,v in pairs( player.GetAll() ) do
     	if v:IsEMS() then
-    		v:addMoney( 500 )
-    		DarkRP.notify( v, 0, 6, "You have been awarded $500 for extinguishing a house fire." )
+    		v:addMoney( 300 )
+    		DarkRP.notify( v, 0, 6, "You have been rewarded $300 for helping extinguish a building fire." )
+			local randwep = table.Random( BLUEPRINT_CONFIG_TIER2 )
+			local e = ents.Create( "crafting_blueprint" )
+			e:SetPos( v:GetPos() + Vector( 0, 30, 0 ) )
+			e:Spawn()
+			e:SetEntName( randwep[1] )
+			e:SetRealName( randwep[2] )
+			e:SetUses( 3 )
+			DarkRP.notify( v, 0, 6, "You have also been rewarded with a crafting blueprint." )
     	end
 		DarkRP.notify( v, 0, 6, "The residential fire has been put out!" )
 	end
 	ResetEventStatus()
 end
 
-hook.Add( "vFireRemoved", "FireEvent", function( fire, parent )
+hook.Add( "vFireCreated", "FireEventCreate", function( fire, parent )
+	if GetGlobalBool( "EventActive" ) and GetGlobalString( "ActiveEvent" ) == "House Fire" and !FirePicked then
+		fire.IsEventFire = true
+		FirePicked = true
+	end
+end )
+
+hook.Add( "vFireRemoved", "FireEventRemove", function( fire, parent )
 	if fire.IsEventFire then
 		HouseFireEnd()
 	end
-end ) ]]
+end )
 
 function MoneyTransfer()
 	if team.NumPlayers( TEAM_BANKER ) == 0 then return end

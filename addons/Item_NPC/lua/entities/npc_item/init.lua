@@ -3,10 +3,10 @@ AddCSLuaFile( "cl_init.lua" )
 AddCSLuaFile( "shared.lua" )
 include('shared.lua')
 
-function ENT:SpawnFunction( ply, tr )
+function ENT:SpawnFunction( ply, tr, name )
 	if !tr.Hit then return end
 	local SpawnPos = tr.HitPos + tr.HitNormal * 2
-	local ent = ents.Create( "npc_item" )
+	local ent = ents.Create( name )
 	ent:SetPos( SpawnPos )
 	ent:Spawn()
 	ent:Activate()
@@ -27,7 +27,7 @@ function ENT:Initialize()
 	self:SetUseType( SIMPLE_USE )
 	
     local phys = self:GetPhysicsObject()
-	if (phys:IsValid()) then
+	if phys:IsValid() then
 		phys:Wake()
 	end
 end
@@ -71,6 +71,7 @@ net.Receive( "CreateItem", function( len, ply )
 	local money = ply:getDarkRPVar( "money" )
 	local name = ItemNPC[ent].Name
 	local price = ItemNPC[ent].Price
+	price = price + ( price * ( GetGlobalInt( "MAYOR_SalesTax" ) * 0.01 ) )
 	if money >= price then
 		if SpawnCheck and SpawnCheck( ply, self ) == false then return end
 		if SpawnItem then

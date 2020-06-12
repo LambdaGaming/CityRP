@@ -3,8 +3,8 @@ if CLIENT then
 	local MenuColor = Color( 49, 53, 61, 200 )
 	local ButtonColor = Color( 230, 93, 80, 255 )
 	local blacklist = {
-		[TEAM_BOUNTY] = true,
-		[TEAM_MAYOR] = true
+		["IA Agent"] = true,
+		["Mayor"] = true
 	}
 	local function OpenFireMenu( ply )
 		local menu = vgui.Create( "DFrame" )
@@ -26,7 +26,7 @@ if CLIENT then
 		plylist:AddColumn( "Job" )
 		plylist:AddColumn( "Index" )
 		for k,v in pairs( player.GetAll() ) do
-			if v:isCP() and !blacklist[v:Team()] then
+			if v:isCP() and !blacklist[team.GetName( v:Team() )] then
 				plylist:AddLine( v:Nick(), team.GetName( v:Team() ), v:EntIndex() )
 			end
 		end
@@ -42,7 +42,7 @@ if CLIENT then
 
 	hook.Add( "PlayerButtonDown", "OpenFireMenu", function( ply, button )
 		if !IsFirstTimePredicted() or ply.FireMenuOpen then return end
-		if button == KEY_F2 and ply:Team() == TEAM_MAYOR then
+		if button == KEY_F6 and ply:Team() == TEAM_MAYOR then
 			OpenFireMenu( ply )
 		end
 	end )
