@@ -52,6 +52,7 @@ net.Receive( "StartCrafting", function( len, ply )
 	local entname = net.ReadString()
 	local CraftMaterials = CraftingTable[ent].Materials
 	local SpawnItem = CraftingTable[ent].SpawnFunction
+	local SpawnCheck = CraftingTable[ent].SpawnCheck
 	if CraftMaterials then
 		for k,v in pairs( CraftMaterials ) do
 			if self:GetNWInt( "Craft_"..k ) < v then
@@ -86,6 +87,7 @@ net.Receive( "StartCrafting", function( len, ply )
 		else
 			self.gotblueprint = false
 		end
+		if SpawnCheck and !SpawnCheck( ply, self ) then return end
 		if SpawnItem then
 			local validfunction = true
 			SpawnItem( ply, self )
