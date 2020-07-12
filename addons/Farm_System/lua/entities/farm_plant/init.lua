@@ -44,6 +44,7 @@ end
 
 function ENT:Think()
 	if self:GetPlanted() and !self:ReadyForHarvest() then
+		if GetGlobalBool( "FarmDraughtActive" ) then return end
 		local tr = util.TraceLine( {
 			start = self:GetPos() + Vector( 0, 0, 50 ),
 			endpos = self:GetPos() + self:GetAngles():Up() * math.huge
