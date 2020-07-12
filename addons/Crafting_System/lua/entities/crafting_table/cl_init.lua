@@ -230,6 +230,6 @@ net.Receive( "CraftMessage", function( len, ply ) --Have to network the entname 
 	if validfunction then
 		chat.AddText( Color( 100, 100, 255 ), "[Crafting Table]: ", color_white, "Successfully crafted a "..entname.." ." )
 	else
-		chat.AddText( Color( 100, 100, 255 ), "[Crafting Table]: ", color_white, "ERROR! Missing SpawnFunction for "..entname.." ("..ent..")" )
+		chat.AddText( Color( 100, 100, 255 ), "[Crafting Table]: ", color_white, "ERROR! Missing SpawnFunction for "..entname )
 	end
 end )
