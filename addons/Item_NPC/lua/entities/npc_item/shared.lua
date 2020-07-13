@@ -44,6 +44,14 @@ local function SpawnVehicle( ply, class, model, script, pos, ang, noenter )
 	end
 end
 
+local function PoliceBanCheck( ply )
+	if GetGlobalBool( "PoliceCarBanActive" ) then
+		DarkRP.notify( ply, 1, 6, "You cannot spawn this vehicle due to the mayor ordering a temporary ban on all police cars." )
+		return false
+	end
+	return true
+end
+
 ItemNPC = {} --Initializes the item table, don't touch
 ItemNPCType = {} --Initializes the type table, don't touch
 
@@ -599,22 +607,20 @@ ItemNPC["anti_bomb"] = {
 	Model = "models/props_junk/metal_paintcan001a.mdl",
 	Price = 800,
 	Type = 1,
-	SpawnCheck =
-		function( ply, self )
-			if ply:Team() != TEAM_TOWER then
-				if SERVER then
-					DarkRP.notify( ply, 1, 6, "Only tow truck drivers can purchase this item." )
-				end
-				return false
+	SpawnCheck = function( ply, self )
+		if ply:Team() != TEAM_TOWER then
+			if SERVER then
+				DarkRP.notify( ply, 1, 6, "Only tow truck drivers can purchase this item." )
 			end
-			return true
-		end,
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "anti_bomb" )
-			e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
-			e:Spawn()
+			return false
 		end
+		return true
+	end,
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "anti_bomb" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
+		e:Spawn()
+	end
 }
 
 ItemNPC["life_alert"] = {
@@ -623,12 +629,11 @@ ItemNPC["life_alert"] = {
 	Model = "models/props_lab/reciever01d.mdl",
 	Price = 600,
 	Type = 1,
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "life_alert" )
-			e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
-			e:Spawn()
-		end
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "life_alert" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
+		e:Spawn()
+	end
 }
 
 ItemNPC["announcement_speaker"] = {
@@ -637,12 +642,11 @@ ItemNPC["announcement_speaker"] = {
 	Model = "models/props_wasteland/speakercluster01a.mdl",
 	Price = 100,
 	Type = 1,
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "announcement_speaker" )
-			e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
-			e:Spawn()
-		end
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "announcement_speaker" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
+		e:Spawn()
+	end
 }
 
 ItemNPC["weapon_announcement"] = {
@@ -651,10 +655,9 @@ ItemNPC["weapon_announcement"] = {
 	Model = "models/props_wasteland/speakercluster01a.mdl",
 	Price = 800,
 	Type = 1,
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "weapon_announcement" )
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "weapon_announcement" )
+	end
 }
 
 ItemNPC["dronesrewrite_bird"] = {
@@ -663,13 +666,12 @@ ItemNPC["dronesrewrite_bird"] = {
 	Model = "models/dronesrewrite/birddr/birddr.mdl",
 	Price = 1000,
 	Type = 1,
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "dronesrewrite_bird" )
-			e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
-			e:Spawn()
-			e:SetupOwner( ply )
-		end
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "dronesrewrite_bird" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
+		e:Spawn()
+		e:SetupOwner( ply )
+	end
 }
 
 ItemNPC["dronesrewrite_spy"] = {
@@ -678,13 +680,12 @@ ItemNPC["dronesrewrite_spy"] = {
 	Model = "models/dronesrewrite/spydr/spydr.mdl",
 	Price = 3000,
 	Type = 1,
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "dronesrewrite_spy" )
-			e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
-			e:Spawn()
-			e:SetupOwner( ply )
-		end
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "dronesrewrite_spy" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
+		e:Spawn()
+		e:SetupOwner( ply )
+	end
 }
 
 ItemNPC["weapon_drr_fuelcan"] = {
@@ -693,10 +694,9 @@ ItemNPC["weapon_drr_fuelcan"] = {
 	Model = "models/props_junk/gascan001a.mdl",
 	Price = 400,
 	Type = 1,
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "weapon_drr_fuelcan" )
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "weapon_drr_fuelcan" )
+	end
 }
 
 ItemNPC["weapon_drr_repairtool"] = {
@@ -704,10 +704,9 @@ ItemNPC["weapon_drr_repairtool"] = {
 	Description = "Repairs drones.",
 	Price = 200,
 	Type = 1,
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "weapon_drr_repairtool" )
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "weapon_drr_repairtool" )
+	end
 }
 
 ItemNPC["automod_fuel"] = {
@@ -716,12 +715,11 @@ ItemNPC["automod_fuel"] = {
 	Model = "models/props_junk/gascan001a.mdl",
 	Price = 200,
 	Type = 1,
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "automod_fuel" )
-			e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
-			e:Spawn()
-		end
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "automod_fuel" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
+		e:Spawn()
+	end
 }
 
 -----CONTRABAND ITEMS-----
@@ -731,12 +729,11 @@ ItemNPC["dronesrewrite_console"] = {
 	Model = "models/dronesrewrite/console/console.mdl",
 	Price = 5000,
 	Type = 2,
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "dronesrewrite_console" )
-			e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
-			e:Spawn()
-		end
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "dronesrewrite_console" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
+		e:Spawn()
+	end
 }
 
 ItemNPC["printer_paper"] = {
@@ -745,12 +742,11 @@ ItemNPC["printer_paper"] = {
 	Model = "models/props_lab/binderblue.mdl",
 	Price = 50,
 	Type = 2,
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "printer_paper" )
-			e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
-			e:Spawn()
-		end
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "printer_paper" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
+		e:Spawn()
+	end
 }
 
 ItemNPC["policebadge"] = {
@@ -759,10 +755,9 @@ ItemNPC["policebadge"] = {
 	Model = "models/freeman/policebadge.mdl",
 	Price = 400,
 	Type = 2,
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "policebadge" )
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "policebadge" )
+	end
 }
 
 ItemNPC["weapon_nmrih_molotov"] = {
@@ -771,10 +766,9 @@ ItemNPC["weapon_nmrih_molotov"] = {
 	Model = "models/props_junk/garbage_glassbottle003a.mdl",
 	Price = 500,
 	Type = 2,
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "weapon_nmrih_molotov" )
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "weapon_nmrih_molotov" )
+	end
 }
 
 ItemNPC["weapon_cuff_shackles"] = {
@@ -782,10 +776,9 @@ ItemNPC["weapon_cuff_shackles"] = {
 	Description = "Used to tie players up. Steel, doesn't break easily.",
 	Price = 900,
 	Type = 2,
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "weapon_cuff_shackles" )
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "weapon_cuff_shackles" )
+	end
 }
 
 ItemNPC["cw_flash_grenade"] = {
@@ -794,10 +787,9 @@ ItemNPC["cw_flash_grenade"] = {
 	Model = "models/weapons/w_eq_flashbang.mdl",
 	Price = 300,
 	Type = 2,
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "cw_flash_grenade" )
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "cw_flash_grenade" )
+	end
 }
 
 ItemNPC["cw_smoke_grenade"] = {
@@ -806,10 +798,9 @@ ItemNPC["cw_smoke_grenade"] = {
 	Model = "models/weapons/w_eq_smokegrenade.mdl",
 	Price = 200,
 	Type = 2,
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "cw_smoke_grenade" )
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "cw_smoke_grenade" )
+	end
 }
 
 ItemNPC["epic_carevicter"] = {
@@ -817,10 +808,9 @@ ItemNPC["epic_carevicter"] = {
 	Description = "Forces players out of the drivers seat of any vehicle.",
 	Price = 300,
 	Type = 2,
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "epic_carevicter" )
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "epic_carevicter" )
+	end
 }
 
 ItemNPC["rp_chloride"] = {
@@ -829,12 +819,11 @@ ItemNPC["rp_chloride"] = {
 	Model = "models/props_junk/garbage_plasticbottle001a.mdl",
 	Price = 1500,
 	Type = 2,
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "rp_chloride" )
-			e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
-			e:Spawn()
-		end
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "rp_chloride" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
+		e:Spawn()
+	end
 }
 
 ItemNPC["rp_gas"] = {
@@ -843,12 +832,11 @@ ItemNPC["rp_gas"] = {
 	Model = "models/props_junk/propane_tank001a.mdl",
 	Price = 250,
 	Type = 2,
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "rp_gas" )
-			e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
-			e:Spawn()
-		end
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "rp_gas" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
+		e:Spawn()
+	end
 }
 
 ItemNPC["rp_pot"] = {
@@ -857,12 +845,11 @@ ItemNPC["rp_pot"] = {
 	Model = "models/props_c17/metalPot001a.mdl",
 	Price = 100,
 	Type = 2,
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "rp_pot" )
-			e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
-			e:Spawn()
-		end
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "rp_pot" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
+		e:Spawn()
+	end
 }
 
 ItemNPC["rp_pot_sell"] = {
@@ -871,13 +858,12 @@ ItemNPC["rp_pot_sell"] = {
 	Model = "models/props_c17/metalPot001a.mdl",
 	Price = 2800,
 	Type = 2,
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "rp_pot" )
-			e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
-			e:Spawn()
-			e:SetNWBool( "IsMarketable", true )
-		end
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "rp_pot" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
+		e:Spawn()
+		e:SetNWBool( "IsMarketable", true )
+	end
 }
 
 ItemNPC["rp_sodium"] = {
@@ -886,12 +872,11 @@ ItemNPC["rp_sodium"] = {
 	Model = "models/props_junk/garbage_plasticbottle002a.mdl",
 	Price = 1500,
 	Type = 2,
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "rp_sodium" )
-			e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
-			e:Spawn()
-		end
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "rp_sodium" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
+		e:Spawn()
+	end
 }
 
 ItemNPC["rp_stove"] = {
@@ -900,12 +885,11 @@ ItemNPC["rp_stove"] = {
 	Model = "models/props_c17/furnitureStove001a.mdl",
 	Price = 6000,
 	Type = 2,
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "rp_stove" )
-			e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
-			e:Spawn()
-		end
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "rp_stove" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
+		e:Spawn()
+	end
 }
 
 ItemNPC["rp_weed_plant"] = {
@@ -914,12 +898,11 @@ ItemNPC["rp_weed_plant"] = {
 	Model = "models/props/de_inferno/flower_barrel.mdl",
 	Price = 1500,
 	Type = 2,
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "rp_weed_plant" )
-			e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
-			e:Spawn()
-		end
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "rp_weed_plant" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
+		e:Spawn()
+	end
 }
 
 ItemNPC["weapon_vfire_gascan"] = {
@@ -928,10 +911,9 @@ ItemNPC["weapon_vfire_gascan"] = {
 	Model = "models/props_junk/gascan001a.mdl",
 	Price = 600,
 	Type = 2,
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "weapon_vfire_gascan" )
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "weapon_vfire_gascan" )
+	end
 }
 
 ItemNPC["money_printer_silver"] = {
@@ -940,13 +922,12 @@ ItemNPC["money_printer_silver"] = {
 	Model = "models/props_c17/consolebox01a.mdl",
 	Price = 600,
 	Type = 2,
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "money_printer_silver" )
-			e:SetPos( ply:GetPos() + Vector( 0, 30, 35 ) )
-			e:Spawn()
-			e:SetNWEntity( "Owner", ply )
-		end
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "money_printer_silver" )
+		e:SetPos( ply:GetPos() + Vector( 0, 30, 35 ) )
+		e:Spawn()
+		e:SetNWEntity( "Owner", ply )
+	end
 }
 
 ItemNPC["money_printer_gold"] = {
@@ -955,13 +936,12 @@ ItemNPC["money_printer_gold"] = {
 	Model = "models/props_c17/consolebox01a.mdl",
 	Price = 1000,
 	Type = 2,
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "money_printer_gold" )
-			e:SetPos( ply:GetPos() + Vector( 0, 30, 35 ) )
-			e:Spawn()
-			e.dt.owning_ent = ply
-		end
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "money_printer_gold" )
+		e:SetPos( ply:GetPos() + Vector( 0, 30, 35 ) )
+		e:Spawn()
+		e.dt.owning_ent = ply
+	end
 }
 
 ItemNPC["weapon_spraymhs"] = {
@@ -970,10 +950,9 @@ ItemNPC["weapon_spraymhs"] = {
 	Model = "models/props_junk/propane_tank001a.mdl",
 	Price = 50,
 	Type = 2,
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "weapon_spraymhs" )
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "weapon_spraymhs" )
+	end
 }
 
 ItemNPC["realrbn_tazer_mr"] = {
@@ -982,10 +961,9 @@ ItemNPC["realrbn_tazer_mr"] = {
 	Model = "models/weapons/cg_ocrp2/w_taser.mdl",
 	Price = 50,
 	Type = 2,
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "realrbn_tazer_mr" )
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "realrbn_tazer_mr" )
+	end
 }
 
 ItemNPC["weapon_leash_rope"] = {
@@ -993,10 +971,9 @@ ItemNPC["weapon_leash_rope"] = {
 	Description = "Weak cuffs, but players can be dragged with them.",
 	Price = 800,
 	Type = 2,
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "weapon_leash_rope" )
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "weapon_leash_rope" )
+	end
 }
 
 ItemNPC["weapon_agent"] = {
@@ -1005,10 +982,9 @@ ItemNPC["weapon_agent"] = {
 	Model = "models/weapons/w_c4.mdl",
 	Price = 3000,
 	Type = 2,
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "weapon_agent" )
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "weapon_agent" )
+	end
 }
 
 ItemNPC["coca_plant_marketable"] = {
@@ -1017,12 +993,11 @@ ItemNPC["coca_plant_marketable"] = {
 	Model = "models/props/cs_office/plant01.mdl",
 	Price = 3000,
 	Type = 2,
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "coca_plant_marketable" )
-			e:SetPos( ply:GetPos() + Vector( 0, 30, 35 ) )
-			e:Spawn()
-		end
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "coca_plant_marketable" )
+		e:SetPos( ply:GetPos() + Vector( 0, 30, 35 ) )
+		e:Spawn()
+	end
 }
 
 ItemNPC["coca_plant_consumable"] = {
@@ -1031,12 +1006,11 @@ ItemNPC["coca_plant_consumable"] = {
 	Model = "models/props/cs_office/plant01.mdl",
 	Price = 500,
 	Type = 2,
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "coca_plant_consumable" )
-			e:SetPos( ply:GetPos() + Vector( 0, 30, 35 ) )
-			e:Spawn()
-		end
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "coca_plant_consumable" )
+		e:SetPos( ply:GetPos() + Vector( 0, 30, 35 ) )
+		e:Spawn()
+	end
 }
 
 ItemNPC["heat_lamp"] = {
@@ -1045,13 +1019,12 @@ ItemNPC["heat_lamp"] = {
 	Model = "models/props/de_nuke/IndustrialLight01.mdl",
 	Price = 1000,
 	Type = 2,
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "heat_lamp" )
-			e:SetPos( ply:GetPos() + Vector( 0, 30, 35 ) )
-			e:Spawn()
-			e.Owner = ply
-		end
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "heat_lamp" )
+		e:SetPos( ply:GetPos() + Vector( 0, 30, 35 ) )
+		e:Spawn()
+		e.Owner = ply
+	end
 }
 
 ItemNPC["contraband_package"] = {
@@ -1060,21 +1033,19 @@ ItemNPC["contraband_package"] = {
 	Model = "models/props_junk/cardboard_box001a.mdl",
 	Price = 3000,
 	Type = 2,
-	SpawnCheck =
-		function( ply, self )
-			if ply:isWanted() then
-				DarkRP.notify( ply, 1, 6, "You cannot buy this item while wanted!" )
-				return false
-			end
-			return true
-		end,
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "contraband_package" )
-			e:SetPos( ply:GetPos() + Vector( 0, 30, 35 ) )
-			e:Spawn()
-			e.Owner = ply
+	SpawnCheck = function( ply, self )
+		if ply:isWanted() then
+			DarkRP.notify( ply, 1, 6, "You cannot buy this item while wanted!" )
+			return false
 		end
+		return true
+	end,
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "contraband_package" )
+		e:SetPos( ply:GetPos() + Vector( 0, 30, 35 ) )
+		e:Spawn()
+		e.Owner = ply
+	end
 }
 
 -----FIRE TRUCK NPC ITEMS-----
@@ -1084,25 +1055,24 @@ ItemNPC["fire_truck"] = {
 	Model = "models/noble/engine_32.mdl",
 	Price = 0,
 	Type = 3,
-	SpawnFunction =
-		function( ply, self )
-			local class = "2014 Seagrave Marauder II Engine"
-			local model = "models/noble/engine_32.mdl"
-			local script = "scripts/vehicles/noble/noble_engine32.txt"
-			if map == rockford then
-				SpawnVehicle( ply, class, model, script, Vector( -5257, -3349, 8 ), Angle( 0, 180, 0 ) )
-			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 9431, 1260, -103 ), Angle( 0, -90, 0 ) )
-			elseif map == evocity then
-				SpawnVehicle( ply, class, model, script, Vector( 5363, 13248, 68 ), angle_zero )
-			elseif map == florida then
-				SpawnVehicle( ply, class, model, script, Vector( 6604, -4522, 136 ), Angle( 0, 90, 0 ) )
-			elseif map == truenorth then
-				SpawnVehicle( ply, class, model, script, Vector( 13135, 11426, 8 ), Angle( 0, 90, 0 ) )
-			elseif map == newexton then
-				SpawnVehicle( ply, class, model, script, Vector( 199, -6835, 1024 ), Angle( 0, 180, 0 ) )
-			end
+	SpawnFunction = function( ply, self )
+		local class = "2014 Seagrave Marauder II Engine"
+		local model = "models/noble/engine_32.mdl"
+		local script = "scripts/vehicles/noble/noble_engine32.txt"
+		if map == rockford then
+			SpawnVehicle( ply, class, model, script, Vector( -5257, -3349, 8 ), Angle( 0, 180, 0 ) )
+		elseif map == chaoscity then
+			SpawnVehicle( ply, class, model, script, Vector( 9431, 1260, -103 ), Angle( 0, -90, 0 ) )
+		elseif map == evocity then
+			SpawnVehicle( ply, class, model, script, Vector( 5363, 13248, 68 ), angle_zero )
+		elseif map == florida then
+			SpawnVehicle( ply, class, model, script, Vector( 6604, -4522, 136 ), Angle( 0, 90, 0 ) )
+		elseif map == truenorth then
+			SpawnVehicle( ply, class, model, script, Vector( 13135, 11426, 8 ), Angle( 0, 90, 0 ) )
+		elseif map == newexton then
+			SpawnVehicle( ply, class, model, script, Vector( 199, -6835, 1024 ), Angle( 0, 180, 0 ) )
 		end
+	end
 }
 
 ItemNPC["fire_truck_tesla"] = {
@@ -1111,25 +1081,24 @@ ItemNPC["fire_truck_tesla"] = {
 	Model = "models/sentry/cybertruck.mdl",
 	Price = 0,
 	Type = 3,
-	SpawnFunction =
-		function( ply, self )
-			local class = "Tesla Cybertruck - FD"
-			local model = "models/sentry/cybertruck.mdl"
-			local script = "scripts/vehicles/sentry/cybertruck.txt"
-			if map == rockford then
-				SpawnVehicle( ply, class, model, script, Vector( -5257, -3349, 8 ), Angle( 0, 180, 0 ) )
-			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 9431, 1260, -103 ), Angle( 0, -90, 0 ) )
-			elseif map == evocity then
-				SpawnVehicle( ply, class, model, script, Vector( 5363, 13248, 68 ), angle_zero )
-			elseif map == florida then
-				SpawnVehicle( ply, class, model, script, Vector( 6604, -4522, 136 ), Angle( 0, 90, 0 ) )
-			elseif map == truenorth then
-				SpawnVehicle( ply, class, model, script, Vector( 13135, 11426, 8 ), Angle( 0, 90, 0 ) )
-			elseif map == newexton then
-				SpawnVehicle( ply, class, model, script, Vector( 199, -6835, 1024 ), Angle( 0, 180, 0 ) )
-			end
+	SpawnFunction = function( ply, self )
+		local class = "Tesla Cybertruck - FD"
+		local model = "models/sentry/cybertruck.mdl"
+		local script = "scripts/vehicles/sentry/cybertruck.txt"
+		if map == rockford then
+			SpawnVehicle( ply, class, model, script, Vector( -5257, -3349, 8 ), Angle( 0, 180, 0 ) )
+		elseif map == chaoscity then
+			SpawnVehicle( ply, class, model, script, Vector( 9431, 1260, -103 ), Angle( 0, -90, 0 ) )
+		elseif map == evocity then
+			SpawnVehicle( ply, class, model, script, Vector( 5363, 13248, 68 ), angle_zero )
+		elseif map == florida then
+			SpawnVehicle( ply, class, model, script, Vector( 6604, -4522, 136 ), Angle( 0, 90, 0 ) )
+		elseif map == truenorth then
+			SpawnVehicle( ply, class, model, script, Vector( 13135, 11426, 8 ), Angle( 0, 90, 0 ) )
+		elseif map == newexton then
+			SpawnVehicle( ply, class, model, script, Vector( 199, -6835, 1024 ), Angle( 0, 180, 0 ) )
 		end
+	end
 }
 
 -----GOV VEHICLE NPC ITEMS-----
@@ -1139,25 +1108,27 @@ ItemNPC["chevy_impala"] = {
 	Model = "models/lonewolfie/chev_impala_09_police.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnFunction =
-		function( ply, self )
-			local class = "Chevrolet Impala LS Police Cruiser"
-			local model = "models/lonewolfie/chev_impala_09_police.mdl"
-			local script = "scripts/vehicles/lwcars/chev_impala_09.txt"
-			if map == rockford then
-				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
-			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
-			elseif map == evocity then
-				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
-			elseif map == florida then
-				SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
-			elseif map == truenorth then
-				SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
-			elseif map == newexton then
-				SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
-			end
+	SpawnCheck = function( ply, self )
+		return PoliceBanCheck( ply )
+	end,
+	SpawnFunction = function( ply, self )
+		local class = "Chevrolet Impala LS Police Cruiser"
+		local model = "models/lonewolfie/chev_impala_09_police.mdl"
+		local script = "scripts/vehicles/lwcars/chev_impala_09.txt"
+		if map == rockford then
+			SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
+		elseif map == chaoscity then
+			SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
+		elseif map == evocity then
+			SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
+		elseif map == florida then
+			SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
+		elseif map == truenorth then
+			SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
+		elseif map == newexton then
+			SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
 		end
+	end
 }
 
 ItemNPC["chevy_tahoe"] = {
@@ -1166,25 +1137,27 @@ ItemNPC["chevy_tahoe"] = {
 	Model = "models/smcars/2015_tahoe.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnFunction =
-		function( ply, self )
-			local class = "2015 Chevrolet Tahoe PPV"
-			local model = "models/smcars/2015_tahoe.mdl"
-			local script = "scripts/vehicles/SuperCars/smtahoe_15.txt"
-			if map == rockford then
-				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
-			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
-			elseif map == evocity then
-				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
-			elseif map == florida then
-				SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
-			elseif map == truenorth then
-				SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
-			elseif map == newexton then
-				SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
-			end
+	SpawnCheck = function( ply, self )
+		return PoliceBanCheck( ply )
+	end,
+	SpawnFunction = function( ply, self )
+		local class = "2015 Chevrolet Tahoe PPV"
+		local model = "models/smcars/2015_tahoe.mdl"
+		local script = "scripts/vehicles/SuperCars/smtahoe_15.txt"
+		if map == rockford then
+			SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
+		elseif map == chaoscity then
+			SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
+		elseif map == evocity then
+			SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
+		elseif map == florida then
+			SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
+		elseif map == truenorth then
+			SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
+		elseif map == newexton then
+			SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
 		end
+	end
 }
 
 ItemNPC["swat_van"] = {
@@ -1193,25 +1166,27 @@ ItemNPC["swat_van"] = {
 	Model = "models/perrynsvehicles/bearcat_g3/bearcat_g3.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnFunction =
-		function( ply, self )
-			local class = "Lenco Bearcat G3"
-			local model = "models/perrynsvehicles/bearcat_g3/bearcat_g3.mdl"
-			local script = "scripts/vehicles/perryn/bearcat_g3.txt"
-			if map == rockford then
-				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
-			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
-			elseif map == evocity then
-				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
-			elseif map == florida then
-				SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
-			elseif map == truenorth then
-				SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
-			elseif map == newexton then
-				SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
-			end
+	SpawnCheck = function( ply, self )
+		return PoliceBanCheck( ply )
+	end,
+	SpawnFunction = function( ply, self )
+		local class = "Lenco Bearcat G3"
+		local model = "models/perrynsvehicles/bearcat_g3/bearcat_g3.mdl"
+		local script = "scripts/vehicles/perryn/bearcat_g3.txt"
+		if map == rockford then
+			SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
+		elseif map == chaoscity then
+			SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
+		elseif map == evocity then
+			SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
+		elseif map == florida then
+			SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
+		elseif map == truenorth then
+			SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
+		elseif map == newexton then
+			SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
 		end
+	end
 }
 
 ItemNPC["ford_crownvic"] = {
@@ -1220,25 +1195,27 @@ ItemNPC["ford_crownvic"] = {
 	Model = "models/tdmcars/emergency/for_crownvic_fh3.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnFunction =
-		function( ply, self )
-			local class = "Ford Crown Vic Police"
-			local model = "models/tdmcars/emergency/for_crownvic_fh3.mdl"
-			local script = "scripts/vehicles/TDMCars/for_crownvic_fh3.txt"
-			if map == rockford then
-				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
-			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
-			elseif map == evocity then
-				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
-			elseif map == florida then
-				SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
-			elseif map == truenorth then
-				SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
-			elseif map == newexton then
-				SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
-			end
+	SpawnCheck = function( ply, self )
+		return PoliceBanCheck( ply )
+	end,
+	SpawnFunction = function( ply, self )
+		local class = "Ford Crown Vic Police"
+		local model = "models/tdmcars/emergency/for_crownvic_fh3.mdl"
+		local script = "scripts/vehicles/TDMCars/for_crownvic_fh3.txt"
+		if map == rockford then
+			SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
+		elseif map == chaoscity then
+			SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
+		elseif map == evocity then
+			SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
+		elseif map == florida then
+			SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
+		elseif map == truenorth then
+			SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
+		elseif map == newexton then
+			SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
 		end
+	end
 }
 
 ItemNPC["ford_crownvic_slick"] = {
@@ -1247,25 +1224,27 @@ ItemNPC["ford_crownvic_slick"] = {
 	Model = "models/tdmcars/emergency/for_crownvic_fh3.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnFunction =
-		function( ply, self )
-			local class = "Ford Crown Vic Police Slicktop"
-			local model = "models/tdmcars/emergency/for_crownvic_fh3.mdl"
-			local script = "scripts/vehicles/TDMCars/for_crownvic_fh3.txt"
-			if map == rockford then
-				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
-			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
-			elseif map == evocity then
-				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
-			elseif map == florida then
-				SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
-			elseif map == truenorth then
-				SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
-			elseif map == newexton then
-				SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
-			end
+	SpawnCheck = function( ply, self )
+		return PoliceBanCheck( ply )
+	end,
+	SpawnFunction = function( ply, self )
+		local class = "Ford Crown Vic Police Slicktop"
+		local model = "models/tdmcars/emergency/for_crownvic_fh3.mdl"
+		local script = "scripts/vehicles/TDMCars/for_crownvic_fh3.txt"
+		if map == rockford then
+			SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
+		elseif map == chaoscity then
+			SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
+		elseif map == evocity then
+			SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
+		elseif map == florida then
+			SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
+		elseif map == truenorth then
+			SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
+		elseif map == newexton then
+			SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
 		end
+	end
 }
 
 ItemNPC["ford_crownvic_und"] = {
@@ -1274,25 +1253,27 @@ ItemNPC["ford_crownvic_und"] = {
 	Model = "models/tdmcars/emergency/for_crownvic_fh3.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnFunction =
-		function( ply, self )
-			local class = "Ford Crown Vic Undercover"
-			local model = "models/tdmcars/emergency/for_crownvic_fh3.mdl"
-			local script = "scripts/vehicles/TDMCars/for_crownvic_fh3.txt"
-			if map == rockford then
-				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
-			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
-			elseif map == evocity then
-				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
-			elseif map == florida then
-				SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
-			elseif map == truenorth then
-				SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
-			elseif map == newexton then
-				SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
-			end
+	SpawnCheck = function( ply, self )
+		return PoliceBanCheck( ply )
+	end,
+	SpawnFunction = function( ply, self )
+		local class = "Ford Crown Vic Undercover"
+		local model = "models/tdmcars/emergency/for_crownvic_fh3.mdl"
+		local script = "scripts/vehicles/TDMCars/for_crownvic_fh3.txt"
+		if map == rockford then
+			SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
+		elseif map == chaoscity then
+			SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
+		elseif map == evocity then
+			SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
+		elseif map == florida then
+			SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
+		elseif map == truenorth then
+			SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
+		elseif map == newexton then
+			SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
 		end
+	end
 }
 
 ItemNPC["ford_f150"] = {
@@ -1301,25 +1282,27 @@ ItemNPC["ford_f150"] = {
 	Model = "models/stcars/15f150_cop.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnFunction =
-		function( ply, self )
-			local class = "2015 Ford F150 Police"
-			local model = "models/stcars/15f150_cop.mdl"
-			local script = "scripts/vehicles/stcars/15f150_cop.txt"
-			if map == rockford then
-				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
-			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
-			elseif map == evocity then
-				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
-			elseif map == florida then
-				SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
-			elseif map == truenorth then
-				SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
-			elseif map == newexton then
-				SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
-			end
+	SpawnCheck = function( ply, self )
+		return PoliceBanCheck( ply )
+	end,
+	SpawnFunction = function( ply, self )
+		local class = "2015 Ford F150 Police"
+		local model = "models/stcars/15f150_cop.mdl"
+		local script = "scripts/vehicles/stcars/15f150_cop.txt"
+		if map == rockford then
+			SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
+		elseif map == chaoscity then
+			SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
+		elseif map == evocity then
+			SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
+		elseif map == florida then
+			SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
+		elseif map == truenorth then
+			SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
+		elseif map == newexton then
+			SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
 		end
+	end
 }
 
 ItemNPC["jaguar_und"] = {
@@ -1328,25 +1311,27 @@ ItemNPC["jaguar_und"] = {
 	Model = "models/lonewolfie/jaguar_xfr_pol_und.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnFunction =
-		function( ply, self )
-			local class = "Jaguar XFR SEG Photon"
-			local model = "models/lonewolfie/jaguar_xfr_pol_und.mdl"
-			local script = "scripts/vehicles/lwcars/jag_xfr_pol.txt"
-			if map == rockford then
-				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
-			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
-			elseif map == evocity then
-				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
-			elseif map == florida then
-				SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
-			elseif map == truenorth then
-				SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
-			elseif map == newexton then
-				SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
-			end
+	SpawnCheck = function( ply, self )
+		return PoliceBanCheck( ply )
+	end,
+	SpawnFunction = function( ply, self )
+		local class = "Jaguar XFR SEG Photon"
+		local model = "models/lonewolfie/jaguar_xfr_pol_und.mdl"
+		local script = "scripts/vehicles/lwcars/jag_xfr_pol.txt"
+		if map == rockford then
+			SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
+		elseif map == chaoscity then
+			SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
+		elseif map == evocity then
+			SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
+		elseif map == florida then
+			SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
+		elseif map == truenorth then
+			SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
+		elseif map == newexton then
+			SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
 		end
+	end
 }
 
 ItemNPC["charger_police"] = {
@@ -1355,25 +1340,27 @@ ItemNPC["charger_police"] = {
 	Model = "models/lonewolfie/dodge_charger_2015_police.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnFunction =
-		function( ply, self )
-			local class = "Dodge Charger 2015 Pursuit"
-			local model = "models/lonewolfie/dodge_charger_2015_police.mdl"
-			local script = "scripts/vehicles/lwcars/dodge_charger_2015_police.txt"
-			if map == rockford then
-				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
-			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
-			elseif map == evocity then
-				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
-			elseif map == florida then
-				SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
-			elseif map == truenorth then
-				SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
-			elseif map == newexton then
-				SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
-			end
+	SpawnCheck = function( ply, self )
+		return PoliceBanCheck( ply )
+	end,
+	SpawnFunction = function( ply, self )
+		local class = "Dodge Charger 2015 Pursuit"
+		local model = "models/lonewolfie/dodge_charger_2015_police.mdl"
+		local script = "scripts/vehicles/lwcars/dodge_charger_2015_police.txt"
+		if map == rockford then
+			SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
+		elseif map == chaoscity then
+			SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
+		elseif map == evocity then
+			SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
+		elseif map == florida then
+			SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
+		elseif map == truenorth then
+			SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
+		elseif map == newexton then
+			SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
 		end
+	end
 }
 
 ItemNPC["charger_und"] = {
@@ -1382,25 +1369,27 @@ ItemNPC["charger_und"] = {
 	Model = "models/lonewolfie/dodge_charger_2015_undercover.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnFunction =
-		function( ply, self )
-			local class = "Dodge Charger 2015 Undercover"
-			local model = "models/lonewolfie/dodge_charger_2015_undercover.mdl"
-			local script = "scripts/vehicles/lwcars/dodge_charger_2015_police.txt"
-			if map == rockford then
-				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
-			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
-			elseif map == evocity then
-				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
-			elseif map == florida then
-				SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
-			elseif map == truenorth then
-				SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
-			elseif map == newexton then
-				SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
-			end
+	SpawnCheck = function( ply, self )
+		return PoliceBanCheck( ply )
+	end,
+	SpawnFunction = function( ply, self )
+		local class = "Dodge Charger 2015 Undercover"
+		local model = "models/lonewolfie/dodge_charger_2015_undercover.mdl"
+		local script = "scripts/vehicles/lwcars/dodge_charger_2015_police.txt"
+		if map == rockford then
+			SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
+		elseif map == chaoscity then
+			SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
+		elseif map == evocity then
+			SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
+		elseif map == florida then
+			SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
+		elseif map == truenorth then
+			SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
+		elseif map == newexton then
+			SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
 		end
+	end
 }
 
 ItemNPC["lambosine"] = {
@@ -1409,25 +1398,27 @@ ItemNPC["lambosine"] = {
 	Model = "models/sentry/lambosine.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnFunction =
-		function( ply, self )
-			local class = "lambosine"
-			local model = "models/sentry/lambosine.mdl"
-			local script = "scripts/vehicles/sentry/lambosine.txt"
-			if map == rockford then
-				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
-			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
-			elseif map == evocity then
-				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
-			elseif map == florida then
-				SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
-			elseif map == truenorth then
-				SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
-			elseif map == newexton then
-				SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
-			end
+	SpawnCheck = function( ply, self )
+		return PoliceBanCheck( ply )
+	end,
+	SpawnFunction = function( ply, self )
+		local class = "lambosine"
+		local model = "models/sentry/lambosine.mdl"
+		local script = "scripts/vehicles/sentry/lambosine.txt"
+		if map == rockford then
+			SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
+		elseif map == chaoscity then
+			SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
+		elseif map == evocity then
+			SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
+		elseif map == florida then
+			SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
+		elseif map == truenorth then
+			SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
+		elseif map == newexton then
+			SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
 		end
+	end
 }
 
 ItemNPC["lambo_veneno"] = {
@@ -1436,25 +1427,27 @@ ItemNPC["lambo_veneno"] = {
 	Model = "models/sentry/veneno_new_cop.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnFunction =
-		function( ply, self )
-			local class = "Lamborghini Veneno Police Edition"
-			local model = "models/sentry/veneno_new_cop.mdl"
-			local script = "scripts/vehicles/sentry/veneno_new.txt"
-			if map == rockford then
-				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
-			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
-			elseif map == evocity then
-				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
-			elseif map == florida then
-				SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
-			elseif map == truenorth then
-				SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
-			elseif map == newexton then
-				SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
-			end
+	SpawnCheck = function( ply, self )
+		return PoliceBanCheck( ply )
+	end,
+	SpawnFunction = function( ply, self )
+		local class = "Lamborghini Veneno Police Edition"
+		local model = "models/sentry/veneno_new_cop.mdl"
+		local script = "scripts/vehicles/sentry/veneno_new.txt"
+		if map == rockford then
+			SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
+		elseif map == chaoscity then
+			SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
+		elseif map == evocity then
+			SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
+		elseif map == florida then
+			SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
+		elseif map == truenorth then
+			SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
+		elseif map == newexton then
+			SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
 		end
+	end
 }
 
 ItemNPC["jaguar_police"] = {
@@ -1463,25 +1456,27 @@ ItemNPC["jaguar_police"] = {
 	Model = "models/lonewolfie/jaguar_xfr_pol.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnFunction =
-		function( ply, self )
-			local class = "Jaguar XFR Police Photon"
-			local model = "models/lonewolfie/jaguar_xfr_pol.mdl"
-			local script = "scripts/vehicles/lwcars/jag_xfr_pol.txt"
-			if map == rockford then
-				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
-			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
-			elseif map == evocity then
-				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
-			elseif map == florida then
-				SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
-			elseif map == truenorth then
-				SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
-			elseif map == newexton then
-				SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
-			end
+	SpawnCheck = function( ply, self )
+		return PoliceBanCheck( ply )
+	end,
+	SpawnFunction = function( ply, self )
+		local class = "Jaguar XFR Police Photon"
+		local model = "models/lonewolfie/jaguar_xfr_pol.mdl"
+		local script = "scripts/vehicles/lwcars/jag_xfr_pol.txt"
+		if map == rockford then
+			SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
+		elseif map == chaoscity then
+			SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
+		elseif map == evocity then
+			SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
+		elseif map == florida then
+			SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
+		elseif map == truenorth then
+			SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
+		elseif map == newexton then
+			SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
 		end
+	end
 }
 
 ItemNPC["dodge_monaco"] = {
@@ -1490,25 +1485,27 @@ ItemNPC["dodge_monaco"] = {
 	Model = "models/lonewolfie/dodge_monaco_police.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnFunction =
-		function( ply, self )
-			local class = "Dodge Monaco Police "
-			local model = "models/lonewolfie/dodge_monaco_police.mdl"
-			local script = "scripts/vehicles/LWCars/dodge_monaco.txt"
-			if map == rockford then
-				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
-			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
-			elseif map == evocity then
-				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
-			elseif map == florida then
-				SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
-			elseif map == truenorth then
-				SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
-			elseif map == newexton then
-				SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
-			end
+	SpawnCheck = function( ply, self )
+		return PoliceBanCheck( ply )
+	end,
+	SpawnFunction = function( ply, self )
+		local class = "Dodge Monaco Police "
+		local model = "models/lonewolfie/dodge_monaco_police.mdl"
+		local script = "scripts/vehicles/LWCars/dodge_monaco.txt"
+		if map == rockford then
+			SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
+		elseif map == chaoscity then
+			SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
+		elseif map == evocity then
+			SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
+		elseif map == florida then
+			SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
+		elseif map == truenorth then
+			SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
+		elseif map == newexton then
+			SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
 		end
+	end
 }
 
 ItemNPC["transport_truck"] = {
@@ -1517,25 +1514,27 @@ ItemNPC["transport_truck"] = {
 	Model = "models/tdmcars/trucks/gmc_c5500.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnFunction =
-		function( ply, self )
-			local class = "c5500tdm"
-			local model = "models/tdmcars/trucks/gmc_c5500.mdl"
-			local script = "scripts/vehicles/TDMCars/c5500.txt"
-			if map == rockford then
-				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
-			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
-			elseif map == evocity then
-				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
-			elseif map == florida then
-				SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
-			elseif map == truenorth then
-				SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
-			elseif map == newexton then
-				SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
-			end
+	SpawnCheck = function( ply, self )
+		return PoliceBanCheck( ply )
+	end,
+	SpawnFunction = function( ply, self )
+		local class = "c5500tdm"
+		local model = "models/tdmcars/trucks/gmc_c5500.mdl"
+		local script = "scripts/vehicles/TDMCars/c5500.txt"
+		if map == rockford then
+			SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
+		elseif map == chaoscity then
+			SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
+		elseif map == evocity then
+			SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
+		elseif map == florida then
+			SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
+		elseif map == truenorth then
+			SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
+		elseif map == newexton then
+			SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
 		end
+	end
 }
 
 ItemNPC["ford_explorer"] = {
@@ -1544,25 +1543,27 @@ ItemNPC["ford_explorer"] = {
 	Model = "models/schmal/fpiu/ford_utility.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnFunction =
-		function( ply, self )
-			local class = "2016 Ford Police Interceptor Utility"
-			local model = "models/schmal/fpiu/ford_utility.mdl"
-			local script = "scripts/vehicles/schmal/ford_pol_int_2016.txt"
-			if map == rockford then
-				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
-			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
-			elseif map == evocity then
-				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
-			elseif map == florida then
-				SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
-			elseif map == truenorth then
-				SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
-			elseif map == newexton then
-				SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
-			end
+	SpawnCheck = function( ply, self )
+		return PoliceBanCheck( ply )
+	end,
+	SpawnFunction = function( ply, self )
+		local class = "2016 Ford Police Interceptor Utility"
+		local model = "models/schmal/fpiu/ford_utility.mdl"
+		local script = "scripts/vehicles/schmal/ford_pol_int_2016.txt"
+		if map == rockford then
+			SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
+		elseif map == chaoscity then
+			SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
+		elseif map == evocity then
+			SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
+		elseif map == florida then
+			SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
+		elseif map == truenorth then
+			SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
+		elseif map == newexton then
+			SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
 		end
+	end
 }
 
 ItemNPC["ford_taurus"] = {
@@ -1571,25 +1572,27 @@ ItemNPC["ford_taurus"] = {
 	Model = "models/sentry/taurussho.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnFunction =
-		function( ply, self )
-			local class = "2010 Ford Taurus Police Interceptor"
-			local model = "models/sentry/taurussho.mdl"
-			local script = "scripts/vehicles/sentry/taurus.txt"
-			if map == rockford then
-				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
-			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
-			elseif map == evocity then
-				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
-			elseif map == florida then
-				SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
-			elseif map == truenorth then
-				SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
-			elseif map == newexton then
-				SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
-			end
+	SpawnCheck = function( ply, self )
+		return PoliceBanCheck( ply )
+	end,
+	SpawnFunction = function( ply, self )
+		local class = "2010 Ford Taurus Police Interceptor"
+		local model = "models/sentry/taurussho.mdl"
+		local script = "scripts/vehicles/sentry/taurus.txt"
+		if map == rockford then
+			SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
+		elseif map == chaoscity then
+			SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
+		elseif map == evocity then
+			SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
+		elseif map == florida then
+			SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
+		elseif map == truenorth then
+			SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
+		elseif map == newexton then
+			SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
 		end
+	end
 }
 
 ItemNPC["lambo_huracan"] = {
@@ -1598,25 +1601,27 @@ ItemNPC["lambo_huracan"] = {
 	Model = "models/lonewolfie/lam_huracan.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnFunction =
-		function( ply, self )
-			local class = "Lamborghini Huracan Undercover"
-			local model = "models/lonewolfie/lam_huracan.mdl"
-			local script = "scripts/vehicles/LWCars/lam_huracan.txt"
-			if map == rockford then
-				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
-			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
-			elseif map == evocity then
-				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
-			elseif map == florida then
-				SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
-			elseif map == truenorth then
-				SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
-			elseif map == newexton then
-				SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
-			end
+	SpawnCheck = function( ply, self )
+		return PoliceBanCheck( ply )
+	end,
+	SpawnFunction = function( ply, self )
+		local class = "Lamborghini Huracan Undercover"
+		local model = "models/lonewolfie/lam_huracan.mdl"
+		local script = "scripts/vehicles/LWCars/lam_huracan.txt"
+		if map == rockford then
+			SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
+		elseif map == chaoscity then
+			SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
+		elseif map == evocity then
+			SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
+		elseif map == florida then
+			SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
+		elseif map == truenorth then
+			SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
+		elseif map == newexton then
+			SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
 		end
+	end
 }
 
 ItemNPC["dodge_challenger"] = {
@@ -1625,25 +1630,27 @@ ItemNPC["dodge_challenger"] = {
 	Model = "models/tdmcars/dod_challenger15.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnFunction =
-		function( ply, self )
-			local class = "2015 Challenger Unmarked"
-			local model = "models/tdmcars/dod_challenger15.mdl"
-			local script = "scripts/vehicles/TDMCars/dod_challenger15.txt"
-			if map == rockford then
-				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
-			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
-			elseif map == evocity then
-				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
-			elseif map == florida then
-				SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
-			elseif map == truenorth then
-				SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
-			elseif map == newexton then
-				SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
-			end
+	SpawnCheck = function( ply, self )
+		return PoliceBanCheck( ply )
+	end,
+	SpawnFunction = function( ply, self )
+		local class = "2015 Challenger Unmarked"
+		local model = "models/tdmcars/dod_challenger15.mdl"
+		local script = "scripts/vehicles/TDMCars/dod_challenger15.txt"
+		if map == rockford then
+			SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
+		elseif map == chaoscity then
+			SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
+		elseif map == evocity then
+			SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
+		elseif map == florida then
+			SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
+		elseif map == truenorth then
+			SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
+		elseif map == newexton then
+			SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
 		end
+	end
 }
 
 ItemNPC["hummer"] = {
@@ -1652,25 +1659,27 @@ ItemNPC["hummer"] = {
 	Model = "models/tdmcars/hummerh1.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnFunction =
-		function( ply, self )
-			local class = "Hummer H1 SWAT Edition"
-			local model = "models/tdmcars/hummerh1.mdl"
-			local script = "scripts/vehicles/TDMCars/h1.txt"
-			if map == rockford then
-				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
-			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
-			elseif map == evocity then
-				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
-			elseif map == florida then
-				SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
-			elseif map == truenorth then
-				SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
-			elseif map == newexton then
-				SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
-			end
+	SpawnCheck = function( ply, self )
+		return PoliceBanCheck( ply )
+	end,
+	SpawnFunction = function( ply, self )
+		local class = "Hummer H1 SWAT Edition"
+		local model = "models/tdmcars/hummerh1.mdl"
+		local script = "scripts/vehicles/TDMCars/h1.txt"
+		if map == rockford then
+			SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
+		elseif map == chaoscity then
+			SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
+		elseif map == evocity then
+			SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
+		elseif map == florida then
+			SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
+		elseif map == truenorth then
+			SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
+		elseif map == newexton then
+			SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
 		end
+	end
 }
 
 ItemNPC["chevy_impala_taxi"] = {
@@ -1679,25 +1688,27 @@ ItemNPC["chevy_impala_taxi"] = {
 	Model = "models/lonewolfie/chev_impala_09_taxi.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnFunction =
-		function( ply, self )
-			local class = "Impala Taxi Unmarked"
-			local model = "models/lonewolfie/chev_impala_09_taxi.mdl"
-			local script = "scripts/vehicles/LWCars/chev_impala_09.txt"
-			if map == rockford then
-				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
-			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
-			elseif map == evocity then
-				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
-			elseif map == florida then
-				SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
-			elseif map == truenorth then
-				SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
-			elseif map == newexton then
-				SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
-			end
+	SpawnCheck = function( ply, self )
+		return PoliceBanCheck( ply )
+	end,
+	SpawnFunction = function( ply, self )
+		local class = "Impala Taxi Unmarked"
+		local model = "models/lonewolfie/chev_impala_09_taxi.mdl"
+		local script = "scripts/vehicles/LWCars/chev_impala_09.txt"
+		if map == rockford then
+			SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
+		elseif map == chaoscity then
+			SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
+		elseif map == evocity then
+			SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
+		elseif map == florida then
+			SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
+		elseif map == truenorth then
+			SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
+		elseif map == newexton then
+			SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
 		end
+	end
 }
 
 ItemNPC["laferrari"] = {
@@ -1706,25 +1717,27 @@ ItemNPC["laferrari"] = {
 	Model = "models/tdmcars/fer_lafer.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnFunction =
-		function( ply, self )
-			local class = "Unmarked LaFerrari"
-			local model = "models/tdmcars/fer_lafer.mdl"
-			local script = "scripts/vehicles/TDMCars/laferrari.txt"
-			if map == rockford then
-				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
-			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
-			elseif map == evocity then
-				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
-			elseif map == florida then
-				SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
-			elseif map == truenorth then
-				SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
-			elseif map == newexton then
-				SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
-			end
+	SpawnCheck = function( ply, self )
+		return PoliceBanCheck( ply )
+	end,
+	SpawnFunction = function( ply, self )
+		local class = "Unmarked LaFerrari"
+		local model = "models/tdmcars/fer_lafer.mdl"
+		local script = "scripts/vehicles/TDMCars/laferrari.txt"
+		if map == rockford then
+			SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
+		elseif map == chaoscity then
+			SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
+		elseif map == evocity then
+			SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
+		elseif map == florida then
+			SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
+		elseif map == truenorth then
+			SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
+		elseif map == newexton then
+			SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
 		end
+	end
 }
 
 ItemNPC["charger_old"] = {
@@ -1733,25 +1746,27 @@ ItemNPC["charger_old"] = {
 	Model = "models/tdmcars/dod_charger12.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnFunction =
-		function( ply, self )
-			local class = "Charger SRT-8 Police Undercover"
-			local model = "models/tdmcars/dod_charger12.mdl"
-			local script = "scripts/vehicles/TDMCars/charger2012.txt"
-			if map == rockford then
-				SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
-			elseif map == chaoscity then
-				SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
-			elseif map == evocity then
-				SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
-			elseif map == florida then
-				SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
-			elseif map == truenorth then
-				SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
-			elseif map == newexton then
-				SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
-			end
+	SpawnCheck = function( ply, self )
+		return PoliceBanCheck( ply )
+	end,
+	SpawnFunction = function( ply, self )
+		local class = "Charger SRT-8 Police Undercover"
+		local model = "models/tdmcars/dod_charger12.mdl"
+		local script = "scripts/vehicles/TDMCars/charger2012.txt"
+		if map == rockford then
+			SpawnVehicle( ply, class, model, script, Vector( -8248, -5485, 0), angle_zero )
+		elseif map == chaoscity then
+			SpawnVehicle( ply, class, model, script, Vector( 8688, 8619, -127 ), Angle( 0, 90, 0 ) )
+		elseif map == evocity then
+			SpawnVehicle( ply, class, model, script, Vector( -13, -2278, -179 ), angle_zero )
+		elseif map == florida then
+			SpawnVehicle( ply, class, model, script, Vector( 6537, -1612, 136 ), angle_zero )
+		elseif map == truenorth then
+			SpawnVehicle( ply, class, model, script, Vector( 3238, 3914, 0 ), angle_zero )
+		elseif map == newexton then
+			SpawnVehicle( ply, class, model, script, Vector( -7225, 10207, 1024 ), Angle( 0, -90, 0 ) )
 		end
+	end
 }
 
 -----AMBULANCE NPC ITEMS-----
