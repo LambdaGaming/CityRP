@@ -64,8 +64,7 @@ EventPos["rp_rockford_v2b"] = {
 		Vector( -2499, 12990, 519 ),
 		Vector( 8875, 4412, 1536 )
 	},
-	Robbery = Vector( -3526, -3217, 40 ), --Need 1 position
-	Drunk = Vector( -2381, -6509, 0 ) --Need 1 position
+	Robbery = Vector( -3526, -3217, 40 ) --Need 1 position
 }
 
 EventPos["rp_southside"] = {
@@ -101,8 +100,7 @@ EventPos["rp_southside"] = {
 		Vector( -1408, 6163, 0 ),
 		Vector( -2608, 2182, -111 )
 	},
-	Robbery = Vector( -1029, 2484, -102 ),
-	Drunk = Vector( -11449, 1758, -47 )
+	Robbery = Vector( -1029, 2484, -102 )
 }
 
 EventPos["rp_evocity2_v5p"] = {
@@ -138,8 +136,7 @@ EventPos["rp_evocity2_v5p"] = {
 		Vector( 11053, 6183, -1823 ),
 		Vector( 6007, 7670, 68 )
 	},
-	Robbery = Vector( 1552, -31, 150 ),
-	Drunk = Vector( 3290, -2166, 68 )
+	Robbery = Vector( 1552, -31, 150 )
 }
 
 EventPos["rp_florida_v2"] = {
@@ -175,8 +172,7 @@ EventPos["rp_florida_v2"] = {
 		Vector( -7706, 757, 128 ),
 		Vector( 7162, -9455, 128 )
 	},
-	Robbery = Vector( 4734, -6663, 137 ),
-	Drunk = Vector( 11995, -6350, 129 )
+	Robbery = Vector( 4734, -6663, 137 )
 }
 
 EventPos["rp_truenorth_v1a"] = {
@@ -212,8 +208,7 @@ EventPos["rp_truenorth_v1a"] = {
 		Vector( -6757, -10766, 0 ),
 		Vector( -10804, 15175, 2560 )
 	},
-	Robbery = Vector( 6737, 2556, 20 ),
-	Drunk = Vector( -10234, -7658, 0 )
+	Robbery = Vector( 6737, 2556, 20 )
 }
 
 EventPos["rp_newexton2_v4h"] = {
@@ -249,8 +244,7 @@ EventPos["rp_newexton2_v4h"] = {
 		Vector( 15187, 3764, -7 ),
 		Vector( -5695, -3282, -519 )
 	},
-	Robbery = Vector( -9838, -2134, 1420 ),
-	Drunk = Vector( -8743, -9520, 1016 )
+	Robbery = Vector( -9838, -2134, 1420 )
 }
 
 local function GetCurrentEvent()
@@ -626,7 +620,7 @@ function DrunkDriver()
 	timer.Simple( 1, function() --The server crashes without this timer, I guess the vehicle needs time to fully inititialize
 		local e = ents.Create( "prop_vehicle_jeep" )
 		e:SetKeyValue( "vehiclescript", randveh.KeyValues.vehiclescript )
-		e:SetPos( EventPos[game.GetMap()].Drunk )
+		e:SetPos( RandRoad() + Vector( 0, 0, 10 ) )
 		e:SetModel( randveh.Model )
 		e:Spawn()
 		e:Activate()

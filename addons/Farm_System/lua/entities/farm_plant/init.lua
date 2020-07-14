@@ -1,6 +1,6 @@
 AddCSLuaFile( "cl_init.lua" )
 AddCSLuaFile( "shared.lua" )
-include('shared.lua')
+include( "shared.lua" )
 
 function ENT:Initialize()
     self:SetModel( "models/props_lab/box01a.mdl" )
@@ -31,7 +31,8 @@ function ENT:Use( activator, caller )
 				e:SetPlantType( self:GetPlantType() )
 				e:Spawn()
 			end
-			self:Remove()
+			self:EmitSound( "physics/surfaces/sand_impact_bullet"..math.random( 1, 4 )..".wav" )
+			self:SetGrowth( 0 )
 		end
 	else
 		self:SetModel( PlantTable.PlantModel )
@@ -46,7 +47,7 @@ function ENT:Think()
 	if self:GetPlanted() and !self:ReadyForHarvest() then
 		if GetGlobalBool( "FarmDraughtActive" ) then return end
 		local tr = util.TraceLine( {
-			start = self:GetPos() + Vector( 0, 0, 50 ),
+			start = self:GetPos() + Vector( 0, 0, 60 ),
 			endpos = self:GetPos() + self:GetAngles():Up() * math.huge
 		} )
 		if tr.HitSky then --Make sure the plant is getting sunlight
