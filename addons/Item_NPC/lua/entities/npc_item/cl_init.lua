@@ -1,5 +1,5 @@
 
-include('shared.lua')
+include( "shared.lua" )
 
 surface.CreateFont( "ItemNPCTitleFont", {
 	font = "Arial",
@@ -107,7 +107,7 @@ local function DrawItemMenu( ent ) --Panel that draws the main menu
 		local itemprice = vgui.Create( "DLabel", itembackground )
 		itemprice:SetFont( "Trebuchet24" )
 		itemprice:SetColor( ItemNPCType[type].MenuTextColor )
-		if realprice <= 0 then
+		if v.Price <= 0 then
 			itemprice:SetText( "Price: Free" )
 		else
 			itemprice:SetText( "Price: "..DarkRP.formatMoney( realprice ) )

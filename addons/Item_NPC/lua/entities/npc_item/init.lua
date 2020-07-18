@@ -71,7 +71,11 @@ net.Receive( "CreateItem", function( len, ply )
 	local money = ply:getDarkRPVar( "money" )
 	local name = ItemNPC[ent].Name
 	local price = ItemNPC[ent].Price
-	price = price + ( price * ( GetGlobalInt( "MAYOR_SalesTax" ) * 0.01 ) )
+	local salestax = price * ( GetGlobalInt( "MAYOR_SalesTax" ) * 0.01 )
+	if price > 0 then
+		price = price + salestax
+		SetGlobalBool( "MAYOR_Money", GetGlobalBool( "MAYOR_Money" ) + salestax )
+	end
 	if money >= price then
 		if SpawnCheck and SpawnCheck( ply, self ) == false then return end
 		if SpawnItem then
