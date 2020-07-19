@@ -5,18 +5,16 @@ net.Receive( "LifeAlertSound", function( len, ply )
 end )
 
 local mat = Material( "icon16/bullet_error.png" )
-
 local function AlertImage()
     local pl = LocalPlayer()
     local shootPos = pl:GetShootPos()
 	local ply = player.GetAll()
-	local plypos = Vector( 0, 0, 0 )
+	local plypos = vector_origin
+	local hisPos = pl:GetShootPos()
 	local emsjobs = {
 		[TEAM_FIREBOSS] = true,
 		[TEAM_FIRE] = true
 	}
-	
-	local hisPos = pl:GetShootPos()
 	if pl:isCP() or emsjobs[pl:Team()] then
 		for k,v in pairs( ply ) do
 			if v:GetNWBool( "LifeAlertActiveDeath" ) then

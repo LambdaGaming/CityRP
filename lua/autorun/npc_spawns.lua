@@ -15,12 +15,6 @@ if SERVER then
 				bank:SetModel( "models/player/group01/male_02.mdl" )
 				bank:Spawn()
 
-				local release = ents.Create("breakout_npc")
-				release:SetPos( Vector( -8687, -5565, 8 ) )
-				release:SetAngles( Angle( 0, -90, 0 ) )
-				release:SetModel( "models/Humans/Group03/male_03.mdl" )
-				release:Spawn()
-
 				local shop = ents.Create( "npc_item" )
 				shop:SetPos( Vector( 1613, 6095, 574 ) )
 				shop:SetAngles( Angle( 0, -90, 0 ) )
@@ -82,12 +76,6 @@ if SERVER then
 				bank:SetAngles( Angle( 0, -90, 0 ) )
 				bank:SetModel( "models/player/group01/male_02.mdl" )
 				bank:Spawn()
-
-				local release = ents.Create("breakout_npc")
-				release:SetPos( Vector( 7955, 8045, 200 ) )
-				release:SetAngles( Angle( 0, -90, 0 ) )
-				release:SetModel( "models/Humans/Group03/male_03.mdl" )
-				release:Spawn()
 
 				local shop = ents.Create( "npc_item" )
 				shop:SetPos( Vector( -5911, 1437, -22 ) )
@@ -157,12 +145,6 @@ if SERVER then
 				bank:SetModel( "models/player/group01/male_02.mdl" )
 				bank:Spawn()
 
-				local release = ents.Create("breakout_npc")
-				release:SetPos( Vector( -242, -1951, 76 ) )
-				release:SetAngles( Angle( 0, 180, 0 ) )
-				release:SetModel( "models/Humans/Group03/male_03.mdl" )
-				release:Spawn()
-
 				local shop = ents.Create( "npc_item" )
 				shop:SetPos( Vector( 8197, 6212, 70 ) )
 				shop:SetAngles( Angle( 0, 90, 0 ) )
@@ -224,12 +206,6 @@ if SERVER then
 				bank:SetAngles( Angle( 0, 180, 0 ) )
 				bank:SetModel( "models/player/group01/male_02.mdl" )
 				bank:Spawn()
-
-				local release = ents.Create("breakout_npc")
-				release:SetPos( Vector( 6468, -2716, 136 ) )
-				release:SetAngles( Angle( 0, 180, 0 ) )
-				release:SetModel( "models/Humans/Group03/male_03.mdl" )
-				release:Spawn()
 
 				local shop = ents.Create( "npc_item" )
 				shop:SetPos( Vector( 7812, -4510, 136 ) )
@@ -293,12 +269,6 @@ if SERVER then
 				bank:SetModel( "models/player/group01/male_02.mdl" )
 				bank:Spawn()
 
-				local release = ents.Create("breakout_npc")
-				release:SetPos( Vector( 2359, 3243, 8 ) )
-				release:SetAngles( Angle( 0, 90, 0 ) )
-				release:SetModel( "models/Humans/Group03/male_03.mdl" )
-				release:Spawn()
-
 				local shop = ents.Create( "npc_item" )
 				shop:SetPos( Vector( 15073, 9818, 8 ) )
 				shop:SetAngles( Angle( 0, 90, 0 ) )
@@ -360,12 +330,6 @@ if SERVER then
 				bank:SetAngles( Angle( 0, 180, 0 ) )
 				bank:SetModel( "models/player/group01/male_02.mdl" )
 				bank:Spawn()
-
-				local release = ents.Create("breakout_npc")
-				release:SetPos( Vector( -6440, 8162, 1088 ) )
-				release:SetAngles( Angle( 0, -90, 0 ) )
-				release:SetModel( "models/Humans/Group03/male_03.mdl" )
-				release:Spawn()
 
 				local shop = ents.Create( "npc_item" )
 				shop:SetPos( Vector( 3992, 6119, 1024 ) )

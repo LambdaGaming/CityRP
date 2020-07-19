@@ -36,12 +36,15 @@ function ENT:Use( activator, caller )
 				return
 			end
 			local total = 0
+			local numplants = 0
 			for k,v in pairs( PlantTypes ) do
 				total = total + ( self:GetNWInt( v.Name ) * v.SellPrice )
+				numplants = numplants + 1
 			end
 			activator:addMoney( total )
-			DarkRP.notify( activator, 0, 6, "You have sold farm foods for "..DarkRP.formatMoney( total ).."." )
+			DarkRP.notify( activator, 0, 6, "You have sold "..numplants.." farm food(s) for "..DarkRP.formatMoney( total ).."." )
 			self:EmitSound( "items/ammocrate_open.wav" )
+			SetGlobalInt( "MAYOR_Money", GetGlobalInt( "MAYOR_Money" ) + numplants )
 			for k,v in pairs( PlantTypes ) do
 				self:SetNWInt( v.Name, 0 )
 			end

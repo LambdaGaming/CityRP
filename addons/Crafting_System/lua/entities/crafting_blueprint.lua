@@ -8,10 +8,10 @@ ENT.Author = "Lambda Gaming"
 ENT.Spawnable = false
 ENT.AdminOnly = true
 
-function ENT:SpawnFunction( ply, tr )
+function ENT:SpawnFunction( ply, tr, name )
 	if !tr.Hit then return end
 	local SpawnPos = tr.HitPos + tr.HitNormal * 1
-	local ent = ents.Create( "crafting_blueprint" )
+	local ent = ents.Create( name )
 	ent:SetPos( SpawnPos )
 	ent:Spawn()
 	ent:Activate()
@@ -26,15 +26,15 @@ end
 
 function ENT:Initialize()
     self:SetModel( "models/props_lab/binderblue.mdl" )
-	self:SetMoveType(MOVETYPE_VPHYSICS)
-	self:SetSolid(SOLID_VPHYSICS)
+	self:SetMoveType( MOVETYPE_VPHYSICS )
+	self:SetSolid( SOLID_VPHYSICS )
 	if SERVER then
-		self:PhysicsInit(SOLID_VPHYSICS)
-		self:SetUseType(SIMPLE_USE)
+		self:PhysicsInit( SOLID_VPHYSICS )
+		self:SetUseType( SIMPLE_USE )
 	end
  
     local phys = self:GetPhysicsObject()
-	if (phys:IsValid()) then
+	if phys:IsValid() then
 		phys:Wake()
 	end
 end
