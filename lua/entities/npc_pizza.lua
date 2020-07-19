@@ -3,7 +3,7 @@ AddCSLuaFile()
 ENT.Type = "ai"
 ENT.Base = "base_ai"
 ENT.PrintName = "Pizza NPC"
-ENT.Category = "Superadmin Only"
+ENT.Category = "Zeros PizzaMaker"
 ENT.Spawnable = true
 ENT.AdminOnly = true
 ENT.AutomaticFrameAdvance = true
@@ -28,13 +28,9 @@ function ENT:Initialize()
 	}
 	self:SetModel( table.Random( models ) )
 	if SERVER then
-		self:SetMoveType(MOVETYPE_NONE)
-		self:SetSolid( SOLID_BBOX )
-		self:SetCollisionGroup(COLLISION_GROUP_PLAYER)
-	end
-	local phys = self:GetPhysicsObject()
-	if IsValid(phys) then
-		phys:Wake()
+		self:SetMoveType( MOVETYPE_NONE )
+		self:SetSolid( SOLID_VPHYSICS )
+		self:SetCollisionGroup( COLLISION_GROUP_PLAYER )
 	end
 	
 	local randpizzas = {
@@ -53,7 +49,7 @@ function ENT:Initialize()
 	self:SetNWString( "SetPizza", table.Random( randpizzas ) )
 end
 
-function ENT:AcceptInput( activator, caller )
+function ENT:AcceptInput( name, caller )
 	if caller.pizzacooldown and caller.pizzacooldown > CurTime() then return end
 	if !caller:IsPlayer() then return end
 	if caller:Team() == TEAM_COOK and GetGlobalString( "ActiveEvent" ) == "Food Delivery" then
@@ -61,8 +57,8 @@ function ENT:AcceptInput( activator, caller )
 			if v:GetClass() == "zpizmak_pizza" then
 				if v:GetPizzaType() == self:GetNWString( "SetPizza" ) then
 					v:Remove()
-					caller:ChatPrint( "Thanks. Here's your cash. ($2000)" )
-					caller:addMoney( 2000 )
+					caller:ChatPrint( "Thanks. Here's $1000 and a crafting blueprint." )
+					caller:addMoney( 1000 )
 					self:Remove()
 					FoodDeliveryEnd()
 					local randwep = table.Random( BLUEPRINT_CONFIG_TIER2 )
@@ -73,7 +69,6 @@ function ENT:AcceptInput( activator, caller )
 					e:SetEntName( randwep[1] )
 					e:SetRealName( randwep[2] )
 					e:SetUses( 3 )
-					DarkRP.notify( ply, 0, 6, "You have also been rewarded with a crafting blueprint." )
 				else
 					caller:ChatPrint( "Incorrect pizza type." )
 				end
@@ -94,7 +89,7 @@ if CLIENT then
 		local plyShootPos = LocalPlayer():GetShootPos()
 		if self:GetPos():DistToSqr( plyShootPos ) < 562500 then
 			local pos = self:GetPos()
-			pos.z = (pos.z + 15)
+			pos.z = pos.z + 15
 			local ang = self:GetAngles()
 			
 			surface.SetFont("Bebas40Font")
@@ -106,7 +101,7 @@ if CLIENT then
 			local textang = ang
 			
 			cam.Start3D2D(pos + ang:Right() * -30, ang, 0.2)
-				draw.WordBox(2, -tw *0.5 + 5, -180, title, "Bebas40Font", VOTING.Theme.ControlColor, color_white)
+				draw.WordBox(2, -tw *0.5 + 5, -180, title, "Bebas40Font", color_theme, color_white)
 			cam.End3D2D()
 		end
 	end

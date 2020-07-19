@@ -1,6 +1,6 @@
 
 local function PickRandomEvent()
-	local rand2 = math.random( 1, 8 )
+	local rand2 = math.random( 1, 9 )
 	if rand2 == 1 then
 		OverturnedTruck()
 	elseif rand2 == 2 then
@@ -15,8 +15,10 @@ local function PickRandomEvent()
 		RoadWork()
 	elseif rand2 == 7 then
 		Robbery()
-	else
+	elseif rand2 == 8 then
 		DrunkDriver()
+	else
+		BusPassenger()
 	end
 end
 
@@ -30,8 +32,15 @@ timer.Create( "EventLoop", 300, 0, function()
 end )
 
 local EventPos = {}
+local rockford = "rp_rockford_v2b"
+local southside = "rp_southside"
+local evocity = "rp_evocity2_v5p"
+local florida = "rp_florida_v2"
+local truenorth = "rp_truenorth_v1a"
+local newexton = "rp_newexton2_v4h"
+local map = game.GetMap()
 
-EventPos["rp_rockford_v2b"] = {
+EventPos[rockford] = {
 	Truck = { --Need 3 positions
 		Vector( -2511, -6511, 60 ),
 		Vector( -678, 5338, 580 ),
@@ -67,7 +76,7 @@ EventPos["rp_rockford_v2b"] = {
 	Robbery = Vector( -3526, -3217, 40 ) --Need 1 position
 }
 
-EventPos["rp_southside"] = {
+EventPos[southside] = {
 	Truck = {
 		Vector( 2310, 9275, 150 ),
 		Vector( -3233, 10219, 150 ),
@@ -103,7 +112,7 @@ EventPos["rp_southside"] = {
 	Robbery = Vector( -1029, 2484, -102 )
 }
 
-EventPos["rp_evocity2_v5p"] = {
+EventPos[evocity] = {
 	Truck = {
 		Vector( 5878, 12433, 100 ),
 		Vector( -1272, -569, 100 ),
@@ -139,7 +148,7 @@ EventPos["rp_evocity2_v5p"] = {
 	Robbery = Vector( 1552, -31, 150 )
 }
 
-EventPos["rp_florida_v2"] = {
+EventPos[florida] = {
 	Truck = {
 		Vector( 5682, -1344, 150 ),
 		Vector( -5071, 404, 150 ),
@@ -175,7 +184,7 @@ EventPos["rp_florida_v2"] = {
 	Robbery = Vector( 4734, -6663, 137 )
 }
 
-EventPos["rp_truenorth_v1a"] = {
+EventPos[truenorth] = {
 	Truck = {
 		Vector( 6294, 5792, 50 ),
 		Vector( 1861, -62, 50 ),
@@ -211,7 +220,7 @@ EventPos["rp_truenorth_v1a"] = {
 	Robbery = Vector( 6737, 2556, 20 )
 }
 
-EventPos["rp_newexton2_v4h"] = {
+EventPos[newexton] = {
 	Truck = {
 		Vector( -8727, 6911, 1070 ),
 		Vector( -4808, -9089, -570 ),
@@ -251,7 +260,7 @@ local function GetCurrentEvent()
     return GetGlobalString( "ActiveEvent" )
 end
 
-hook.Add( "PlayerSay", "CurEvent", function( ply, text )
+local function CurEvent( ply, text )
 	if text == "!currentevent" then
 		local event
 		if GetCurrentEvent() == "" then
@@ -262,11 +271,12 @@ hook.Add( "PlayerSay", "CurEvent", function( ply, text )
 		ply:ChatPrint( "Event that is currently active: "..event )
 		return ""
 	end
-end )
+end
+hook.Add( "PlayerSay", "CurEvent", CurEvent )
 
 local function RandTruck()
 	for k,v in pairs( EventPos ) do
-		if k == tostring( game.GetMap() ) then
+		if k == tostring( map ) then
 			return table.Random( v.Truck )
 		end
 	end
@@ -274,7 +284,7 @@ end
 
 local function RandShooter()
 	for k,v in pairs( EventPos ) do
-		if k == tostring( game.GetMap() ) then
+		if k == tostring( map ) then
 			return table.Random( v.Shooter )
 		end
 	end
@@ -282,7 +292,7 @@ end
 
 local function RandFire()
 	for k,v in pairs( EventPos ) do
-		if k == tostring( game.GetMap() ) then
+		if k == tostring( map ) then
 			return table.Random( v.Fire )
 		end
 	end
@@ -290,7 +300,7 @@ end
 
 local function RandFood()
 	for k,v in pairs( EventPos ) do
-		if k == tostring( game.GetMap() ) then
+		if k == tostring( map ) then
 			return table.Random( v.Food )
 		end
 	end
@@ -298,7 +308,7 @@ end
 
 local function RandRoad()
 	for k,v in pairs( EventPos ) do
-		if k == tostring( game.GetMap() ) then
+		if k == tostring( map ) then
 			return table.Random( v.Road )
 		end
 	end
@@ -361,7 +371,7 @@ function OverturnedTruckEnd()
 	for k,v in pairs( player.GetAll() ) do
 		if v:Team() == TEAM_TOWER then
 			v:addMoney( 600 )
-			DarkRP.notify( v, 0, 6, "You have been rewarded $600 for clearing the road of the overturned truck." )
+			DarkRP.notify( v, 0, 6, "You have been rewarded with $600 and a crafting blueprint for clearing the overturned truck." )
 			local randwep = table.Random( BLUEPRINT_CONFIG_TIER2 )
 			local e = ents.Create( "crafting_blueprint" )
 			e:SetPos( v:GetPos() + Vector( 0, 30, 0 ) )
@@ -370,7 +380,6 @@ function OverturnedTruckEnd()
 			e:SetEntName( randwep[1] )
 			e:SetRealName( randwep[2] )
 			e:SetUses( 3 )
-			DarkRP.notify( v, 0, 6, "You have also been rewarded with a crafting blueprint." )
 			for a,b in pairs( ents.FindInSphere( v:GetPos(), 200 ) ) do
 				if b:IsPlayer() and b:isCP() then
 					b:addMoney( 300 )
@@ -385,8 +394,8 @@ function OverturnedTruckEnd()
 	cooldown = CurTime() + 1
 end
 
-hook.Add( "Think", "OverturnedTruckThink", function()
-    if !GetGlobalBool( "EventActive" ) or GetGlobalString( "ActiveEvent" ) != "Overturned Truck" then return end
+local function OverturnedTruckThink()
+	if !GetGlobalBool( "EventActive" ) or GetGlobalString( "ActiveEvent" ) != "Overturned Truck" then return end
 	for k,v in pairs( ents.FindByClass( "prop_physics" ) ) do
 		if IsValid( v ) then
 			if !v.FlippedOver and math.Round( v:GetAngles().x ) == 0 then
@@ -408,7 +417,8 @@ hook.Add( "Think", "OverturnedTruckThink", function()
 			end
 	    end
 	end
-end )
+end
+hook.Add( "Think", "OverturnedTruckThink", OverturnedTruckThink )
 
 function ActiveShooter()
 	local numcops = team.NumPlayers( TEAM_POLICEBOSS ) + team.NumPlayers( TEAM_SWATBOSS ) + team.NumPlayers( TEAM_OFFICER ) + team.NumPlayers( TEAM_SWAT ) + team.NumPlayers( TEAM_FBI ) + team.NumPlayers( TEAM_UNDERCOVER )
@@ -431,7 +441,7 @@ end
 
 function ActiveShooterEnd( killer )
 	killer:addMoney( 600 )
-	DarkRP.notify( killer, 0, 6, "You have been rewarded $600 for stopping the threat." )
+	DarkRP.notify( killer, 0, 6, "You have been rewarded with $600 and a crafting blueprint for stopping the threat." )
 	local randwep = table.Random( BLUEPRINT_CONFIG_TIER2 )
 	local e = ents.Create( "crafting_blueprint" )
 	e:SetPos( killer:GetPos() + Vector( 0, 30, 0 ) )
@@ -440,7 +450,6 @@ function ActiveShooterEnd( killer )
 	e:SetEntName( randwep[1] )
 	e:SetRealName( randwep[2] )
 	e:SetUses( 3 )
-	DarkRP.notify( killer, 0, 6, "You have also been rewarded with a crafting blueprint." )
 	for k,v in pairs( player.GetAll() ) do
 		if v != killer then
 			DarkRP.notify( v, 0, 6, killer:Nick().." has killed the active shooter and ended the threat!" )
@@ -474,7 +483,7 @@ function HouseFireEnd()
     for k,v in pairs( player.GetAll() ) do
     	if v:IsEMS() then
     		v:addMoney( 300 )
-    		DarkRP.notify( v, 0, 6, "You have been rewarded $300 for helping extinguish a building fire." )
+    		DarkRP.notify( v, 0, 6, "You have been rewarded with $300 and a crafting blueprint for helping extinguish a building fire." )
 			local randwep = table.Random( BLUEPRINT_CONFIG_TIER2 )
 			local e = ents.Create( "crafting_blueprint" )
 			e:SetPos( v:GetPos() + Vector( 0, 30, 0 ) )
@@ -482,25 +491,26 @@ function HouseFireEnd()
 			e:SetEntName( randwep[1] )
 			e:SetRealName( randwep[2] )
 			e:SetUses( 3 )
-			DarkRP.notify( v, 0, 6, "You have also been rewarded with a crafting blueprint." )
     	end
 		DarkRP.notify( v, 0, 6, "The residential fire has been put out!" )
 	end
 	ResetEventStatus()
 end
 
-hook.Add( "vFireCreated", "FireEventCreate", function( fire, parent )
+local function FireEventCreate( fire, parent )
 	if GetGlobalBool( "EventActive" ) and GetGlobalString( "ActiveEvent" ) == "House Fire" and !FirePicked then
 		fire.IsEventFire = true
 		FirePicked = true
 	end
-end )
+end
+hook.Add( "vFireCreated", "FireEventCreate", FireEventCreate )
 
-hook.Add( "vFireRemoved", "FireEventRemove", function( fire, parent )
+local function FireEventRemove( fire, parent )
 	if fire.IsEventFire then
 		HouseFireEnd()
 	end
-end )
+end
+hook.Add( "vFireRemoved", "FireEventRemove", FireEventRemove )
 
 function MoneyTransfer()
 	if team.NumPlayers( TEAM_BANKER ) == 0 then return end
@@ -534,7 +544,9 @@ end
 
 function FoodDeliveryEnd()
 	ResetEventStatus()
-	DarkRP.notify( team.GetPlayers( TEAM_COOK ), 0, 6, "The hungry customer has been served!" )
+	for k,v in pairs( team.GetPlayers( TEAM_COOK ) ) do
+		DarkRP.notify( v, 0, 6, "The hungry customer has been served!" )
+	end
 end
 
 function RoadWork()
@@ -551,7 +563,7 @@ end
 function RoadWorkEnd( ply, ent )
 	local pos = ent:GetPos()
 	ply:addMoney( 400 )
-	DarkRP.notify( ply, 0, 6, "You have been rewarded $400 for removing a pothole." )
+	DarkRP.notify( ply, 0, 6, "You have been rewarded with $400 and a crafting blueprint for removing a pothole." )
 	local randwep = table.Random( BLUEPRINT_CONFIG_TIER2 )
 	local e = ents.Create( "crafting_blueprint" )
 	e:SetPos( pos + Vector( 0, 30, 0 ) )
@@ -559,7 +571,6 @@ function RoadWorkEnd( ply, ent )
 	e:SetEntName( randwep[1] )
 	e:SetRealName( randwep[2] )
 	e:SetUses( 3 )
-	DarkRP.notify( ply, 0, 6, "You have also been rewarded with a crafting blueprint." )
 	ResetEventStatus()
 end
 
@@ -583,7 +594,7 @@ function Robbery()
 		"weapon_pistol",
 		"weapon_shotgun"
 	}
-	local origin = EventPos[game.GetMap()].Robbery
+	local origin = EventPos[map].Robbery
 	for i=1, math.random( 2, 6 ) do
 		local shooter = ents.Create( "npc_citizen" )
 		shooter:SetPos( Vector( origin.x, origin.y + ( i * 30 ), origin.z ) )
@@ -616,6 +627,9 @@ function DrunkDriver()
 	RunConsoleCommand( "bot" )
 	local veh = list.Get( "Vehicles" )
 	local randveh, name = table.Random( veh )
+	while AM_Config_Blacklist[randveh.Model] do --Prevents blacklisted vehicles such as trailers from spawning
+		randveh, name = table.Random( veh )
+	end
 
 	timer.Simple( 1, function() --The server crashes without this timer, I guess the vehicle needs time to fully inititialize
 		local e = ents.Create( "prop_vehicle_jeep" )
@@ -641,6 +655,8 @@ function DrunkDriver()
 		end
 	end )
 	DarkRP.notifyAll( 0, 6, "A drunk driver has been reported to be in the area! Be on the lookout and report anything suspicious to police!" )
+	SetGlobalBool( "EventActive", true )
+	SetGlobalString( "ActiveEvent", "Drunk Driver" )
 end
 
 function EndDrunkDriver( bot, ply )
@@ -649,7 +665,7 @@ function EndDrunkDriver( bot, ply )
 		if v.DrunkVeh then v:Remove() end
 	end
 	ply:addMoney( 500 )
-	DarkRP.notify( ply, 0, 6, "You have been rewarded $500 for arresting the drunk driver." )
+	DarkRP.notify( ply, 0, 6, "You have been rewarded with $500 and a crafting blueprint for arresting the drunk driver." )
 	local randwep = table.Random( BLUEPRINT_CONFIG_TIER2 )
 	local e = ents.Create( "crafting_blueprint" )
 	e:SetPos( ply:GetPos() + Vector( 0, 30, 0 ) )
@@ -658,17 +674,105 @@ function EndDrunkDriver( bot, ply )
 	e:SetEntName( randwep[1] )
 	e:SetRealName( randwep[2] )
 	e:SetUses( 3 )
-	DarkRP.notify( ply, 0, 6, "You have also been rewarded with a crafting blueprint." )
 	DarkRP.notifyAll( 0, 6, "The drunk driver has been found and arrested by "..ply:Nick().."!" )
+	ResetEventStatus()
 end
 
-hook.Add( "OnHandcuffed", "DrunkDriverHandcuff", function( ply, bot, handcuffs )
+local function DrunkDriverHandcuff( ply, but, handcuffs )
 	if bot:IsBot() and bot.DrunkDriver then
 		EndDrunkDriver( bot, ply )
 	end
-end )
+end
+hook.Add( "OnHandcuffed", "DrunkDriverHandcuff", DrunkDriverHandcuff )
 
-hook.Add( "PlayerInitialSpawn", "ActiveShooterRelationship", function( ply )
+Stops = {
+	["City Hall"] = {
+		[rockford] = Vector( -4656, -6421, 8 ),
+		[southside] = Vector( 3978, 4452, -55 ),
+		[evocity] = Vector( -758, -1140, 76 ),
+		[florida] = Vector( 4128, -2294, 136 ),
+		[truenorth] = Vector( 5065, 4512, 8 ),
+		[newexton] = Vector( -4088, 829, 1536 )
+	},
+	["Hospital"] = {
+		[rockford] = Vector( -1165, -5850, 0 ),
+		[southside] = Vector( 7423, 4728, -60 ),
+		[evocity] = Vector( -2341, 1355, 76 ),
+		[florida] = Vector( 6702, 6, 128 ),
+		[truenorth] = Vector( 13247, 13676, 0 ),
+		[newexton] = Vector( 5681, 5813, 1024 )
+	},
+	["Bank"] = {
+		[rockford] = Vector( -2806, -2797, 8 ),
+		[southside] = Vector( -2171, 1969, -103 ),
+		[evocity] = Vector( 1945, -444, 76 ),
+		[florida] = Vector( 2869, -6658, 136 ),
+		[truenorth] = Vector( 6994, 3091, 8 ),
+		[newexton] = Vector( -8948, -929, 1536 )
+	},
+	["Car Dealer"] = {
+		[rockford] = Vector( -4094, -1208, 0 ),
+		[southside] = Vector( -7185, 739, -39 ),
+		[evocity] = Vector( 2918, -1599, 76 ),
+		[florida] = Vector( -1942, 5691, 128 ),
+		[truenorth] = Vector( 6823, 13505, 0 ),
+		[newexton] = Vector( -6594, -6189, 1008 )
+	}
+}
+
+function BusPassenger()
+	if team.NumPlayers( TEAM_BUS ) == 0 then return end
+	local e = ents.Create( "bus_passenger" )
+	e:SetPos( RandFood() )
+	e:Spawn()
+	for k,v in pairs( team.GetPlayers( TEAM_BUS ) ) do
+		DarkRP.notify( v, 0, 6, "A passenger needs picked up! Find them and take them to their destination!" )
+	end
+	SetGlobalBool( "EventActive", true )
+	SetGlobalString( "ActiveEvent", "Bus Passenger" )
+end
+
+function EndBusPassenger()
+	ResetEventStatus()
+	for k,v in pairs( team.GetPlayers( TEAM_BUS ) ) do
+		DarkRP.notify( v, 0, 6, "The passenger has been transported!" )
+	end
+end
+
+local function BusDriverChat( ply, text )
+	if text == "!busstop" then
+		if ply:Team() != TEAM_BUS then
+			DarkRP.notify( ply, 1, 6, "Only bus drivers can use this command." )
+			return
+		end
+		if !ply:InVehicle() or !ply:GetVehicle().HasPassenger then
+			DarkRP.notify( ply, 1, 6, "You must be in your bus with a passenger on board to use this command." )
+			return
+		end
+		local veh = ply:GetVehicle()
+		local stopname = veh.SetStop
+		local dist = ply:GetPos():DistToSqr( Stops[stopname][map] )
+		if dist <= 250000 then
+			ply:ChatPrint( "Thanks. Here's $500 and a crafting blueprint." )
+			ply:addMoney( 500 )
+			veh.HasPassenger = false
+			EndBusPassenger()
+			local randwep = table.Random( BLUEPRINT_CONFIG_TIER2 )
+			local e = ents.Create( "crafting_blueprint" )
+			e:SetPos( ply:GetPos() + Vector( 0, 0, 35 ) )
+			e:SetAngles( ply:GetAngles() + Angle( 0, 180, 0 ) )
+			e:Spawn()
+			e:SetEntName( randwep[1] )
+			e:SetRealName( randwep[2] )
+			e:SetUses( 3 )
+		else
+			DarkRP.notify( ply, 1, 6, "You are too far away from the "..stopname..". Move closer." )
+		end
+	end
+end
+hook.Add( "PlayerSay", "BusDriverChat", BusDriverChat )
+
+local function ActiveShooterRelationship( ply )
 	local event = GetGlobalString( "ActiveEvent" )
 	if GetGlobalBool( "EventActive" ) and ( event == "Active Shooter" or event == "Bank Robbery" ) then
 		for k,v in pairs( ents.FindByClass( "npc_citizen" ) ) do
@@ -677,9 +781,10 @@ hook.Add( "PlayerInitialSpawn", "ActiveShooterRelationship", function( ply )
 			end
 		end
 	end
-end )
+end
+hook.Add( "PlayerInitialSpawn", "ActiveShooterRelationship", ActiveShooterRelationship )
 
-hook.Add( "OnNPCKilled", "ShooterKilled", function( npc, attacker, inflictor )
+local function ShooterKilled( npc, attacker, inflictor )
 	if npc:GetClass() == "npc_citizen" then
 		if npc.IsEventNPC then
 			ActiveShooterEnd( attacker )
@@ -706,7 +811,7 @@ hook.Add( "OnNPCKilled", "ShooterKilled", function( npc, attacker, inflictor )
 			end
 			if attacker:IsPlayer() then
 				attacker:addMoney( 200 )
-				DarkRP.notify( attacker, 0, 6, "You have been rewarded $200 for killing a robber." )
+				DarkRP.notify( attacker, 0, 6, "You have been rewarded with $200 and a crafting blueprint for killing a robber." )
 				local randwep = table.Random( BLUEPRINT_CONFIG_TIER2 )
 				local e = ents.Create( "crafting_blueprint" )
 				e:SetPos( attacker:GetPos() + Vector( 0, 30, 0 ) )
@@ -715,7 +820,6 @@ hook.Add( "OnNPCKilled", "ShooterKilled", function( npc, attacker, inflictor )
 				e:SetEntName( randwep[1] )
 				e:SetRealName( randwep[2] )
 				e:SetUses( 3 )
-				DarkRP.notify( attacker, 0, 6, "You have also been rewarded with a crafting blueprint." )
 			end
 			RobberCount = RobberCount - 1
 			if RobberCount == 0 then
@@ -723,6 +827,7 @@ hook.Add( "OnNPCKilled", "ShooterKilled", function( npc, attacker, inflictor )
 			end
 		end
 	end
-end )
+end
+hook.Add( "OnNPCKilled", "ShooterKilled", ShooterKilled )
 
 MsgC( color_red, "\n[CityRP] Loaded server events.\n" )
