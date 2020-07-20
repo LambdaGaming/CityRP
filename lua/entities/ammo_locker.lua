@@ -43,12 +43,12 @@ if SERVER then
 		local getwep = ply:GetActiveWeapon()
 		local primaryammo = getwep:GetPrimaryAmmoType()
 		local primaryname = game.GetAmmoName( primaryammo )
-		local name = AmmoTypes[primaryname][1]
-		local price = AmmoTypes[primaryname][2]
-		if !AmmoTypes[primaryname] then
+		if !AmmoTypes[primaryname] or !AmmoTypes[primaryname][1] then
 			DarkRP.notify( ply, 1, 6, "Ammo is not available for this weapon." )
 			return
 		end
+		local name = AmmoTypes[primaryname][1]
+		local price = AmmoTypes[primaryname][2]
 		if !ply:canAfford( price ) then
 			DarkRP.notify( ply, 1, 6, "You can't afford ammo for this weapon." )
 			return

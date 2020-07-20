@@ -50,6 +50,7 @@ if SERVER then
 	end
 
 	local function CreateMarkers( ply, inflictor, attacker )
+		if !attacker:IsPlayer() then return end
 		local pos
 		local id = attacker:UniqueID()
 		timer.Create( "KillerMarker"..id, 30, 1, function()

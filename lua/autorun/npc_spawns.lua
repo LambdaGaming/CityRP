@@ -28,7 +28,7 @@ if SERVER then
 				contraband:ApplyType( 2 )
 
 				local fire = ents.Create( "npc_item" )
-				fire:SetPos( Vector( -5257, -3349, 8 ) )
+				fire:SetPos( Vector( -5808, -3152, 8 ) )
 				fire:SetAngles( Angle( 0, 180, 0 ) )
 				fire:Spawn()
 				fire:ApplyType( 3 )
@@ -41,13 +41,13 @@ if SERVER then
 
 				local ambulance = ents.Create( "npc_item" )
 				ambulance:SetPos( Vector( -69, -5779, 64 ) )
-				ambulance:SetAngles( angle_zero )
+				ambulance:SetAngles( Angle( 0, 180, 0 ) )
 				ambulance:Spawn()
 				ambulance:ApplyType( 5 )
 
 				local health = ents.Create( "npc_item" )
 				health:SetPos( Vector( -67, -5909, 64 ) )
-				health:SetAngles( angle_zero )
+				health:SetAngles( Angle( 0, 180, 0 ) )
 				health:Spawn()
 				health:ApplyType( 6 )
 
@@ -392,6 +392,6 @@ if SERVER then
 				truck:ApplyType( 8 )
 			end
 		end )
+		MsgC( color_orange, "[CityRP] Spawned NPCs." )
 	end )
-	MsgC( color_orange, "[CityRP] Spawned NPCs." )
 end

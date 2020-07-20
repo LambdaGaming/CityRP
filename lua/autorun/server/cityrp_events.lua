@@ -678,7 +678,7 @@ function EndDrunkDriver( bot, ply )
 	ResetEventStatus()
 end
 
-local function DrunkDriverHandcuff( ply, but, handcuffs )
+local function DrunkDriverHandcuff( ply, bot, handcuffs )
 	if bot:IsBot() and bot.DrunkDriver then
 		EndDrunkDriver( bot, ply )
 	end
