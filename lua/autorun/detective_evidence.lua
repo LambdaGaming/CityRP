@@ -54,6 +54,7 @@ if SERVER then
 		local pos
 		local id = attacker:UniqueID()
 		timer.Create( "KillerMarker"..id, 30, 1, function()
+			if !IsValid( attacker ) then return end
 			pos = attacker:GetPos()
 			DetectiveMarkers[id] = {}
 			table.insert( DetectiveMarkers[id], { pos, false } )
@@ -70,6 +71,7 @@ if SERVER then
 		local pos
 		local id = ply:UniqueID()
 		if timer.Exists( "KillerMarker"..id ) then
+			if !IsValid( ply ) then return end
 			pos = ply:GetPos()
 			DetectiveMarkers[id] = {}
 			table.insert( DetectiveMarkers[id], { pos, true } )
