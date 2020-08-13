@@ -32,10 +32,10 @@ end
 
 function ENT:Use( caller, activator )
 	if SERVER then
-		if caller:Team() == TEAM_UTILITY then
+		if caller:Team() == TEAM_TOWER then
 			DarkRP.notify( caller, 0, 6, "Use a pickaxe on this pothole to even out the road surface." )
 		else
-			DarkRP.notify( caller, 0, 6, "Contact a utility worker to have them repair this pothole." )
+			DarkRP.notify( caller, 0, 6, "Contact a mechanic to have them repair this pothole." )
 		end
 	end
 end
@@ -54,7 +54,7 @@ function ENT:OnTakeDamage( damage )
 	local wep = ply:GetActiveWeapon():GetClass()
 	local pos = self:GetPos()
 	local hp = self:Health()
-	if ply:IsPlayer() and ply:Team() == TEAM_UTILITY and wep == "mgs_pickaxe" then
+	if ply:IsPlayer() and ply:Team() == TEAM_TOWER and wep == "mgs_pickaxe" then
 		local randinterval = math.random( 1, 5 )
 		self:SetHealth( hp - randinterval )
 	end

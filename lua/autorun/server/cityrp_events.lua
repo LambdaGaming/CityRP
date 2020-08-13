@@ -550,12 +550,12 @@ function FoodDeliveryEnd()
 end
 
 function RoadWork()
-	if team.NumPlayers( TEAM_UTILITY ) == 0 then return end
+	if team.NumPlayers( TEAM_TOWER ) == 0 then return end
 	if #ents.FindByClass( "pot_hole" ) >= 1 then return end
 	local e = ents.Create( "pot_hole" )
 	e:SetPos( RandRoad() + Vector( 0, 0, 50 ) )
 	e:Spawn()
-	DarkRP.notify( team.GetPlayers( TEAM_UTILITY ), 0, 6, "Citizens have reported a large pothole in the area. Find and repair it." )
+	DarkRP.notify( team.GetPlayers( TEAM_TOWER ), 0, 6, "Citizens have reported a large pothole in the area. Find and repair it." )
 	SetGlobalBool( "EventActive", true )
 	SetGlobalString( "ActiveEvent", "Pot Hole" )
 end

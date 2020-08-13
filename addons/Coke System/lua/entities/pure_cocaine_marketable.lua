@@ -78,7 +78,6 @@ local civi = {
 	[TEAM_FIRE] = true,
 	[TEAM_DETECTIVE] = true,
 	[TEAM_COOK] = true,
-	[TEAM_UTILITY] = true,
 	[TEAM_HITMAN] = true,
 	[TEAM_BUS] = true
 }
