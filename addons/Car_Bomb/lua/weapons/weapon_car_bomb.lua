@@ -23,6 +23,22 @@ SWEP.Secondary.ClipSize = -1
 SWEP.Secondary.DefaultClip = -1
 SWEP.Secondary.Automatic = false
 
+SWEP.SelectedType = 1
+
+local BombType = {
+	[1] = "Instant detonation as soon as the engine starts.",
+	[2] = "Detonation 1 minute after engine starts.",
+	[3] = "Detonation 5 minutes after engine starts.",
+	[4] = "Detonation when the vehicle reaches 20 MPH.",
+	[5] = "Detonation when the vehicle reaches 50 MPH."
+}
+
+function SWEP:Deploy()
+	if IsFirstTimePredicted() and SERVER then
+		self.Owner:ChatPrint( "Bomb Type: "..BombType[self.SelectedType] )
+	end
+end
+
 function SWEP:PrimaryAttack()
 	if !IsFirstTimePredicted() or CLIENT then return end
     local tr = self.Owner:GetEyeTrace().Entity
@@ -34,6 +50,7 @@ function SWEP:PrimaryAttack()
 			return
 		end
 		tr.HasCarBomb = true
+		tr.CarBombType = self.SelectedType
 		self.Owner:EmitSound( "physics/metal/metal_box_impact_soft"..math.random( 1, 3 )..".wav" )
 		DarkRP.notify( self.Owner, 0, 6, "Car bomb successfully planted." )
 		self:Remove()
@@ -41,4 +58,14 @@ function SWEP:PrimaryAttack()
 		DarkRP.notify( self.Owner, 1, 6, "You must be looking at a vehicle to plant the bomb." )
 	end
     self:SetNextPrimaryFire( CurTime() + 0.5 )
+end
+
+function SWEP:SecondaryAttack()
+	if !IsFirstTimePredicted() or CLIENT then return end
+	if self.SelectedType == 5 then
+		self.SelectedType = 1
+	else
+		self.SelectedType = self.SelectedType + 1
+	end
+	self.Owner:ChatPrint( "Bomb Type: "..BombType[self.SelectedType] )
 end
