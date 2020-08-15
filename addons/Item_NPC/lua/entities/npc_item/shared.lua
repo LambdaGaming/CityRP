@@ -95,6 +95,7 @@ local function SpawnVehicle( ply, class, model, script, type, noenter )
 		e:Activate()
 		e.VehicleTable = list.Get( "Vehicles" )[class]
 		e:Fire( "HandBrakeOff", "", 0.01 )
+		e:SetNWEntity( "VehicleOwner", ply )
 		if !noenter then
 			ply:EnterVehicle( e )
 		end
