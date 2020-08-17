@@ -1325,19 +1325,19 @@ ItemNPC["ford_crownvic_und"] = {
 	end
 }
 
-ItemNPC["ford_f150"] = {
-	Name = "2015 Ford F150 Police",
+ItemNPC["ram_3500"] = {
+	Name = "Dodge Ram 3500 Police",
 	Description = "Police pickup truck.",
-	Model = "models/stcars/15f150_cop.mdl",
+	Model = "models/tdmcars/dod_ram_3500.mdl",
 	Price = 0,
 	Type = 4,
 	SpawnCheck = function( ply, self )
 		return PoliceBanCheck( ply )
 	end,
 	SpawnFunction = function( ply, self )
-		local class = "2015 Ford F150 Police"
-		local model = "models/stcars/15f150_cop.mdl"
-		local script = "scripts/vehicles/stcars/15f150_cop.txt"
+		local class = "Dodge Ram 3500 Police"
+		local model = "models/tdmcars/dod_ram_3500.mdl"
+		local script = "scripts/vehicles/TDMCars/dod_ram_3500.txt"
 		SpawnVehicle( ply, class, model, script, 1 )
 	end
 }
