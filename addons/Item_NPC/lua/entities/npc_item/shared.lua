@@ -86,9 +86,13 @@ end
 
 local function SpawnVehicle( ply, class, model, script, type, noenter )
 	if SERVER then
+		local realpos = VehicleSpawns[type][map][1]
+		if model == "models/tdmcars/dod_ram_3500.mdl" then --Fix for this truck since it spawns below the map for some reason
+			realpos = realpos + Vector( 0, 0, 50 )
+		end
 		local e = ents.Create( "prop_vehicle_jeep" )
 		e:SetKeyValue( "vehiclescript", script )
-		e:SetPos( VehicleSpawns[type][map][1] )
+		e:SetPos( realpos )
 		e:SetAngles( VehicleSpawns[type][map][2] )
 		e:SetModel( model )
 		e:Spawn()
