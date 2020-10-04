@@ -23,7 +23,7 @@ DrawItems = function( ent )
 	backbutton:SetPos( 350, 3 )
 	backbutton:SetSize( 50, 20 )
 	backbutton.Paint = function( self, w, h )
-		draw.RoundedBox( 0, 0, 0, w, h, CRAFT_CONFIG_BUTTON_COLOR )
+		draw.RoundedBox( 10, 0, 0, w, h, CRAFT_CONFIG_BUTTON_COLOR )
 	end
 	backbutton.DoClick = function()
 		mainframe:Close()
@@ -86,7 +86,7 @@ DrawRecipes = function( ent )
 	backbutton:SetPos( 350, 3 )
 	backbutton:SetSize( 50, 20 )
 	backbutton.Paint = function( self, w, h )
-		draw.RoundedBox( 0, 0, 0, w, h, CRAFT_CONFIG_BUTTON_COLOR )
+		draw.RoundedBox( 10, 0, 0, w, h, CRAFT_CONFIG_BUTTON_COLOR )
 	end
 	backbutton.DoClick = function()
 		mainframe:Close()
@@ -96,16 +96,23 @@ DrawRecipes = function( ent )
 	local mainframescroll = vgui.Create( "DScrollPanel", mainframe )
 	mainframescroll:Dock( FILL )
 	for a,b in ipairs( CraftingCategory ) do
-		local categorybutton = vgui.Create( "DButton", mainframescroll )
-		categorybutton:SetSize( nil, 35 ) --X is ignored since it's docked to the frame already
-		categorybutton:SetText( b.Name )
-		categorybutton:SetFont( "Trebuchet24" )
-		categorybutton:SetTextColor( CRAFT_CONFIG_BUTTON_TEXT_COLOR )
+		local mainlist = vgui.Create( "DPanelList" )
+		mainlist:SetSpacing( 5 )
+		mainlist:EnableHorizontal( false )
+
+		local categorybutton = vgui.Create( "DCollapsibleCategory", mainframescroll )
+		categorybutton:SetLabel( b.Name )
 		categorybutton:Dock( TOP )
 		categorybutton:DockMargin( 0, 15, 0, 5 )
+		categorybutton:DockPadding( 0, 0, 0, 5 )
+		categorybutton:SetContents( mainlist )
 		categorybutton.Paint = function( self, w, h )
-			draw.RoundedBox( 0, 0, 0, w, h, b.Color )
+			draw.RoundedBox( 8, 0, 0, w, h, b.Color )
 		end
+		if b.StartCollapsed then
+			categorybutton:SetExpanded( false )
+		end
+		categorybutton.NumEntries = 0
 		for k,v in pairs( CraftingTable ) do --Looks over all recipes in the main CraftingTable table
 			if v.Category != b.Name then --Puts items into their respective categories
 				continue
@@ -124,8 +131,6 @@ DrawRecipes = function( ent )
 			mainbuttons:SetText( v.Name )
 			mainbuttons:SetTextColor( CRAFT_CONFIG_BUTTON_TEXT_COLOR )
 			mainbuttons:SetTextColor( changedtextcolor )
-			mainbuttons:Dock( TOP )
-			mainbuttons:DockMargin( 0, 0, 0, 5 )
 			mainbuttons.Paint = function( self, w, h )
 				draw.RoundedBox( 0, 0, 0, w, h, CRAFT_CONFIG_BUTTON_COLOR )
 			end
@@ -137,6 +142,11 @@ DrawRecipes = function( ent )
 				mainframe:Close()
 				DrawRecipes( ent ) --Refreshes the button so it shows the currently selected item
 			end
+			mainlist:AddItem( mainbuttons )
+			categorybutton.NumEntries = categorybutton.NumEntries + 1
+		end
+		if categorybutton.NumEntries == 0 then
+			categorybutton:Remove() --Remove the category if no recipes are using it
 		end
 	end
 	local selectedbutton = vgui.Create( "DButton", mainframe )
@@ -149,7 +159,7 @@ DrawRecipes = function( ent )
 	selectedbutton:SetPos( 5, 465 )
 	selectedbutton:SetSize( 245, 30 )
 	selectedbutton.Paint = function( self, w, h )
-		draw.RoundedBox( 0, 0, 0, w, h, CRAFT_CONFIG_BUTTON_COLOR )
+		draw.RoundedBox( 10, 0, 0, w, h, CRAFT_CONFIG_BUTTON_COLOR )
 	end
 	local craftbutton = vgui.Create( "DButton", mainframe )
 	craftbutton:SetText( "Craft Selected Item" )
@@ -158,7 +168,7 @@ DrawRecipes = function( ent )
 	craftbutton:DockMargin( 250, 0, 0, 0 )
 	craftbutton:SetSize( 245, 30 )
 	craftbutton.Paint = function( self, w, h )
-		draw.RoundedBox( 0, 0, 0, w, h, CRAFT_CONFIG_BUTTON_COLOR )
+		draw.RoundedBox( 10, 0, 0, w, h, CRAFT_CONFIG_BUTTON_COLOR )
 	end
 	craftbutton.DoClick = function()
 		if !ply.SelectedCraftingItem then
@@ -193,7 +203,7 @@ DrawMainMenu = function( ent )
 	recipesbutton:SetSize( 250, 30 )
 	recipesbutton:CenterHorizontal()
 	recipesbutton.Paint = function( self, w, h )
-		draw.RoundedBox( 0, 0, 0, w, h, CRAFT_CONFIG_BUTTON_COLOR )
+		draw.RoundedBox( 10, 0, 0, w, h, CRAFT_CONFIG_BUTTON_COLOR )
 	end
 	recipesbutton.DoClick = function()
 		DrawRecipes( ent )
@@ -207,7 +217,7 @@ DrawMainMenu = function( ent )
 	itemsbutton:SetSize( 250, 30 )
 	itemsbutton:CenterHorizontal()
 	itemsbutton.Paint = function( self, w, h )
-		draw.RoundedBox( 0, 0, 0, w, h, CRAFT_CONFIG_BUTTON_COLOR )
+		draw.RoundedBox( 10, 0, 0, w, h, CRAFT_CONFIG_BUTTON_COLOR )
 	end
 	itemsbutton.DoClick = function()
 		DrawItems( ent )

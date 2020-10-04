@@ -9,6 +9,7 @@ ENT.Category = "Crafting Table"
 CraftingTable = {}
 CraftingCategory = {}
 CraftingIngredient = {}
+local COLOR_DEFAULT = Color( 49, 53, 61, 255 )
 
 --Template Ingredient
 --[[
@@ -37,53 +38,54 @@ CraftingIngredient["dronesrewrite_spy"] = {
 --[[
 	CraftingCategory[1] = {
 		Name = "Pistols",
-		Color = Color( 49, 53, 61, 255 )
+		Color = COLOR_DEFAULT,
+		StartCollapsed = false
 	}
 ]]
 
 CraftingCategory[1] = {
 	Name = "Pistols",
-	Color = Color( 49, 53, 61, 255 )
+	Color = COLOR_DEFAULT
 }
 
 CraftingCategory[2] = {
 	Name = "SMGs",
-	Color = Color( 49, 53, 61, 255 )
+	Color = COLOR_DEFAULT
 }
 
 CraftingCategory[3] = {
 	Name = "Rifles",
-	Color = Color( 49, 53, 61, 255 )
+	Color = COLOR_DEFAULT
 }
 
 CraftingCategory[4] = {
 	Name = "Shotguns",
-	Color = Color( 49, 53, 61, 255 )
+	Color = COLOR_DEFAULT
 }
 
 CraftingCategory[5] = {
 	Name = "Explosives",
-	Color = Color( 49, 53, 61, 255 )
+	Color = COLOR_DEFAULT
 }
 
 CraftingCategory[6] = {
 	Name = "Crafting Ingredients",
-	Color = Color( 49, 53, 61, 255 )
+	Color = COLOR_DEFAULT
 }
 
 CraftingCategory[7] = {
 	Name = "Tools",
-	Color = Color( 49, 53, 61, 255 )
+	Color = COLOR_DEFAULT
 }
 
 CraftingCategory[8] = {
 	Name = "Ammo & Upgrades",
-	Color = Color( 49, 53, 61, 255 )
+	Color = COLOR_DEFAULT
 }
 
 CraftingCategory[9] = {
 	Name = "Other",
-	Color = Color( 49, 53, 61, 255 )
+	Color = COLOR_DEFAULT
 }
 
 --Template Item
