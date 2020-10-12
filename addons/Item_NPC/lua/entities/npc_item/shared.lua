@@ -176,7 +176,7 @@ ItemNPCType[4] = {
 
 ItemNPCType[5] = {
 	Name = "Ambulance NPC",
-	Model = "models/taggart/police02/male_05.mdl",
+	Model = "models/player/magnusson.mdl",
 	MenuColor = Color( 49, 53, 61, 200 ),
 	MenuTextColor = color_white,
 	ButtonColor = Color( 230, 93, 80, 255 ),

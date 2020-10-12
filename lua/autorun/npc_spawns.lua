@@ -1,11 +1,14 @@
 
 if SERVER then
 	hook.Add( "InitPostEntity", "LoadNPCsCityRP", function()
+		local angle_ninety = Angle( 0, 90, 0 )
+		local angle_negninety = Angle( 0, -90, 0 )
+		local angle_oneeighty = Angle( 0, 180, 0 )
 		timer.Simple( 10, function()
 			if game.GetMap() == "rp_rockford_v2b" then
 				local drug = ents.Create( "rp_dealer" )
 				drug:SetPos( Vector( -14461, 2342, 392 ) )
-				drug:SetAngles( Angle( 0, -90, 0 ) )
+				drug:SetAngles( angle_negninety )
 				drug:SetModel( "models/player/group03/male_08.mdl" )
 				drug:Spawn()
 
@@ -17,37 +20,37 @@ if SERVER then
 
 				local shop = ents.Create( "npc_item" )
 				shop:SetPos( Vector( 1613, 6095, 574 ) )
-				shop:SetAngles( Angle( 0, -90, 0 ) )
+				shop:SetAngles( angle_negninety )
 				shop:Spawn()
 				shop:ApplyType( 1 )
 
 				local contraband = ents.Create( "npc_item" )
 				contraband:SetPos( Vector( -613, 6085, 536 ) )
-				contraband:SetAngles( Angle( 0, -90, 0 ) )
+				contraband:SetAngles( angle_negninety )
 				contraband:Spawn()
 				contraband:ApplyType( 2 )
 
 				local fire = ents.Create( "npc_item" )
 				fire:SetPos( Vector( -5808, -3152, 8 ) )
-				fire:SetAngles( Angle( 0, 180, 0 ) )
+				fire:SetAngles( angle_oneeighty )
 				fire:Spawn()
 				fire:ApplyType( 3 )
 
 				local gov = ents.Create( "npc_item" )
 				gov:SetPos( Vector( -8781, -5573, 8 ) )
-				gov:SetAngles( Angle( 0, -90, 0 ) )
+				gov:SetAngles( angle_negninety )
 				gov:Spawn()
 				gov:ApplyType( 4 )
 
 				local ambulance = ents.Create( "npc_item" )
 				ambulance:SetPos( Vector( -69, -5779, 64 ) )
-				ambulance:SetAngles( Angle( 0, 180, 0 ) )
+				ambulance:SetAngles( angle_oneeighty )
 				ambulance:Spawn()
 				ambulance:ApplyType( 5 )
 
 				local health = ents.Create( "npc_item" )
 				health:SetPos( Vector( -67, -5909, 64 ) )
-				health:SetAngles( Angle( 0, 180, 0 ) )
+				health:SetAngles( angle_oneeighty )
 				health:Spawn()
 				health:ApplyType( 6 )
 
@@ -59,9 +62,15 @@ if SERVER then
 
 				local truck = ents.Create( "npc_item" )
 				truck:SetPos( Vector( -1436, 3912, 552 ) )
-				truck:SetAngles( Angle( 0, 90, 0 ) )
+				truck:SetAngles( angle_ninety )
 				truck:Spawn()
 				truck:ApplyType( 8 )
+
+				local deposit = ents.Create( "deposit_box" )
+				deposit:SetPos( Vector( -3613, -3575, 68 ) )
+				deposit:SetAngles( angle_ninety )
+				deposit:Spawn()
+				deposit:SpawnExtraBoxes()
 			end
 
 			if game.GetMap() == "rp_southside" then
@@ -73,13 +82,13 @@ if SERVER then
 
 				local bank = ents.Create("banker_npc")
 				bank:SetPos( Vector( -13976, -10344, -175 ) )
-				bank:SetAngles( Angle( 0, -90, 0 ) )
+				bank:SetAngles( angle_negninety )
 				bank:SetModel( "models/player/group01/male_02.mdl" )
 				bank:Spawn()
 
 				local shop = ents.Create( "npc_item" )
 				shop:SetPos( Vector( -5911, 1437, -22 ) )
-				shop:SetAngles( Angle( 0, -90, 0 ) )
+				shop:SetAngles( angle_negninety )
 				shop:Spawn()
 				shop:ApplyType( 1 )
 
@@ -91,7 +100,7 @@ if SERVER then
 
 				local contraband = ents.Create( "npc_item" )
 				contraband:SetPos( Vector( -9452, 1698, 0 ) )
-				contraband:SetAngles( Angle( 0, 90, 0 ) )
+				contraband:SetAngles( angle_ninety )
 				contraband:Spawn()
 				contraband:ApplyType( 2 )
 
@@ -103,19 +112,19 @@ if SERVER then
 
 				local gov = ents.Create( "npc_item" )
 				gov:SetPos( Vector( 7883, 8052, 200 ) )
-				gov:SetAngles( Angle( 0, -90, 0 ) )
+				gov:SetAngles( angle_negninety )
 				gov:Spawn()
 				gov:ApplyType( 4 )
 
 				local ambulance = ents.Create( "npc_item" )
 				ambulance:SetPos( Vector( 7417, 5420, -55 ) )
-				ambulance:SetAngles( Angle( 0, -90, 0 ) )
+				ambulance:SetAngles( angle_negninety )
 				ambulance:Spawn()
 				ambulance:ApplyType( 5 )
 
 				local health = ents.Create( "npc_item" )
 				health:SetPos( Vector( 7518, 5420, -55 ) )
-				health:SetAngles( Angle( 0, -90, 0 ) )
+				health:SetAngles( angle_negninety )
 				health:Spawn()
 				health:ApplyType( 6 )
 
@@ -130,6 +139,12 @@ if SERVER then
 				truck:SetAngles( angle_zero )
 				truck:Spawn()
 				truck:ApplyType( 8 )
+
+				local deposit = ents.Create( "deposit_box" )
+				deposit:SetPos( Vector( -745, 2968, -42 ) )
+				deposit:SetAngles( angle_oneeighty )
+				deposit:Spawn()
+				deposit:SpawnExtraBoxes()
 			end
 
 			if game.GetMap() == "rp_evocity2_v5p" then
@@ -147,7 +162,7 @@ if SERVER then
 
 				local shop = ents.Create( "npc_item" )
 				shop:SetPos( Vector( 8197, 6212, 70 ) )
-				shop:SetAngles( Angle( 0, 90, 0 ) )
+				shop:SetAngles( angle_ninety )
 				shop:Spawn()
 				shop:ApplyType( 1 )
 
@@ -165,7 +180,7 @@ if SERVER then
 
 				local gov = ents.Create( "npc_item" )
 				gov:SetPos( Vector( -242, -1888, 76 ) )
-				gov:SetAngles( Angle( 0, 180, 0 ) )
+				gov:SetAngles( angle_oneeighty )
 				gov:Spawn()
 				gov:ApplyType( 4 )
 
@@ -183,15 +198,21 @@ if SERVER then
 
 				local tow = ents.Create( "npc_item" )
 				tow:SetPos( Vector( -3385, 3354, 76 ) )
-				tow:SetAngles( Angle( 0, -90, 0 ) )
+				tow:SetAngles( angle_negninety )
 				tow:Spawn()
 				tow:ApplyType( 7 )
 
 				local truck = ents.Create( "npc_item" )
 				truck:SetPos( Vector( 7475, 3689, -1791 ) )
-				truck:SetAngles( Angle( 0, -90, 0 ) )
+				truck:SetAngles( angle_negninety )
 				truck:Spawn()
 				truck:ApplyType( 8 )
+
+				local deposit = ents.Create( "deposit_box" )
+				deposit:SetPos( Vector( 1310, 304, 184 ) )
+				deposit:SetAngles( angle_negninety )
+				deposit:Spawn()
+				deposit:SpawnExtraBoxes()
 			end
 
 			if game.GetMap() == "rp_florida_v2" then
@@ -203,13 +224,13 @@ if SERVER then
 
 				local bank = ents.Create("banker_npc")
 				bank:SetPos( Vector( 12525, 5561, 135 ) )
-				bank:SetAngles( Angle( 0, 180, 0 ) )
+				bank:SetAngles( angle_oneeighty )
 				bank:SetModel( "models/player/group01/male_02.mdl" )
 				bank:Spawn()
 
 				local shop = ents.Create( "npc_item" )
 				shop:SetPos( Vector( 7812, -4510, 136 ) )
-				shop:SetAngles( Angle( 0, -90, 0 ) )
+				shop:SetAngles( angle_negninety )
 				shop:Spawn()
 				shop:ApplyType( 1 )
 
@@ -221,13 +242,13 @@ if SERVER then
 
 				local fire = ents.Create( "npc_item" )
 				fire:SetPos( Vector( 6604, -4522, 136 ) )
-				fire:SetAngles( Angle( 0, 90, 0 ) )
+				fire:SetAngles( angle_ninety )
 				fire:Spawn()
 				fire:ApplyType( 3 )
 
 				local gov = ents.Create( "npc_item" )
 				gov:SetPos( Vector( 6464, -2658, 136 ) )
-				gov:SetAngles( Angle( 0, 180, 0 ) )
+				gov:SetAngles( angle_oneeighty )
 				gov:Spawn()
 				gov:ApplyType( 4 )
 
@@ -254,12 +275,18 @@ if SERVER then
 				truck:SetAngles( angle_zero )
 				truck:Spawn()
 				truck:ApplyType( 8 )
+
+				local deposit = ents.Create( "deposit_box" )
+				deposit:SetPos( Vector( 4801, -6432, 192 ) )
+				deposit:SetAngles( angle_negninety )
+				deposit:Spawn()
+				deposit:SpawnExtraBoxes()
 			end
 
 			if game.GetMap() == "rp_truenorth_v1a" then
 				local drug = ents.Create( "rp_dealer" )
 				drug:SetPos( Vector( 10563, 12505, 13 ) )
-				drug:SetAngles( Angle( 0, 90, 0 ) )
+				drug:SetAngles( angle_ninety )
 				drug:SetModel( "models/player/group03/male_08.mdl" )
 				drug:Spawn()
 
@@ -271,25 +298,25 @@ if SERVER then
 
 				local shop = ents.Create( "npc_item" )
 				shop:SetPos( Vector( 15073, 9818, 8 ) )
-				shop:SetAngles( Angle( 0, 90, 0 ) )
+				shop:SetAngles( angle_ninety )
 				shop:Spawn()
 				shop:ApplyType( 1 )
 
 				local contraband = ents.Create( "npc_item" )
 				contraband:SetPos( Vector( 11848, 1789, -255 ) )
-				contraband:SetAngles( Angle( 0, -90, 0 ) )
+				contraband:SetAngles( angle_negninety )
 				contraband:Spawn()
 				contraband:ApplyType( 2 )
 
 				local fire = ents.Create( "npc_item" )
 				fire:SetPos( Vector( 13135, 11426, 8 ) )
-				fire:SetAngles( Angle( 0, 90, 0 ) )
+				fire:SetAngles( angle_ninety )
 				fire:Spawn()
 				fire:ApplyType( 3 )
 
 				local gov = ents.Create( "npc_item" )
 				gov:SetPos( Vector( 2294, 3243, 8 ) )
-				gov:SetAngles( Angle( 0, 90, 0 ) )
+				gov:SetAngles( angle_ninety )
 				gov:Spawn()
 				gov:ApplyType( 4 )
 
@@ -307,7 +334,7 @@ if SERVER then
 
 				local tow = ents.Create( "npc_item" )
 				tow:SetPos( Vector( 9660, 13737, 0 ) )
-				tow:SetAngles( Angle( 0, 180, 0 ) )
+				tow:SetAngles( angle_oneeighty )
 				tow:Spawn()
 				tow:ApplyType( 7 )
 
@@ -316,6 +343,12 @@ if SERVER then
 				truck:SetAngles( angle_zero )
 				truck:Spawn()
 				truck:ApplyType( 8 )
+
+				local deposit = ents.Create( "deposit_box" )
+				deposit:SetPos( Vector( 6485, 2800, 50 ) )
+				deposit:SetAngles( angle_negninety )
+				deposit:Spawn()
+				deposit:SpawnExtraBoxes()
 			end
 
 			if game.GetMap() == "rp_newexton2_v4h" then
@@ -327,7 +360,7 @@ if SERVER then
 
 				local bank = ents.Create("banker_npc")
 				bank:SetPos(Vector( -4215, -11715, -512 ) )
-				bank:SetAngles( Angle( 0, 180, 0 ) )
+				bank:SetAngles( angle_oneeighty )
 				bank:SetModel( "models/player/group01/male_02.mdl" )
 				bank:Spawn()
 
@@ -339,25 +372,25 @@ if SERVER then
 
 				local shop2 = ents.Create( "npc_item" )
 				shop2:SetPos( Vector( -5792, -9613, -511 ) )
-				shop2:SetAngles( Angle( 0, -90, 0 ) )
+				shop2:SetAngles( angle_negninety )
 				shop2:Spawn()
 				shop2:ApplyType( 1 )
 
 				local shop3 = ents.Create( "npc_item" )
 				shop3:SetPos( Vector( -121, -10681, 1024 ) )
-				shop3:SetAngles( Angle( 0, 90, 0 ) )
+				shop3:SetAngles( angle_ninety )
 				shop3:Spawn()
 				shop3:ApplyType( 1 )
 
 				local contraband = ents.Create( "npc_item" )
 				contraband:SetPos( Vector( -6336, 985, 1536 ) )
-				contraband:SetAngles( Angle( 0, -90, 0 ) )
+				contraband:SetAngles( angle_negninety )
 				contraband:Spawn()
 				contraband:ApplyType( 2 )
 
 				local fire = ents.Create( "npc_item" )
 				fire:SetPos( Vector( -127, -7431, 1024 ) )
-				fire:SetAngles( Angle( 0, 180, 0 ) )
+				fire:SetAngles( angle_oneeighty )
 				fire:Spawn()
 				fire:ApplyType( 3 )
 
@@ -369,19 +402,19 @@ if SERVER then
 
 				local ambulance = ents.Create( "npc_item" )
 				ambulance:SetPos( Vector( 6468, 5757, 1024 ) )
-				ambulance:SetAngles( Angle( 0, 180, 0 ) )
+				ambulance:SetAngles( angle_oneeighty )
 				ambulance:Spawn()
 				ambulance:ApplyType( 5 )
 
 				local health = ents.Create( "npc_item" )
 				health:SetPos( Vector( 6465, 5828, 1024 ) )
-				health:SetAngles( Angle( 0, 180, 0 ) )
+				health:SetAngles( angle_oneeighty )
 				health:Spawn()
 				health:ApplyType( 6 )
 
 				local tow = ents.Create( "npc_item" )
 				tow:SetPos( Vector( -6492, -8678, -511 ) )
-				tow:SetAngles( Angle( 0, 90, 0 ) )
+				tow:SetAngles( angle_ninety )
 				tow:Spawn()
 				tow:ApplyType( 7 )
 
@@ -390,6 +423,12 @@ if SERVER then
 				truck:SetAngles( angle_zero )
 				truck:Spawn()
 				truck:ApplyType( 8 )
+
+				local deposit = ents.Create( "deposit_box" )
+				deposit:SetPos( Vector( -9139, -2543, 1604 ) )
+				deposit:SetAngles( angle_ninety )
+				deposit:Spawn()
+				deposit:SpawnExtraBoxes()
 			end
 		end )
 		MsgC( color_orange, "[CityRP] Spawned NPCs." )

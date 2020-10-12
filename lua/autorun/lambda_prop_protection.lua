@@ -53,6 +53,10 @@ local defaultblock = { --Blocked for all players including superadmins
 	["gas_pump"] = true
 }
 
+local gravblacklist = {
+	["deposit_box"] = true
+}
+
 local function PlayerPickup( ply, ent )
 	if ent:IsWorld() or !IsValid( ent ) then return false end
 	if ent.IsPermaProp and !ply:IsSuperAdmin() then return false end --Only superadmins can pick up perma props
@@ -82,5 +86,14 @@ local function ToolRestrict( ply, tr, tool )
 	end
 end
 hook.Add( "CanTool", "disallow_maptools", ToolRestrict )
+
+local function GravRestrict( ply, ent )
+	if IsValid( ent ) then
+		if gravblacklist[ent:GetClass()] then
+			return false
+		end
+	end
+end
+hook.Add( "GravGunPickupAllowed", "disallow_gravgun", GravRestrict )
 
 MsgC( color_orange, "[CityRP] Loaded prop protection." )
