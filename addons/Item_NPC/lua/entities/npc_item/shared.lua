@@ -80,11 +80,81 @@ if SERVER then
 			[florida] = { Vector( -1481, 7813, 128 ), angle_ninety },
 			[truenorth] = { Vector( 12993, -10200, 0 ), angle_one_eighty },
 			[newexton] = { Vector( 15593, 12228, -7 ), angle_ninety }
+		},
+		{ --Smuggle truck spawns
+			[rockford] = { Vector( -2893, -6357, 0 ) , angle_ninety_neg },
+			[southside] = { Vector( -7011, -3749, -319 ), angle_one_eighty },
+			[evocity] = { Vector( 8528, 8225, 64 ), angle_ninety_neg },
+			[florida] = { Vector( 9, -135, 136 ), angle_ninety },
+			[truenorth] = { Vector( 6137, 8882, 0 ), angle_zero },
+			[newexton] = { Vector( -12616, 6635, 1016 ), Angle( 0, 145, 0 ) }
 		}
 	}
 end
 
-local function SpawnVehicle( ply, class, model, script, type, noenter )
+local function SpawnBlueprint( ply )
+	local combined = table.Add( BLUEPRINT_CONFIG_TIER1, BLUEPRINT_CONFIG_TIER2 )
+	combined = table.Add( combined, BLUEPRINT_CONFIG_TIER3 )
+	local randwep = table.Random( combined )
+	local e = ents.Create( "crafting_blueprint" )
+	e:SetPos( ply:GetPos() + Vector( 0, 30, 0 ) )
+	e:SetAngles( ply:GetAngles() + Angle( 0, 180, 0 ) )
+	e:Spawn()
+	e:SetEntName( randwep[1] )
+	e:SetRealName( randwep[2] )
+	e:SetUses( 3 )
+end
+
+SmuggleItems = {
+	{
+		Name = "Number Nine Large",
+		Model = "models/food/burger.mdl",
+		Pos = Vector( 0, -110, 30 ),
+		Reward = function( ply )
+			ply:addMoney( 1300 )
+			return "$1,300"
+		end
+	},
+	{
+		Name = "Illegal Ammunition",
+		Model = "models/Items/item_item_crate_dynamic.mdl",
+		Pos = Vector( 0, -110, 40 ),
+		Reward = function( ply )
+			ply:addMoney( 3500 )
+			return "$3,500"
+		end
+	},
+	{
+		Name = "Unregistered Weapons",
+		Model = "models/props/CS_militia/footlocker01_closed.mdl",
+		Pos = Vector( 0, -50, 50 ),
+		Reward = function( ply )
+			ply:addMoney( 6500 )
+			return "$6,500"
+		end
+	},
+	{
+		Name = "C4",
+		Model = "models/weapons/w_c4_planted.mdl",
+		Pos = Vector( 0, -110, 40 ),
+		Reward = function( ply )
+			SpawnBlueprint( ply )
+			return "a random tier crafting blueprint"
+		end
+	},
+	{
+		Name = "Stolen Sports Car",
+		Model = "models/sentry/veneno_new.mdl",
+		Pos = Vector( 0, -110, 40 ),
+		Reward = function( ply )
+			SpawnBlueprint( ply )
+			ply:addMoney( 15000 )
+			return "a random tier crafting blueprint and $15,000"
+		end
+	}
+}
+
+local function SpawnVehicle( ply, class, model, script, type, noenter, smugid )
 	if SERVER then
 		local realpos = VehicleSpawns[type][map][1]
 		if model == "models/tdmcars/dod_ram_3500.mdl" then --Fix for this truck since it spawns below the map for some reason
@@ -100,6 +170,20 @@ local function SpawnVehicle( ply, class, model, script, type, noenter )
 		e.VehicleTable = list.Get( "Vehicles" )[class]
 		e:Fire( "HandBrakeOff", "", 0.01 )
 		e:SetNWEntity( "VehicleOwner", ply )
+		if smugid then
+			local item = SmuggleItems[smugid]
+			e.SmuggleTruck = true
+			e.SmuggleOwner = ply
+			e.SmuggleID = smugid
+			e:SetBodygroup( 1, 1 )
+			local prop = ents.Create( "prop_dynamic" )
+			prop:SetModel( item.Model )
+			prop:SetParent( e )
+			prop:SetLocalPos( item.Pos )
+			prop:SetLocalAngles( angle_zero )
+			prop:Spawn()
+			DarkRP.notify( ply, 0, 6, "Deliver this truck to the Smuggle Sell NPC for a reward." )
+		end
 		if !noenter then
 			ply:EnterVehicle( e )
 		end
@@ -118,6 +202,27 @@ local function ApplyBlueprintData( ent, index )
 	ent:SetEntName( BLUEPRINT_CONFIG_TIER1[index][1] )
 	ent:SetRealName( BLUEPRINT_CONFIG_TIER1[index][2] )
 	ent:SetUses( 3 )
+end
+
+local function SmuggleCheck( ply )
+	local copcount = team.NumPlayers( TEAM_POLICEBOSS ) + team.NumPlayers( TEAM_OFFICER ) + team.NumPlayers( TEAM_SWATBOSS ) + team.NumPlayers( TEAM_SWAT ) + team.NumPlayers( TEAM_UNDERCOVER ) + team.NumPlayers( TEAM_FBI )
+	if ply.SmuggleCooldown and ply.SmuggleCooldown > CurTime() then
+		DarkRP.notify( ply, 1, 6, "Please wait "..string.ToMinutesSeconds( ply.SmuggleCooldown - CurTime() ).." to smuggle again." )
+		return false
+	end
+	if copcount < 1 then
+		DarkRP.notify( ply, 1, 6, "There needs to be at least 1 cop on the server for smuggling to unlock." )
+		return false
+	end
+	return true
+end
+
+local function DoSmuggle( ply, id )
+	local class = "c5500tdm"
+	local model = "models/tdmcars/trucks/gmc_c5500.mdl"
+	local script = "scripts/vehicles/TDMCars/c5500.txt"
+	SpawnVehicle( ply, class, model, script, 7, false, id )
+	ply.SmuggleCooldown = CurTime() + 600
 end
 
 ItemNPC = {} --Initializes the item table, don't touch
@@ -217,6 +322,22 @@ ItemNPCType[8] = {
 	ButtonColor = Color( 230, 93, 80, 255 ),
 	ButtonTextColor = color_white,
 	Allowed = {}
+}
+
+ItemNPCType[9] = {
+	Name = "Smuggle NPC",
+	Model = "models/humans/group03/male_01.mdl",
+	MenuColor = Color( 49, 53, 61, 200 ),
+	MenuTextColor = color_white,
+	ButtonColor = Color( 230, 93, 80, 255 ),
+	ButtonTextColor = color_white,
+	Allowed = {
+		[TEAM_CITIZEN] = true,
+		[TEAM_TOWER] = true,
+		[TEAM_CAMERA] = true,
+		[TEAM_BUS] = true,
+		[TEAM_HITMAN] = true
+	}
 }
 
 -----SHOP NPC ITEMS-----
@@ -1827,5 +1948,76 @@ ItemNPC["trailer_storage"] = {
 		local model = "models/sentry/trailers/stortrailer.mdl"
 		local script = "scripts/vehicles/sentry/stortrailer.txt"
 		SpawnVehicle( ply, class, model, script, 6, true )
+	end
+}
+
+-----SMUGGLE ITEMS-----
+ItemNPC["smuggle_numbernine"] = {
+	Name = "Number Nine Large",
+	Description = "Stolen number nine large from Cluckin Bell.",
+	Model = "models/food/burger.mdl",
+	Price = 500,
+	Type = 9,
+	SpawnCheck = function( ply, self )
+		return SmuggleCheck( ply )
+	end,
+	SpawnFunction = function( ply, self )
+		DoSmuggle( ply, 1 )
+	end
+}
+
+ItemNPC["smuggle_illegalammo"] = {
+	Name = "Illegal Ammunition",
+	Description = "Ammunition from China. Illegally smuggled into the US.",
+	Model = "models/Items/item_item_crate_dynamic.mdl",
+	Price = 2000,
+	Type = 9,
+	SpawnCheck = function( ply, self )
+		return SmuggleCheck( ply )
+	end,
+	SpawnFunction = function( ply, self )
+		DoSmuggle( ply, 2 )
+	end
+}
+
+ItemNPC["smuggle_unregisteredweps"] = {
+	Name = "Unregistered Weapons",
+	Description = "Unregistered weapons to be sold on the black market.",
+	Model = "models/props/CS_militia/footlocker01_closed.mdl",
+	Price = 3500,
+	Type = 9,
+	SpawnCheck = function( ply, self )
+		return SmuggleCheck( ply )
+	end,
+	SpawnFunction = function( ply, self )
+		DoSmuggle( ply, 3 )
+	end
+}
+
+ItemNPC["smuggle_c4"] = {
+	Name = "C4",
+	Description = "C4 explosives to be used in terrorist attacks.",
+	Model = "models/weapons/w_c4_planted.mdl",
+	Price = 8000,
+	Type = 9,
+	SpawnCheck = function( ply, self )
+		return SmuggleCheck( ply )
+	end,
+	SpawnFunction = function( ply, self )
+		DoSmuggle( ply, 4 )
+	end
+}
+
+ItemNPC["smuggle_lambo"] = {
+	Name = "Stolen Sports Car",
+	Description = "Stolen Lamborghini from Dubai.",
+	Model = "models/sentry/veneno_new.mdl",
+	Price = 12000,
+	Type = 9,
+	SpawnCheck = function( ply, self )
+		return SmuggleCheck( ply )
+	end,
+	SpawnFunction = function( ply, self )
+		DoSmuggle( ply, 5 )
 	end
 }

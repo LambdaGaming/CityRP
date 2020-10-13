@@ -66,6 +66,17 @@ if SERVER then
 				truck:Spawn()
 				truck:ApplyType( 8 )
 
+				local smugbuy = ents.Create( "npc_item" )
+				smugbuy:SetPos( Vector( -3442, -7400, 0 ) )
+				smugbuy:SetAngles( angle_ninety )
+				smugbuy:Spawn()
+				smugbuy:ApplyType( 9 )
+
+				local smugsell = ents.Create( "smuggle_sell" )
+				smugsell:SetPos( Vector( 8200, 12417, 1536 ) )
+				smugsell:SetAngles( angle_ninety )
+				smugsell:Spawn()
+
 				local deposit = ents.Create( "deposit_box" )
 				deposit:SetPos( Vector( -3613, -3575, 68 ) )
 				deposit:SetAngles( angle_ninety )
@@ -140,6 +151,17 @@ if SERVER then
 				truck:Spawn()
 				truck:ApplyType( 8 )
 
+				local smugbuy = ents.Create( "npc_item" )
+				smugbuy:SetPos( Vector( -6770, -4017, -319 ) )
+				smugbuy:SetAngles( angle_ninety )
+				smugbuy:Spawn()
+				smugbuy:ApplyType( 9 )
+
+				local smugsell = ents.Create( "smuggle_sell" )
+				smugsell:SetPos( Vector( 8959, 6583, 8 ) )
+				smugsell:SetAngles( Angle( 0, -135, 0 ) )
+				smugsell:Spawn()
+
 				local deposit = ents.Create( "deposit_box" )
 				deposit:SetPos( Vector( -745, 2968, -42 ) )
 				deposit:SetAngles( angle_oneeighty )
@@ -207,6 +229,17 @@ if SERVER then
 				truck:SetAngles( angle_negninety )
 				truck:Spawn()
 				truck:ApplyType( 8 )
+
+				local smugbuy = ents.Create( "npc_item" )
+				smugbuy:SetPos( Vector( 8120, 8006, 70 ) )
+				smugbuy:SetAngles( angle_ninety )
+				smugbuy:Spawn()
+				smugbuy:ApplyType( 9 )
+
+				local smugsell = ents.Create( "smuggle_sell" )
+				smugsell:SetPos( Vector( 11528, 3184, -1818 ) )
+				smugsell:SetAngles( angle_ninety )
+				smugsell:Spawn()
 
 				local deposit = ents.Create( "deposit_box" )
 				deposit:SetPos( Vector( 1310, 304, 184 ) )
@@ -276,6 +309,17 @@ if SERVER then
 				truck:Spawn()
 				truck:ApplyType( 8 )
 
+				local smugbuy = ents.Create( "npc_item" )
+				smugbuy:SetPos( Vector( -3, -383, 136 ) )
+				smugbuy:SetAngles( angle_zero )
+				smugbuy:Spawn()
+				smugbuy:ApplyType( 9 )
+
+				local smugsell = ents.Create( "smuggle_sell" )
+				smugsell:SetPos( Vector( 11659, -3126, 112 ) )
+				smugsell:SetAngles( angle_zero )
+				smugsell:Spawn()
+
 				local deposit = ents.Create( "deposit_box" )
 				deposit:SetPos( Vector( 4801, -6432, 192 ) )
 				deposit:SetAngles( angle_negninety )
@@ -343,6 +387,17 @@ if SERVER then
 				truck:SetAngles( angle_zero )
 				truck:Spawn()
 				truck:ApplyType( 8 )
+
+				local smugbuy = ents.Create( "npc_item" )
+				smugbuy:SetPos( Vector( 6141, 8532, 8 ) )
+				smugbuy:SetAngles( angle_zero )
+				smugbuy:Spawn()
+				smugbuy:ApplyType( 9 )
+
+				local smugsell = ents.Create( "smuggle_sell" )
+				smugsell:SetPos( Vector( 11410, -14796, 5376 ) )
+				smugsell:SetAngles( angle_negninety )
+				smugsell:Spawn()
 
 				local deposit = ents.Create( "deposit_box" )
 				deposit:SetPos( Vector( 6485, 2800, 50 ) )
@@ -423,6 +478,17 @@ if SERVER then
 				truck:SetAngles( angle_zero )
 				truck:Spawn()
 				truck:ApplyType( 8 )
+
+				local smugbuy = ents.Create( "npc_item" )
+				smugbuy:SetPos( Vector( -13274, 6950, 1024 ) )
+				smugbuy:SetAngles( angle_zero )
+				smugbuy:Spawn()
+				smugbuy:ApplyType( 9 )
+
+				local smugsell = ents.Create( "smuggle_sell" )
+				smugsell:SetPos( Vector( 15679, 10017, 23 ) )
+				smugsell:SetAngles( angle_oneeighty )
+				smugsell:Spawn()
 
 				local deposit = ents.Create( "deposit_box" )
 				deposit:SetPos( Vector( -9139, -2543, 1604 ) )
