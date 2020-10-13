@@ -1416,23 +1416,6 @@ ItemNPC["ford_crownvic"] = {
 	end
 }
 
-ItemNPC["ford_crownvic_slick"] = {
-	Name = "Ford Crown Vic Police Slicktop",
-	Description = "Crown vic with police equipment, no lightbar.",
-	Model = "models/tdmcars/emergency/for_crownvic_fh3.mdl",
-	Price = 0,
-	Type = 4,
-	SpawnCheck = function( ply, self )
-		return PoliceBanCheck( ply )
-	end,
-	SpawnFunction = function( ply, self )
-		local class = "Ford Crown Vic Police Slicktop"
-		local model = "models/tdmcars/emergency/for_crownvic_fh3.mdl"
-		local script = "scripts/vehicles/TDMCars/for_crownvic_fh3.txt"
-		SpawnVehicle( ply, class, model, script, 1 )
-	end
-}
-
 ItemNPC["ford_crownvic_und"] = {
 	Name = "Ford Crown Vic Undercover",
 	Description = "Undercover Crown Vic.",
