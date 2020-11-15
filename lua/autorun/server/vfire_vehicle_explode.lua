@@ -1,5 +1,5 @@
 
-CreateConVar( "VF_VehicleExplodeTime", 30, FCVAR_NONE, "How many seconds it takes for a vehicle that's on fire to explode. Set to 0 to instantly explode when ignited." )
+CreateConVar( "VF_VehicleExplodeTime", 120, FCVAR_NONE, "How many seconds it takes for a vehicle that's on fire to explode. Set to 0 to instantly explode when ignited." )
 CreateConVar( "VF_VehicleExplodeMagnitude", 100, FCVAR_NONE, "The magnitude of the vehicle explosion, the higher the number, the greater the range and the more damage it does. 0 to disable." )
 CreateConVar( "VF_VehicleRemoveTime", 600, FCVAR_NONE, "How many seconds until the vehicle gets removed after exploding. Set to -1 to never remove and 0 to instantly remove." )
 

@@ -1775,7 +1775,7 @@ ItemNPC["health"] = {
 ItemNPC["onetimehealth"] = {
 	Name = "One-Time Med Kit",
 	Description = "Sets your health back to 100, can be used at any time but removes itself after being used.",
-	Price = 200,
+	Price = 500,
 	Type = 6,
 	SpawnCheck = function( ply, self )
 		if ply:HasWeapon( "onetime_medkit" ) then
