@@ -1750,6 +1750,23 @@ ItemNPC["onetimehealth"] = {
 	end
 }
 
+ItemNPC["onetimearmor"] = {
+	Name = "One-Time Armor Kit",
+	Description = "Sets your armor to 100, can be used at any time but removes itself after being used.",
+	Price = 1000,
+	Type = 6,
+	SpawnCheck = function( ply, self )
+		if ply:HasWeapon( "onetime_armorkit" ) then
+			DarkRP.notify( ply, 1, 6, "You already have a one-time armor kit!" )
+			return
+		end
+		return true
+	end,
+	SpawnFunction = function( ply, self )
+		ply:Give( "onetime_armorkit" )
+	end
+}
+
 ItemNPC["armor"] = {
 	Name = "Replenish Armor",
 	Description = "Set your armor to 100.",
