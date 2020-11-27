@@ -68,7 +68,7 @@ if SERVER then
 		{ --Semi spawns
 			[rockford] = { Vector( -1434, 4509, 536 ), angle_ninety },
 			[southside] = { Vector( 701, -3806, -231 ), angle_ninety_neg },
-			[evocity] = { Vector( 8638, 4530, -1817 ), angle_one_eighty },
+			[evocity] = { Vector( 8621, 3497, -1824 ), angle_one_eighty },
 			[florida] = { Vector( -1930, 8490, 128 ), angle_one_eighty },
 			[truenorth] = { Vector( 12511, -10243, 0 ), angle_zero },
 			[newexton] = { Vector( 14464, 12104, -7 ), angle_one_eighty }
@@ -76,7 +76,7 @@ if SERVER then
 		{ --Trailer spawns
 			[rockford] = { Vector( -851, 4153, 536 ), angle_zero },
 			[southside] = { Vector( 701, -3806, -231 ), angle_ninety_neg },
-			[evocity] = { Vector( 8042, 4464, -1823 ), angle_one_eighty },
+			[evocity] = { Vector( 8005, 3514, -1824 ), angle_one_eighty },
 			[florida] = { Vector( -1481, 7813, 128 ), angle_ninety },
 			[truenorth] = { Vector( 12993, -10200, 0 ), angle_one_eighty },
 			[newexton] = { Vector( 15593, 12228, -7 ), angle_ninety }
@@ -1411,23 +1411,6 @@ ItemNPC["ram_3500"] = {
 	end
 }
 
-ItemNPC["jaguar_und"] = {
-	Name = "Jaguar XFR SEG Photon",
-	Description = "A fast undercover cruiser.",
-	Model = "models/lonewolfie/jaguar_xfr_pol_und.mdl",
-	Price = 0,
-	Type = 4,
-	SpawnCheck = function( ply, self )
-		return PoliceBanCheck( ply )
-	end,
-	SpawnFunction = function( ply, self )
-		local class = "Jaguar XFR SEG Photon"
-		local model = "models/lonewolfie/jaguar_xfr_pol_und.mdl"
-		local script = "scripts/vehicles/lwcars/jag_xfr_pol.txt"
-		SpawnVehicle( ply, class, model, script, 1 )
-	end
-}
-
 ItemNPC["charger_police"] = {
 	Name = "Dodge Charger 2015 Pursuit",
 	Description = "Traffic enforcement model.",
@@ -1492,23 +1475,6 @@ ItemNPC["lambo_veneno"] = {
 		local class = "Lamborghini Veneno Police Edition"
 		local model = "models/sentry/veneno_new_cop.mdl"
 		local script = "scripts/vehicles/sentry/veneno_new.txt"
-		SpawnVehicle( ply, class, model, script, 1 )
-	end
-}
-
-ItemNPC["jaguar_police"] = {
-	Name = "Jaguar XFR Police Photon",
-	Description = "Traffic enforcement edition of the Jaguar XFR.",
-	Model = "models/lonewolfie/jaguar_xfr_pol.mdl",
-	Price = 0,
-	Type = 4,
-	SpawnCheck = function( ply, self )
-		return PoliceBanCheck( ply )
-	end,
-	SpawnFunction = function( ply, self )
-		local class = "Jaguar XFR Police Photon"
-		local model = "models/lonewolfie/jaguar_xfr_pol.mdl"
-		local script = "scripts/vehicles/lwcars/jag_xfr_pol.txt"
 		SpawnVehicle( ply, class, model, script, 1 )
 	end
 }

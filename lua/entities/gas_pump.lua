@@ -36,11 +36,10 @@ function ENT:Use( activator, caller )
 	if activator:canAfford( price ) then
 		local pos = self:GetPos()
 		local findveh = ents.FindInSphere( pos, 300 )
-		local totalveh = 0
+		local foundveh = false
 		price = price + ( price * ( GetGlobalInt( "MAYOR_SalesTax" ) * 0.01 ) )
 		for k,v in pairs( findveh ) do
-			if v:GetClass() == "prop_vehicle_jeep" then
-				totalveh = totalveh + 1
+			if v:GetClass() == "prop_vehicle_jeep" and v:GetNWEntity( "VehicleOwner" ) == activator then
 				v:SetNWInt( "AM_FuelAmount", 100 )
 				activator:addMoney( -price )
 				if price == 0 then
@@ -48,10 +47,11 @@ function ENT:Use( activator, caller )
 				else
 					DarkRP.notify( activator, 0, 6, "You have purchased a full fuel tank for $"..price.."." )
 				end
+				foundveh = true
 				break
 			end
 		end
-		if totalveh == 0 then
+		if !foundveh then
 			DarkRP.notify( activator, 1, 6, "No vehicle detected. Move it closer." )
 		end
 	else
