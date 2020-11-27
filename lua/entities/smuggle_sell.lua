@@ -2,7 +2,7 @@ AddCSLuaFile()
 
 ENT.Type = "ai"
 ENT.Base = "base_ai"
-ENT.PrintName = "Smuggle Sell NPC"
+ENT.PrintName = "Smuggle Buyer"
 ENT.Category = "Misc NPCs"
 ENT.Spawnable = true
 ENT.AdminOnly = true
@@ -66,7 +66,7 @@ if CLIENT then
 			local ang = self:GetAngles()
 			
 			surface.SetFont( "Bebas40Font" )
-			local title = "Smuggle Sell NPC"
+			local title = "Smuggle Buyer"
 			local tw = surface.GetTextSize( title )
 			
 			ang:RotateAroundAxis( ang:Forward(), 90 )

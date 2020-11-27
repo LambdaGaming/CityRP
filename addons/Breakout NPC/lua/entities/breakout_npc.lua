@@ -2,7 +2,7 @@ AddCSLuaFile()
 
 ENT.Type = "ai"
 ENT.Base = "base_ai"
-ENT.PrintName = "Breakout NPC"
+ENT.PrintName = "Jailbreaker"
 ENT.Category = "Misc NPCs"
 ENT.Spawnable = true
 ENT.AdminOnly = true
@@ -84,7 +84,7 @@ if CLIENT then
 		local ang = self:GetAngles()
 		
 		surface.SetFont("Bebas40Font")
-		local title = "Release NPC"
+		local title = "Jailbreaker"
 		local tw = surface.GetTextSize(title)
 		
 		ang:RotateAroundAxis(ang:Forward(), 90)

@@ -167,7 +167,7 @@ local function SpawnVehicle( ply, class, model, script, type, noenter, smugid )
 		e:SetModel( model )
 		e:Spawn()
 		e:Activate()
-		e.VehicleTable = list.Get( "Vehicles" )[class]
+		e.VehicleTable = list.GetForEdit( "Vehicles" )[class]
 		e:Fire( "HandBrakeOff", "", 0.01 )
 		e:SetNWEntity( "VehicleOwner", ply )
 		if smugid then
@@ -229,7 +229,7 @@ ItemNPC = {} --Initializes the item table, don't touch
 ItemNPCType = {} --Initializes the type table, don't touch
 
 ItemNPCType[1] = {
-	Name = "Shop NPC",
+	Name = "Supermarket",
 	Model = "models/breen.mdl",
 	MenuColor = Color( 49, 53, 61, 200 ),
 	MenuTextColor = color_white,
@@ -239,7 +239,7 @@ ItemNPCType[1] = {
 }
 
 ItemNPCType[2] = {
-	Name = "Contraband NPC",
+	Name = "Contraband Dealer",
 	Model = "models/Humans/Group03/male_07.mdl",
 	MenuColor = Color( 230, 93, 80, 200 ),
 	MenuTextColor = color_white,
@@ -249,7 +249,7 @@ ItemNPCType[2] = {
 }
 
 ItemNPCType[3] = {
-	Name = "Fire Truck NPC",
+	Name = "Firefighter",
 	Model = "models/player/portal/male_07_fireman.mdl",
 	MenuColor = Color( 49, 53, 61, 200 ),
 	MenuTextColor = color_white,
@@ -262,7 +262,7 @@ ItemNPCType[3] = {
 }
 
 ItemNPCType[4] = {
-	Name = "Gov Vehicle NPC",
+	Name = "Police Secretary",
 	Model = "models/taggart/police01/male_07.mdl",
 	MenuColor = Color( 49, 53, 61, 200 ),
 	MenuTextColor = color_white,
@@ -280,7 +280,7 @@ ItemNPCType[4] = {
 }
 
 ItemNPCType[5] = {
-	Name = "Ambulance NPC",
+	Name = "Paramedic",
 	Model = "models/player/magnusson.mdl",
 	MenuColor = Color( 49, 53, 61, 200 ),
 	MenuTextColor = color_white,
@@ -293,7 +293,7 @@ ItemNPCType[5] = {
 }
 
 ItemNPCType[6] = {
-	Name = "Health NPC",
+	Name = "Healer",
 	Model = "models/kleiner.mdl",
 	MenuColor = Color( 49, 53, 61, 200 ),
 	MenuTextColor = color_white,
@@ -303,7 +303,7 @@ ItemNPCType[6] = {
 }
 
 ItemNPCType[7] = {
-	Name = "Tow Truck NPC",
+	Name = "Tower",
 	Model = "models/monk.mdl",
 	MenuColor = Color( 49, 53, 61, 200 ),
 	MenuTextColor = color_white,
@@ -315,7 +315,7 @@ ItemNPCType[7] = {
 }
 
 ItemNPCType[8] = {
-	Name = "Truck NPC",
+	Name = "Trucker",
 	Model = "models/humans/group02/male_08.mdl",
 	MenuColor = Color( 49, 53, 61, 200 ),
 	MenuTextColor = color_white,
@@ -325,7 +325,7 @@ ItemNPCType[8] = {
 }
 
 ItemNPCType[9] = {
-	Name = "Smuggle NPC",
+	Name = "Smuggle Seller",
 	Model = "models/humans/group03/male_01.mdl",
 	MenuColor = Color( 49, 53, 61, 200 ),
 	MenuTextColor = color_white,
@@ -712,45 +712,6 @@ ItemNPC["zpizmak_opensign"] = {
 	Type = 1,
 	SpawnFunction = function( ply, self )
 		local e = ents.Create( "zpizmak_opensign" )
-		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
-		e:Spawn()
-	end
-}
-
-ItemNPC["wdj_radio"] = {
-	Name = "DJ Radio",
-	Description = "Plays music broadcasted from a controller.",
-	Model = "models/props_lab/citizenradio.mdl",
-	Price = 50,
-	Type = 1,
-	SpawnFunction = function( ply, self )
-		local e = ents.Create( "wdj_radio" )
-		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
-		e:Spawn()
-	end
-}
-
-ItemNPC["wdj_mastercontroller"] = {
-	Name = "DJ Controller",
-	Description = "Plays music, can be heard on a radio.",
-	Model = "models/props/de_nuke/NuclearControlBox.mdl",
-	Price = 100,
-	Type = 1,
-	SpawnFunction = function( ply, self )
-		local e = ents.Create( "wdj_mastercontroller" )
-		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
-		e:Spawn()
-	end
-}
-
-ItemNPC["wdj_speaker"] = {
-	Name = "DJ Speaker",
-	Description = "Plays music broadcasted from a controller, has a wider range than a radio.",
-	Model = "models/props_wasteland/speakercluster01a.mdl",
-	Price = 50,
-	Type = 1,
-	SpawnFunction = function( ply, self )
-		local e = ents.Create( "wdj_speaker" )
 		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
 		e:Spawn()
 	end
