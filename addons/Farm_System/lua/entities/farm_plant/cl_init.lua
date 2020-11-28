@@ -13,6 +13,7 @@ function ENT:Draw()
 	if self:GetPos():DistToSqr( plyShootPos ) < 562500 then
 		local PlantType = self:GetPlantType()
 		local PlantTable = PlantTypes[PlantType]
+		if !PlantTable then return end
 		if self:GetPlanted() then
 			local growth = self:GetGrowth()
 			local GrowTime = PlantTable.GrowthTime
