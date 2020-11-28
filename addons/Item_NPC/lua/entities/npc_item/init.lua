@@ -72,7 +72,7 @@ net.Receive( "CreateItem", function( len, ply )
 	local name = ItemNPC[ent].Name
 	local price = ItemNPC[ent].Price
 	local salestax = price * ( GetGlobalInt( "MAYOR_SalesTax" ) * 0.01 )
-	if price > 0 then
+	if price > 0 and self:GetNPCType() != 2 then
 		price = price + salestax
 		SetGlobalBool( "MAYOR_Money", GetGlobalBool( "MAYOR_Money" ) + salestax )
 	end

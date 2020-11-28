@@ -70,7 +70,9 @@ local function DrawItemMenu( ent ) --Panel that draws the main menu
 			net.WriteEntity( ent )
 			net.WriteString( k )
 			net.SendToServer()
-			mainframe:Close()
+			if type > 2 then
+				mainframe:Close()
+			end
 		end
 
 		if v.Model then

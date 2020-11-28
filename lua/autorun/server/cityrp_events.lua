@@ -150,9 +150,9 @@ EventPos[evocity] = {
 
 EventPos[florida] = {
 	Truck = {
-		Vector( 5682, -1344, 150 ),
-		Vector( -5071, 404, 150 ),
-		Vector( 2468, 7806, 150 )
+		Vector( 5682, -1344, 180 ),
+		Vector( -5071, 404, 180 ),
+		Vector( 2468, 7806, 180 )
 	},
 	Shooter = {
 		Vector( -2159, 5129, 136 ),

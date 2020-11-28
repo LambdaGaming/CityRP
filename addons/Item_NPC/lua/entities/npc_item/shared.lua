@@ -85,7 +85,7 @@ if SERVER then
 			[rockford] = { Vector( -2893, -6357, 0 ) , angle_ninety_neg },
 			[southside] = { Vector( -7011, -3749, -319 ), angle_one_eighty },
 			[evocity] = { Vector( 8528, 8225, 64 ), angle_ninety_neg },
-			[florida] = { Vector( 9, -135, 136 ), angle_ninety },
+			[florida] = { Vector( 9, -135, 156 ), angle_ninety },
 			[truenorth] = { Vector( 6137, 8882, 0 ), angle_zero },
 			[newexton] = { Vector( -12616, 6635, 1016 ), Angle( 0, 145, 0 ) }
 		}

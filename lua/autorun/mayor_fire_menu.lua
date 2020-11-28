@@ -6,6 +6,10 @@ if CLIENT then
 		["IA Agent"] = true,
 		["Mayor"] = true
 	}
+	local ems = {
+		["ER Commander"] = true,
+		["Emergency Responder"] = true
+	}
 	local function OpenFireMenu( ply )
 		local menu = vgui.Create( "DFrame" )
 		menu:SetTitle( "Double click on a player to fire them:" )
@@ -26,8 +30,9 @@ if CLIENT then
 		plylist:AddColumn( "Job" )
 		plylist:AddColumn( "Index" )
 		for k,v in pairs( player.GetAll() ) do
-			if v:isCP() and !blacklist[team.GetName( v:Team() )] then
-				plylist:AddLine( v:Nick(), team.GetName( v:Team() ), v:EntIndex() )
+			local name = team.GetName( v:Team() )
+			if ( v:isCP() and !blacklist[name] ) or ems[name] then
+				plylist:AddLine( v:Nick(), name, v:EntIndex() )
 			end
 		end
 		function plylist:DoDoubleClick( id, line )
