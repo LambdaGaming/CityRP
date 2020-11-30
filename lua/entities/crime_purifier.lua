@@ -66,17 +66,27 @@ function ENT:Use( activator, caller )
 	end 
 end
 
+local snd
 function ENT:StartTouch( ent )
     if ent:GetClass() == "durgz_weed" and self:GetNWInt( "WeedAmount" ) < 6 then
         ent:Remove()
         self:EmitSound( "ambient/machines/combine_terminal_idle4.wav" )
 		self:SetNWInt( "WeedAmount", self:GetNWInt( "WeedAmount" ) + 1 )
-        timer.Simple( 45, function()
+		timer.Simple( 3, function()
+			if !snd or !snd:IsPlaying() then
+				snd = CreateSound( self, "ambient/machines/laundry_machine1_amb.wav" )
+				snd:Play()
+			end
+		end )
+        timer.Simple( 5, function()
             local e = ents.Create( "rp_weed" )
-            e:SetPos( self:GetPos() + Vector( 75, 0, 10 ) )
+            e:SetPos( self:GetPos() + self:GetForward() * 70 )
             e:Spawn()
             self:SetNWInt( "WeedAmount", self:GetNWInt( "WeedAmount" ) - 1 )
 			self:EmitSound( "HL1/ambience/steamburst1.wav", 75, math.random( 75, 125 ) )
+			if self:GetNWInt( "WeedAmount" ) <= 0 and self:GetNWInt( "CokeType" ) <= 0 then
+				snd:Stop()
+			end
         end )
     end
 	if ent:GetClass() == "raw_cocaine" and !self:GetNWBool( "HasCocaine" ) then
@@ -84,21 +94,30 @@ function ENT:StartTouch( ent )
 		self:SetNWBool( "HasCocaine", true )
 		ent:Remove()
 		self:EmitSound( "ambient/machines/combine_terminal_idle4.wav", 75, 70 )
+		timer.Simple( 3, function()
+			if !snd or !snd:IsPlaying() then
+				snd = CreateSound( self, "ambient/machines/laundry_machine1_amb.wav" )
+				snd:Play()
+			end
+		end )
 		timer.Create( "CokeIncrement"..self:EntIndex(), 1, 600, function() self:SetNWInt( "CokePurity", self:GetNWInt( "CokePurity" ) + 1 ) end )
 		timer.Create( "CokeTimer"..self:EntIndex(), 600, 1, function()
 			if self:GetNWInt( "CokeType" ) == 1 then
 				local e = ents.Create( "pure_cocaine_marketable" )
-				e:SetPos( self:GetPos() + Vector( 75, 0, 10 ) )
+				e:SetPos( self:GetPos() + self:GetForward() * 70 )
 				e:Spawn()
 				e:SetNWInt( "Purity", self:GetNWInt( "CokePurity" ) )
 			else
 				local e = ents.Create( "pure_cocaine_consumable" )
-				e:SetPos( self:GetPos() + Vector( 75, 0, 10 ) )
+				e:SetPos( self:GetPos() + self:GetForward() * 70 )
 				e:Spawn()
 			end
 			self:SetNWInt( "CokeType", 0 )
 			self:SetNWInt( "HasCocaine", false )
 			self:EmitSound( "HL1/ambience/steamburst1.wav", 75, math.random( 75, 125 ) )
+			if self:GetNWInt( "WeedAmount" ) <= 0 and self:GetNWInt( "CokeType" ) <= 0 then
+				snd:Stop()
+			end
 		end )
 	end
 end

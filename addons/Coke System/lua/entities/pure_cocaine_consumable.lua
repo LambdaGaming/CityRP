@@ -36,7 +36,6 @@ function ENT:Initialize()
 end
 
 function ENT:Use( activator, caller )
-	sound.Play( "drugs/insufflation.wav", activator:GetPos(), 75, 100, 1 )
 	activator:SetDSP( 6 )
 	activator:SetGravity( 0.5 )
 	activator:SetHealth( 200 )
@@ -66,6 +65,7 @@ function ENT:Use( activator, caller )
 			activator:Kill()
 		end
 	end )
+	self:Remove()
 end
 
 if CLIENT then
