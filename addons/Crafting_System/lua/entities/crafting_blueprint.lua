@@ -8,6 +8,39 @@ ENT.Author = "Lambda Gaming"
 ENT.Spawnable = false
 ENT.AdminOnly = true
 
+BLUEPRINT_CONFIG_TIER1 = { --Blueprints you can get from the dumpster
+	{ "cw_g3a3", "G3A3" },
+	{ "cw_g36c", "G36C" },
+	{ "cw_vss", "VSS" },
+	{ "factory_lockpick", "Premium Lockpick" },
+	{ "cw_mr96", "MR-96" },
+	{ "cw_shorty", "Serbu Super-Shorty" },
+	{ "dronesrewrite_nanodr", "Nano Drone" }
+}
+
+BLUEPRINT_CONFIG_TIER2 = { --Blueprints you can get from smuggling weapons and random events
+	{ "cw_ak74", "AK-74" },
+	{ "cw_m3super90", "M3 Super 90" },
+	{ "cw_scarh", "SCAR-H" },
+	{ "cw_frag_grenade", "Frag Grenade" },
+	{ "cw_l115", "L115" },
+	{ "cw_m14", "M14" },
+	{ "cw_ar15", "AR-15" },
+	{ "cw_attpack_various", "40mm Grenade Launcher Attachment" },
+	{ "nik_m1garandnew", "M1 Garand" }
+}
+
+BLUEPRINT_CONFIG_TIER3 = { --Blueprints you can get from gov bank, PD bank, and deposit boxes
+	{ "cw_frag_grenade", "Frag Grenade" },
+	{ "usm_c4", "Timed C4" },
+	{ "weapon_slam", "SLAM Remote Explosive" },
+	{ "cw_m249_official", "M249" },
+	{ "cw_attpack_various", "40mm Grenade Launcher Attachment" },
+	{ "car_bomb", "Car Bomb" },
+	{ "ins2_atow_rpg7", "RPG-7" },
+	{ "cw_kks_doi_mg42", "MG 42" }
+}
+
 function ENT:SpawnFunction( ply, tr, name )
 	if !tr.Hit then return end
 	local SpawnPos = tr.HitPos + tr.HitNormal * 1

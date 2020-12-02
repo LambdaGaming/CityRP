@@ -72,7 +72,7 @@ function ENT:StartTouch( ent )
         ent:Remove()
         self:EmitSound( "ambient/machines/combine_terminal_idle4.wav" )
 		self:SetNWInt( "WeedAmount", self:GetNWInt( "WeedAmount" ) + 1 )
-		timer.Simple( 3, function()
+		timer.Simple( 45, function()
 			if !snd or !snd:IsPlaying() then
 				snd = CreateSound( self, "ambient/machines/laundry_machine1_amb.wav" )
 				snd:Play()
@@ -84,7 +84,7 @@ function ENT:StartTouch( ent )
             e:Spawn()
             self:SetNWInt( "WeedAmount", self:GetNWInt( "WeedAmount" ) - 1 )
 			self:EmitSound( "HL1/ambience/steamburst1.wav", 75, math.random( 75, 125 ) )
-			if self:GetNWInt( "WeedAmount" ) <= 0 and self:GetNWInt( "CokeType" ) <= 0 then
+			if self:GetNWInt( "WeedAmount" ) <= 0 and self:GetNWInt( "CokeType" ) <= 0 and snd then
 				snd:Stop()
 			end
         end )
@@ -115,7 +115,7 @@ function ENT:StartTouch( ent )
 			self:SetNWInt( "CokeType", 0 )
 			self:SetNWInt( "HasCocaine", false )
 			self:EmitSound( "HL1/ambience/steamburst1.wav", 75, math.random( 75, 125 ) )
-			if self:GetNWInt( "WeedAmount" ) <= 0 and self:GetNWInt( "CokeType" ) <= 0 then
+			if self:GetNWInt( "WeedAmount" ) <= 0 and self:GetNWInt( "CokeType" ) <= 0 and snd then
 				snd:Stop()
 			end
 		end )

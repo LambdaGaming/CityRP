@@ -34,6 +34,18 @@ CraftingIngredient["dronesrewrite_spy"] = {
 	Name = "Spy Drone"
 }
 
+CraftingIngredient["goldbar"] = {
+	Name = "Gold"
+}
+
+CraftingIngredient["ruby"] = {
+	Name = "Ruby"
+}
+
+CraftingIngredient["diamond"] = {
+	Name = "Diamond"
+}
+
 --Template Category
 --[[
 	CraftingCategory[1] = {
@@ -352,12 +364,13 @@ CraftingTable["cw_g36c"] = {
 
 CraftingTable["cw_frag_grenade"] = {
 	Name = "Frag Grenade",
-	Description = "Needs 4 iron, and 4 wrenches",
+	Description = "Needs 4 iron, 1 diamond, and 1 ruby.",
 	NeedsBlueprint = true,
 	Category = "Explosives",
 	Materials = {
 		ironbar = 4,
-		wrench = 4,
+		diamond = 1,
+		ruby = 1,
 	},
 	SpawnFunction =
 		function( ply, self )
@@ -454,12 +467,13 @@ CraftingTable["factory_lockpick"] = {
 
 CraftingTable["usm_c4"] = {
 	Name = "Timed C4",
-	Description = "Needs 8 iron and 4 wrenches",
+	Description = "Needs 8 iron, 1 gold, and 1 diamond.",
 	NeedsBlueprint = true,
 	Category = "Explosives",
 	Materials = {
 		ironbar = 8,
-		wrench = 4,
+		goldbar = 1,
+		diamond = 1,
 	},
 	SpawnFunction =
 		function( ply, self )
@@ -589,12 +603,13 @@ CraftingTable["cw_attpack_ammotypes_shotguns"] = {
 
 CraftingTable["weapon_slam"] = {
 	Name = "SLAM Remote Explosive",
-	Description = "Needs 10 iron and 4 wrenches",
+	Description = "Needs 10 iron, 1 gold, and 1 diamond.",
 	NeedsBlueprint = true,
 	Category = "Explosives",
 	Materials = {
 		ironbar = 10,
-		wrench = 4,
+		goldbar = 1,
+		diamond = 1,
 	},
 	SpawnFunction =
 		function( ply, self )
@@ -653,12 +668,13 @@ CraftingTable["cw_ammo_40mm"] = {
 
 CraftingTable["weapon_car_bomb"] = {
 	Name = "Car Bomb",
-	Description = "Needs 6 iron and 4 wrenches",
+	Description = "Needs 6 iron, 1 gold, and 1 diamond.",
 	NeedsBlueprint = true,
 	Category = "Explosives",
 	Materials = {
 		ironbar = 6,
-		wrench = 4,
+		goldbar = 1,
+		diamond = 1,
 	},
 	SpawnFunction =
 		function( ply, self )
@@ -668,18 +684,38 @@ CraftingTable["weapon_car_bomb"] = {
 
 CraftingTable["ins2_atow_rpg7"] = {
 	Name = "RPG-7",
-	Description = "Needs 25 iron, 10 wrenches, and 10 wood",
+	Description = "Needs 25 iron, 3 diamonds, 2 rubys, and 10 wood",
 	NeedsBlueprint = true,
 	Category = "Explosives",
 	Materials = {
 		ironbar = 25,
-		wrench = 10,
+		diamond = 3,
+		ruby = 2,
 		swm_log = 10,
 	},
 	SpawnFunction =
 		function( ply, self )
 			local e = ents.Create( "ins2_atow_rpg7" )
 			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
+			e:Spawn()
+		end
+}
+
+CraftingTable["wardrobe"] = {
+	Name = "Wardrobe",
+	Description = "Needs 2 iron, 8 wood, 1 gold, 1 ruby, and 1 diamond.",
+	Category = "Other",
+	Materials = {
+		ironbar = 2,
+		swm_log = 8,
+		goldbar = 1,
+		ruby = 1,
+		diamond = 1,
+	},
+	SpawnFunction =
+		function( ply, self )
+			local e = ents.Create( "wardrobe" )
+			e:SetPos( self:GetPos() + Vector( 0, 0, 45 ) )
 			e:Spawn()
 		end
 }

@@ -43,7 +43,7 @@ local function DrawItemMenu( ent ) --Panel that draws the main menu
 
 	local listframe = vgui.Create( "DScrollPanel", mainframe )
 	listframe:Dock( FILL )
-	for k,v in pairs( ItemNPC ) do
+	for k,v in SortedPairs( ItemNPC ) do
 		if v.Type != type then
 			continue
 		end
@@ -125,7 +125,7 @@ local function DrawItemMenu( ent ) --Panel that draws the main menu
 		local itemdesc = vgui.Create( "DLabel", itembackground )
 		itemdesc:SetFont( "Trebuchet18" )
 		itemdesc:SetColor( ItemNPCType[type].MenuTextColor )
-		itemdesc:SetText( "Description: "..v.Description )
+		itemdesc:SetText( v.Description )
 		itemdesc:SetWrap( true )
 
 		if v.Model then

@@ -442,23 +442,9 @@ ItemNPC["mgs_pickaxe"] = {
 	end
 }
 
-ItemNPC["swm_cart"] = {
-	Name = "Log Cart",
-	Description = "Holds up to 20 logs, can be put in a wood cutter for a profit.",
-	Model = "models/props_wasteland/laundry_cart002.mdl",
-	Price = 200,
-	Type = 1,
-	SpawnFunction = function( ply, self )
-		local e = ents.Create( "swm_cart" )
-		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
-		e:Spawn()
-		e:Setowning_ent( ply )
-	end
-}
-
 ItemNPC["mgs_cart"] = {
-	Name = "Rock Cart",
-	Description = "Holds up to 20 ores/rocks, can be put in a rock and ore grinder a profit.",
+	Name = "Mining Cart",
+	Description = "Holds up to 20 ores or logs, can be put in a grinder or sawmill for a profit.",
 	Model = "models/props_wasteland/laundry_cart002.mdl",
 	Price = 200,
 	Type = 1,
@@ -933,6 +919,19 @@ ItemNPC["crafting_blueprint_nano"] = {
 		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
 		e:Spawn()
 		ApplyBlueprintData( e, 7 )
+	end
+}
+
+ItemNPC["ore_smelter"] = {
+	Name = "Ore Smelter",
+	Description = "Used to smelt ores obtained from rocks.",
+	Model = "models/props/cs_militia/furnace01.mdl",
+	Price = 5000,
+	Type = 1,
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "ore_smelter" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
+		e:Spawn()
 	end
 }
 
