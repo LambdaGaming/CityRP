@@ -58,7 +58,7 @@ if SERVER then
 			[newexton] = { Vector( 7651, 7446, 1016 ), angle_ninety }
 		},
 		{ --Tow truck spawns
-			[rockford] = { Vector( -7496, 587, 4 ), angle_zero },
+			[rockford] = { Vector( -7564, 680, 3 ), angle_zero },
 			[southside] = { Vector( -1656, 6421, 14 ), angle_zero },
 			[evocity] = { Vector( -3282, 2636, 76 ), angle_zero },
 			[florida] = { Vector( 2198, -2753, 131 ), angle_ninety_neg },
