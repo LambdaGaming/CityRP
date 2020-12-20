@@ -935,6 +935,19 @@ ItemNPC["ore_smelter"] = {
 	end
 }
 
+ItemNPC["rp_gas"] = {
+	Name = "Propane Canister",
+	Description = "Propane gas for fueling industrial appliances.",
+	Model = "models/props_junk/propane_tank001a.mdl",
+	Price = 250,
+	Type = 1,
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "rp_gas" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
+		e:Spawn()
+	end
+}
+
 -----CONTRABAND ITEMS-----
 ItemNPC["dronesrewrite_console"] = {
 	Name = "Drone Console",
@@ -1034,19 +1047,6 @@ ItemNPC["rp_chloride"] = {
 	Type = 2,
 	SpawnFunction = function( ply, self )
 		local e = ents.Create( "rp_chloride" )
-		e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
-		e:Spawn()
-	end
-}
-
-ItemNPC["rp_gas"] = {
-	Name = "Meth Stove Gas",
-	Description = "Fuels the meth stove. Can supply for 2 batches.",
-	Model = "models/props_junk/propane_tank001a.mdl",
-	Price = 250,
-	Type = 2,
-	SpawnFunction = function( ply, self )
-		local e = ents.Create( "rp_gas" )
 		e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
 		e:Spawn()
 	end

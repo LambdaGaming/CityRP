@@ -9,6 +9,11 @@ ENT.Spawnable = true
 ENT.AdminOnly = true
 ENT.Category = "Cocaine System"
 
+function ENT:SetupDataTables()
+	self:NetworkVar( "Bool", 0, "HasCanister" )
+	self:NetworkVar( "Entity", 0, "Canister" )
+end
+
 function ENT:SpawnFunction( ply, tr, name )
 	if !tr.Hit then return end
 	local SpawnPos = tr.HitPos + tr.HitNormal * 10
@@ -57,17 +62,47 @@ function ENT:Initialize()
 	end )
 end
 
+if SERVER then
+	function ENT:StartTouch(ent)
+		if IsValid( ent ) and ent:GetClass() == "rp_gas" and !self:GetHasCanister() and !ent:GetHasStove() then
+			if !ent:IsReadyForStove() then return end
+			self:SetHasCanister( true )
+			self:SetCanister( ent )
+			ent:SetHasStove( true )
+			ent:SetStove( self )
+			local weld = constraint.Weld( self, ent, 0, 0, 0, true, false )
+			self:EmitSound( "physics/metal/metal_barrel_impact_soft"..math.random( 1, 4 )..".wav" )
+		end
+	end
+
+	function ENT:Think()
+		if self:GetNWBool( "TurnedOn" ) and self:GetHasCanister() then
+			local fuel = self:GetCanister():GetFuel()
+			if fuel > 0 then
+				self:GetCanister():SetFuel( math.Clamp( fuel - 1, 0, 200 ) )
+			else
+				self:TurnOff()
+			end
+		elseif self:GetNWBool( "TurnedOn" ) and !self:GetHasCanister() then
+			self:TurnOff()
+		end
+		self:NextThink( CurTime() + 2 )
+		return true
+	end
+end
+
 function ENT:TurnOff()
 	self:SetNWBool( "TurnedOn", false )
 	self.light:Remove()
 	self:StopSound( "heat_lamp_idle" )
 	self:EmitSound( "buttons/lightswitch2.wav" )
-	if timer.Exists( "Lamp"..self:EntIndex() ) then
-		timer.Remove( "Lamp"..self:EntIndex() )
-	end
 end
 
 function ENT:TurnOn()
+	if !self:GetHasCanister() or self:GetCanister():GetFuel() <= 0 then
+		self:EmitSound( "buttons/lever6.wav" )
+		return
+	end
 	self:SetNWBool( "TurnedOn", true )
 	self.light = ents.Create("light_dynamic")
 	self.light:SetPos( self:GetPos() + Vector( 0, 0, -30 ) )
@@ -78,7 +113,6 @@ function ENT:TurnOn()
 	self.light:Spawn()
 	self:EmitSound( "heat_lamp_idle" )
 	self:EmitSound( "buttons/lightswitch2.wav" )
-	timer.Create( "Lamp"..self:EntIndex(), 180, 1, function() self:TurnOff() end )
 end
 
 function ENT:Use( activator, caller )
