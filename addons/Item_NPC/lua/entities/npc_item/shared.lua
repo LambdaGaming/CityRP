@@ -75,7 +75,7 @@ if SERVER then
 		},
 		{ --Trailer spawns
 			[rockford] = { Vector( -851, 4153, 536 ), angle_zero },
-			[southside] = { Vector( 701, -3806, -231 ), angle_ninety_neg },
+			[southside] = { Vector( 701, -3806, -231 ), angle_ninety },
 			[evocity] = { Vector( 8005, 3514, -1824 ), angle_one_eighty },
 			[florida] = { Vector( -1481, 7813, 128 ), angle_ninety },
 			[truenorth] = { Vector( 12993, -10200, 0 ), angle_one_eighty },
@@ -1832,20 +1832,6 @@ ItemNPC["gmc_moving"] = {
 		local model = "models/tdmcars/trucks/gmc_c5500.mdl"
 		local script = "scripts/vehicles/TDMCars/c5500.txt"
 		SpawnVehicle( ply, class, model, script, 5 )
-	end
-}
-
-ItemNPC["trailer_beverage"] = {
-	Name = "Beverage Trailer",
-	Description = "Refrigerated box trailer for storing drinks.",
-	Model = "models/sentry/trailers/bevtrailer.mdl",
-	Price = 500,
-	Type = 8,
-	SpawnFunction = function( ply, self )
-		local class = "bevtrailer"
-		local model = "models/sentry/trailers/bevtrailer.mdl"
-		local script = "scripts/vehicles/sentry/bevtrailer.txt"
-		SpawnVehicle( ply, class, model, script, 6, true )
 	end
 }
 
