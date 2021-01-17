@@ -27,7 +27,8 @@ BLUEPRINT_CONFIG_TIER2 = { --Blueprints you can get from smuggling weapons and r
 	{ "cw_m14", "M14" },
 	{ "cw_ar15", "AR-15" },
 	{ "cw_attpack_various", "40mm Grenade Launcher Attachment" },
-	{ "nik_m1garandnew", "M1 Garand" }
+	{ "nik_m1garandnew", "M1 Garand" },
+	{ "car_bomb", "Car Bomb" }
 }
 
 BLUEPRINT_CONFIG_TIER3 = { --Blueprints you can get from gov bank, PD bank, and deposit boxes
@@ -36,7 +37,6 @@ BLUEPRINT_CONFIG_TIER3 = { --Blueprints you can get from gov bank, PD bank, and 
 	{ "weapon_slam", "SLAM Remote Explosive" },
 	{ "cw_m249_official", "M249" },
 	{ "cw_attpack_various", "40mm Grenade Launcher Attachment" },
-	{ "car_bomb", "Car Bomb" },
 	{ "ins2_atow_rpg7", "RPG-7" },
 	{ "cw_kks_doi_mg42", "MG 42" }
 }
