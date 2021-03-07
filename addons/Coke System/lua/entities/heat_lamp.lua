@@ -92,8 +92,10 @@ if SERVER then
 end
 
 function ENT:TurnOff()
+	if self.light then
+		self.light:Remove()
+	end
 	self:SetNWBool( "TurnedOn", false )
-	self.light:Remove()
 	self:StopSound( "heat_lamp_idle" )
 	self:EmitSound( "buttons/lightswitch2.wav" )
 end
@@ -107,12 +109,21 @@ function ENT:TurnOn()
 	self.light = ents.Create("light_dynamic")
 	self.light:SetPos( self:GetPos() + Vector( 0, 0, -30 ) )
 	self.light:SetParent( self )
-	self.light:SetKeyValue( "_light", "255 191 0 255" )
 	self.light:SetKeyValue( "pitch", "180" )
 	self.light:SetKeyValue( "distance", "1500" )
 	self.light:Spawn()
 	self:EmitSound( "heat_lamp_idle" )
 	self:EmitSound( "buttons/lightswitch2.wav" )
+
+	local tr = util.TraceLine( {
+		start = self:GetPos() + Vector( 0, 0, -50 ),
+		endpos = self:GetPos() + self:GetAngles():Up() * -200
+	} )
+	if IsValid( tr.Entity ) and string.find( tr.Entity:GetClass(), "coca_plant_" ) then
+		self.light:SetKeyValue( "_light", "255 191 0 255" )
+	else
+		self.light:SetKeyValue( "_light", "255 0 0 255" )
+	end
 end
 
 function ENT:Use( activator, caller )
