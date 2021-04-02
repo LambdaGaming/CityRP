@@ -36,7 +36,7 @@ if SERVER then
 			end
 			table.insert( TotalVotes, ply:UniqueID() )
 			if numvotes == minvotes then
-				for k,v in pairs( player.GetAll() ) do
+				for k,v in ipairs( player.GetAll() ) do
 					if v:Team() == mayor then
 						v:teamBan( mayor, 600 )
 						v:changeTeam( GAMEMODE.DefaultTeam, true, false )

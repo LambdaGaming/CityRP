@@ -344,7 +344,7 @@ function OverturnedTruck()
 		event_trailer.IsEventTrailer = true
 		event_trailer:GetPhysicsObject():SetMass( 10000 )
 		
-		for k,v in pairs( player.GetAll() ) do
+		for k,v in ipairs( player.GetAll() ) do
 			if v:Team() == TEAM_TOWER or v:isCP() then
 				DarkRP.notify( v, 0, 6, "A truck has been reported to have overturned somewhere on the map, find it and clear the road!" )
 			end
@@ -368,23 +368,21 @@ function OverturnedTruckEnd()
 	if IsValid( event_truck ) then event_truck:Remove() end
 	if IsValid( event_trailer ) then event_trailer:Remove() end
 	DarkRP.notifyAll( 0, 6, "The overturned truck has been cleared from the road!" )
-	for k,v in pairs( player.GetAll() ) do
-		if v:Team() == TEAM_TOWER then
-			v:addMoney( 600 )
-			DarkRP.notify( v, 0, 6, "You have been rewarded with $600 and a crafting blueprint for clearing the overturned truck." )
-			local randwep = table.Random( BLUEPRINT_CONFIG_TIER2 )
-			local e = ents.Create( "crafting_blueprint" )
-			e:SetPos( v:GetPos() + Vector( 0, 30, 0 ) )
-			e:SetAngles( v:GetAngles() + Angle( 0, 180, 0 ) )
-			e:Spawn()
-			e:SetEntName( randwep[1] )
-			e:SetRealName( randwep[2] )
-			e:SetUses( 3 )
-			for a,b in pairs( ents.FindInSphere( v:GetPos(), 200 ) ) do
-				if b:IsPlayer() and b:isCP() then
-					b:addMoney( 300 )
-					DarkRP.notify( b, 0, 6, "You have been rewarded $300 for assisting the tow truck driver." )
-				end
+	for k,v in pairs( team.GetPlayers( TEAM_TOWER ) ) do
+		v:addMoney( 600 )
+		DarkRP.notify( v, 0, 6, "You have been rewarded with $600 and a crafting blueprint for clearing the overturned truck." )
+		local randwep = table.Random( BLUEPRINT_CONFIG_TIER2 )
+		local e = ents.Create( "crafting_blueprint" )
+		e:SetPos( v:GetPos() + Vector( 0, 30, 0 ) )
+		e:SetAngles( v:GetAngles() + Angle( 0, 180, 0 ) )
+		e:Spawn()
+		e:SetEntName( randwep[1] )
+		e:SetRealName( randwep[2] )
+		e:SetUses( 3 )
+		for a,b in pairs( ents.FindInSphere( v:GetPos(), 200 ) ) do
+			if b:IsPlayer() and b:isCP() then
+				b:addMoney( 300 )
+				DarkRP.notify( b, 0, 6, "You have been rewarded $300 for assisting the tow truck driver." )
 			end
 		end
 	end
@@ -429,7 +427,7 @@ function ActiveShooter()
 	shooter:Activate()
 	shooter:Give( "weapon_smg1" )
 	shooter:SetHealth( math.random( 100, 500 ) )
-	for k,v in pairs( player.GetAll() ) do
+	for k,v in ipairs( player.GetAll() ) do
 		shooter:AddEntityRelationship( v, D_HT, 99 )
 	end
 	shooter.IsEventNPC = true
@@ -450,7 +448,7 @@ function ActiveShooterEnd( killer )
 	e:SetEntName( randwep[1] )
 	e:SetRealName( randwep[2] )
 	e:SetUses( 3 )
-	for k,v in pairs( player.GetAll() ) do
+	for k,v in ipairs( player.GetAll() ) do
 		if v != killer then
 			DarkRP.notify( v, 0, 6, killer:Nick().." has killed the active shooter and ended the threat!" )
 		end
@@ -472,7 +470,7 @@ function HouseFire()
 	SetGlobalString( "ActiveEvent", "House Fire" )
 	FirePicked = false
 	CreateVFireBall( 1200, 200, RandFire() + Vector( 0, 0, 100 ), Vector( 0, 0, 0 ), nil )
-	for k,v in pairs( player.GetAll() ) do
+	for k,v in ipairs( player.GetAll() ) do
 		if v:IsEMS() then
 			DarkRP.notify( v, 0, 6, "A fire has been reported to have broken out in a residential building. Find the fire and put it out!" )
 		end
@@ -480,7 +478,7 @@ function HouseFire()
 end
 
 function HouseFireEnd()
-    for k,v in pairs( player.GetAll() ) do
+    for k,v in ipairs( player.GetAll() ) do
     	if v:IsEMS() then
     		v:addMoney( 300 )
     		DarkRP.notify( v, 0, 6, "You have been rewarded with $300 and a crafting blueprint for helping extinguish a building fire." )
@@ -514,7 +512,7 @@ hook.Add( "vFireRemoved", "FireEventRemove", FireEventRemove )
 
 function MoneyTransfer()
 	if team.NumPlayers( TEAM_BANKER ) == 0 then return end
-	for k,v in pairs( player.GetAll() ) do
+	for k,v in ipairs( player.GetAll() ) do
 		if v:isCP() or v:Team() == TEAM_BANKER then
 			DarkRP.notify( v, 0, 6, "A check needs tranfered from the banker NPC to the check machine!" )
 		end
@@ -603,7 +601,7 @@ function Robbery()
 		shooter:SetModel( table.Random( models ) )
 		shooter:Give( table.Random( randwep ) )
 		shooter:SetHealth( 100 )
-		for k,v in pairs( player.GetAll() ) do
+		for k,v in ipairs( player.GetAll() ) do
 			shooter:AddEntityRelationship( v, D_HT, 99 )
 		end
 		shooter.IsRobber = true
