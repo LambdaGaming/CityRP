@@ -17,7 +17,7 @@ ENT.Category = "Item NPC"
 
 local rockford = "rp_rockford_v2b"
 local southside = "rp_southside"
-local evocity = "rp_evocity2_v5p"
+local riverden = "rp_riverden_v1a"
 local florida = "rp_florida_v2"
 local truenorth = "rp_truenorth_v1a"
 local newexton = "rp_newexton2_v4h"
@@ -36,7 +36,7 @@ if SERVER then
 		{ --Police spawns
 			[rockford] = { Vector( -8248, -5485, 0 ), angle_zero },
 			[southside] = { Vector( 8688, 8619, -127 ), angle_ninety },
-			[evocity] = { Vector( -13, -2278, -179 ), angle_zero },
+			[riverden] = { Vector( -8703, 8141, -264 ), angle_one_eighty },
 			[florida] = { Vector( 6537, -1612, 136 ), angle_zero },
 			[truenorth] = { Vector( 3238, 3914, 0 ), angle_zero },
 			[newexton] = { Vector( -7225, 10207, 1024 ), angle_ninety_neg }
@@ -44,7 +44,7 @@ if SERVER then
 		{ --Fire spawns
 			[rockford] = { Vector( -5257, -3349, 8 ), angle_one_eighty },
 			[southside] = { Vector( 9431, 1260, -103 ), angle_ninety_neg },
-			[evocity] = { Vector( 5363, 13248, 68 ), angle_zero },
+			[riverden] = { Vector( -12202, 1422, -256 ), angle_one_eighty },
 			[florida] = { Vector( 6604, -4522, 136 ), angle_ninety },
 			[truenorth] = { Vector( 13135, 11426, 8 ), angle_ninety },
 			[newexton] = { Vector( 199, -6835, 1024 ), angle_one_eighty }
@@ -52,7 +52,7 @@ if SERVER then
 		{ --Medic spawns
 			[rockford] = { Vector( 318, -4842, 64 ), angle_ninety },
 			[southside] = { Vector( 7308, 4544, -63 ), angle_ninety },
-			[evocity] = { Vector( -3191, 417, 76 ), angle_zero },
+			[riverden] = { Vector( -5405, 1972, -264 ), angle_zero },
 			[florida] = { Vector( 6714, 2145, 128 ), angle_ninety },
 			[truenorth] = { Vector( 13135, 11426, 8 ), angle_ninety },
 			[newexton] = { Vector( 7651, 7446, 1016 ), angle_ninety }
@@ -60,7 +60,7 @@ if SERVER then
 		{ --Tow truck spawns
 			[rockford] = { Vector( -7564, 680, 3 ), angle_zero },
 			[southside] = { Vector( -1656, 6421, 14 ), angle_zero },
-			[evocity] = { Vector( -3282, 2636, 76 ), angle_zero },
+			[riverden] = { Vector( -1820, 6037, -264 ), angle_zero },
 			[florida] = { Vector( 2198, -2753, 131 ), angle_ninety_neg },
 			[truenorth] = { Vector( 8909, 12963, 0 ), angle_zero },
 			[newexton] = { Vector( -5618, -7700, -511 ), angle_zero }
@@ -68,7 +68,7 @@ if SERVER then
 		{ --Semi spawns
 			[rockford] = { Vector( -1434, 4509, 536 ), angle_ninety },
 			[southside] = { Vector( 701, -3806, -231 ), angle_ninety_neg },
-			[evocity] = { Vector( 8621, 3497, -1824 ), angle_one_eighty },
+			[riverden] = { Vector( -14909, 1862, -256 ), angle_ninety },
 			[florida] = { Vector( -1930, 8490, 128 ), angle_one_eighty },
 			[truenorth] = { Vector( 12511, -10243, 0 ), angle_zero },
 			[newexton] = { Vector( 14464, 12104, -7 ), angle_one_eighty }
@@ -76,7 +76,7 @@ if SERVER then
 		{ --Trailer spawns
 			[rockford] = { Vector( -851, 4153, 536 ), angle_zero },
 			[southside] = { Vector( 701, -3806, -231 ), angle_ninety },
-			[evocity] = { Vector( 8005, 3514, -1824 ), angle_one_eighty },
+			[riverden] = { Vector( -14195, 1863, -264 ), angle_one_eighty },
 			[florida] = { Vector( -1481, 7813, 128 ), angle_ninety },
 			[truenorth] = { Vector( 12993, -10200, 0 ), angle_one_eighty },
 			[newexton] = { Vector( 15593, 12228, -7 ), angle_ninety }
@@ -84,7 +84,7 @@ if SERVER then
 		{ --Smuggle truck spawns
 			[rockford] = { Vector( -2893, -6357, 0 ) , angle_ninety_neg },
 			[southside] = { Vector( -7011, -3749, -319 ), angle_one_eighty },
-			[evocity] = { Vector( 8528, 8225, 64 ), angle_ninety_neg },
+			[riverden] = { Vector( -4213, 2226, -264 ), angle_one_eighty },
 			[florida] = { Vector( 9, -135, 156 ), angle_ninety },
 			[truenorth] = { Vector( 6137, 8882, 0 ), angle_zero },
 			[newexton] = { Vector( -12616, 6635, 1016 ), Angle( 0, 145, 0 ) }
@@ -341,69 +341,58 @@ ItemNPCType[9] = {
 }
 
 -----SHOP NPC ITEMS-----
-ItemNPC["cw_nen_glock17"] = {
-	Name = "Glock 17",
+ItemNPC["arccw_mifl_fas2_g20"] = {
+	Name = "Glock 20",
 	Description = "Does good amounts of damage at medium range.",
-	Model = "models/weapons/nen/glock 17/w_pist_glock17.mdl",
+	Model = "models/weapons/arccw/mifl/fas2/c_glock20.mdl",
 	Price = 800,
 	Type = 1,
 	SpawnFunction = function( ply, self )
-		ply:Give( "cw_nen_glock17" )
+		ply:Give( "arccw_mifl_fas2_g20" )
 	end
 }
 
-ItemNPC["cw_p99"] = {
-	Name = "P99",
+ItemNPC["arccw_mifl_fas2_p226"] = {
+	Name = "P226",
 	Description = "Does fair amounts of damage at medium range.",
 	Model = "models/weapons/w_pist_p228.mdl",
 	Price = 500,
 	Type = 1,
 	SpawnFunction = function( ply, self )
-		ply:Give( "cw_p99" )
+		ply:Give( "arccw_mifl_fas2_p226" )
 	end
 }
 
-ItemNPC["cw_fiveseven"] = {
-	Name = "FiveSeven",
-	Description = "Does pretty good amounts of damage at medium range.",
-	Model = "models/weapons/w_pist_fiveseven.mdl",
-	Price = 900,
-	Type = 1,
-	SpawnFunction = function( ply, self )
-		ply:Give( "cw_fiveseven" )
-	end
-}
-
-ItemNPC["cw_deagle"] = {
+ItemNPC["arccw_mifl_fas2_deagle"] = {
 	Name = "Desert Eagle",
 	Description = "Does heavy amounts of damage at all ranges, most powerful sidearm.",
 	Model = "models/weapons/w_pist_deagle.mdl",
 	Price = 1500,
 	Type = 1,
 	SpawnFunction = function( ply, self )
-		ply:Give( "cw_deagle" )
+		ply:Give( "arccw_mifl_fas2_deagle" )
 	end
 }
 
-ItemNPC["cw_mac11"] = {
+ItemNPC["arccw_mifl_fas2_mac11"] = {
 	Name = "MAC-11",
 	Description = "Automatic pistol, does fair amounts of damage.",
 	Model = "models/weapons/w_cst_mac11.mdl",
 	Price = 2500,
 	Type = 1,
 	SpawnFunction = function( ply, self )
-		ply:Give( "cw_mac11" )
+		ply:Give( "arccw_mifl_fas2_mac11" )
 	end
 }
 
-ItemNPC["cw_mp5"] = {
+ItemNPC["arccw_mifl_fas2_mp5"] = {
 	Name = "MP5",
 	Description = "Automatic weapon, does fair amounts of damage.",
 	Model = "models/weapons/w_smg_mp5.mdl",
 	Price = 3500,
 	Type = 1,
 	SpawnFunction = function( ply, self )
-		ply:Give( "cw_mp5" )
+		ply:Give( "arccw_mifl_fas2_mp5" )
 	end
 }
 
@@ -478,25 +467,14 @@ ItemNPC["weapon_extinguisher_infinite"] = {
 	end
 }
 
-ItemNPC["cw_extrema_ratio_official"] = {
-	Name = "Knife",
-	Description = "Sharp metal blade to easily slice through almost anything.",
-	Model = "models/weapons/wcw_ex_ra.mdl",
-	Price = 250,
-	Type = 1,
-	SpawnFunction = function( ply, self )
-		ply:Give( "cw_extrema_ratio_official" )
-	end
-}
-
-ItemNPC["cw_ws_mosin"] = {
-	Name = "Mosin Nagant",
-	Description = "Small rifle, has scopes for long range encounters.",
-	Model = "models/weapons/ws mosin/w_ws_mosin.mdl",
+ItemNPC["arccw_mifl_fas2_sr25"] = {
+	Name = "SR-25",
+	Description = "Small sniper rifle.",
+	Model = "models/weapons/arccw/mifl/fas2/c_sr25.mdl",
 	Price = 4000,
 	Type = 1,
 	SpawnFunction = function( ply, self )
-		ply:Give( "cw_ws_mosin" )
+		ply:Give( "arccw_mifl_fas2_sr25" )
 	end
 }
 
@@ -526,47 +504,25 @@ ItemNPC["automod_repair_kit"] = {
 	end
 }
 
-ItemNPC["cw_ump45"] = {
-	Name = "UMP 45",
-	Description = "Large, automatic SMG.",
-	Model = "models/weapons/w_smg_ump45.mdl",
-	Price = 3500,
-	Type = 1,
-	SpawnFunction = function( ply, self )
-		ply:Give( "cw_ump45" )
-	end
-}
-
-ItemNPC["cw_l85a2"] = {
-	Name = "L85A2",
-	Description = "Large, automatic SMG.",
-	Model = "models/weapons/w_cw20_l85a2.mdl",
+ItemNPC["arccw_mifl_fas2_famas"] = {
+	Name = "FAMAS",
+	Description = "Large, automatic rifle.",
+	Model = "models/weapons/arccw/mifl/fas2/c_famas.mdl",
 	Price = 5000,
 	Type = 1,
 	SpawnFunction = function( ply, self )
-		ply:Give( "cw_l85a2" )
+		ply:Give( "arccw_mifl_fas2_famas" )
 	end
 }
 
-ItemNPC["cw_m1911"] = {
+ItemNPC["arccw_mifl_fas2_m1911"] = {
 	Name = "M1911",
 	Description = "Does alright damage, least powerful sidearm.",
-	Model = "models/weapons/cw_pist_m1911.mdl",
+	Model = "models/weapons/arccw/mifl/fas2/c_m1911.mdl",
 	Price = 300,
 	Type = 1,
 	SpawnFunction = function( ply, self )
-		ply:Give( "cw_m1911" )
-	end
-}
-
-ItemNPC["cw_makarov"] = {
-	Name = "Makarov",
-	Description = "Soviet standard issue side arm.",
-	Model = "models/cw2/pistols/w_makarov.mdl",
-	Price = 300,
-	Type = 1,
-	SpawnFunction = function( ply, self )
-		ply:Give( "cw_makarov" )
+		ply:Give( "arccw_mifl_fas2_m1911" )
 	end
 }
 
@@ -1004,28 +960,6 @@ ItemNPC["weapon_cuff_shackles"] = {
 	Type = 2,
 	SpawnFunction = function( ply, self )
 		ply:Give( "weapon_cuff_shackles" )
-	end
-}
-
-ItemNPC["cw_flash_grenade"] = {
-	Name = "Flashbang",
-	Description = "Temporarily blinds any player that looks at the grenade.",
-	Model = "models/weapons/w_eq_flashbang.mdl",
-	Price = 300,
-	Type = 2,
-	SpawnFunction = function( ply, self )
-		ply:Give( "cw_flash_grenade" )
-	end
-}
-
-ItemNPC["cw_smoke_grenade"] = {
-	Name = "Smoke Grenade",
-	Description = "Emits a dense cloud of grey smoke.",
-	Model = "models/weapons/w_eq_smokegrenade.mdl",
-	Price = 200,
-	Type = 2,
-	SpawnFunction = function( ply, self )
-		ply:Give( "cw_smoke_grenade" )
 	end
 }
 

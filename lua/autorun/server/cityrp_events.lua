@@ -34,7 +34,7 @@ end )
 local EventPos = {}
 local rockford = "rp_rockford_v2b"
 local southside = "rp_southside"
-local evocity = "rp_evocity2_v5p"
+local riverden = "rp_riverden_v1a"
 local florida = "rp_florida_v2"
 local truenorth = "rp_truenorth_v1a"
 local newexton = "rp_newexton2_v4h"
@@ -112,40 +112,40 @@ EventPos[southside] = {
 	Robbery = Vector( -1029, 2484, -102 )
 }
 
-EventPos[evocity] = {
+EventPos[riverden] = {
 	Truck = {
-		Vector( 5878, 12433, 100 ),
-		Vector( -1272, -569, 100 ),
-		Vector( 10690, 1350, -1790 )
+		Vector( -10926, 2225, -220 ),
+		Vector( -9937, -9862, -220 ),
+		Vector( 8415, -3144, 800 )
 	},
 	Shooter = {
-		Vector( 2284, -1764, 76 ),
-		Vector( -314, 2818, 76 ),
-		Vector( -2612, 3700, 76 ),
-		Vector( -2808, 686, 76 ),
-		Vector( 3928, 1729, 76 )
+		Vector( -11084, 12348, 128 ),
+		Vector( -11281, 8013, -256 ),
+		Vector( -13282, 6958, -415 ),
+		Vector( -9442, 1035, -256 ),
+		Vector( 6863, -14373, 776 )
 	},
 	Fire = {
-		Vector( 3977, 630, 404 ),
-		Vector( 3795, -2762, 252 ),
-		Vector( 5381, 7782, -1695 ),
-		Vector( 6153, 10531, -1759 ),
-		Vector( 8519, 10341, -1791 ),
-		Vector( 7665, 7182, -1819 )
+		Vector( 11915, -11570, 824 ),
+		Vector( 11024, 3567, 808 ),
+		Vector( 7588, 8592, -242 ),
+		Vector( -3090, -2614, -192 ),
+		Vector( -6105, 2117, -256 ),
+		Vector( -4166, 11292, 1 )
 	},
 	Food = {
-		Vector( 9139, 5744, -1823 ),
-		Vector( 320, -232, 76 ),
-		Vector( -6994, 1481, 140 ),
-		Vector( 2169, 12760, 64 )
+		Vector( -5538, 11362, 0 ),
+		Vector( -5160, 1092, -256 ),
+		Vector( 3840, 2059, -264 ),
+		Vector( -10275, -10213, -264 )
 	},
 	Road = {
-		Vector( -1599, 2003, 68 ),
-		Vector( -6294, 9766, 196 ),
-		Vector( 11053, 6183, -1823 ),
-		Vector( 6007, 7670, 68 )
+		Vector( -10800, 2179, -264 ),
+		Vector( -9714, 10592, -8 ),
+		Vector( 4218, -1695, -264 ),
+		Vector( 8702, 1821, 768 )
 	},
-	Robbery = Vector( 1552, -31, 150 )
+	Robbery = Vector( -11333, 14619, 0 )
 }
 
 EventPos[florida] = {
@@ -275,43 +275,23 @@ end
 hook.Add( "PlayerSay", "CurEvent", CurEvent )
 
 local function RandTruck()
-	for k,v in pairs( EventPos ) do
-		if k == tostring( map ) then
-			return table.Random( v.Truck )
-		end
-	end
+	return table.Random( EventPos[map].Truck )
 end
 
 local function RandShooter()
-	for k,v in pairs( EventPos ) do
-		if k == tostring( map ) then
-			return table.Random( v.Shooter )
-		end
-	end
+	return table.Random( EventPos[map].Shooter )
 end
 
 local function RandFire()
-	for k,v in pairs( EventPos ) do
-		if k == tostring( map ) then
-			return table.Random( v.Fire )
-		end
-	end
+	return table.Random( EventPos[map].Fire )
 end
 
 local function RandFood()
-	for k,v in pairs( EventPos ) do
-		if k == tostring( map ) then
-			return table.Random( v.Food )
-		end
-	end
+	return table.Random( EventPos[map].Food )
 end
 
 local function RandRoad()
-	for k,v in pairs( EventPos ) do
-		if k == tostring( map ) then
-			return table.Random( v.Road )
-		end
-	end
+	return table.Random( EventPos[map].Road )
 end
 
 local function ResetEventStatus()
@@ -687,7 +667,7 @@ Stops = {
 	["City Hall"] = {
 		[rockford] = Vector( -4656, -6421, 8 ),
 		[southside] = Vector( 3978, 4452, -55 ),
-		[evocity] = Vector( -758, -1140, 76 ),
+		[riverden] = Vector( -10519, 10943, 0 ),
 		[florida] = Vector( 4128, -2294, 136 ),
 		[truenorth] = Vector( 5065, 4512, 8 ),
 		[newexton] = Vector( -4088, 829, 1536 )
@@ -695,7 +675,7 @@ Stops = {
 	["Hospital"] = {
 		[rockford] = Vector( -1165, -5850, 0 ),
 		[southside] = Vector( 7423, 4728, -60 ),
-		[evocity] = Vector( -2341, 1355, 76 ),
+		[riverden] = Vector( -5156, 1771, -256 ),
 		[florida] = Vector( 6702, 6, 128 ),
 		[truenorth] = Vector( 13247, 13676, 0 ),
 		[newexton] = Vector( 5681, 5813, 1024 )
@@ -703,7 +683,7 @@ Stops = {
 	["Bank"] = {
 		[rockford] = Vector( -2806, -2797, 8 ),
 		[southside] = Vector( -2171, 1969, -103 ),
-		[evocity] = Vector( 1945, -444, 76 ),
+		[riverden] = Vector( -12720, 13972, 0 ),
 		[florida] = Vector( 2869, -6658, 136 ),
 		[truenorth] = Vector( 6994, 3091, 8 ),
 		[newexton] = Vector( -8948, -929, 1536 )
@@ -711,7 +691,7 @@ Stops = {
 	["Car Dealer"] = {
 		[rockford] = Vector( -4094, -1208, 0 ),
 		[southside] = Vector( -7185, 739, -39 ),
-		[evocity] = Vector( 2918, -1599, 76 ),
+		[riverden] = Vector( -5546, 11358, 0 ),
 		[florida] = Vector( -1942, 5691, 128 ),
 		[truenorth] = Vector( 6823, 13505, 0 ),
 		[newexton] = Vector( -6594, -6189, 1008 )
