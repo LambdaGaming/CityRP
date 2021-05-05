@@ -111,58 +111,41 @@ CraftingCategory[9] = {
 			sent_ball = 2,
 			edit_fog = 1
 		},
-		SpawnFunction =
-			function( ply, self )
-				local e = ents.Create( "weapon_crowbar" )
-				e:SetPos( self:GetPos() - Vector( 0, 0, -5 ) )
-				e:Spawn()
-			end
-		}
+		SpawnFunction = function( ply, self )
+			local e = ents.Create( "weapon_crowbar" )
+			e:SetPos( self:GetPos() - Vector( 0, 0, -5 ) )
+			e:Spawn()
+		end
+	}
 ]]
 
-CraftingTable["cw_l85a2"] = {
-	Name = "L85A2",
+CraftingTable["arccw_mifl_fas2_famas"] = {
+	Name = "FAMAS",
 	Description = "Requires 7 iron and 1 wrench.",
-	Category = "SMGs",
+	Category = "Rifles",
 	Materials = {
 		ironbar = 7,
 		wrench = 1
 	},
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "cw_l85a2" )
-		end
-	}
+	SpawnFunction = function( ply, self )
+		ply:Give( "arccw_mifl_fas2_famas" )
+	end
+}
 
-CraftingTable["cw_ump45"] = {
-	Name = "UMP 45",
-	Description = "Requires 5 iron and 1 wrench.",
-	Category = "SMGs",
-	Materials = {
-		ironbar = 5,
-		wrench = 1
-	},
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "cw_ump45" )
-		end
-	}
-
-CraftingTable["cw_ws_mosin"] = {
-	Name = "Mosin Nagant",
+CraftingTable["arccw_mifl_fas2_sr25"] = {
+	Name = "SR-25",
 	Description = "Requires 5 iron and 2 wrenches.",
 	Category = "Rifles",
 	Materials = {
 		ironbar = 5,
 		wrench = 2
 	},
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "cw_ws_mosin" )
-		end
-	}
+	SpawnFunction = function( ply, self )
+		ply:Give( "arccw_mifl_fas2_sr25" )
+	end
+}
 
-CraftingTable["cw_mp5"] = {
+CraftingTable["arccw_mifl_fas2_mp5"] = {
 	Name = "MP5",
 	Description = "Requires 5 iron and 1 wrench.",
 	Category = "SMGs",
@@ -170,13 +153,12 @@ CraftingTable["cw_mp5"] = {
 		ironbar = 5,
 		wrench = 1
 	},
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "cw_mp5" )
-		end
-	}
+	SpawnFunction = function( ply, self )
+		ply:Give( "arccw_mifl_fas2_mp5" )
+	end
+}
 
-CraftingTable["cw_mac11"] = {
+CraftingTable["arccw_mifl_fas2_mac11"] = {
 	Name = "MAC-11",
 	Description = "Requires 4 iron and 1 wrench.",
 	Category = "SMGs",
@@ -184,11 +166,10 @@ CraftingTable["cw_mac11"] = {
 		ironbar = 4,
 		wrench = 1
 	},
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "cw_mac11" )
-		end
-	}
+	SpawnFunction = function( ply, self )
+		ply:Give( "arccw_mifl_fas2_mac11" )
+	end
+}
 
 CraftingTable["dronesrewrite_spyspider"] = {
 	Name = "Spider Drone",
@@ -199,14 +180,13 @@ CraftingTable["dronesrewrite_spyspider"] = {
 		ironbar = 5,
 		dronesrewrite_spy = 1
 	},
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "dronesrewrite_spyspider" )
-			e:SetPos( self:GetPos() - Vector( 0, 0, -5 ) )
-			e:Spawn()
-			e:SetupOwner( ply )
-		end
-	}
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "dronesrewrite_spyspider" )
+		e:SetPos( self:GetPos() - Vector( 0, 0, -5 ) )
+		e:Spawn()
+		e:SetupOwner( ply )
+	end
+}
 
 CraftingTable["dronesrewrite_nanodr"] = {
 	Name = "Nano Drone",
@@ -217,17 +197,16 @@ CraftingTable["dronesrewrite_nanodr"] = {
 		wrench = 3,
 		ironbar = 5
 	},
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "dronesrewrite_nanodr" )
-			e:SetPos( self:GetPos() - Vector( 0, 0, -5 ) )
-			e:Spawn()
-			e:SetupOwner( ply )
-		end
-	}
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "dronesrewrite_nanodr" )
+		e:SetPos( self:GetPos() - Vector( 0, 0, -5 ) )
+		e:Spawn()
+		e:SetupOwner( ply )
+	end
+}
 
-CraftingTable["cw_kks_doi_mg42"] = {
-	Name = "MG 42",
+CraftingTable["arccw_mifl_fas2_rpk"] = {
+	Name = "RPK47",
 	Description = "Needs 5 wrenches and 12 iron",
 	NeedsBlueprint = true,
 	Category = "Rifles",
@@ -235,14 +214,13 @@ CraftingTable["cw_kks_doi_mg42"] = {
 		wrench = 5,
 		ironbar = 12,
 	},
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "cw_kks_doi_mg42" )
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "arccw_mifl_fas2_rpk" )
+	end
 }
 
-CraftingTable["nik_m1garandnew"] = {
-	Name = "M1 Garand",
+CraftingTable["arccw_mifl_fas2_m82"] = {
+	Name = "M82 Antimaterial Rifle",
 	Description = "Needs 4 wrenches, and 7 iron",
 	NeedsBlueprint = true,
 	Category = "Rifles",
@@ -250,14 +228,13 @@ CraftingTable["nik_m1garandnew"] = {
 		ironbar = 7,
 		wrench = 4,
 	},
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "nik_m1garandnew" )
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "arccw_mifl_fas2_m82" )
+	end
 }
 
-CraftingTable["cw_ak74"] = {
-	Name = "AK-74",
+CraftingTable["arccw_mifl_fas2_ak47"] = {
+	Name = "AK-47",
 	Description = "Needs 4 wood, 2 wrenches, and 6 iron",
 	NeedsBlueprint = true,
 	Category = "Rifles",
@@ -266,14 +243,13 @@ CraftingTable["cw_ak74"] = {
 		ironbar = 6,
 		wrench = 2,
 	},
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "cw_ak74" )
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "arccw_mifl_fas2_ak47" )
+	end
 }
 
-CraftingTable["cw_ar15"] = {
-	Name = "AR-15",
+CraftingTable["arccw_mifl_fas2_m4a1"] = {
+	Name = "M4A1",
 	Description = "Needs 6 iron and 2 wrenches",
 	NeedsBlueprint = true,
 	Category = "Rifles",
@@ -281,13 +257,12 @@ CraftingTable["cw_ar15"] = {
 		wrench = 2,
 		ironbar = 6,
 	},
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "cw_ar15" )
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "arccw_mifl_fas2_m4a1" )
+	end
 }
 
-CraftingTable["cw_m3super90"] = {
+CraftingTable["arccw_mifl_fas2_m3"] = {
 	Name = "M3 Super 90",
 	Description = "Needs 3 wrenches and 8 iron",
 	NeedsBlueprint = true,
@@ -296,10 +271,9 @@ CraftingTable["cw_m3super90"] = {
 		wrench = 3,
 		ironbar = 8,
 	},
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "cw_m3super90" )
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "arccw_mifl_fas2_m3" )
+	end
 }
 
 CraftingTable["wrench"] = {
@@ -309,30 +283,28 @@ CraftingTable["wrench"] = {
 	Materials = {
 		ironbar = 2,
 	},
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "wrench" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-			e:Spawn()
-		end
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "wrench" )
+		e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
+		e:Spawn()
+	end
 }
 
-CraftingTable["cw_scarh"] = {
-	Name = "SCAR-H",
+CraftingTable["arccw_mifl_fas2_toz34"] = {
+	Name = "TOZ-34",
 	Description = "Needs 8 iron and 2 wrenches",
 	NeedsBlueprint = true,
-	Category = "Rifles",
+	Category = "Shotguns",
 	Materials = {
 		ironbar = 8,
 		wrench = 2,
 	},
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "cw_scarh" )
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "arccw_mifl_fas2_toz34" )
+	end
 }
 
-CraftingTable["cw_g3a3"] = {
+CraftingTable["arccw_mifl_fas2_g3"] = {
 	Name = "G3A3",
 	Description = "Needs 6 iron and 1 wrench",
 	NeedsBlueprint = true,
@@ -341,13 +313,12 @@ CraftingTable["cw_g3a3"] = {
 		ironbar = 6,
 		wrench = 1,
 	},
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "cw_g3a3" )
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "arccw_mifl_fas2_g3" )
+	end
 }
 
-CraftingTable["cw_g36c"] = {
+CraftingTable["arccw_mifl_fas2_g36c"] = {
 	Name = "G36C",
 	Description = "Needs 6 iron and 1 wrench",
 	NeedsBlueprint = true,
@@ -356,30 +327,13 @@ CraftingTable["cw_g36c"] = {
 		ironbar = 6,
 		wrench = 1,
 	},
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "cw_g36c" )
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "arccw_mifl_fas2_g36c" )
+	end
 }
 
-CraftingTable["cw_frag_grenade"] = {
-	Name = "Frag Grenade",
-	Description = "Needs 4 iron, 1 diamond, and 1 ruby.",
-	NeedsBlueprint = true,
-	Category = "Explosives",
-	Materials = {
-		ironbar = 4,
-		diamond = 1,
-		ruby = 1,
-	},
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "cw_frag_grenade" )
-		end
-}
-
-CraftingTable["cw_l115"] = {
-	Name = "L115 Sniper",
+CraftingTable["arccw_mifl_fas2_m24"] = {
+	Name = "M24 Sniper",
 	Description = "Needs 10 iron and 2 wrenches",
 	NeedsBlueprint = true,
 	Category = "Rifles",
@@ -387,14 +341,13 @@ CraftingTable["cw_l115"] = {
 		ironbar = 10,
 		wrench = 2,
 	},
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "cw_l115" )
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "arccw_mifl_fas2_m24" )
+	end
 }
 
-CraftingTable["cw_m14"] = {
-	Name = "M14",
+CraftingTable["arccw_mifl_fas2_sg55x"] = {
+	Name = "SG552",
 	Description = "Needs 7 iron and 2 wrenches",
 	NeedsBlueprint = true,
 	Category = "Rifles",
@@ -402,25 +355,23 @@ CraftingTable["cw_m14"] = {
 		ironbar = 7,
 		wrench = 2,
 	},
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "cw_m14" )
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "arccw_mifl_fas2_sg55x" )
+	end
 }
 
-CraftingTable["cw_vss"] = {
-	Name = "VSS",
+CraftingTable["arccw_mifl_fas2_870"] = {
+	Name = "Remington 870",
 	Description = "Needs 6 iron and 1 wrench",
 	NeedsBlueprint = true,
-	Category = "Rifles",
+	Category = "Shotguns",
 	Materials = {
 		ironbar = 6,
 		wrench = 1,
 	},
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "cw_vss" )
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "arccw_mifl_fas2_870" )
+	end
 }
 
 CraftingTable["sent_turtle"] = {
@@ -430,12 +381,11 @@ CraftingTable["sent_turtle"] = {
 	Materials = {
 		swm_log = 2,
 	},
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "sent_turtle" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-			e:Spawn()
-		end
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "sent_turtle" )
+		e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
+		e:Spawn()
+	end
 }
 
 CraftingTable["lockpick"] = {
@@ -445,10 +395,9 @@ CraftingTable["lockpick"] = {
 	Materials = {
 		ironbar = 3,
 	},
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "lockpick" )
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "lockpick" )
+	end
 }
 
 CraftingTable["factory_lockpick"] = {
@@ -459,10 +408,9 @@ CraftingTable["factory_lockpick"] = {
 	Materials = {
 		ironbar = 20,
 	},
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "factory_lockpick" )
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "factory_lockpick" )
+	end
 }
 
 CraftingTable["usm_c4"] = {
@@ -475,28 +423,13 @@ CraftingTable["usm_c4"] = {
 		goldbar = 1,
 		diamond = 1,
 	},
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "usm_c4" )
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "usm_c4" )
+	end
 }
 
-CraftingTable["cw_extrema_ratio_official"] = {
-	Name = "Knife",
-	Description = "Needs 1 wood and 2 iron",
-	Category = "Tools",
-	Materials = {
-		ironbar = 3,
-		swm_log = 1,
-	},
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "cw_extrema_ratio_official" )
-		end
-}
-
-CraftingTable["cw_mr96"] = {
-	Name = "MR-96",
+CraftingTable["arccw_mifl_fas2_ragingbull"] = {
+	Name = "Raging Bull",
 	Description = "Needs 5 iron and 1 wrench",
 	NeedsBlueprint = true,
 	Category = "Pistols",
@@ -504,10 +437,9 @@ CraftingTable["cw_mr96"] = {
 		ironbar = 5,
 		wrench = 1,
 	},
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "cw_mr96" )
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "arccw_mifl_fas2_ragingbull" )
+	end
 }
 
 CraftingTable["item_box_buckshot"] = {
@@ -518,16 +450,15 @@ CraftingTable["item_box_buckshot"] = {
 		ironbar = 4,
 		wrench = 1,
 	},
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "item_box_buckshot" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-			e:Spawn()
-		end
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "item_box_buckshot" )
+		e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
+		e:Spawn()
+	end
 }
 
-CraftingTable["cw_shorty"] = {
-	Name = "Serbu Super-Shorty",
+CraftingTable["arccw_fml_fas2_custom_mass26"] = {
+	Name = "MASS-26",
 	Description = "Needs 3 wrenches and 6 iron",
 	NeedsBlueprint = true,
 	Category = "Shotguns",
@@ -535,28 +466,26 @@ CraftingTable["cw_shorty"] = {
 		wrench = 3,
 		ironbar = 6,
 	},
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "cw_shorty" )
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "arccw_fml_fas2_custom_mass26" )
+	end
 }
 
-CraftingTable["cw_attpack_suppressors"] = {
-	Name = "Suppressor Attachment Pack",
-	Description = "Needs 8 iron",
-	Category = "Ammo & Upgrades",
+CraftingTable["arccw_mifl_fas2_ks23"] = {
+	Name = "KS-23",
+	Description = "Needs 4 wrenches and 8 iron",
+	NeedsBlueprint = true,
+	Category = "Shotguns",
 	Materials = {
+		wrench = 4,
 		ironbar = 8,
 	},
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "cw_attpack_suppressors" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-			e:Spawn()
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "arccw_mifl_fas2_ks23" )
+	end
 }
 
-CraftingTable["cw_m249_official"] = {
+CraftingTable["arccw_mifl_fas2_minimi"] = {
 	Name = "M429",
 	Description = "Needs 2 wrenches and 10 iron",
 	NeedsBlueprint = true,
@@ -565,40 +494,9 @@ CraftingTable["cw_m249_official"] = {
 		wrench = 2,
 		ironbar = 10,
 	},
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "cw_m249_official" )
-		end
-}
-
-CraftingTable["cw_attpack_ammotypes_rifles"] = {
-	Name = "Extra Rifle Ammo Types",
-	Description = "Needs 5 iron",
-	Category = "Ammo & Upgrades",
-	Materials = {
-		ironbar = 5,
-	},
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "cw_attpack_ammotypes_rifles" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-			e:Spawn()
-		end
-}
-
-CraftingTable["cw_attpack_ammotypes_shotguns"] = {
-	Name = "Extra Shotgun Ammo Types",
-	Description = "Needs 10 iron",
-	Category = "Ammo & Upgrades",
-	Materials = {
-		ironbar = 10,
-	},
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "cw_attpack_ammotypes_shotguns" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-			e:Spawn()
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "arccw_mifl_fas2_minimi" )
+	end
 }
 
 CraftingTable["weapon_slam"] = {
@@ -611,59 +509,9 @@ CraftingTable["weapon_slam"] = {
 		goldbar = 1,
 		diamond = 1,
 	},
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "weapon_slam" )
-		end
-}
-
-CraftingTable["cw_attpack_sights_longrange"] = {
-	Name = "Long Range Scopes Attachment Pack",
-	Description = "Needs 5 iron and 1 wrench",
-	Category = "Ammo & Upgrades",
-	Materials = {
-		ironbar = 5,
-		wrench = 1,
-	},
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "cw_attpack_sights_longrange" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-			e:Spawn()
-		end
-}
-
-CraftingTable["cw_attpack_various"] = {
-	Name = "40mm Grenade Launcher Rifle Attachment",
-	Description = "Needs 6 iron and 2 wrenches",
-	NeedsBlueprint = true,
-	Category = "Ammo & Upgrades",
-	Materials = {
-		ironbar = 6,
-		wrench = 2,
-	},
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "cw_attpack_various" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-			e:Spawn()
-		end
-}
-
-CraftingTable["cw_ammo_40mm"] = {
-	Name = "40mm Grenade",
-	Description = "Needs 7 iron and 4 wrenches",
-	Category = "Ammo & Upgrades",
-	Materials = {
-		ironbar = 7,
-		wrench = 4,
-	},
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "cw_ammo_40mm" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-			e:Spawn()
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "weapon_slam" )
+	end
 }
 
 CraftingTable["weapon_car_bomb"] = {
@@ -676,14 +524,13 @@ CraftingTable["weapon_car_bomb"] = {
 		goldbar = 1,
 		diamond = 1,
 	},
-	SpawnFunction =
-		function( ply, self )
-			ply:Give( "weapon_car_bomb" )
-		end
+	SpawnFunction = function( ply, self )
+		ply:Give( "weapon_car_bomb" )
+	end
 }
 
-CraftingTable["ins2_atow_rpg7"] = {
-	Name = "RPG-7",
+CraftingTable["arccw_mifl_fas2_m79"] = {
+	Name = "M79 Grenade Launcher",
 	Description = "Needs 25 iron, 3 diamonds, 2 rubys, and 10 wood",
 	NeedsBlueprint = true,
 	Category = "Explosives",
@@ -693,12 +540,11 @@ CraftingTable["ins2_atow_rpg7"] = {
 		ruby = 2,
 		swm_log = 10,
 	},
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "ins2_atow_rpg7" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-			e:Spawn()
-		end
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "arccw_mifl_fas2_m79" )
+		e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
+		e:Spawn()
+	end
 }
 
 CraftingTable["wardrobe"] = {
@@ -712,10 +558,9 @@ CraftingTable["wardrobe"] = {
 		ruby = 1,
 		diamond = 1,
 	},
-	SpawnFunction =
-		function( ply, self )
-			local e = ents.Create( "wardrobe" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, 45 ) )
-			e:Spawn()
-		end
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "wardrobe" )
+		e:SetPos( self:GetPos() + Vector( 0, 0, 45 ) )
+		e:Spawn()
+	end
 }

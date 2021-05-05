@@ -9,36 +9,33 @@ ENT.Spawnable = false
 ENT.AdminOnly = true
 
 BLUEPRINT_CONFIG_TIER1 = { --Blueprints you can get from the dumpster
-	{ "cw_g3a3", "G3A3" },
-	{ "cw_g36c", "G36C" },
-	{ "cw_vss", "VSS" },
+	{ "arccw_mifl_fas2_g3", "G3A3" },
+	{ "arccw_mifl_fas2_g36c", "G36C" },
+	{ "arccw_mifl_fas2_870", "Remington 870" },
 	{ "factory_lockpick", "Premium Lockpick" },
-	{ "cw_mr96", "MR-96" },
-	{ "cw_shorty", "Serbu Super-Shorty" },
+	{ "arccw_mifl_fas2_ragingbull", "Raging Bull" },
+	{ "arccw_fml_fas2_custom_mass26", "MASS-26" },
 	{ "dronesrewrite_nanodr", "Nano Drone" }
 }
 
 BLUEPRINT_CONFIG_TIER2 = { --Blueprints you can get from smuggling weapons and random events
-	{ "cw_ak74", "AK-74" },
-	{ "cw_m3super90", "M3 Super 90" },
-	{ "cw_scarh", "SCAR-H" },
-	{ "cw_frag_grenade", "Frag Grenade" },
-	{ "cw_l115", "L115" },
-	{ "cw_m14", "M14" },
-	{ "cw_ar15", "AR-15" },
-	{ "cw_attpack_various", "40mm Grenade Launcher Attachment" },
-	{ "nik_m1garandnew", "M1 Garand" },
+	{ "arccw_mifl_fas2_ak47", "AK-47" },
+	{ "arccw_mifl_fas2_m3", "M3 Super 90" },
+	{ "arccw_mifl_fas2_toz34", "TOZ-34" },
+	{ "arccw_mifl_fas2_m24", "M24" },
+	{ "arccw_mifl_fas2_sg55x", "SG552" },
+	{ "arccw_mifl_fas2_m4a1", "M4A1" },
 	{ "car_bomb", "Car Bomb" }
 }
 
 BLUEPRINT_CONFIG_TIER3 = { --Blueprints you can get from gov bank, PD bank, and deposit boxes
-	{ "cw_frag_grenade", "Frag Grenade" },
+	{ "arccw_mifl_fas2_ks23", "KS-23" },
 	{ "usm_c4", "Timed C4" },
 	{ "weapon_slam", "SLAM Remote Explosive" },
-	{ "cw_m249_official", "M249" },
-	{ "cw_attpack_various", "40mm Grenade Launcher Attachment" },
-	{ "ins2_atow_rpg7", "RPG-7" },
-	{ "cw_kks_doi_mg42", "MG 42" }
+	{ "arccw_mifl_fas2_minimi", "M249" },
+	{ "arccw_mifl_fas2_m79", "M79 Grenade Launcher" },
+	{ "arccw_mifl_fas2_rpk", "RPK47" },
+	{ "arccw_mifl_fas2_m82", "M82 Antimaterial Rifle" }
 }
 
 function ENT:SpawnFunction( ply, tr, name )
