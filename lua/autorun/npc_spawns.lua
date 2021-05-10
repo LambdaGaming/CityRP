@@ -226,7 +226,7 @@ if SERVER then
 
 				local tow = ents.Create( "npc_item" )
 				tow:SetPos( Vector( -1960, 7342, -256 ) )
-				tow:SetAngles( angle_one_eighty )
+				tow:SetAngles( angle_oneeighty )
 				tow:Spawn()
 				tow:ApplyType( 7 )
 

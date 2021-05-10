@@ -29,7 +29,9 @@ if SERVER then
 	local AmmoTypes = {
 		["Buckshot"] = { "item_box_buckshot", 40 },
 		["Pistol"] = {"item_ammo_pistol_large", 20 },
-		["SMG1"] = { "item_ammo_smg1", 30 }
+		["SMG1"] = { "item_ammo_smg1", 30 },
+		["357"] = { "item_ammo_357", 20 },
+		["AR2"] = { "item_ammo_ar2", 30 }
 	}
 
 	function ENT:BreakOpen( ply ) --Integrate with the Enterprise ATM for robbing feature
