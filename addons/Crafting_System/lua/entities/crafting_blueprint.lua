@@ -25,7 +25,7 @@ BLUEPRINT_CONFIG_TIER2 = { --Blueprints you can get from smuggling weapons and r
 	{ "arccw_mifl_fas2_m24", "M24" },
 	{ "arccw_mifl_fas2_sg55x", "SG552" },
 	{ "arccw_mifl_fas2_m4a1", "M4A1" },
-	{ "car_bomb", "Car Bomb" }
+	{ "weapon_car_bomb", "Car Bomb" }
 }
 
 BLUEPRINT_CONFIG_TIER3 = { --Blueprints you can get from gov bank, PD bank, and deposit boxes
