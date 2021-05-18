@@ -11,7 +11,6 @@ ENT.AdminOnly = true
 BLUEPRINT_CONFIG_TIER1 = { --Blueprints you can get from the dumpster
 	{ "arccw_mifl_fas2_g3", "G3A3" },
 	{ "arccw_mifl_fas2_g36c", "G36C" },
-	{ "arccw_mifl_fas2_870", "Remington 870" },
 	{ "factory_lockpick", "Premium Lockpick" },
 	{ "arccw_mifl_fas2_ragingbull", "Raging Bull" },
 	{ "arccw_fml_fas2_custom_mass26", "MASS-26" },

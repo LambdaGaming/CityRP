@@ -360,20 +360,6 @@ CraftingTable["arccw_mifl_fas2_sg55x"] = {
 	end
 }
 
-CraftingTable["arccw_mifl_fas2_870"] = {
-	Name = "Remington 870",
-	Description = "Needs 6 iron and 1 wrench",
-	NeedsBlueprint = true,
-	Category = "Shotguns",
-	Materials = {
-		ironbar = 6,
-		wrench = 1,
-	},
-	SpawnFunction = function( ply, self )
-		ply:Give( "arccw_mifl_fas2_870" )
-	end
-}
-
 CraftingTable["sent_turtle"] = {
 	Name = "Toy Turtle",
 	Description = "Needs 2 wood",
