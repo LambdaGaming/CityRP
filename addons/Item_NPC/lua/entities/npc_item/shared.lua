@@ -1,13 +1,3 @@
-
---[[
-	This is a modified version of my Item NPC addon. If you are looking for the main addon, it can be found here: https://github.com/LambdaGaming/Item_NPC
-
-	If you are here to find out how to add a specific item, more than likely you will find it below. Some items that have been added to this NPC include
-	health, armor, weapons, entities, and vehicles. This version also includes support for having animated playermodels on the NPC base.
-	(Which can be found in the init.lua under the ENT:Think() function.) If you need a custom item added and you can't find an example on how to do
-	it here, feel free to add me on steam and ask me about it: https://steamcommunity.com/profiles/76561198136556075 (Make sure you leave a comment stating why you're adding me or you'll get ignored)
-]]
-
 ENT.Type = "ai"
 ENT.Base = "base_ai"
 ENT.PrintName = "Item NPC"
@@ -960,6 +950,28 @@ ItemNPC["weapon_cuff_shackles"] = {
 	Type = 2,
 	SpawnFunction = function( ply, self )
 		ply:Give( "weapon_cuff_shackles" )
+	end
+}
+
+ItemNPC["arccw_nade_flash"] = {
+	Name = "Flashbang",
+	Description = "Temporarily blinds any player that looks at the grenade.",
+	Model = "models/weapons/w_eq_flashbang.mdl",
+	Price = 300,
+	Type = 2,
+	SpawnFunction = function( ply, self )
+		ply:Give( "arccw_nade_flash" )
+	end
+}
+
+ItemNPC["arccw_nade_smoke"] = {
+	Name = "Smoke Grenade",
+	Description = "Emits a dense cloud of grey smoke.",
+	Model = "models/weapons/w_eq_smokegrenade.mdl",
+	Price = 200,
+	Type = 2,
+	SpawnFunction = function( ply, self )
+		ply:Give( "arccw_nade_smoke" )
 	end
 }
 

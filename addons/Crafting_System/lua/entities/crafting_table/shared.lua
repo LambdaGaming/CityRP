@@ -332,6 +332,21 @@ CraftingTable["arccw_mifl_fas2_g36c"] = {
 	end
 }
 
+CraftingTable["arccw_nade_frag"] = {
+	Name = "Frag Grenade",
+	Description = "Needs 4 iron, 1 diamond, and 1 ruby.",
+	NeedsBlueprint = true,
+	Category = "Explosives",
+	Materials = {
+		ironbar = 4,
+		diamond = 1,
+		ruby = 1,
+	},
+	SpawnFunction = function( ply, self )
+		ply:Give( "arccw_nade_frag" )
+	end
+}
+
 CraftingTable["arccw_mifl_fas2_m24"] = {
 	Name = "M24 Sniper",
 	Description = "Needs 10 iron and 2 wrenches",
