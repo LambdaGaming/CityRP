@@ -547,21 +547,3 @@ CraftingTable["arccw_mifl_fas2_m79"] = {
 		e:Spawn()
 	end
 }
-
-CraftingTable["wardrobe"] = {
-	Name = "Wardrobe",
-	Description = "Needs 2 iron, 8 wood, 1 gold, 1 ruby, and 1 diamond.",
-	Category = "Other",
-	Materials = {
-		ironbar = 2,
-		swm_log = 8,
-		goldbar = 1,
-		ruby = 1,
-		diamond = 1,
-	},
-	SpawnFunction = function( ply, self )
-		local e = ents.Create( "wardrobe" )
-		e:SetPos( self:GetPos() + Vector( 0, 0, 45 ) )
-		e:Spawn()
-	end
-}
