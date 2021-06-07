@@ -29,7 +29,6 @@ BLUEPRINT_CONFIG_TIER2 = { --Blueprints you can get from smuggling weapons and r
 }
 
 BLUEPRINT_CONFIG_TIER3 = { --Blueprints you can get from gov bank, PD bank, and deposit boxes
-	{ "arccw_nade_frag", "Frag Grenade" },
 	{ "arccw_mifl_fas2_ks23", "KS-23" },
 	{ "usm_c4", "Timed C4" },
 	{ "weapon_slam", "SLAM Remote Explosive" },

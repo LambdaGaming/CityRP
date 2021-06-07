@@ -200,8 +200,8 @@ local function SmuggleCheck( ply )
 		DarkRP.notify( ply, 1, 6, "Please wait "..string.ToMinutesSeconds( ply.SmuggleCooldown - CurTime() ).." to smuggle again." )
 		return false
 	end
-	if copcount < 1 then
-		DarkRP.notify( ply, 1, 6, "There needs to be at least 1 cop on the server for smuggling to unlock." )
+	if copcount < 2 then
+		DarkRP.notify( ply, 1, 6, "There needs to be at least 2 cops on the server for smuggling to unlock." )
 		return false
 	end
 	return true
@@ -774,7 +774,7 @@ ItemNPC["crafting_blueprint_g3a3"] = {
 	Name = "G3A3 Crafting Blueprint",
 	Description = "Crafting blueprint for the G3A3 rifle.",
 	Model = "models/props_lab/binderblue.mdl",
-	Price = 3000,
+	Price = 1000,
 	Type = 1,
 	SpawnFunction = function( ply, self )
 		local e = ents.Create( "crafting_blueprint" )
@@ -788,7 +788,7 @@ ItemNPC["crafting_blueprint_g36c"] = {
 	Name = "G36C Crafting Blueprint",
 	Description = "Crafting blueprint for the G36C rifle.",
 	Model = "models/props_lab/binderblue.mdl",
-	Price = 3000,
+	Price = 1000,
 	Type = 1,
 	SpawnFunction = function( ply, self )
 		local e = ents.Create( "crafting_blueprint" )
@@ -798,11 +798,11 @@ ItemNPC["crafting_blueprint_g36c"] = {
 	end
 }
 
-ItemNPC["crafting_blueprint_vss"] = {
-	Name = "VSS Crafting Blueprint",
-	Description = "Crafting blueprint for the VSS rifle.",
+ItemNPC["crafting_blueprint_lockpick"] = {
+	Name = "Premium Lockpick",
+	Description = "Crafting blueprint for the premium lockpick.",
 	Model = "models/props_lab/binderblue.mdl",
-	Price = 3000,
+	Price = 500,
 	Type = 1,
 	SpawnFunction = function( ply, self )
 		local e = ents.Create( "crafting_blueprint" )
@@ -812,11 +812,11 @@ ItemNPC["crafting_blueprint_vss"] = {
 	end
 }
 
-ItemNPC["crafting_blueprint_lockpick"] = {
-	Name = "Premium Lockpick Crafting Blueprint",
-	Description = "Crafting blueprint for the premium lockpick.",
+ItemNPC["crafting_blueprint_ragingbull"] = {
+	Name = "Raging Bull Crafting Blueprint",
+	Description = "Crafting blueprint for the Raging Bull revolver.",
 	Model = "models/props_lab/binderblue.mdl",
-	Price = 700,
+	Price = 1000,
 	Type = 1,
 	SpawnFunction = function( ply, self )
 		local e = ents.Create( "crafting_blueprint" )
@@ -826,11 +826,11 @@ ItemNPC["crafting_blueprint_lockpick"] = {
 	end
 }
 
-ItemNPC["crafting_blueprint_mr96"] = {
-	Name = "MR-96 Crafting Blueprint",
-	Description = "Crafting blueprint for the MR-96 revolver.",
+ItemNPC["crafting_blueprint_mass26"] = {
+	Name = "MASS-26 Crafting Blueprint",
+	Description = "Crafting blueprint for the MASS-26 shotgun.",
 	Model = "models/props_lab/binderblue.mdl",
-	Price = 2500,
+	Price = 1000,
 	Type = 1,
 	SpawnFunction = function( ply, self )
 		local e = ents.Create( "crafting_blueprint" )
@@ -840,11 +840,11 @@ ItemNPC["crafting_blueprint_mr96"] = {
 	end
 }
 
-ItemNPC["crafting_blueprint_shorty"] = {
-	Name = "Shorty Shotgun Crafting Blueprint",
-	Description = "Crafting blueprint for the shorty shotgun.",
+ItemNPC["crafting_blueprint_nano"] = {
+	Name = "Nano Drone Crafting Blueprint",
+	Description = "Crafting blueprint for the nano drone.",
 	Model = "models/props_lab/binderblue.mdl",
-	Price = 5000,
+	Price = 1000,
 	Type = 1,
 	SpawnFunction = function( ply, self )
 		local e = ents.Create( "crafting_blueprint" )
@@ -854,17 +854,213 @@ ItemNPC["crafting_blueprint_shorty"] = {
 	end
 }
 
-ItemNPC["crafting_blueprint_nano"] = {
-	Name = "Nano Drone Crafting Blueprint",
-	Description = "Crafting blueprint for the nano drone.",
+ItemNPC["crafting_blueprint_ak47"] = {
+	Name = "AK-47 Crafting Blueprint",
+	Description = "Crafting blueprint for the AK-47 rifle.",
 	Model = "models/props_lab/binderblue.mdl",
-	Price = 3500,
+	Price = 5000,
 	Type = 1,
 	SpawnFunction = function( ply, self )
 		local e = ents.Create( "crafting_blueprint" )
 		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
 		e:Spawn()
 		ApplyBlueprintData( e, 7 )
+	end
+}
+
+ItemNPC["crafting_blueprint_m3super90"] = {
+	Name = "M3 Super 90 Crafting Blueprint",
+	Description = "Crafting blueprint for the M3 Super 90 shotgun.",
+	Model = "models/props_lab/binderblue.mdl",
+	Price = 5000,
+	Type = 1,
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "crafting_blueprint" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
+		e:Spawn()
+		ApplyBlueprintData( e, 8 )
+	end
+}
+
+ItemNPC["crafting_blueprint_toz34"] = {
+	Name = "TOZ-34 Crafting Blueprint",
+	Description = "Crafting blueprint for the TOZ-34 shotgun.",
+	Model = "models/props_lab/binderblue.mdl",
+	Price = 5000,
+	Type = 1,
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "crafting_blueprint" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
+		e:Spawn()
+		ApplyBlueprintData( e, 9 )
+	end
+}
+
+ItemNPC["crafting_blueprint_m24"] = {
+	Name = "M24 Crafting Blueprint",
+	Description = "Crafting blueprint for the M24 rifle.",
+	Model = "models/props_lab/binderblue.mdl",
+	Price = 5000,
+	Type = 1,
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "crafting_blueprint" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
+		e:Spawn()
+		ApplyBlueprintData( e, 10 )
+	end
+}
+
+ItemNPC["crafting_blueprint_sg552"] = {
+	Name = "SG552 Crafting Blueprint",
+	Description = "Crafting blueprint for the SG552 rifle.",
+	Model = "models/props_lab/binderblue.mdl",
+	Price = 5000,
+	Type = 1,
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "crafting_blueprint" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
+		e:Spawn()
+		ApplyBlueprintData( e, 11 )
+	end
+}
+
+ItemNPC["crafting_blueprint_m4a1"] = {
+	Name = "M4A1 Crafting Blueprint",
+	Description = "Crafting blueprint for the M4A1 rifle.",
+	Model = "models/props_lab/binderblue.mdl",
+	Price = 5000,
+	Type = 1,
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "crafting_blueprint" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
+		e:Spawn()
+		ApplyBlueprintData( e, 12 )
+	end
+}
+
+ItemNPC["crafting_blueprint_carbomb"] = {
+	Name = "Car Bomb Crafting Blueprint",
+	Description = "Crafting blueprint for the car bomb.",
+	Model = "models/props_lab/binderblue.mdl",
+	Price = 5000,
+	Type = 1,
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "crafting_blueprint" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
+		e:Spawn()
+		ApplyBlueprintData( e, 13 )
+	end
+}
+
+ItemNPC["crafting_blueprint_frag"] = {
+	Name = "Frag Grenade Crafting Blueprint",
+	Description = "Crafting blueprint for the frag grenade.",
+	Model = "models/props_lab/binderblue.mdl",
+	Price = 5000,
+	Type = 1,
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "crafting_blueprint" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
+		e:Spawn()
+		ApplyBlueprintData( e, 14 )
+	end
+}
+
+ItemNPC["crafting_blueprint_ks23"] = {
+	Name = "KS-23 Crafting Blueprint",
+	Description = "Crafting blueprint for the KS-23 shotgun.",
+	Model = "models/props_lab/binderblue.mdl",
+	Price = 10000,
+	Type = 1,
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "crafting_blueprint" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
+		e:Spawn()
+		ApplyBlueprintData( e, 15 )
+	end
+}
+
+ItemNPC["crafting_blueprint_c4"] = {
+	Name = "C4 Crafting Blueprint",
+	Description = "Crafting blueprint for the C4 explosive.",
+	Model = "models/props_lab/binderblue.mdl",
+	Price = 10000,
+	Type = 1,
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "crafting_blueprint" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
+		e:Spawn()
+		ApplyBlueprintData( e, 16 )
+	end
+}
+
+ItemNPC["crafting_blueprint_slam"] = {
+	Name = "SLAM Crafting Blueprint",
+	Description = "Crafting blueprint for the SLAM remote explosive.",
+	Model = "models/props_lab/binderblue.mdl",
+	Price = 10000,
+	Type = 1,
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "crafting_blueprint" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
+		e:Spawn()
+		ApplyBlueprintData( e, 17 )
+	end
+}
+
+ItemNPC["crafting_blueprint_m249"] = {
+	Name = "M249 Crafting Blueprint",
+	Description = "Crafting blueprint for the M249 LMG.",
+	Model = "models/props_lab/binderblue.mdl",
+	Price = 10000,
+	Type = 1,
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "crafting_blueprint" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
+		e:Spawn()
+		ApplyBlueprintData( e, 18 )
+	end
+}
+
+ItemNPC["crafting_blueprint_m79"] = {
+	Name = "M79 Crafting Blueprint",
+	Description = "Crafting blueprint for the M79 grenade launcher.",
+	Model = "models/props_lab/binderblue.mdl",
+	Price = 10000,
+	Type = 1,
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "crafting_blueprint" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
+		e:Spawn()
+		ApplyBlueprintData( e, 19 )
+	end
+}
+
+ItemNPC["crafting_blueprint_rpk"] = {
+	Name = "RPK47 Crafting Blueprint",
+	Description = "Crafting blueprint for the RPK47 LMG.",
+	Model = "models/props_lab/binderblue.mdl",
+	Price = 10000,
+	Type = 1,
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "crafting_blueprint" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
+		e:Spawn()
+		ApplyBlueprintData( e, 20 )
+	end
+}
+
+ItemNPC["crafting_blueprint_m82"] = {
+	Name = "M82 Crafting Blueprint",
+	Description = "Crafting blueprint for the M82 antimaterial rifle.",
+	Model = "models/props_lab/binderblue.mdl",
+	Price = 10000,
+	Type = 1,
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "crafting_blueprint" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
+		e:Spawn()
+		ApplyBlueprintData( e, 21 )
 	end
 }
 
