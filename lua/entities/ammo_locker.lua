@@ -51,7 +51,7 @@ if SERVER then
 		end
 		local name = AmmoTypes[primaryname][1]
 		local price = AmmoTypes[primaryname][2]
-		if !ply:canAfford( price ) then
+		if !ply:canAfford( price ) and !ply:isCP() then
 			DarkRP.notify( ply, 1, 6, "You can't afford ammo for this weapon." )
 			return
 		end
@@ -64,16 +64,21 @@ if SERVER then
 		timer.Simple( 1.5, function()
 			if !IsValid( self ) then return end
 			local pos, ang = LocalToWorld( Vector( 20, -5, -30 ), Angle( -90, -90, 0 ), self:GetPos(), self:GetAngles() )
+			local mayorfunds = GetGlobalInt( "MAYOR_Money" )
 			local salestax = price * ( GetGlobalInt( "MAYOR_SalesTax" ) * 0.01 )
+			if mayorfunds < salestax and ply:isCP() then
+				DarkRP.notify( ply, 1, 6, "There is not enough mayor funds to buy ammo for this weapon." )
+				return
+			end
 			local ammo = ents.Create( name )
 			ammo:SetPos( pos )
 			ammo:SetAngles( ang )
 			ammo:Spawn()
 			if ply:isCP() then
-				SetGlobalInt( "MAYOR_Money", GetGlobalInt( "MAYOR_Money" ) - salestax )
+				SetGlobalInt( "MAYOR_Money", mayorfunds - salestax )
 			else
 				local finalprice = price + salestax
-				SetGlobalInt( "MAYOR_Money", GetGlobalInt( "MAYOR_Money" ) + salestax )
+				SetGlobalInt( "MAYOR_Money", mayorfunds + salestax )
 				ply:addMoney( -finalprice )
 			end
 			self.Used = false
