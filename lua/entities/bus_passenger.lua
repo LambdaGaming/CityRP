@@ -70,25 +70,7 @@ end
 
 if CLIENT then
 	function ENT:Draw()
-		self:DrawModel()
-
-		local plyShootPos = LocalPlayer():GetShootPos()
-		if self:GetPos():DistToSqr( plyShootPos ) < 562500 then
-			local pos = self:GetPos()
-			pos.z = pos.z + 15
-			local ang = self:GetAngles()
-			
-			surface.SetFont("Bebas40Font")
-			local title = "Take me to the "..self:GetNWString( "SetStop" ).." for cash."
-			local tw = surface.GetTextSize(title)
-			
-			ang:RotateAroundAxis(ang:Forward(), 90)
-			ang:RotateAroundAxis(ang:Right(), -90)
-			local textang = ang
-			
-			cam.Start3D2D(pos + ang:Right() * -30, ang, 0.2)
-				draw.WordBox(2, -tw *0.5 + 5, -180, title, "Bebas40Font", color_theme, color_white)
-			cam.End3D2D()
-		end
+		local setstop = self:GetNWString( "SetStop" )
+		self:DrawNPCText( "Take me to the "..setstop.." for cash." )
 	end
 end

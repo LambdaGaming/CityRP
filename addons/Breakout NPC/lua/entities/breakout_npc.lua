@@ -77,22 +77,6 @@ end
 
 if CLIENT then
 	function ENT:Draw()
-		self:DrawModel()
-
-		local pos = self:GetPos()
-		pos.z = (pos.z + 15)
-		local ang = self:GetAngles()
-		
-		surface.SetFont("Bebas40Font")
-		local title = "Jailbreaker"
-		local tw = surface.GetTextSize(title)
-		
-		ang:RotateAroundAxis(ang:Forward(), 90)
-		ang:RotateAroundAxis(ang:Right(), -90)
-		local textang = ang
-		
-		cam.Start3D2D(pos + ang:Right() * -30, ang, 0.2)
-			draw.WordBox(2, -tw *0.5 + 5, -180, title, "Bebas40Font", VOTING.Theme.ControlColor, color_white)
-		cam.End3D2D()
+		self:DrawNPCText( "Jailbreaker" )
 	end
 end
