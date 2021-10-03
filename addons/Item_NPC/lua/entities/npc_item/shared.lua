@@ -83,9 +83,7 @@ if SERVER then
 end
 
 local function SpawnBlueprint( ply )
-	local combined = table.Add( BLUEPRINT_CONFIG_TIER1, BLUEPRINT_CONFIG_TIER2 )
-	combined = table.Add( combined, BLUEPRINT_CONFIG_TIER3 )
-	local randwep = table.Random( combined )
+	local randwep = table.Random( BLUEPRINT_COMBINED )
 	local e = ents.Create( "crafting_blueprint" )
 	e:SetPos( ply:GetPos() + Vector( 0, 30, 0 ) )
 	e:SetAngles( ply:GetAngles() + Angle( 0, 180, 0 ) )
@@ -189,8 +187,8 @@ local function PoliceBanCheck( ply )
 end
 
 local function ApplyBlueprintData( ent, index )
-	ent:SetEntName( BLUEPRINT_CONFIG_TIER1[index][1] )
-	ent:SetRealName( BLUEPRINT_CONFIG_TIER1[index][2] )
+	ent:SetEntName( BLUEPRINT_COMBINED[index][1] )
+	ent:SetRealName( BLUEPRINT_COMBINED[index][2] )
 	ent:SetUses( 3 )
 end
 

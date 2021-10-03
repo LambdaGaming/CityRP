@@ -38,6 +38,8 @@ BLUEPRINT_CONFIG_TIER3 = { --Blueprints you can get from gov bank, PD bank, and 
 	{ "arccw_mifl_fas2_m82", "M82 Antimaterial Rifle" }
 }
 
+BLUEPRINT_COMBINED = table.Add( table.Add( BLUEPRINT_CONFIG_TIER1, BLUEPRINT_CONFIG_TIER2 ), BLUEPRINT_CONFIG_TIER3 )
+
 function ENT:SpawnFunction( ply, tr, name )
 	if !tr.Hit then return end
 	local SpawnPos = tr.HitPos + tr.HitNormal * 1
