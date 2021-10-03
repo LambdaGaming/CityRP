@@ -1,4 +1,3 @@
-
 if SERVER then
 	hook.Add( "PlayerSay", "playersaypersist", function( ply, text, public )
 	    local entnum = string.Explode( " ", text )
@@ -22,8 +21,7 @@ if SERVER then
 	
 	hook.Add( "InitPostEntity", "LoadNewPersist", function()
 	    local files, directories = file.Find( "newpersist/"..game.GetMap().."/*.txt", "DATA" ) --Looks at all of the txt files in the specified directory
-		for a,b in pairs( files ) do
-			--print(b) --Testing purposes only, prints a list of found files to the console
+		for k,v in pairs( files ) do
 			local readtxt = file.Read( "newpersist/"..game.GetMap().."/"..b, "DATA" ) --Reads the files that were found above
 			local readunpack = util.JSONToTable( readtxt ) --Converts the JSON format back into a lua table
 			local split = string.Explode( "-", b ) --Splits the file names for use below
@@ -36,9 +34,11 @@ if SERVER then
 				e:SetModel( readunpack[3] )
 			end
 			e:SetMoveType( MOVETYPE_NONE )
-			e:SetSolid( SOLID_VPHYSICS )
+			if scripted_ents.IsBasedOn( e:GetClass(), "base_anim" ) then
+				e:SetSolid( SOLID_VPHYSICS )
+			end
 			e.IsPermaProp = true
 		end
-		MsgC( color_orange, "[CityRP] Loaded perma props." )
+		MsgC( color_orange, "\n[CityRP] Loaded perma props.\n" )
     end )
 end
