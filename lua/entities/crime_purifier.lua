@@ -66,26 +66,25 @@ function ENT:Use( activator, caller )
 	end 
 end
 
-local snd
 function ENT:StartTouch( ent )
     if ent:GetClass() == "durgz_weed" and self:GetNWInt( "WeedAmount" ) < 6 then
         ent:Remove()
         self:EmitSound( "ambient/machines/combine_terminal_idle4.wav" )
 		self:SetNWInt( "WeedAmount", self:GetNWInt( "WeedAmount" ) + 1 )
-		timer.Simple( 45, function()
-			if !snd or !snd:IsPlaying() then
-				snd = CreateSound( self, "ambient/machines/laundry_machine1_amb.wav" )
-				snd:Play()
+		timer.Simple( 5, function()
+			if !self.Snd or !self.Snd:IsPlaying() then
+				self.Snd = CreateSound( self, "ambient/machines/laundry_machine1_amb.wav" )
+				self.Snd:Play()
 			end
 		end )
-        timer.Simple( 5, function()
+        timer.Simple( 45, function()
             local e = ents.Create( "rp_weed" )
             e:SetPos( self:GetPos() + self:GetForward() * 70 )
             e:Spawn()
             self:SetNWInt( "WeedAmount", self:GetNWInt( "WeedAmount" ) - 1 )
 			self:EmitSound( "HL1/ambience/steamburst1.wav", 75, math.random( 75, 125 ) )
-			if self:GetNWInt( "WeedAmount" ) <= 0 and self:GetNWInt( "CokeType" ) <= 0 and snd then
-				snd:Stop()
+			if self:GetNWInt( "WeedAmount" ) <= 0 and self:GetNWInt( "CokeType" ) <= 0 and self.Snd then
+				self.Snd:Stop()
 			end
         end )
     end
@@ -95,9 +94,9 @@ function ENT:StartTouch( ent )
 		ent:Remove()
 		self:EmitSound( "ambient/machines/combine_terminal_idle4.wav", 75, 70 )
 		timer.Simple( 3, function()
-			if !snd or !snd:IsPlaying() then
-				snd = CreateSound( self, "ambient/machines/laundry_machine1_amb.wav" )
-				snd:Play()
+			if !self.Snd or !self.Snd:IsPlaying() then
+				self.Snd = CreateSound( self, "ambient/machines/laundry_machine1_amb.wav" )
+				self.Snd:Play()
 			end
 		end )
 		timer.Create( "CokeIncrement"..self:EntIndex(), 1, 600, function() self:SetNWInt( "CokePurity", self:GetNWInt( "CokePurity" ) + 1 ) end )
@@ -115,8 +114,8 @@ function ENT:StartTouch( ent )
 			self:SetNWInt( "CokeType", 0 )
 			self:SetNWInt( "HasCocaine", false )
 			self:EmitSound( "HL1/ambience/steamburst1.wav", 75, math.random( 75, 125 ) )
-			if self:GetNWInt( "WeedAmount" ) <= 0 and self:GetNWInt( "CokeType" ) <= 0 and snd then
-				snd:Stop()
+			if self:GetNWInt( "WeedAmount" ) <= 0 and self:GetNWInt( "CokeType" ) <= 0 and self.Snd then
+				self.Snd:Stop()
 			end
 		end )
 	end
@@ -124,10 +123,7 @@ end
 
 if CLIENT then
 	local function BoolToNumber( bool )
-		if bool then
-			return 1
-		end
-		return 0
+		return bool and 1 or 0
 	end
 
     function ENT:Draw()
