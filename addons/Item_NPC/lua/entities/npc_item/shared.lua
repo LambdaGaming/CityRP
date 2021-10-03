@@ -1434,7 +1434,7 @@ ItemNPC["fire_truck_tesla"] = {
 
 -----GOV VEHICLE NPC ITEMS-----
 ItemNPC["chevy_impala"] = {
-	Name = "Chevrolet Impala LS Police Cruiser",
+	Name = "Chevrolet Impala Police",
 	Description = "Chevrolet Impala with police features.",
 	Model = "models/lonewolfie/chev_impala_09_police.mdl",
 	Price = 0,
@@ -1443,7 +1443,7 @@ ItemNPC["chevy_impala"] = {
 		return PoliceBanCheck( ply )
 	end,
 	SpawnFunction = function( ply, self )
-		local class = "Chevrolet Impala LS Police Cruiser"
+		local class = "Chevrolet Impala Police"
 		local model = "models/lonewolfie/chev_impala_09_police.mdl"
 		local script = "scripts/vehicles/lwcars/chev_impala_09.txt"
 		SpawnVehicle( ply, class, model, script, 1 )
