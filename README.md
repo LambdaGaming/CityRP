@@ -1,2 +1,2 @@
 # CityRP
-This repository includes all of my custom codes that are currently being used on the Lambda Gaming CityRP Garry's Mod server. This does NOT include any scripts from the server that were originally made by someone else and modified by me. You are allowed to use any parts of these scripts as long as you give me credit for the original.
+This repository includes all of my custom code that is currently being used on the Lambda Gaming CityRP Garry's Mod server. More information about this server can be found [here.](https://lambdagaming.github.io/cityrp/main.html)
