@@ -1,4 +1,3 @@
-
 local function PickRandomEvent()
 	local rand2 = math.random( 1, 9 )
 	if rand2 == 1 then
@@ -807,5 +806,3 @@ local function ShooterKilled( npc, attacker, inflictor )
 	end
 end
 hook.Add( "OnNPCKilled", "ShooterKilled", ShooterKilled )
-
-MsgC( color_red, "\n[CityRP] Loaded server events.\n" )

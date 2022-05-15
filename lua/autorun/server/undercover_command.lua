@@ -1,4 +1,3 @@
-
 local function SilentUndercover( ply, text )
 	if text == "!undercover" then
 		if ply:Team() == TEAM_UNDERCOVER then

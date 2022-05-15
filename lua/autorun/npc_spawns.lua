@@ -1,4 +1,3 @@
-
 if SERVER then
 	hook.Add( "InitPostEntity", "LoadNPCsCityRP", function()
 		local angle_ninety = Angle( 0, 90, 0 )

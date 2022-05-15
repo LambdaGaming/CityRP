@@ -1,4 +1,3 @@
-
 hook.Add( "PlayerDeath", "DeductMoney", function( ply, inf, attack )
 	if GetGlobalBool( "DarkRP_LockDown" ) then return end
 	if ply:isArrested() then return end
@@ -7,5 +6,3 @@ hook.Add( "PlayerDeath", "DeductMoney", function( ply, inf, attack )
 	ply:addMoney( -walletpercent )
 	DarkRP.notify( ply, 0, 6, "You have lost $"..walletpercent.." as a result of your death." )
 end )
-
-MsgC( color_orange, "[CityRP] Loaded money deduct on death function." )

@@ -1,4 +1,3 @@
-
 if CLIENT then
 	local MenuColor = Color( 49, 53, 61, 200 )
 	local ButtonColor = Color( 230, 93, 80, 255 )

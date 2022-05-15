@@ -1,4 +1,3 @@
-
 AddCSLuaFile()
 
 local physblacklist = { --Entities that can't be physgunned by anyone but superadmins
@@ -95,5 +94,3 @@ local function GravRestrict( ply, ent )
 	end
 end
 hook.Add( "GravGunPickupAllowed", "disallow_gravgun", GravRestrict )
-
-MsgC( color_orange, "[CityRP] Loaded prop protection." )

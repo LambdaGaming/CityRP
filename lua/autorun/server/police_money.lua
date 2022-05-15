@@ -17,5 +17,3 @@ local function PoliceNotify( ply, amount, wallet )
 	end
 end
 hook.Add( "playerWalletChanged", "PoliceNotify", PoliceNotify )
-
-MsgC( color_red, "[CityRP] Loaded player wallet police notification." )

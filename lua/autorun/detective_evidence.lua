@@ -1,6 +1,4 @@
-
 DetectiveMarkers = {}
-
 if CLIENT then
 	local mat = Material( "icon16/gun.png" )
 	local matcar = Material( "icon16/car.png" )

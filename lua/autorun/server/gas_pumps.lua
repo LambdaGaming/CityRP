@@ -1,4 +1,3 @@
-
 local GasPumpMaps = {
 	["rp_rockford_v2b"] = "models/statua/shell/shellpump1.mdl",
 	["rp_southside"] = "models/unioncity2/props_unioncity/gas_pump.mdl",
