@@ -83,7 +83,7 @@ if SERVER then
 				deposit:SpawnExtraBoxes()
 			end
 
-			if game.GetMap() == "rp_southside" then
+			if game.GetMap() == "rp_southside_day" then
 				local drug = ents.Create( "rp_dealer" )
 				drug:SetPos( Vector( 3711, 923, -96 ) )
 				drug:SetAngles( angle_zero )

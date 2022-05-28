@@ -1,6 +1,6 @@
 local GasPumpMaps = {
 	["rp_rockford_v2b"] = "models/statua/shell/shellpump1.mdl",
-	["rp_southside"] = "models/unioncity2/props_unioncity/gas_pump.mdl",
+	["rp_southside_day"] = "models/unioncity2/props_unioncity/gas_pump.mdl",
 	["rp_riverden_v1a"] = "models/unioncity2/props_unioncity/gaspump_712.mdl",
 	["rp_florida_v2"] = "models/props_equipment/gas_pump.mdl",
 	["rp_truenorth_v1a"] = "models/props_equipment/gas_pump.mdl",
