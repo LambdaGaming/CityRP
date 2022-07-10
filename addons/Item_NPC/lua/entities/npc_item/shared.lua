@@ -1126,14 +1126,14 @@ ItemNPC["policebadge"] = {
 	end
 }
 
-ItemNPC["weapon_nmrih_molotov"] = {
+ItemNPC["weapon_molotov"] = {
 	Name = "Molotov Cocktail",
 	Description = "Creates a ball of fire wherever it lands.",
 	Model = "models/props_junk/garbage_glassbottle003a.mdl",
 	Price = 500,
 	Type = 2,
 	SpawnFunction = function( ply, self )
-		ply:Give( "weapon_nmrih_molotov" )
+		ply:Give( "weapon_molotov" )
 	end
 }
 
