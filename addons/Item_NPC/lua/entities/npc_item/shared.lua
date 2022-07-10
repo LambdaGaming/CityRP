@@ -714,7 +714,7 @@ ItemNPC["dronesrewrite_bird"] = {
 	Type = 1,
 	SpawnFunction = function( ply, self )
 		local e = ents.Create( "dronesrewrite_bird" )
-		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
+		e:SetPos( self:GetPos() + Vector( 0, 0, 100 ) )
 		e:Spawn()
 		e:SetupOwner( ply )
 	end
@@ -728,7 +728,7 @@ ItemNPC["dronesrewrite_spy"] = {
 	Type = 1,
 	SpawnFunction = function( ply, self )
 		local e = ents.Create( "dronesrewrite_spy" )
-		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
+		e:SetPos( self:GetPos() + Vector( 0, 0, 100 ) )
 		e:Spawn()
 		e:SetupOwner( ply )
 	end
