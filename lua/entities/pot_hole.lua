@@ -1,4 +1,3 @@
-
 AddCSLuaFile()
 
 ENT.Type = "anim"
@@ -42,8 +41,8 @@ end
 
 function ENT:StartTouch( ent )
 	if ent:IsVehicle() and SERVER then
-		local rand = math.random( 1, 100 )
-		if rand <= 10 then
+		local rand = math.random( 1, 10 )
+		if rand == 1 then
 			AM_PopTire( ent, 1 ) --10% chance of the pothole popping a tire
 		end
 	end
@@ -52,15 +51,14 @@ end
 function ENT:OnTakeDamage( damage )
 	local ply = damage:GetAttacker()
 	local wep = ply:GetActiveWeapon():GetClass()
-	local pos = self:GetPos()
 	local hp = self:Health()
 	if ply:IsPlayer() and ply:Team() == TEAM_TOWER and wep == "mgs_pickaxe" then
 		local randinterval = math.random( 1, 5 )
 		self:SetHealth( hp - randinterval )
 	end
 	if hp <= 0 then
-		self:Remove()
 		RoadWorkEnd( ply, self )
+		self:Remove()
 	end
 end
 

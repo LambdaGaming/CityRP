@@ -530,7 +530,7 @@ function RoadWork()
 	if team.NumPlayers( TEAM_TOWER ) == 0 then return end
 	if #ents.FindByClass( "pot_hole" ) >= 1 then return end
 	local e = ents.Create( "pot_hole" )
-	e:SetPos( RandRoad() + Vector( 0, 0, 50 ) )
+	e:SetPos( RandRoad() )
 	e:Spawn()
 	DarkRP.notify( team.GetPlayers( TEAM_TOWER ), 0, 6, "Citizens have reported a large pothole in the area. Find and repair it." )
 	SetGlobalBool( "EventActive", true )
