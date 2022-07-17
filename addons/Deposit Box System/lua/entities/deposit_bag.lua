@@ -51,6 +51,7 @@ function ENT:Use( activator, caller )
 	if foundbanker then
 		activator:addMoney( self.MoneyAmount )
 		DarkRP.notify( activator, 0, 6, "You have received "..DarkRP.formatMoney( self.MoneyAmount ).." from a stolen money bag." )
+		local rand = math.random( 1, 10 )
 		if rand <= 3 then
 			local e = ents.Create( "money_printer_platinum" )
 			e:SetPos( activator:GetPos() + Vector( 0, 0, 35 ) )
