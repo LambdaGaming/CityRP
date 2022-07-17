@@ -682,30 +682,6 @@ ItemNPC["life_alert"] = {
 	end
 }
 
-ItemNPC["announcement_speaker"] = {
-	Name = "Announcement Speaker",
-	Description = "Broadcast your voice over a loudspeaker. Requires an announcement microphone to work.",
-	Model = "models/props_wasteland/speakercluster01a.mdl",
-	Price = 100,
-	Type = 1,
-	SpawnFunction = function( ply, self )
-		local e = ents.Create( "announcement_speaker" )
-		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
-		e:Spawn()
-	end
-}
-
-ItemNPC["weapon_announcement"] = {
-	Name = "Announcement Microphone",
-	Description = "Broadcast your voice over a loudspeaker. Requires announcement speakers to work.",
-	Model = "models/props_wasteland/speakercluster01a.mdl",
-	Price = 800,
-	Type = 1,
-	SpawnFunction = function( ply, self )
-		ply:Give( "weapon_announcement" )
-	end
-}
-
 ItemNPC["dronesrewrite_bird"] = {
 	Name = "Camera Drone",
 	Description = "Drone with a camera on it, nothing special.",
