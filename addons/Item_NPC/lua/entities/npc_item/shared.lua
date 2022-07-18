@@ -1865,6 +1865,23 @@ ItemNPC["armor"] = {
 	end
 }
 
+ItemNPC["lifeinsurance"] = {
+	Name = "Life Insurance",
+	Description = "You won't lose money on death for the rest of the session.",
+	Price = 3000,
+	Type = 6,
+	SpawnCheck = function( ply, self )
+		if ply.HasLifeInsurance then
+			DarkRP.notify( ply, 1, 6, "You already have life insurance." )
+			return false
+		end
+		return true
+	end,
+	SpawnFunction = function( ply, self )
+		ply.HasLifeInsurance = true
+	end
+}
+
 -----TOW TRUCK NPC ITEMS-----
 ItemNPC["dodge_tow"] = {
 	Name = "Dodge Ram 3500 Towtruck",
