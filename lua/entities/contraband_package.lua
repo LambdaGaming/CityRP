@@ -1,4 +1,3 @@
-
 AddCSLuaFile()
 
 ENT.Type = "anim"
@@ -10,7 +9,7 @@ ENT.AdminOnly = true
 
 function ENT:SpawnFunction( ply, tr )
 	if !tr.Hit then return end
-	local SpawnPos = tr.HitPos + tr.HitNormal * 1
+	local SpawnPos = tr.HitPos + tr.HitNormal
 	local ent = ents.Create( "contraband_package" )
 	ent:SetPos( SpawnPos )
 	ent:Spawn()
@@ -29,7 +28,7 @@ function ENT:Initialize()
 	end
  
     local phys = self:GetPhysicsObject()
-	if (phys:IsValid()) then
+	if phys:IsValid() then
 		phys:Wake()
 	end
 
@@ -41,7 +40,7 @@ function ENT:Initialize()
 				self:Remove()
 				return
 			end
-			local randnpc = math.random( 1, 7 )
+			local randnpc = math.random( 1, 6 )
 			if randnpc == 1 then
 				self:SetNWInt( "TargetNPCType", 1 ) --Shop NPC
 			elseif randnpc == 2 then
@@ -49,10 +48,8 @@ function ENT:Initialize()
 			elseif randnpc == 3 then
 				self:SetNWInt( "TargetNPCType", 4 ) --Gov Vehicle NPC
 			elseif randnpc == 4 then
-				self:SetNWInt( "TargetNPCType", 5 ) --Ambulance NPC
-			elseif randnpc == 5 then
 				self:SetNWInt( "TargetNPCType", 6 ) --Health NPC
-			elseif randnpc == 6 then
+			elseif randnpc == 5 then
 				self:SetNWInt( "TargetNPCType", 7 ) --Tow Truck NPC
 			else
 				self:SetNWInt( "TargetNPCType", 8 ) --Truck NPC

@@ -23,7 +23,7 @@ if SERVER then
 	local angle_ninety_neg = Angle( 0, -90, 0 )
 	local angle_one_eighty = Angle( 0, 180, 0 )
 	VehicleSpawns = {
-		{ --Police spawns
+		[1] = { --Police spawns
 			[rockford] = { Vector( -8248, -5485, 0 ), angle_zero },
 			[southside] = { Vector( 8688, 8619, -127 ), angle_ninety },
 			[riverden] = { Vector( -8703, 8141, -264 ), angle_one_eighty },
@@ -31,7 +31,7 @@ if SERVER then
 			[truenorth] = { Vector( 3238, 3914, 0 ), angle_zero },
 			[newexton] = { Vector( -7225, 10207, 1024 ), angle_ninety_neg }
 		},
-		{ --Fire spawns
+		[2] = { --Fire spawns
 			[rockford] = { Vector( -5257, -3349, 8 ), angle_one_eighty },
 			[southside] = { Vector( 9431, 1260, -103 ), angle_ninety_neg },
 			[riverden] = { Vector( -12202, 1422, -256 ), angle_one_eighty },
@@ -39,15 +39,7 @@ if SERVER then
 			[truenorth] = { Vector( 13135, 11426, 8 ), angle_ninety },
 			[newexton] = { Vector( 199, -6835, 1024 ), angle_one_eighty }
 		},
-		{ --Medic spawns
-			[rockford] = { Vector( 318, -4842, 64 ), angle_ninety },
-			[southside] = { Vector( 7308, 4544, -63 ), angle_ninety },
-			[riverden] = { Vector( -5405, 1972, -264 ), angle_zero },
-			[florida] = { Vector( 6714, 2145, 128 ), angle_ninety },
-			[truenorth] = { Vector( 13135, 11426, 8 ), angle_ninety },
-			[newexton] = { Vector( 7651, 7446, 1016 ), angle_ninety }
-		},
-		{ --Tow truck spawns
+		[4] = { --Tow truck spawns
 			[rockford] = { Vector( -7564, 680, 3 ), angle_zero },
 			[southside] = { Vector( -1656, 6421, 14 ), angle_zero },
 			[riverden] = { Vector( -1820, 6037, -264 ), angle_zero },
@@ -55,7 +47,7 @@ if SERVER then
 			[truenorth] = { Vector( 8909, 12963, 0 ), angle_zero },
 			[newexton] = { Vector( -5618, -7700, -511 ), angle_zero }
 		},
-		{ --Semi spawns
+		[5] = { --Semi spawns
 			[rockford] = { Vector( -1434, 4509, 536 ), angle_ninety },
 			[southside] = { Vector( 701, -3806, -231 ), angle_ninety_neg },
 			[riverden] = { Vector( -14909, 1862, -256 ), angle_ninety },
@@ -63,7 +55,7 @@ if SERVER then
 			[truenorth] = { Vector( 12511, -10243, 0 ), angle_zero },
 			[newexton] = { Vector( 14464, 12104, -7 ), angle_one_eighty }
 		},
-		{ --Trailer spawns
+		[6] = { --Trailer spawns
 			[rockford] = { Vector( -851, 4153, 536 ), angle_zero },
 			[southside] = { Vector( 701, -3806, -231 ), angle_ninety },
 			[riverden] = { Vector( -14195, 1863, -264 ), angle_one_eighty },
@@ -71,7 +63,7 @@ if SERVER then
 			[truenorth] = { Vector( 12993, -10200, 0 ), angle_one_eighty },
 			[newexton] = { Vector( 15593, 12228, -7 ), angle_ninety }
 		},
-		{ --Smuggle truck spawns
+		[7] = { --Smuggle truck spawns
 			[rockford] = { Vector( -2893, -6357, 0 ) , angle_ninety_neg },
 			[southside] = { Vector( -7011, -3749, -319 ), angle_one_eighty },
 			[riverden] = { Vector( -4213, 2226, -264 ), angle_one_eighty },
@@ -264,19 +256,6 @@ ItemNPCType[4] = {
 		[TEAM_SWAT] = true,
 		[TEAM_UNDERCOVER] = true,
 		[TEAM_FBI] = true
-	}
-}
-
-ItemNPCType[5] = {
-	Name = "Paramedic",
-	Model = "models/player/magnusson.mdl",
-	MenuColor = Color( 49, 53, 61, 200 ),
-	MenuTextColor = color_white,
-	ButtonColor = Color( 230, 93, 80, 255 ),
-	ButtonTextColor = color_white,
-	Allowed = {
-		[TEAM_FIREBOSS] = true,
-		[TEAM_FIRE] = true
 	}
 }
 
@@ -1406,6 +1385,34 @@ ItemNPC["fire_truck_tesla"] = {
 	end
 }
 
+ItemNPC["ambulance"] = {
+	Name = "Ford F350 Ambulance",
+	Description = "Standard ambulance.",
+	Model = "models/lonewolfie/ford_f350_ambu.mdl",
+	Price = 0,
+	Type = 3,
+	SpawnFunction = function( ply, self )
+		local class = "Ford F350 Ambulance Photon"
+		local model = "models/lonewolfie/ford_f350_ambu.mdl"
+		local script = "scripts/vehicles/lwcars/ford_f350_ambu.txt"
+		SpawnVehicle( ply, class, model, script, 2 )
+	end
+}
+
+ItemNPC["crownvic_med"] = {
+	Name = "2011 CVPI Medic",
+	Description = "Ford Crown Victoria with EMS lighting.",
+	Model = "models/tdmcars/emergency/for_crownvic_fh3.mdl",
+	Price = 0,
+	Type = 3,
+	SpawnFunction = function( ply, self )
+		local class = "2011 CVPI Medic"
+		local model = "models/tdmcars/emergency/for_crownvic_fh3.mdl"
+		local script = "scripts/vehicles/TDMCars/for_crownvic_fh3.txt"
+		SpawnVehicle( ply, class, model, script, 2 )
+	end
+}
+
 -----GOV VEHICLE NPC ITEMS-----
 ItemNPC["chevy_impala"] = {
 	Name = "Chevrolet Impala Police",
@@ -1761,35 +1768,6 @@ ItemNPC["charger_old"] = {
 		local model = "models/tdmcars/dod_charger12.mdl"
 		local script = "scripts/vehicles/TDMCars/charger2012.txt"
 		SpawnVehicle( ply, class, model, script, 1 )
-	end
-}
-
------AMBULANCE NPC ITEMS-----
-ItemNPC["ambulance"] = {
-	Name = "Ford F350 Ambulance",
-	Description = "Standard ambulance.",
-	Model = "models/lonewolfie/ford_f350_ambu.mdl",
-	Price = 0,
-	Type = 5,
-	SpawnFunction = function( ply, self )
-		local class = "Ford F350 Ambulance Photon"
-		local model = "models/lonewolfie/ford_f350_ambu.mdl"
-		local script = "scripts/vehicles/lwcars/ford_f350_ambu.txt"
-		SpawnVehicle( ply, class, model, script, 3 )
-	end
-}
-
-ItemNPC["crownvic_med"] = {
-	Name = "2011 CVPI Medic",
-	Description = "Ford Crown Victoria with EMS lighting.",
-	Model = "models/tdmcars/emergency/for_crownvic_fh3.mdl",
-	Price = 0,
-	Type = 5,
-	SpawnFunction = function( ply, self )
-		local class = "2011 CVPI Medic"
-		local model = "models/tdmcars/emergency/for_crownvic_fh3.mdl"
-		local script = "scripts/vehicles/TDMCars/for_crownvic_fh3.txt"
-		SpawnVehicle( ply, class, model, script, 3 )
 	end
 }
 

@@ -41,12 +41,6 @@ if SERVER then
 				gov:Spawn()
 				gov:ApplyType( 4 )
 
-				local ambulance = ents.Create( "npc_item" )
-				ambulance:SetPos( Vector( -69, -5779, 64 ) )
-				ambulance:SetAngles( angle_oneeighty )
-				ambulance:Spawn()
-				ambulance:ApplyType( 5 )
-
 				local health = ents.Create( "npc_item" )
 				health:SetPos( Vector( -67, -5909, 64 ) )
 				health:SetAngles( angle_oneeighty )
@@ -125,12 +119,6 @@ if SERVER then
 				gov:SetAngles( angle_negninety )
 				gov:Spawn()
 				gov:ApplyType( 4 )
-
-				local ambulance = ents.Create( "npc_item" )
-				ambulance:SetPos( Vector( 7417, 5420, -55 ) )
-				ambulance:SetAngles( angle_negninety )
-				ambulance:Spawn()
-				ambulance:ApplyType( 5 )
 
 				local health = ents.Create( "npc_item" )
 				health:SetPos( Vector( 7518, 5420, -55 ) )
@@ -211,12 +199,6 @@ if SERVER then
 				gov:Spawn()
 				gov:ApplyType( 4 )
 
-				local ambulance = ents.Create( "npc_item" )
-				ambulance:SetPos( Vector( -6080, 2021, -256 ) )
-				ambulance:SetAngles( angle_zero )
-				ambulance:Spawn()
-				ambulance:ApplyType( 5 )
-
 				local health = ents.Create( "npc_item" )
 				health:SetPos( Vector( -6080, 2132, -256 ) )
 				health:SetAngles( angle_zero )
@@ -290,12 +272,6 @@ if SERVER then
 				gov:Spawn()
 				gov:ApplyType( 4 )
 
-				local ambulance = ents.Create( "npc_item" )
-				ambulance:SetPos( Vector( 6564, 437, 136 ) )
-				ambulance:SetAngles( angle_zero )
-				ambulance:Spawn()
-				ambulance:ApplyType( 5 )
-
 				local health = ents.Create( "npc_item" )
 				health:SetPos( Vector( 6564, 530, 136 ) )
 				health:SetAngles( angle_zero )
@@ -368,12 +344,6 @@ if SERVER then
 				gov:SetAngles( angle_ninety )
 				gov:Spawn()
 				gov:ApplyType( 4 )
-
-				local ambulance = ents.Create( "npc_item" )
-				ambulance:SetPos( Vector( 13203, 12859, 64 ) )
-				ambulance:SetAngles( angle_zero )
-				ambulance:Spawn()
-				ambulance:ApplyType( 5 )
 
 				local health = ents.Create( "npc_item" )
 				health:SetPos( Vector( 13203, 12741, 64 ) )
@@ -459,12 +429,6 @@ if SERVER then
 				gov:SetAngles( angle_zero )
 				gov:Spawn()
 				gov:ApplyType( 4 )
-
-				local ambulance = ents.Create( "npc_item" )
-				ambulance:SetPos( Vector( 6468, 5757, 1024 ) )
-				ambulance:SetAngles( angle_oneeighty )
-				ambulance:Spawn()
-				ambulance:ApplyType( 5 )
 
 				local health = ents.Create( "npc_item" )
 				health:SetPos( Vector( 6465, 5828, 1024 ) )
