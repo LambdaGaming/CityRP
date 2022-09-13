@@ -1,4 +1,3 @@
-
 AddCSLuaFile()
 
 ENT.Type = "anim"
@@ -7,11 +6,11 @@ ENT.PrintName = "Iron Refiner"
 ENT.Author = "Lambda Gaming"
 ENT.Spawnable = true
 ENT.AdminOnly = true
-ENT.Category = "Mining System"
+ENT.Category = "Crafting System"
 
 function ENT:SpawnFunction( ply, tr, name )
 	if not tr.Hit then return end
-	local SpawnPos = tr.HitPos + tr.HitNormal * 1
+	local SpawnPos = tr.HitPos + tr.HitNormal
 	local ent = ents.Create( name )
 	ent:SetPos( SpawnPos )
 	ent:Spawn()
@@ -33,32 +32,8 @@ function ENT:Initialize()
 		phys:Wake()
 	end
 	
-	self.refining = false
-	self:SetNWString( "CurRefining", "Nothing" )
+	self:SetNWInt( "TotalSmelting", "0" )
 end
-
-local allowedweps = {
-	["arccw_mifl_fas2_ak47"] = true,
-	["arccw_mifl_fas2_m4a1"] = true,
-	["arccw_mifl_fas2_m3"] = true,
-	["arccw_mifl_fas2_toz34"] = true,
-	["arccw_mifl_fas2_g3"] = true,
-	["arccw_mifl_fas2_g36c"] = true,
-	["arccw_mifl_fas2_m24"] = true,
-	["arccw_mifl_fas2_sg55x"] = true,
-	["lockpick"] = true,
-	["factory_lockpick"] = true,
-	["usm_c4"] = true,
-	["arccw_mifl_fas2_ragingbull"] = true,
-	["arccw_fml_fas2_custom_mass26"] = true,
-	["arccw_mifl_fas2_minimi"] = true,
-	["weapon_slam"] = true,
-	["car_bomb"] = true,
-	["arccw_mifl_fas2_m79"] = true,
-	["arccw_mifl_fas2_m82"] = true,
-	["arccw_mifl_fas2_rpk"] = true,
-	["arccw_mifl_fas2_ks23"] = true
-}
 
 local wepvalues = {
 	["arccw_mifl_fas2_ak47"] = 7,
@@ -83,56 +58,67 @@ local wepvalues = {
 	["arccw_mifl_fas2_ks23"] = 8
 }
 
-local allowedents = {
-	["spawned_weapon"] = true,
-	["wrench"] = true,
-	["dronesrewrite_nanodr"] = true,
-	["dronesrewrite_spyspider"] = true
-}
-
 local entvalues = {
 	["wrench"] = 1,
 	["dronesrewrite_nanodr"] = 11,
 	["dronesrewrite_spyspider"] = 11
 }
 
+local ores = {
+	["Ruby"] = {
+		Time = 150,
+		NewEnt = "ruby"
+	},
+	["Gold"] = {
+		Time = 120,
+		NewEnt = "goldbar"
+	},
+	["Diamond"] = {
+		Time = 300,
+		NewEnt = "diamond"
+	}
+}
+
 function ENT:Touch( ent )
-	if self.refining then return end
-	if allowedents[ent:GetClass()] then
-		if ent:GetClass() == "spawned_weapon" and allowedweps[ent:GetWeaponClass()] then
-			for k,v in pairs( wepvalues ) do
-				if k == tostring( ent:GetWeaponClass() ) then
-					self:SetNWString( "CurRefining", k )
-					timer.Simple( 30 * v, function()
-						for i=1, v do
-							local e = ents.Create( "ironbar" )
-							e:SetPos( self:GetPos() + Vector( 0, 0, i*20 ) )
-							e:Spawn()
-						end
-						self:EmitSound( "ambient/energy/weld"..math.random( 1, 2 )..".wav" )
-						self:SetNWString( "CurRefining", "Nothing" )
-					end )
-					ent:Remove()
-				end
-			end
-		else
-			for k,v in pairs( entvalues ) do
-				if k == tostring( ent:GetClass() ) then
-					self:SetNWString( "CurRefining", k )
-					timer.Simple( 30 * v, function()
-						for i=1, v do
-							local e = ents.Create( "ironbar" )
-							e:SetPos( self:GetPos() + Vector( 0, 0, i*20 ) )
-							e:Spawn()
-						end
-						self:EmitSound( "ambient/energy/weld"..math.random( 1, 2 )..".wav" )
-						self:SetNWString( "CurRefining", "Nothing" )
-					end )
-					ent:Remove()
-				end
-			end
+	if self:GetNWInt( "TotalSmelting" ) >= 3 then return end
+	local class = ent:GetClass()
+
+	if class == "mgs_ore" then
+		local oretype = ent:GetNWString( "type" )
+		if ores[oretype] then
+			self:SetNWInt( "TotalSmelting", self:GetNWInt( "TotalSmelting" ) + 1 )
+			timer.Simple( ores[oretype].Time, function()
+				local e = ents.Create( ores[oretype].NewEnt )
+				e:SetPos( self:GetPos() + Vector( 0, 0, 20 ) )
+				e:Spawn()
+				self:EmitSound( "ambient/fire/mtov_flame2.wav" )
+				self:SetNWInt( "TotalSmelting", self:GetNWInt( "TotalSmelting" ) - 1 )
+			end )
+			ent:Remove()
+			return
 		end
 	end
+
+	local entamount = entvalues[class]
+	local wepamount = wepvalues[ent:GetWeaponClass()]
+	if !entamount then return end
+	local finalamount
+	if class == "spawned_weapon" and wepamount then
+		finalamount = wepamount
+	else
+		finalamount = entamount
+	end
+	self:SetNWInt( "TotalSmelting", self:GetNWInt( "TotalSmelting" ) + 1 )
+	timer.Simple( 30 * finalamount, function()
+		for i=1, finalamount do
+			local e = ents.Create( "ironbar" )
+			e:SetPos( self:GetPos() + Vector( 0, 0, i * 20 ) )
+			e:Spawn()
+		end
+		self:EmitSound( "ambient/energy/weld"..math.random( 1, 2 )..".wav" )
+		self:SetNWInt( "TotalSmelting", self:GetNWInt( "TotalSmelting" ) - 1 )
+	end )
+	ent:Remove()
 end
 
 if CLIENT then
@@ -145,7 +131,7 @@ if CLIENT then
 			local ang = self:GetAngles()
 			
 			surface.SetFont("Bebas40Font")
-			local title = "Iron Refiner"
+			local title = "Smelter"
 			local tw = surface.GetTextSize(title)
 			
 			ang:RotateAroundAxis(ang:Forward(), 90)
@@ -156,7 +142,7 @@ if CLIENT then
 				draw.WordBox(2, -tw *0.5 + 5, -180, title, "Bebas40Font", color_theme, color_white)
 			cam.End3D2D()
 			cam.Start3D2D(pos + ang:Right() * -10, ang, 0.2)
-				draw.WordBox(2, -tw *0.5 + -110, -180, "Currently Refining: "..self:GetNWString( "CurRefining" ), "Bebas40Font", color_theme, color_white)
+				draw.WordBox(2, -tw *0.5 + -110, -180, "Currently Smelting: "..self:GetNWInt( "TotalSmelting" ).."/3", "Bebas40Font", color_theme, color_white)
 			cam.End3D2D()
 		end
 	end
