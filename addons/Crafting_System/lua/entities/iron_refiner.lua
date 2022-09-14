@@ -20,10 +20,10 @@ end
 
 function ENT:Initialize()
     self:SetModel( "models/props_wasteland/laundry_washer001a.mdl" )
-	self:SetMoveType(MOVETYPE_VPHYSICS)
-	self:SetSolid(SOLID_VPHYSICS)
+	self:SetMoveType( MOVETYPE_VPHYSICS )
+	self:SetSolid( SOLID_VPHYSICS )
 	if SERVER then
-		self:PhysicsInit(SOLID_VPHYSICS)
+		self:PhysicsInit( SOLID_VPHYSICS )
 		self:SetTrigger( true )
 	end
  
@@ -32,7 +32,7 @@ function ENT:Initialize()
 		phys:Wake()
 	end
 	
-	self:SetNWInt( "TotalSmelting", "0" )
+	self:SetNWInt( "TotalSmelting", 0 )
 end
 
 local wepvalues = {
@@ -89,7 +89,7 @@ function ENT:Touch( ent )
 			self:SetNWInt( "TotalSmelting", self:GetNWInt( "TotalSmelting" ) + 1 )
 			timer.Simple( ores[oretype].Time, function()
 				local e = ents.Create( ores[oretype].NewEnt )
-				e:SetPos( self:GetPos() + Vector( 0, 0, 20 ) )
+				e:SetPos( self:GetPos() + Vector( 0, 0, 50 ) )
 				e:Spawn()
 				self:EmitSound( "ambient/fire/mtov_flame2.wav" )
 				self:SetNWInt( "TotalSmelting", self:GetNWInt( "TotalSmelting" ) - 1 )
@@ -100,13 +100,15 @@ function ENT:Touch( ent )
 	end
 
 	local entamount = entvalues[class]
-	local wepamount = wepvalues[ent:GetWeaponClass()]
 	if !entamount then return end
 	local finalamount
 	if class == "spawned_weapon" and wepamount then
-		finalamount = wepamount
-	else
-		finalamount = entamount
+		local wepamount = wepvalues[ent:GetWeaponClass()]
+		if wepamount then
+			finalamount = wepamount
+		else
+			finalamount = entamount
+		end
 	end
 	self:SetNWInt( "TotalSmelting", self:GetNWInt( "TotalSmelting" ) + 1 )
 	timer.Simple( 30 * finalamount, function()
