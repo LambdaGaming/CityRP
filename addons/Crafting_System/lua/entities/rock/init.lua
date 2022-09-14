@@ -11,7 +11,7 @@ local ores = {
 
 function ENT:SpawnFunction( ply, tr, name )
 	if !tr.Hit then return end
-	local SpawnPos = tr.HitPos + tr.HitNormal * 100
+	local SpawnPos = tr.HitPos + tr.HitNormal
 	local ent = ents.Create( name )
 	ent:SetPos( SpawnPos )
 	ent:Spawn()
@@ -63,7 +63,7 @@ end
 
 local function GetRandomOre( type )
 	local tbl = { "Ruby", "Gold", "Diamond" }
-	return table.Random( tbl )
+	return tbl[math.random( #tbl )]
 end
 
 --[[
@@ -75,6 +75,7 @@ end
 function ENT:CreateLoot()
 	local rand = math.random( 1, 100 )
 	if rand >= 60 then
+		print(1)
 		local rand2 = math.random( 0, 1 )
 		table.insert( self.Loot, {"mgs_ore", 2, "Rock" } )
 		if rand2 == 1 then
@@ -83,20 +84,24 @@ function ENT:CreateLoot()
 			table.insert( self.Loot, {"mgs_ore", 2, GetRandomOre() } )
 		end
 	elseif rand >= 30 and rand < 60 then
+		print(2)
 		local rand2 = math.random( 0, 1 )
-		table.insert( self.Loot, {"mgs_ore", "Rock", 2 } )
+		table.insert( self.Loot, {"mgs_ore", 2, "Rock" } )
 		if rand2 == 1 then
 			table.insert( self.Loot, { "ironbar", 4 } )
 		else
 			table.insert( self.Loot, {"mgs_ore", 4, GetRandomOre() } )
 		end
-	elseif rand >= 10 and rand < 30
+	elseif rand >= 10 and rand < 30 then
+		print(3)
 		table.insert( self.Loot, { "mgs_ore", 3, GetRandomOre() } )
 		table.insert( self.Loot, { "ironbar", 3 } )
 	elseif rand > 1 and rand < 10 then
+		print(4)
 		table.insert( self.Loot, { "mgs_ore", 6, GetRandomOre() } )
 		table.insert( self.Loot, { "ironbar", 6 } )
 	else
+		print(5)
 		table.insert( self.Loot, { "ironbar", 15 } )
 	end
 end
@@ -106,13 +111,14 @@ function ENT:SpawnLoot()
 		for i = 1, v[2] do
 			local e = ents.Create( v[1] )
 			e:SetPos( self:GetPos() + Vector( math.Rand( 1, 20 ), math.Rand( 1, 20 ), 20 ) )
-			if #self.Loot == 3 then
+			if #v == 3 then
 				e:SetNWInt( "price", ores[v[3]][2] )
 				e:SetNWInt( "mass", math.Rand( ores[v[3]][3][1], ores[v[3]][3][2] ) )
 				e:SetNWString( "type", v[3] )
 				e:SetColor( ores[v[3]][1] )
 			end
 			e:Spawn()
+			self.Loot = {}
 		end
 	end
 end
@@ -132,7 +138,7 @@ function ENT:OnTakeDamage( dmg )
 	end
 	if self:Health() <= 0 and !hidden then
 		self:Hide()
-		SpawnLoot()
+		self:SpawnLoot()
 		hook.Run( "Craft_Rock_OnMined", self, ply )
 	end
 end
