@@ -25,7 +25,7 @@ CraftingIngredient["wrench"] = {
 	Name = "Wrench"
 }
 
-CraftingIngredient["swm_log"] = {
+CraftingIngredient["wood"] = {
 	Name = "Wood"
 }
 
@@ -238,7 +238,7 @@ CraftingTable["arccw_mifl_fas2_ak47"] = {
 	NeedsBlueprint = true,
 	Category = "Rifles",
 	Materials = {
-		swm_log = 4,
+		wood = 4,
 		ironbar = 6,
 		wrench = 2,
 	},
@@ -379,7 +379,7 @@ CraftingTable["sent_turtle"] = {
 	Description = "Needs 2 wood",
 	Category = "Other",
 	Materials = {
-		swm_log = 2,
+		wood = 2,
 	},
 	SpawnFunction = function( ply, self )
 		local e = ents.Create( "sent_turtle" )
@@ -538,7 +538,7 @@ CraftingTable["arccw_mifl_fas2_m79"] = {
 		ironbar = 25,
 		diamond = 3,
 		ruby = 2,
-		swm_log = 10,
+		wood = 10,
 	},
 	SpawnFunction = function( ply, self )
 		local e = ents.Create( "arccw_mifl_fas2_m79" )
