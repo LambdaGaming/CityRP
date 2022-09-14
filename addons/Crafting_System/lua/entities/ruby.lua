@@ -7,7 +7,6 @@ ENT.Author = "Lambda Gaming"
 ENT.Spawnable = true
 ENT.AdminOnly = true
 ENT.Category = "Crafting Table"
-ENT.DoNotDuplicate = true
 
 function ENT:Initialize()
 	if SERVER then
@@ -21,11 +20,5 @@ function ENT:Initialize()
 		if IsValid( phys ) then
 			phys:Wake()
 		end
-	end
-end
-
-if CLIENT then
-	function ENT:Draw()
-		self:DrawModel()
 	end
 end
