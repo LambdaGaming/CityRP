@@ -995,16 +995,14 @@ ItemNPC["crafting_blueprint_m82"] = {
 	end
 }
 
-ItemNPC["ore_smelter"] = {
-	Name = "Ore Smelter",
-	Description = "Used to smelt ores obtained from rocks.",
+ItemNPC["rock_scanner"] = {
+	Name = "Rock Scanner",
+	Description = "Scans and displays the contents of rocks.",
 	Model = "models/props/cs_militia/furnace01.mdl",
-	Price = 5000,
+	Price = 500,
 	Type = 1,
 	SpawnFunction = function( ply, self )
-		local e = ents.Create( "ore_smelter" )
-		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
-		e:Spawn()
+		ply:Give( "rock_scanner" )
 	end
 }
 
