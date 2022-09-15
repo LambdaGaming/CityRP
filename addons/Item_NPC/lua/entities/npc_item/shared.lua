@@ -626,28 +626,6 @@ ItemNPC["zpizmak_opensign"] = {
 	end
 }
 
-ItemNPC["anti_bomb"] = {
-	Name = "Car Bomb Protection",
-	Description = "One time use item. Protects a car from bombs being placed on it. Does not protect against bombs already placed on the car.",
-	Model = "models/props_junk/metal_paintcan001a.mdl",
-	Price = 800,
-	Type = 1,
-	SpawnCheck = function( ply, self )
-		if ply:Team() != TEAM_TOWER then
-			if SERVER then
-				DarkRP.notify( ply, 1, 6, "Only tow truck drivers can purchase this item." )
-			end
-			return false
-		end
-		return true
-	end,
-	SpawnFunction = function( ply, self )
-		local e = ents.Create( "anti_bomb" )
-		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
-		e:Spawn()
-	end
-}
-
 ItemNPC["life_alert"] = {
 	Name = "Life Alert",
 	Description = "Notifies police and EMS of your location when you type !alert. Gets removed when you die.",
