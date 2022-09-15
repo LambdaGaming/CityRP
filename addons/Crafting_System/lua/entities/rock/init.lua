@@ -32,8 +32,6 @@ function ENT:Initialize()
 		phys:Wake()
 	end
 
-	self:SetHealth( CRAFT_CONFIG_ROCK_HEALTH )
-	self:SetMaxHealth( CRAFT_CONFIG_ROCK_HEALTH )
 	self:SetNWBool( "IsHidden", false )
 	hook.Run( "Craft_Rock_OnSpawn", self )
 	self.Loot = {}
@@ -99,6 +97,15 @@ function ENT:CreateLoot()
 	else
 		table.insert( self.Loot, { "ironbar", 15 } )
 	end
+
+	local totaliron = 0
+	for k,v in pairs( self.Loot ) do
+		if v[1] == "ironbar" then
+			totaliron = totaliron + v[2]
+		end
+	end
+	self:SetHealth( 5 + totaliron )
+	self:SetMaxHealth( 5 + totaliron )
 end
 
 function ENT:SpawnLoot()
@@ -107,7 +114,12 @@ function ENT:SpawnLoot()
 			local e = ents.Create( v[1] )
 			e:SetPos( self:GetPos() + Vector( math.Rand( 1, 20 ), math.Rand( 1, 20 ), 20 ) )
 			if v[3] then
-				local ore = GetRandomOre()
+				local ore
+				if isstring( v[3] ) then
+					ore = v[3]
+				else
+					ore = GetRandomOre()
+				end
 				e:SetNWInt( "price", ores[ore][2] )
 				e:SetNWInt( "mass", math.Rand( ores[ore][3][1], ores[ore][3][2] ) )
 				e:SetNWString( "type", ore )
@@ -128,9 +140,7 @@ function ENT:OnTakeDamage( dmg )
 	if CRAFT_CONFIG_MINE_WHITELIST_ROCK[wepclass] then
 		local health = self:Health()
 		local maxhealth = self:GetMaxHealth()
-		local damage
-		damage = dmg:GetDamage()
-		self:SetHealth( math.Clamp( health - damage, 0, maxhealth ) )
+		self:SetHealth( math.Clamp( health - dmg:GetDamage(), 0, maxhealth ) )
 	end
 	if self:Health() <= 0 and !hidden then
 		self:Hide()
