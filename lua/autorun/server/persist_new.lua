@@ -27,8 +27,6 @@ hook.Add( "InitPostEntity", "LoadNewPersist", function()
 		local e = ents.Create( split[1] )
 		e:SetPos( readunpack[1] )
 		e:SetAngles( readunpack[2] )
-		e:Spawn()
-		e:Activate()
 		if readunpack[3] then
 			e:SetModel( readunpack[3] )
 		end
@@ -42,6 +40,8 @@ hook.Add( "InitPostEntity", "LoadNewPersist", function()
 		if scripted_ents.IsBasedOn( e:GetClass(), "base_anim" ) or e:GetClass() == "prop_physics" then
 			e:SetSolid( SOLID_VPHYSICS )
 		end
+		e:Spawn()
+		e:Activate()
 		e.IsPermaProp = true
 	end
 	MsgC( color_red, "\n[CityRP] Loaded perma props.\n" )
