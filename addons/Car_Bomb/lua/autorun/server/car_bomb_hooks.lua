@@ -1,4 +1,3 @@
-
 local function Explode( pos )
     local explode = ents.Create( "env_explosion" )
     explode:SetPos( pos )
@@ -15,11 +14,15 @@ local function CreateProp( pos, ang, model )
     e:SetColor( Color( 128, 128, 128 ) )
     e:SetMaterial( "models/props_foliage/tree_deciduous_01a_trunk" )
     e:Spawn()
+	return e
 end
 
 local function BlowUp( ply, veh )
 	Explode( veh:GetPos() )
-	CreateProp( veh:GetPos(), veh:GetAngles(), veh:GetModel() )
+	veh:Remove()
+	local prop = CreateProp( veh:GetPos(), veh:GetAngles(), veh:GetModel() )
+	prop:GetPhysicsObject():SetVelocity( veh:GetVelocity() + Vector( 0, 0, 500 ) )
+	prop:EmitSound( "ambient/explosions/explode_5.wav" )
 	if ply:InVehicle() and ply:GetVehicle() == veh then ply:Kill() end
 	for k,v in pairs( veh.seat ) do
 		local driver = v:GetDriver()
@@ -27,26 +30,30 @@ local function BlowUp( ply, veh )
 			driver:Kill()
 		end
 	end
-	veh:Remove()
+	timer.Simple( 600, function()
+		if IsValid( prop ) then
+			prop:Remove()
+		end
+	end )
 end
 
 local BombType = {
-	[1] = function( ply, veh )
+	function( ply, veh )
 		timer.Simple( 1, function()
 			BlowUp( ply, veh )
         end )
 	end,
-	[2] = function( ply, veh )
+	function( ply, veh )
 		timer.Simple( 60, function()
 			BlowUp( ply, veh )
 		end )
 	end,
-	[3] = function( ply, veh )
+	function( ply, veh )
 		timer.Simple( 300, function()
 			BlowUp( ply, veh )
 		end )
 	end,
-	[4] = function( ply, veh )
+	function( ply, veh )
 		if timer.Exists( "CarBomb"..veh:EntIndex() ) then return end
 		timer.Create( "CarBomb"..veh:EntIndex(), 0.5, 0, function()
 			local mph = veh:GetVelocity():Length() * 0.056818181
@@ -56,7 +63,7 @@ local BombType = {
 			end
 		end )
 	end,
-	[5] = function( ply, veh )
+	function( ply, veh )
 		if timer.Exists( "CarBomb"..veh:EntIndex() ) then return end
 		timer.Create( "CarBomb"..veh:EntIndex(), 0.5, 0, function()
 			local mph = veh:GetVelocity():Length() * 0.056818181

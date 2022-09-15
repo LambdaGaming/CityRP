@@ -1,4 +1,3 @@
-
 AddCSLuaFile()
 
 SWEP.PrintName = "Car Bomb Checker"
@@ -7,16 +6,14 @@ SWEP.Spawnable = true
 SWEP.AdminOnly = true
 SWEP.Base = "weapon_base"
 SWEP.Author = "Lambda Gaming"
-SWEP.Slot = 5
-
-SWEP.ViewModel = "models/weapons/v_crowbar.mdl"
-SWEP.WorldModel = "models/weapons/w_crowbar.mdl"
+SWEP.Slot = 2
+SWEP.ViewModel = "models/weapons/v_stunbaton.mdl"
+SWEP.WorldModel = "models/weapons/w_stunbaton.mdl"
 
 SWEP.Primary.Ammo = "none"
 SWEP.Primary.ClipSize = -1
 SWEP.Primary.DefaultClip = -1
 SWEP.Primary.Automatic = false
-
 SWEP.Secondary.Ammo = "none"
 SWEP.Secondary.ClipSize = -1
 SWEP.Secondary.DefaultClip = -1
@@ -25,7 +22,7 @@ SWEP.Secondary.Automatic = false
 function SWEP:PrimaryAttack()
 	if !IsFirstTimePredicted() or CLIENT then return end
     local tr = self.Owner:GetEyeTrace().Entity
-	if self.Owner:GetPos():DistToSqr( tr:GetPos() ) > 40000 or !IsValid( tr ) then return end
+	if !IsValid( tr ) or self.Owner:GetPos():DistToSqr( tr:GetPos() ) > 40000 then return end
     if tr:IsVehicle() then
 		if tr.HasCarBomb then
 			self.Owner:EmitSound( "ambient/alarms/klaxon1.wav" )
@@ -43,7 +40,7 @@ end
 function SWEP:SecondaryAttack()
 	if !IsFirstTimePredicted() or CLIENT then return end
     local tr = self.Owner:GetEyeTrace().Entity
-	if self.Owner:GetPos():DistToSqr( tr:GetPos() ) > 40000 or !IsValid( tr ) then return end
+	if !IsValid( tr ) or self.Owner:GetPos():DistToSqr( tr:GetPos() ) > 40000 then return end
     if tr:IsVehicle() then
 		if tr.HasCarBomb then
 			tr.HasCarBomb = false
