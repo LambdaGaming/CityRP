@@ -7,8 +7,8 @@ SWEP.AdminOnly = true
 SWEP.Base = "weapon_base"
 SWEP.Author = "Lambda Gaming"
 SWEP.Slot = 1
-SWEP.ViewModel = "models/weapons/v_crowbar.mdl"
-SWEP.WorldModel = "models/weapons/w_crowbar.mdl"
+SWEP.ViewModel = "models/weapons/v_stunbaton.mdl"
+SWEP.WorldModel = "models/weapons/w_stunbaton.mdl"
 
 SWEP.Primary.Ammo = "none"
 SWEP.Primary.ClipSize = -1
