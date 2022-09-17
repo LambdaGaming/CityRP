@@ -6,8 +6,8 @@ if CLIENT then
 		["Mayor"] = true
 	}
 	local ems = {
-		["ER Commander"] = true,
-		["Emergency Responder"] = true
+		["Fire Chief"] = true,
+		["Firefighter"] = true
 	}
 	local function OpenFireMenu( ply )
 		local menu = vgui.Create( "DFrame" )
