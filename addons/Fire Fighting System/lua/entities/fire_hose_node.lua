@@ -32,6 +32,7 @@ function ENT:Initialize()
 		phys:Wake()
 	end
 	self.Connection = NULL
+	self.HostTruck = NULL
 end
 
 if SERVER then
@@ -55,6 +56,7 @@ if SERVER then
 				if v:IsVehicle() and v:GetModel() == "models/noble/engine_32.mdl" then
 					local constr, rope = constraint.Rope( v, ent, 0, 0, Vector( 55, -6, 45 ), Vector( 9, 0, 22 ), 400, 500, 1000, 10, "cable/cable2", false, color_white )
 					ent.Connection = rope
+					ent.HostTruck = v
 					break
 				end
 			end
@@ -64,10 +66,16 @@ if SERVER then
 		elseif int == 2 then
 			for k,v in pairs( ents.FindInSphere( ent:GetPos(), 200 ) ) do
 				if v:GetClass() == "fire_hose_node" and v != ent then
+					if !IsValid( v.HostTruck ) then continue end
 					local constr, rope = constraint.Rope( v, ent, 0, 0, Vector( 9, 0, 22 ), Vector( 9, 0, 22 ), 400, 500, 1000, 10, "cable/cable2", false, color_white )
 					ent.Connection = rope
+					ent.HostTruck = v.HostTruck
 					break
 				end
+			end
+			if !IsValid( ent.HostTruck ) then
+				DarkRP.notify( ply, 1, 6, "Attach nearest node to a fire truck first." )
+				return
 			end
 			if !IsValid( ent.Connection ) then
 				DarkRP.notify( ply, 1, 6, "No nodes detected." )
@@ -75,6 +83,7 @@ if SERVER then
 		elseif int == 3 then
 			if IsValid( ent.Connection ) then
 				ent.Connection:Remove()
+				ent.HostTruck = NULL
 			end
 		else
 			ent:Remove()
