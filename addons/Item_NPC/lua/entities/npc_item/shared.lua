@@ -185,7 +185,7 @@ local function ApplyBlueprintData( ent, index )
 end
 
 local function SmuggleCheck( ply )
-	local copcount = team.NumPlayers( TEAM_POLICEBOSS ) + team.NumPlayers( TEAM_OFFICER ) + team.NumPlayers( TEAM_SWATBOSS ) + team.NumPlayers( TEAM_SWAT ) + team.NumPlayers( TEAM_UNDERCOVER ) + team.NumPlayers( TEAM_FBI )
+	local copcount = team.NumPlayers( TEAM_POLICEBOSS ) + team.NumPlayers( TEAM_OFFICER ) + team.NumPlayers( TEAM_UNDERCOVER ) + team.NumPlayers( TEAM_FBI )
 	if ply.SmuggleCooldown and ply.SmuggleCooldown > CurTime() then
 		DarkRP.notify( ply, 1, 6, "Please wait "..string.ToMinutesSeconds( ply.SmuggleCooldown - CurTime() ).." to smuggle again." )
 		return false
@@ -252,8 +252,6 @@ ItemNPCType[4] = {
 		[TEAM_MAYOR] = true,
 		[TEAM_POLICEBOSS] = true,
 		[TEAM_OFFICER] = true,
-		[TEAM_SWATBOSS] = true,
-		[TEAM_SWAT] = true,
 		[TEAM_UNDERCOVER] = true,
 		[TEAM_FBI] = true
 	}

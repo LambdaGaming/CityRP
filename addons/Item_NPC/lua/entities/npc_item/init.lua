@@ -44,6 +44,10 @@ function ENT:AcceptInput( input, activator )
 		DarkRP.notify( activator, 1, 6, "You cannot use this NPC as your current job." )
 		return
 	end
+	if activator.IsSwat and self:GetNPCType() != 4 then
+		DarkRP.notify( activator, 1, 6, "You cannot use this NPC while on duty as SWAT." )
+		return
+	end
 	net.Start( "ItemNPCMenu" )
 	net.WriteEntity( self )
 	net.Send( activator )

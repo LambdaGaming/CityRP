@@ -398,7 +398,7 @@ end
 hook.Add( "Think", "OverturnedTruckThink", OverturnedTruckThink )
 
 function ActiveShooter()
-	local numcops = team.NumPlayers( TEAM_POLICEBOSS ) + team.NumPlayers( TEAM_SWATBOSS ) + team.NumPlayers( TEAM_OFFICER ) + team.NumPlayers( TEAM_SWAT ) + team.NumPlayers( TEAM_FBI ) + team.NumPlayers( TEAM_UNDERCOVER )
+	local numcops = team.NumPlayers( TEAM_POLICEBOSS ) + team.NumPlayers( TEAM_OFFICER ) + team.NumPlayers( TEAM_FBI ) + team.NumPlayers( TEAM_UNDERCOVER )
 	if numcops == 0 then return end
 	local shooter = ents.Create( "npc_citizen" )
 	shooter:SetPos( RandShooter() )
@@ -553,7 +553,7 @@ end
 
 local RobberCount = 0
 function Robbery()
-	local numcops = team.NumPlayers( TEAM_POLICEBOSS ) + team.NumPlayers( TEAM_SWATBOSS ) + team.NumPlayers( TEAM_OFFICER ) + team.NumPlayers( TEAM_SWAT ) + team.NumPlayers( TEAM_FBI ) + team.NumPlayers( TEAM_UNDERCOVER )
+	local numcops = team.NumPlayers( TEAM_POLICEBOSS ) + team.NumPlayers( TEAM_OFFICER ) + team.NumPlayers( TEAM_FBI ) + team.NumPlayers( TEAM_UNDERCOVER )
 	if numcops == 0 or team.NumPlayers( TEAM_BANKER ) == 0 then return end
 	local models = {
 		"models/humans/group03/male_01.mdl",
@@ -599,7 +599,7 @@ function RobberyEnd()
 end
 
 function DrunkDriver()
-	local numcops = team.NumPlayers( TEAM_POLICEBOSS ) + team.NumPlayers( TEAM_SWATBOSS ) + team.NumPlayers( TEAM_OFFICER ) + team.NumPlayers( TEAM_SWAT ) + team.NumPlayers( TEAM_FBI ) + team.NumPlayers( TEAM_UNDERCOVER )
+	local numcops = team.NumPlayers( TEAM_POLICEBOSS ) + team.NumPlayers( TEAM_OFFICER ) + team.NumPlayers( TEAM_FBI ) + team.NumPlayers( TEAM_UNDERCOVER )
 	if numcops == 0 then return end
 	RunConsoleCommand( "bot" )
 	local veh = list.Get( "Vehicles" )

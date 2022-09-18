@@ -1,4 +1,3 @@
-
 AddCSLuaFile()
 
 ENT.Type = "anim"
@@ -11,7 +10,7 @@ ENT.Category = "Cocaine System"
 
 function ENT:SpawnFunction( ply, tr, name )
 	if !tr.Hit then return end
-	local SpawnPos = tr.HitPos + tr.HitNormal * 1
+	local SpawnPos = tr.HitPos + tr.HitNormal
 	local ent = ents.Create( name )
 	ent:SetPos( SpawnPos )
 	ent:Spawn()
@@ -58,46 +57,22 @@ function ENT:Initialize()
 	self:SetMaterial( "models/debug/debugwhite" )
 end
 
-local cop = {
-	[TEAM_POLICEBOSS] = true,
-	[TEAM_OFFICER] = true,
-	[TEAM_UNDERCOVER] = true,
-	[TEAM_SWATBOSS] = true,
-	[TEAM_SWAT] = true,
-	[TEAM_FBI] = true,
-	[TEAM_MAYOR] = true,
-	[TEAM_BOUNTY] = true
-}
-
-local civi = {
-	[TEAM_CITIZEN] = true,
-	[TEAM_TOWER] = true,
-	[TEAM_CAMERA] = true,
-	[TEAM_BANKER] = true,
-	[TEAM_FIREBOSS] = true,
-	[TEAM_FIRE] = true,
-	[TEAM_DETECTIVE] = true,
-	[TEAM_COOK] = true,
-	[TEAM_HITMAN] = true,
-	[TEAM_BUS] = true
-}
-
 function ENT:Use( activator, caller )
 	local purity = self:GetNWInt( "Purity" )
-	if IsValid(activator) and activator:IsPlayer() then
+	if IsValid( activator ) and activator:IsPlayer() then
 		for k, v in pairs( ents.FindInSphere( self:GetPos(), 128 ) ) do
-			if ( v:GetClass() == "rp_dealer" ) then
+			if v:GetClass() == "rp_dealer" then
 				local rand = math.random( 1, 10 )
-				if rand <= 3 and !activator:isWanted() and civi[activator:Team()] then
+				if rand <= 3 and !activator:isWanted() and !activator:isCP() then
 					activator:wanted( actor, "Seen selling drugs.", 600 )
 				end
-				if cop[activator:Team()] then
+				if activator:isCP() then
 					activator:ChatPrint( "Processing drugs....standby for payment...." )
 					timer.Simple( 30, function()
 						DarkRP.createMoneyBag( v:GetPos() + Vector( 35, 0, 10 ), PurityPayout( purity ) )
 						activator:ChatPrint( "You have sold cocaine for "..DarkRP.formatMoney( PurityPayout( purity ) ).." as a government official." )
 					end )
-				elseif civi[activator:Team()] then
+				else
 					activator:addMoney( PurityPayout( purity ) )
 					activator:ChatPrint( "You have sold cocaine for "..DarkRP.formatMoney( PurityPayout( purity ) ).."." )
 				end
@@ -105,10 +80,4 @@ function ENT:Use( activator, caller )
 			end
 		end
 	end
-end
-
-if CLIENT then
-    function ENT:Draw()
-        self:DrawModel()
-    end
 end
