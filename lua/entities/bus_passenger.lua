@@ -1,9 +1,8 @@
-
 AddCSLuaFile()
 
 ENT.Type = "ai"
 ENT.Base = "base_ai"
-ENT.PrintName = "Gas Pump"
+ENT.PrintName = "Bus Passenger"
 ENT.Author = "Lambda Gaming"
 ENT.Spawnable = false
 
@@ -45,7 +44,7 @@ function ENT:AcceptInput( name, caller )
 	if CLIENT then return end
 	if caller.buscooldown and caller.buscooldown > CurTime() then return end
 	if !caller:IsPlayer() then return end
-	if caller:Team() == TEAM_BUS and GetGlobalString( "ActiveEvent" ) == "Bus Passenger" then
+	if caller:Team() == TEAM_BUS and IsEventActive( EVENT_BUS_PASSENGER ) then
 		local bus = ents.FindInSphere( self:GetPos(), 200 )
 		local foundbus = false
 		for k,v in pairs( bus ) do

@@ -75,10 +75,23 @@ net.Receive( "CreateItem", function( len, ply )
 	local money = ply:getDarkRPVar( "money" )
 	local name = ItemNPC[ent].Name
 	local price = ItemNPC[ent].Price
+	local primary = ItemNPC[ent].PrimaryJobs
+	local event = ItemNPC[ent].EventID
 	local salestax = price * ( GetGlobalInt( "MAYOR_SalesTax" ) * 0.01 )
-	if price > 0 and self:GetNPCType() != 2 then
+	if price > 0 and self:GetNPCType() != 2 and self:GetNPCType() != 8 then
 		price = price + salestax
 		SetGlobalBool( "MAYOR_Money", GetGlobalBool( "MAYOR_Money" ) + salestax )
+	end
+	if primary and !primary[ply:Team()] then
+		DarkRP.notify( ply, 1, 6, "You are not qualified for this job!" )
+		return
+	end
+	if event then
+		if ActiveEvents[event] then
+			DarkRP.notify( ply, 1, 6, "There is already an ongoing job that you can partake in." )
+			return
+		end
+		ActiveEvents[event] = true
 	end
 	if money >= price then
 		if SpawnCheck and SpawnCheck( ply, self ) == false then return end

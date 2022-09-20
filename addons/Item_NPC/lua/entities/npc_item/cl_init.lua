@@ -37,12 +37,12 @@ local function DrawItemMenu( ent ) --Panel that draws the main menu
 		itembackground:DockMargin( 0, 0, 0, 10 )
 		itembackground:Center()
 		itembackground.Paint = function()
-			draw.RoundedBox( 0, 0, 0, itembackground:GetWide(), itembackground:GetTall(), Color( ItemNPCType[type].MenuColor.r, ItemNPCType[type].MenuColor.g, ItemNPCType[type].MenuColor.b, 255 ) )
+			draw.RoundedBox( 0, 0, 0, itembackground:GetWide(), itembackground:GetTall(), ColorAlpha( ItemNPCType[type].MenuColor, 255 ) )
 		end
 
 		local mainbuttons = vgui.Create( "DButton", itembackground )
 		mainbuttons:SetText( v.Name )
-		mainbuttons:SetTextColor( ItemNPCType[type].ButtonTextColor )
+		mainbuttons:SetTextColor( color_white )
 		mainbuttons:SetFont( "ItemNPCTitleFont" )
 		mainbuttons:Dock( TOP )
 		mainbuttons.Paint = function( self, w, h )
@@ -97,7 +97,7 @@ local function DrawItemMenu( ent ) --Panel that draws the main menu
 
 		local itemprice = vgui.Create( "DLabel", itembackground )
 		itemprice:SetFont( "Trebuchet24" )
-		itemprice:SetColor( ItemNPCType[type].MenuTextColor )
+		itemprice:SetColor( color_white )
 		if v.Price <= 0 then
 			itemprice:SetText( "Price: Free" )
 		else
@@ -107,7 +107,7 @@ local function DrawItemMenu( ent ) --Panel that draws the main menu
 
 		local itemdesc = vgui.Create( "DLabel", itembackground )
 		itemdesc:SetFont( "Trebuchet18" )
-		itemdesc:SetColor( ItemNPCType[type].MenuTextColor )
+		itemdesc:SetColor( color_white )
 		itemdesc:SetText( v.Description )
 		itemdesc:SetWrap( true )
 

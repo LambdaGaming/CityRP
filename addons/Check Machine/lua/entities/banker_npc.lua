@@ -25,7 +25,7 @@ end
 
 function ENT:AcceptInput( activator, caller )
 	if !caller:IsPlayer() then return end
-	if caller:Team() == TEAM_BANKER and GetGlobalString( "ActiveEvent" ) == "Money Transfer" and !self.checkused then
+	if caller:Team() == TEAM_BANKER and IsEventActive( EVENT_MONEY_TRANSFER ) and !self.checkused then
 		local check = ents.Create( "check" )
 		check:Spawn()
 		check:SetPos( caller:GetPos() + Vector(30, 0, 0) )

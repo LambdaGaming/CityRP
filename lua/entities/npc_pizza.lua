@@ -52,7 +52,7 @@ end
 function ENT:AcceptInput( name, caller )
 	if caller.pizzacooldown and caller.pizzacooldown > CurTime() then return end
 	if !caller:IsPlayer() then return end
-	if caller:Team() == TEAM_COOK and GetGlobalString( "ActiveEvent" ) == "Food Delivery" then
+	if caller:Team() == TEAM_COOK and IsEventActive( EVENT_FOOD_DELIVERY ) then
 		for k,v in pairs( ents.FindInSphere( self:GetPos(), 50 ) ) do
 			if v:GetClass() == "zpizmak_pizza" then
 				if v:GetPizzaType() == self:GetNWString( "SetPizza" ) then

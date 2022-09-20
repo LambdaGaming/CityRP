@@ -47,22 +47,6 @@ if SERVER then
 			[truenorth] = { Vector( 8909, 12963, 0 ), angle_zero },
 			[newexton] = { Vector( -5618, -7700, -511 ), angle_zero }
 		},
-		[5] = { --Semi spawns
-			[rockford] = { Vector( -1434, 4509, 536 ), angle_ninety },
-			[southside] = { Vector( 701, -3806, -231 ), angle_ninety_neg },
-			[riverden] = { Vector( -14909, 1862, -256 ), angle_ninety },
-			[florida] = { Vector( -1930, 8490, 128 ), angle_one_eighty },
-			[truenorth] = { Vector( 12511, -10243, 0 ), angle_zero },
-			[newexton] = { Vector( 14464, 12104, -7 ), angle_one_eighty }
-		},
-		[6] = { --Trailer spawns
-			[rockford] = { Vector( -851, 4153, 536 ), angle_zero },
-			[southside] = { Vector( 701, -3806, -231 ), angle_ninety },
-			[riverden] = { Vector( -14195, 1863, -264 ), angle_one_eighty },
-			[florida] = { Vector( -1481, 7813, 128 ), angle_ninety },
-			[truenorth] = { Vector( 12993, -10200, 0 ), angle_one_eighty },
-			[newexton] = { Vector( 15593, 12228, -7 ), angle_ninety }
-		},
 		[7] = { --Smuggle truck spawns
 			[rockford] = { Vector( -2893, -6357, 0 ) , angle_ninety_neg },
 			[southside] = { Vector( -7011, -3749, -319 ), angle_one_eighty },
@@ -212,9 +196,7 @@ ItemNPCType[1] = {
 	Name = "Supermarket",
 	Model = "models/breen.mdl",
 	MenuColor = Color( 49, 53, 61, 200 ),
-	MenuTextColor = color_white,
 	ButtonColor = Color( 230, 93, 80, 255 ),
-	ButtonTextColor = color_white,
 	Allowed = {}
 }
 
@@ -222,9 +204,7 @@ ItemNPCType[2] = {
 	Name = "Contraband Dealer",
 	Model = "models/Humans/Group03/male_07.mdl",
 	MenuColor = Color( 230, 93, 80, 200 ),
-	MenuTextColor = color_white,
 	ButtonColor = Color( 49, 53, 61, 255 ),
-	ButtonTextColor = color_white,
 	Allowed = {}
 }
 
@@ -232,9 +212,7 @@ ItemNPCType[3] = {
 	Name = "Firefighter",
 	Model = "models/player/portal/male_07_fireman.mdl",
 	MenuColor = Color( 49, 53, 61, 200 ),
-	MenuTextColor = color_white,
 	ButtonColor = Color( 230, 93, 80, 255 ),
-	ButtonTextColor = color_white,
 	Allowed = {
 		[TEAM_FIREBOSS] = true,
 		[TEAM_FIRE] = true
@@ -245,9 +223,7 @@ ItemNPCType[4] = {
 	Name = "Police Secretary",
 	Model = "models/taggart/police01/male_07.mdl",
 	MenuColor = Color( 49, 53, 61, 200 ),
-	MenuTextColor = color_white,
 	ButtonColor = Color( 230, 93, 80, 255 ),
-	ButtonTextColor = color_white,
 	Allowed = {
 		[TEAM_MAYOR] = true,
 		[TEAM_POLICEBOSS] = true,
@@ -261,9 +237,7 @@ ItemNPCType[6] = {
 	Name = "Healer",
 	Model = "models/kleiner.mdl",
 	MenuColor = Color( 49, 53, 61, 200 ),
-	MenuTextColor = color_white,
 	ButtonColor = Color( 230, 93, 80, 255 ),
-	ButtonTextColor = color_white,
 	Allowed = {}
 }
 
@@ -271,21 +245,17 @@ ItemNPCType[7] = {
 	Name = "Tower",
 	Model = "models/monk.mdl",
 	MenuColor = Color( 49, 53, 61, 200 ),
-	MenuTextColor = color_white,
 	ButtonColor = Color( 230, 93, 80, 255 ),
-	ButtonTextColor = color_white,
 	Allowed = {
 		[TEAM_TOWER] = true
 	}
 }
 
 ItemNPCType[8] = {
-	Name = "Trucker",
-	Model = "models/humans/group02/male_08.mdl",
+	Name = "Job Broker",
+	Model = "models/gman.mdl",
 	MenuColor = Color( 49, 53, 61, 200 ),
-	MenuTextColor = color_white,
 	ButtonColor = Color( 230, 93, 80, 255 ),
-	ButtonTextColor = color_white,
 	Allowed = {}
 }
 
@@ -293,9 +263,7 @@ ItemNPCType[9] = {
 	Name = "Smuggle Seller",
 	Model = "models/humans/group03/male_01.mdl",
 	MenuColor = Color( 49, 53, 61, 200 ),
-	MenuTextColor = color_white,
 	ButtonColor = Color( 230, 93, 80, 255 ),
-	ButtonTextColor = color_white,
 	Allowed = {
 		[TEAM_CITIZEN] = true,
 		[TEAM_TOWER] = true,
@@ -1309,27 +1277,6 @@ ItemNPC["heat_lamp"] = {
 	end
 }
 
-ItemNPC["contraband_package"] = {
-	Name = "Contraband Package",
-	Description = "You don't know what's in it, and you don't need to. Just take it to it's target without question and get rewarded.",
-	Model = "models/props_junk/cardboard_box001a.mdl",
-	Price = 3000,
-	Type = 2,
-	SpawnCheck = function( ply, self )
-		if ply:isWanted() then
-			DarkRP.notify( ply, 1, 6, "You cannot buy this item while wanted!" )
-			return false
-		end
-		return true
-	end,
-	SpawnFunction = function( ply, self )
-		local e = ents.Create( "contraband_package" )
-		e:SetPos( ply:GetPos() + Vector( 0, 30, 35 ) )
-		e:Spawn()
-		e.Owner = ply
-	end
-}
-
 -----FIRE TRUCK NPC ITEMS-----
 ItemNPC["fire_truck"] = {
 	Name = "2014 Seagrave Marauder II Engine",
@@ -1863,91 +1810,6 @@ ItemNPC["peterbilt_tow"] = {
 	end
 }
 
------TRUCK NPC ITEMS-----
-ItemNPC["international"] = {
-	Name = "International 9300",
-	Description = "International 9300 semi.",
-	Model = "models/sentry/i9300.mdl",
-	Price = 1200,
-	Type = 8,
-	SpawnFunction = function( ply, self )
-		local class = "i9300"
-		local model = "models/sentry/i9300.mdl"
-		local script = "scripts/vehicles/sentry/i9300.txt"
-		SpawnVehicle( ply, class, model, script, 5 )
-	end
-}
-
-ItemNPC["kenworth"] = {
-	Name = "Kenworth T600",
-	Description = "Kenworth T600 semi.",
-	Model = "models/sentry/kt600.mdl",
-	Price = 1200,
-	Type = 8,
-	SpawnFunction = function( ply, self )
-		local class = "kt600"
-		local model = "models/sentry/kt600.mdl"
-		local script = "scripts/vehicles/sentry/kt600.txt"
-		SpawnVehicle( ply, class, model, script, 5 )
-	end
-}
-
-ItemNPC["peterbilt"] = {
-	Name = "Peterbilt 379",
-	Description = "Peterbilt 379 semi.",
-	Model = "models/sentry/p379.mdl",
-	Price = 1200,
-	Type = 8,
-	SpawnFunction = function( ply, self )
-		local class = "p379"
-		local model = "models/sentry/p379.mdl"
-		local script = "scripts/vehicles/sentry/p379.txt"
-		SpawnVehicle( ply, class, model, script, 5 )
-	end
-}
-
-ItemNPC["gmc_moving"] = {
-	Name = "GMC C5500",
-	Description = "GMC C5500 moving truck.",
-	Model = "models/tdmcars/trucks/gmc_c5500.mdl",
-	Price = 750,
-	Type = 8,
-	SpawnFunction = function( ply, self )
-		local class = "p379"
-		local model = "models/tdmcars/trucks/gmc_c5500.mdl"
-		local script = "scripts/vehicles/TDMCars/c5500.txt"
-		SpawnVehicle( ply, class, model, script, 5 )
-	end
-}
-
-ItemNPC["trailer_car"] = {
-	Name = "Car Carrier",
-	Description = "Carries small/medium-sized cars.",
-	Model = "models/sentry/trailers/carcarrier.mdl",
-	Price = 250,
-	Type = 8,
-	SpawnFunction = function( ply, self )
-		local class = "carcarrier"
-		local model = "models/sentry/trailers/carcarrier.mdl"
-		local script = "scripts/vehicles/sentry/trailer.txt"
-		SpawnVehicle( ply, class, model, script, 6, true )
-	end
-}
-
-ItemNPC["trailer_storage"] = {
-	Name = "Storage Trailer",
-	Description = "Dry box trailer for storing pretty much anything.",
-	Model = "models/sentry/trailers/stortrailer.mdl",
-	Price = 500,
-	Type = 8,
-	SpawnFunction = function( ply, self )
-		local class = "stortrailer"
-		local model = "models/sentry/trailers/stortrailer.mdl"
-		local script = "scripts/vehicles/sentry/stortrailer.txt"
-		SpawnVehicle( ply, class, model, script, 6, true )
-	end
-}
-
 -----SMUGGLE ITEMS-----
 ItemNPC["smuggle_numbernine"] = {
 	Name = "Number Nine Large",
@@ -2016,5 +1878,18 @@ ItemNPC["smuggle_lambo"] = {
 	end,
 	SpawnFunction = function( ply, self )
 		DoSmuggle( ply, 5 )
+	end
+}
+
+-----EVENT ITEMS-----
+ItemNPC["overturned_truck"] = {
+	Name = "Overturned Truck",
+	Description = "A semi truck took a curve too fast and overturned. The road is blocked and needs cleared. The truck is also leaking fuel and may combust if not cleaned up quickly.",
+	Price = 1200,
+	Type = 8,
+	EventID = EVENT_OVERTURNED_TRUCK,
+	PrimaryJobs = { TEAM_TOWER },
+	SpawnFunction = function()
+		OverturnedTruck()
 	end
 }
