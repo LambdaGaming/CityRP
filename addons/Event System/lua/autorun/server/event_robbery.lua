@@ -19,7 +19,7 @@ function Robbery()
 		"weapon_shotgun"
 	}
 	local origin = EventPos[map].Robbery
-	for i=1, math.random( 2, 6 ) do
+	for i=1, math.random( 3, 6 ) do
 		local shooter = ents.Create( "npc_citizen" )
 		shooter:SetPos( Vector( origin.x, origin.y + ( i * 30 ), origin.z ) )
 		shooter:Spawn()
@@ -33,11 +33,19 @@ function Robbery()
 		shooter.IsRobber = true
 		RobberCount = RobberCount + 1
 	end
-	DarkRP.notifyAll( 0, 6, RobberCount.." armed men are attempting to rob the bank!" )
+	for k,v in ipairs( player.GetAll() ) do
+		if v:isCP() then
+			DarkRP.notify( v, 0, 10, RobberCount.." armed men are attempting to rob the bank!" )
+		end
+	end
 end
 
 function RobberyEnd()
-	DarkRP.notifyAll( 0, 6, "The bank robbers have been killed!" )
+	for k,v in ipairs( player.GetAll() ) do
+		if v:isCP() then
+			DarkRP.notify( v, 0, 10, "The bank robbers have been killed!" )
+		end
+	end
 	RobberCount = 0
 	ActiveEvents[EVENT_ROBBERY] = false
 end

@@ -8,7 +8,7 @@ function DrunkDriver()
 		randveh, name = table.Random( veh )
 	end
 
-	timer.Simple( 1, function() --The server crashes without this timer, I guess the vehicle needs time to fully inititialize
+	timer.Simple( 1, function() --The server crashes without this timer, I guess the vehicle needs time to fully initialize
 		local e = ents.Create( "prop_vehicle_jeep" )
 		e:SetKeyValue( "vehiclescript", randveh.KeyValues.vehiclescript )
 		e:SetPos( table.Random( EventPos[map].Road ) + Vector( 0, 0, 10 ) )
@@ -31,25 +31,28 @@ function DrunkDriver()
 			end
 		end
 	end )
-	DarkRP.notifyAll( 0, 6, "A drunk driver has been reported to be in the area! Be on the lookout and report anything suspicious to police!" )
+	for k,v in ipairs( player.GetAll() ) do
+		DarkRP.notify( v, 0, 10, "Citizens are reporting a drunk driver in the area. Be on the lookout." )
+	end
 end
 
 function EndDrunkDriver( bot, ply )
+	local numcp = 1
+	for k,v in ipairs( player.GetAll() ) do
+		if v:isCP() and v:Team() != TEAM_MAYOR then
+			numcp = numcp + 1
+		end
+	end
+	local reward = 12000 + ( numcp * 4000 )
 	bot:Kick( "Arrested by "..ply:Nick().."." )
 	for k,v in pairs( ents.FindByClass( "prop_vehicle_jeep" ) ) do
 		if v.DrunkVeh then v:Remove() end
 	end
-	ply:addMoney( 500 )
-	DarkRP.notify( ply, 0, 6, "You have been rewarded with $500 and a crafting blueprint for arresting the drunk driver." )
-	local randwep = table.Random( BLUEPRINT_CONFIG_TIER2 )
-	local e = ents.Create( "crafting_blueprint" )
-	e:SetPos( ply:GetPos() + Vector( 0, 30, 0 ) )
-	e:SetAngles( ply:GetAngles() + Angle( 0, 180, 0 ) )
-	e:Spawn()
-	e:SetEntName( randwep[1] )
-	e:SetRealName( randwep[2] )
-	e:SetUses( 3 )
-	DarkRP.notifyAll( 0, 6, "The drunk driver has been found and arrested by "..ply:Nick().."!" )
+	DarkRP.notify( ply, 0, 10, "You have been rewarded with $"..reward.." and a crafting blueprint for arresting the drunk driver." )
+	if numcp > 1 then
+		DarkRP.notify( ply, 2, 10, "Please distribute these earnings among those who helped you." )
+	end
+	GiveReward( ply, reward )
 	ActiveEvents[EVENT_DRUNK_DRIVER] = false
 end
 

@@ -46,14 +46,14 @@ function BusPassenger()
 	e:SetPos( table.Random( EventPos[map].Food ) )
 	e:Spawn()
 	for k,v in pairs( team.GetPlayers( TEAM_BUS ) ) do
-		DarkRP.notify( v, 0, 6, "A passenger needs picked up! Find them and take them to their destination!" )
+		DarkRP.notify( v, 0, 10, "A passenger needs picked up! Find them and take them to their destination!" )
 	end
 end
 
 function EndBusPassenger()
 	ActiveEvents[EVENT_BUS_PASSENGER] = false
 	for k,v in pairs( team.GetPlayers( TEAM_BUS ) ) do
-		DarkRP.notify( v, 0, 6, "The passenger has been transported!" )
+		DarkRP.notify( v, 0, 10, "The passenger has been transported!" )
 	end
 end
 
@@ -71,18 +71,11 @@ local function BusDriverChat( ply, text )
 		local stopname = veh.SetStop
 		local dist = ply:GetPos():DistToSqr( Stops[stopname][map] )
 		if dist <= 250000 then
-			ply:ChatPrint( "Thanks. Here's $500 and a crafting blueprint." )
-			ply:addMoney( 500 )
+			local reward = 750 * team.NumPlayers( TEAM_BUS )
+			ply:ChatPrint( "Thanks. Here's $"..reward.." and a crafting blueprint." )
 			veh.HasPassenger = false
 			EndBusPassenger()
-			local randwep = table.Random( BLUEPRINT_CONFIG_TIER2 )
-			local e = ents.Create( "crafting_blueprint" )
-			e:SetPos( ply:GetPos() + Vector( 0, 0, 35 ) )
-			e:SetAngles( ply:GetAngles() + Angle( 0, 180, 0 ) )
-			e:Spawn()
-			e:SetEntName( randwep[1] )
-			e:SetRealName( randwep[2] )
-			e:SetUses( 3 )
+			GiveReward( ply, reward )
 		else
 			DarkRP.notify( ply, 1, 6, "You are too far away from the "..stopname..". Move closer." )
 		end

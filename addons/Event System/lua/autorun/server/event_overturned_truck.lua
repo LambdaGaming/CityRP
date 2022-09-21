@@ -48,7 +48,7 @@ function OverturnedTruck()
 		
 		for k,v in ipairs( player.GetAll() ) do
 			if v:Team() == TEAM_TOWER or v:isCP() or v:IsEMS() then
-				DarkRP.notify( v, 0, 6, "A truck has been reported to have overturned somewhere on the map, find it and clear the road!" )
+				DarkRP.notify( v, 0, 10, "A truck has been reported to have overturned somewhere on the map, find it and clear the road!" )
 			end
 		end
 	end )
@@ -67,22 +67,9 @@ function OverturnedTruckEnd()
 	if IsValid( event_truck ) then event_truck:Remove() end
 	if IsValid( event_trailer ) then event_trailer:Remove() end
 	for k,v in pairs( team.GetPlayers( TEAM_TOWER ) ) do
-		v:addMoney( 2400 )
-		DarkRP.notify( v, 0, 6, "You have been rewarded with $600 and a crafting blueprint for clearing the overturned truck." )
-		local randwep = table.Random( BLUEPRINT_CONFIG_TIER2 )
-		local e = ents.Create( "crafting_blueprint" )
-		e:SetPos( v:GetPos() + Vector( 0, 30, 0 ) )
-		e:SetAngles( v:GetAngles() + Angle( 0, 180, 0 ) )
-		e:Spawn()
-		e:SetEntName( randwep[1] )
-		e:SetRealName( randwep[2] )
-		e:SetUses( 3 )
-		for a,b in pairs( ents.FindInSphere( v:GetPos(), 200 ) ) do
-			if b:IsPlayer() and ( b:isCP() or b:IsEMS() ) then
-				b:addMoney( 300 )
-				DarkRP.notify( b, 0, 6, "You have been rewarded $300 for assisting the mechanic." )
-			end
-		end
+		local reward = 7500 * team.NumPlayers( TEAM_TOWER )
+		DarkRP.notify( v, 0, 10, "You have been given $"..reward.." and a crafting blueprint for clearing the overturned truck." )
+		GiveReward( v, reward )
 	end
 	timer.Remove( "OverturnedFireTimer" )
 	hook.Remove( "Think", "OverturnedTruckThink" )

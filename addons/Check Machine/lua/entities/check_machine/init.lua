@@ -1,6 +1,5 @@
 AddCSLuaFile( "cl_init.lua" )
 AddCSLuaFile( "shared.lua" )
-
 include('shared.lua')
 
 local cooldowntimer = 180
@@ -48,10 +47,10 @@ function ENT:Touch( ent )
 	if ent:GetClass() == "check" and ent.IsEventCheck then
 		for a,ply in pairs( player.GetAll() ) do
 			if ply:Team() == TEAM_BANKER then
-				ply:addMoney( 400 )
-				DarkRP.notify( ply, 0, 6, "Check successfully delivered. You have been awarded $400!" )
+				DarkRP.notify( ply, 0, 10, "Check successfully delivered. You have been awarded $4500!" )
 				ent:Remove()
 				MoneyTransferEnd()
+				GiveReward( ply, 4500 )
 			end
 		end
 		cooldown = CurTime() + 3

@@ -97,7 +97,9 @@ net.Receive( "CreateItem", function( len, ply )
 		if SpawnCheck and SpawnCheck( ply, self ) == false then return end
 		if SpawnItem then
 			SpawnItem( ply, self )
-			DarkRP.notify( ply, 0, 6, "You have purchased a "..name.."." )
+			if !event then
+				DarkRP.notify( ply, 0, 6, "You have purchased a "..name.."." )
+			end
 		else
 			DarkRP.notify( ply, 1, 6, "ERROR: SpawnFunction for this item not detected!" )
 			return

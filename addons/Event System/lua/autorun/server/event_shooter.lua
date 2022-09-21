@@ -14,23 +14,29 @@ function ActiveShooter()
 	
 	SetGlobalBool( "EventActive", true )
 	SetGlobalString( "ActiveEvent", "Active Shooter" )
-	DarkRP.notifyAll( 0, 6, "Shots fired reported somewhere in the city! Suspect is holding out in a nearby building!" )
+	for k,v in ipairs( player.GetAll() ) do
+		if v:isCP() then
+			DarkRP.notifyAll( 0, 6, "Shots fired reported somewhere in the city! Suspect is holding out in a nearby building!" )
+		end
+	end
 end
 
 function ActiveShooterEnd( killer )
-	killer:addMoney( 600 )
-	DarkRP.notify( killer, 0, 6, "You have been rewarded with $600 and a crafting blueprint for stopping the threat." )
-	local randwep = table.Random( BLUEPRINT_CONFIG_TIER2 )
-	local e = ents.Create( "crafting_blueprint" )
-	e:SetPos( killer:GetPos() + Vector( 0, 30, 0 ) )
-	e:SetAngles( killer:GetAngles() + Angle( 0, 180, 0 ) )
-	e:Spawn()
-	e:SetEntName( randwep[1] )
-	e:SetRealName( randwep[2] )
-	e:SetUses( 3 )
+	local numcp = 1
 	for k,v in ipairs( player.GetAll() ) do
-		if v != killer then
-			DarkRP.notify( v, 0, 6, killer:Nick().." has killed the active shooter and ended the threat!" )
+		if v:isCP() and v:Team() != TEAM_MAYOR then
+			numcp = numcp + 1
+		end
+	end
+	local reward = 12000 + ( numcp * 4000 )
+	DarkRP.notify( killer, 0, 10, "You have been given $"..reward.." and a crafting blueprint for stopping the threat." )
+	GiveReward( killer, reward )
+	if numcp > 1 then
+		DarkRP.notify( killer, 2, 10, "Please distribute these earnings among those who helped you." )
+	end
+	for k,v in ipairs( player.GetAll() ) do
+		if v:isCP() then
+			DarkRP.notify( v, 0, 10, "The active shooter has been dealt with and is no longer a threat!" )
 		end
 	end
 	ActiveEvents[EVENT_ACTIVE_SHOOTER] = false
@@ -73,16 +79,8 @@ local function ShooterKilled( npc, attacker, inflictor )
 				end )
 			end
 			if attacker:IsPlayer() then
-				attacker:addMoney( 200 )
-				DarkRP.notify( attacker, 0, 6, "You have been rewarded with $200 and a crafting blueprint for killing a robber." )
-				local randwep = table.Random( BLUEPRINT_CONFIG_TIER2 )
-				local e = ents.Create( "crafting_blueprint" )
-				e:SetPos( attacker:GetPos() + Vector( 0, 30, 0 ) )
-				e:SetAngles( attacker:GetAngles() + Angle( 0, 180, 0 ) )
-				e:Spawn()
-				e:SetEntName( randwep[1] )
-				e:SetRealName( randwep[2] )
-				e:SetUses( 3 )
+				DarkRP.notify( attacker, 0, 6, "You have been rewarded with $1500 and a crafting blueprint for killing a robber." )
+				GiveReward( attacker, 1500 )
 			end
 			RobberCount = RobberCount - 1
 			if RobberCount == 0 then

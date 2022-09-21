@@ -1882,14 +1882,110 @@ ItemNPC["smuggle_lambo"] = {
 }
 
 -----EVENT ITEMS-----
+ItemNPC["active_shooter"] = {
+	Name = "Active Shooter",
+	Description = "A gunman is going on a rampage shooting at anything that moves. His current location is unknown, but according to witnesses he is targeting popular buildings.",
+	Price = 1500,
+	Type = 8,
+	EventID = EVENT_ACTIVE_SHOOTER,
+	PrimaryJobs = { TEAM_OFFICER },
+	SpawnFunction = function()
+		ActiveShooter()
+	end
+}
+
+ItemNPC["bus_passenger"] = {
+	Name = "Bus Passenger",
+	Description = "A passenger needs picked up and taken somewhere ASAP.",
+	Price = 500,
+	Type = 8,
+	EventID = EVENT_BUS_PASSENGER,
+	PrimaryJobs = { TEAM_BUS },
+	SpawnFunction = function()
+		BusPassenger()
+	end
+}
+
+ItemNPC["drunk_driver"] = {
+	Name = "Drunk Driver",
+	Description = "Citizens are reporting a drunk driver in the area driving recklessly. Attempt to find them and make contact.",
+	Price = 8000,
+	Type = 8,
+	EventID = EVENT_DRUNK_DRIVER,
+	PrimaryJobs = { TEAM_OFFICER },
+	SpawnFunction = function()
+		DrunkDriver()
+	end
+}
+
+ItemNPC["food_delivery"] = {
+	Name = "Food Delivery",
+	Description = "A customer is requesting a pizza. Make the correct type and deliver it to them.",
+	Price = 3000,
+	Type = 8,
+	EventID = EVENT_FOOD_DELIVERY,
+	PrimaryJobs = { TEAM_COOK },
+	SpawnFunction = function()
+		FoodDelivery()
+	end
+}
+
+ItemNPC["house_fire"] = {
+	Name = "House Fire",
+	Description = "A fire has broken out in a residential structure. It needs taken care of before it spreads out of control.",
+	Price = 5000,
+	Type = 8,
+	EventID = EVENT_HOUSE_FIRE,
+	PrimaryJobs = { TEAM_FIRE },
+	SpawnFunction = function()
+		HouseFire()
+	end
+}
+
+ItemNPC["money_transfer"] = {
+	Name = "Money Transfer",
+	Description = "A check needs taken from the banker NPC to the check machine at the bank. This is a highly valuable check that can be stolen so you should have an armed escort.",
+	Price = 3000,
+	Type = 8,
+	EventID = EVENT_MONEY_TRANSFER,
+	PrimaryJobs = { TEAM_BANKER },
+	SpawnFunction = function()
+		MoneyTransfer()
+	end
+}
+
 ItemNPC["overturned_truck"] = {
 	Name = "Overturned Truck",
 	Description = "A semi truck took a curve too fast and overturned. The road is blocked and needs cleared. The truck is also leaking fuel and may combust if not cleaned up quickly.",
-	Price = 1200,
+	Price = 5000,
 	Type = 8,
 	EventID = EVENT_OVERTURNED_TRUCK,
 	PrimaryJobs = { TEAM_TOWER },
 	SpawnFunction = function()
 		OverturnedTruck()
+	end
+}
+
+ItemNPC["road_work"] = {
+	Name = "Road Work",
+	Description = "A massive pothole has appeared on one of the main roads in the city. Shut down the affected road and make repairs before it damages someone's vehicle.",
+	Price = 3000,
+	Type = 8,
+	EventID = EVENT_ROAD_WORK,
+	PrimaryJobs = { TEAM_TOWER },
+	SpawnFunction = function()
+		RoadWork()
+	end
+}
+
+ItemNPC["bank_robbery"] = {
+	Name = "Bank Robbery",
+	Description = "Armed robbers are currently robbing the bank. Stop them before they can escape with a large amount of cash.",
+	Price = 5000,
+	Type = 8,
+	EventID = EVENT_ROBBERY,
+	PrimaryJobs = { TEAM_OFFICER },
+	SpawnFunction = function()
+		Robbery()
 	end
 }

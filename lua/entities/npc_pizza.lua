@@ -57,18 +57,10 @@ function ENT:AcceptInput( name, caller )
 			if v:GetClass() == "zpizmak_pizza" then
 				if v:GetPizzaType() == self:GetNWString( "SetPizza" ) then
 					v:Remove()
-					caller:ChatPrint( "Thanks. Here's $1000 and a crafting blueprint." )
-					caller:addMoney( 1000 )
+					caller:ChatPrint( "Thanks. Here's $4500 and a crafting blueprint." )
 					self:Remove()
 					FoodDeliveryEnd()
-					local randwep = table.Random( BLUEPRINT_CONFIG_TIER2 )
-					local e = ents.Create( "crafting_blueprint" )
-					e:SetPos( caller:GetPos() + Vector( 0, 0, 35 ) )
-					e:SetAngles( caller:GetAngles() + Angle( 0, 180, 0 ) )
-					e:Spawn()
-					e:SetEntName( randwep[1] )
-					e:SetRealName( randwep[2] )
-					e:SetUses( 3 )
+					GiveReward( caller, 4500 )
 				else
 					caller:ChatPrint( "Incorrect pizza type." )
 				end
