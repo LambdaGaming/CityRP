@@ -1,14 +1,11 @@
-
 AddCSLuaFile()
 
 SWEP.PrintName = "Confiscation Tool"
-SWEP.Category = "Automod"
 SWEP.Spawnable = true
-SWEP.AdminSpawnable = true
+SWEP.AdminOnly = true
 SWEP.Base = "weapon_base"
 SWEP.Author = "Lambda Gaming"
 SWEP.Slot = 3
-
 SWEP.ViewModel = ""
 SWEP.WorldModel = ""
 
@@ -23,86 +20,103 @@ SWEP.Secondary.DefaultClip = -1
 SWEP.Secondary.Automatic = false
 
 SWEP.cooldown = 0
-SWEP.TakenWeapons = {}
-SWEP.Confiscated = false
 
-local defaultweapons = {
-	"weapon_physgun",
-	"pocket",
-	"gmod_tool",
-	"gmod_camera",
-	"weapon_physcannon",
-	"rphands",
-	"itemstore_pickup",
-	"weapon_keypadchecker",
-	"keys"
+local whitelist = {
+	["keys"] = true,
+	["weapon_physcannon"] = true,
+	["gmod_camera"] = true,
+	["gmod_tool"] = true,
+	["weapon_physgun"] = true,
+	["rphands"] = true,
+	["itemstore_pickup"] = true,
+	["weapon_handcuffed"] = true
 }
 
-if SERVER then
-	function SWEP:PrimaryAttack()
+function SWEP:PrimaryAttack()
+	if SERVER then
 		if self.cooldown > CurTime() then return end
 		if IsFirstTimePredicted() then
-			if self.Confiscated then self.Owner:ChatPrint( "You already holding confiscated weapons! Give them back or destroy them to confiscate new ones." ) return end
 			local tr = self.Owner:GetEyeTrace().Entity
 			if tr:IsPlayer() and self.Owner:GetPos():DistToSqr( tr:GetPos() ) < 22500 then
 				if tr:isCP() then
-					self.Owner:ChatPrint( "You cannot confiscate weapons from fellow officers!" )
-					return
+					DarkRP.notify( self:GetOwner(), 1, 6, "You cannot confiscate weapons from fellow officers!" )
 				else
-					for k,v in pairs( tr:GetWeapons() ) do
-						local wep = v:GetClass()
-						if !table.HasValue( defaultweapons, wep ) then
-							if k == 1 then
-								self.Owner:ChatPrint( "List of weapons you confiscated from "..tr:Nick()..":" )
-							end
-							tr:StripWeapon( wep )
-							self.Owner:ChatPrint( wep )
-							table.insert( self.TakenWeapons, wep )
-							self.TakenOwner = tr:UniqueID()
-							self.Confiscated = true
+					if !tr:IsHandcuffed() then
+						DarkRP.notify( self:GetOwner(), 1, 6, "You need to cuff this person before you can search them." )
+						return
+					end
+					local foundwep = false
+					local plyweps = tr:GetWeapons()
+					for k,v in pairs( plyweps ) do
+						if !whitelist[v:GetClass()] and !table.HasValue( tr:getJobTable().weapons, v:GetClass() ) then
+							foundwep = true
+							break
 						end
 					end
-				end
-			end
-		end
-		self.cooldown = CurTime() + 1
-	end
-
-	function SWEP:SecondaryAttack()
-		if self.cooldown > CurTime() then return end
-		if IsFirstTimePredicted() then
-			local tr = self.Owner:GetEyeTrace().Entity
-			if tr:IsPlayer() then
-				if tr:UniqueID() == self.TakenOwner then
-					for k,v in pairs( self.TakenWeapons ) do
-						tr:Give( v )
+					if foundwep then
+						net.Start( "ViewWeapons" )
+						net.WriteEntity( tr )
+						net.WriteTable( plyweps )
+						net.Send( self:GetOwner() )
+					else
+						DarkRP.notify( self:GetOwner(), 1, 6, "No illegal weapons detected." )
 					end
-					table.Empty( self.TakenWeapons )
-					self.Owner:ChatPrint( "Successfully returned confiscated weapons." )
-					self.Confiscated = false
-					self.TakenOwner = nil
-				elseif !self.Confiscated and self.TakenOwner == nil then
-					self.Owner:ChatPrint( "You don't have any confiscated weapons to return." )
-				else
-					self.Owner:ChatPrint( "Incorrect owner of confiscated weapons! Either return them to the correct owner or press reload to destroy the weapons." )
 				end
 			end
 		end
 		self.cooldown = CurTime() + 1
 	end
+end
 
-	function SWEP:Reload()
-		if self.cooldown > CurTime() then return end
-		if IsFirstTimePredicted() then
-			if table.Count( self.TakenWeapons ) > 0 then
-				table.Empty( self.TakenWeapons )
-				self.Confiscated = false
-				self.TakenOwner = nil
-				self.Owner:ChatPrint( "Confiscated weapons successfully destroyed." )
-			else
-				self.Owner:ChatPrint( "You don't have any confiscated weapons to destroy!" )
+function SWEP:SecondaryAttack()
+end
+
+if CLIENT then
+	local function WeaponList()
+		local ply = net.ReadEntity()
+		local weps = net.ReadTable()
+		local mainframe = vgui.Create( "DFrame" )
+		mainframe:SetTitle( "Illegal weapons:" )
+		mainframe:SetSize( 200, 300 )
+		mainframe:Center()
+		mainframe:MakePopup()
+		mainframe.Paint = function( self, w, h )
+			draw.RoundedBox( 0, 0, 0, w, h, CRAFT_CONFIG_MENU_COLOR )
+		end
+		local mainframescroll = vgui.Create( "DScrollPanel", mainframe )
+		mainframescroll:Dock( FILL )
+		for k,v in pairs( weps ) do
+			if whitelist[v:GetClass()] or table.HasValue( ply:getJobTable().weapons, v:GetClass() ) then
+				continue
+			end
+			local scrollbutton = vgui.Create( "DButton", mainframescroll )
+			scrollbutton:SetText( v:GetPrintName() )
+			scrollbutton:SetTextColor( CRAFT_CONFIG_BUTTON_TEXT_COLOR )
+			scrollbutton:Dock( TOP )
+			scrollbutton:DockMargin( 5, 5, 5, 5 )
+			scrollbutton.Paint = function( self, w, h )
+				draw.RoundedBox( 0, 0, 0, w, h, CRAFT_CONFIG_BUTTON_COLOR )
+			end
+			scrollbutton.DoClick = function()
+				net.Start( "TakeWeapon" )
+				net.WriteEntity( ply )
+				net.WriteEntity( v )
+				net.SendToServer()
+				scrollbutton:Remove()
 			end
 		end
-		self.cooldown = CurTime() + 1
 	end
+	net.Receive( "ViewWeapons", WeaponList )
+end
+ 
+if SERVER then
+	util.AddNetworkString( "TakeWeapon" )
+	util.AddNetworkString( "ViewWeapons" )
+	net.Receive( "TakeWeapon", function( len, ply )
+		local target = net.ReadEntity()
+		local wep = net.ReadEntity()
+		target:StripWeapon( wep:GetClass() )
+		ply:Give( wep:GetClass() )
+		DarkRP.notify( ply, 0, 6, "Successfully confiscated a "..wep:GetPrintName().." from "..target:Nick() )
+	end )
 end
