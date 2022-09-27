@@ -39,12 +39,10 @@ function SWEP:PrimaryAttack()
 			local tr = self.Owner:GetEyeTrace().Entity
 			if tr:IsPlayer() and self.Owner:GetPos():DistToSqr( tr:GetPos() ) < 22500 then
 				if tr:isCP() then
-					DarkRP.notify( self:GetOwner(), 1, 6, "You cannot confiscate weapons from fellow officers!" )
+					DarkRP.notify( self:GetOwner(), 1, 6, "You cannot confiscate weapons from your colleagues!" )
+				elseif !tr:IsHandcuffed() then
+					DarkRP.notify( self:GetOwner(), 1, 6, "You need to cuff this person before you can search them." )
 				else
-					if !tr:IsHandcuffed() then
-						DarkRP.notify( self:GetOwner(), 1, 6, "You need to cuff this person before you can search them." )
-						return
-					end
 					local foundwep = false
 					local plyweps = tr:GetWeapons()
 					for k,v in pairs( plyweps ) do
@@ -108,15 +106,24 @@ if CLIENT then
 	end
 	net.Receive( "ViewWeapons", WeaponList )
 end
- 
+
 if SERVER then
 	util.AddNetworkString( "TakeWeapon" )
 	util.AddNetworkString( "ViewWeapons" )
 	net.Receive( "TakeWeapon", function( len, ply )
 		local target = net.ReadEntity()
 		local wep = net.ReadEntity()
+		if ply:HasWeapon( wep:GetClass() ) then
+			local e = ents.Create( "spawned_weapon" )
+			e:SetModel( wep:GetModel() )
+			e:SetWeaponClass( wep:GetClass() )
+			e:SetPos( ply:GetPos() + Vector( 0, 0, 50 ) + ply:GetForward() * 10 )
+			e.nodupe = true
+			e:Spawn()
+		else
+			ply:Give( wep:GetClass() )
+		end
 		target:StripWeapon( wep:GetClass() )
-		ply:Give( wep:GetClass() )
 		DarkRP.notify( ply, 0, 6, "Successfully confiscated a "..wep:GetPrintName().." from "..target:Nick() )
 	end )
 end
