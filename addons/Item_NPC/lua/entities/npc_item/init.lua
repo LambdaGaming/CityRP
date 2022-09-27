@@ -1,7 +1,6 @@
-
 AddCSLuaFile( "cl_init.lua" )
 AddCSLuaFile( "shared.lua" )
-include('shared.lua')
+include( "shared.lua" )
 
 function ENT:SpawnFunction( ply, tr, name )
 	if !tr.Hit then return end
@@ -82,7 +81,7 @@ net.Receive( "CreateItem", function( len, ply )
 		price = price + salestax
 		SetGlobalBool( "MAYOR_Money", GetGlobalBool( "MAYOR_Money" ) + salestax )
 	end
-	if primary and !primary[ply:Team()] then
+	if primary and !table.HasValue( primary, ply:Team() ) then
 		DarkRP.notify( ply, 1, 6, "You are not qualified for this job!" )
 		return
 	end

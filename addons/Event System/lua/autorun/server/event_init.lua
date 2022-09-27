@@ -28,12 +28,6 @@ EventPos[rockford] = {
 		Vector( 10773, 4830, 1704 ),
 		Vector( 10622, 7444, 1568 )
 	},
-	Food = { --Need 4 positions
-		Vector( -6974, 5644, 8 ),
-		Vector( -9536, -5775, 8 ),
-		Vector( 5156, -11509, 322 ),
-		Vector( 8562, 3765, 1544 )
-	},
 	Road = { --Need 4 positions
 		Vector( -3919, -6921, 0 ),
 		Vector( -8019, 4866, 0 ),
@@ -63,12 +57,6 @@ EventPos[southside] = {
 		Vector( -1735, 2493, -103 ),
 		Vector( -5941, 564, -39 ),
 		Vector( 7199, 5135, -55 )
-	},
-	Food = {
-		Vector( 2716, 4100, -55 ),
-		Vector( -93, 557, -103 ),
-		Vector( 5387, -909, -103 ),
-		Vector( 8241, 4295, -58 )
 	},
 	Road = {
 		Vector( 6267, 7477, 128 ),
@@ -100,12 +88,6 @@ EventPos[riverden] = {
 		Vector( -6105, 2117, -256 ),
 		Vector( -4166, 11292, 1 )
 	},
-	Food = {
-		Vector( -5538, 11362, 0 ),
-		Vector( -5160, 1092, -256 ),
-		Vector( 3840, 2059, -264 ),
-		Vector( -10275, -10213, -264 )
-	},
 	Road = {
 		Vector( -10800, 2179, -314 ),
 		Vector( -9714, 10592, -58 ),
@@ -135,12 +117,6 @@ EventPos[florida] = {
 		Vector( -9334, 1147, 136 ),
 		Vector( -9322, -427, 136 ),
 		Vector( 9171, 2481, 280 )
-	},
-	Food = {
-		Vector( 7953, 2658, 136 ),
-		Vector( 5382, -852, 136 ),
-		Vector( -100, -10064, 137 ),
-		Vector( -5480, -29, 136 )
 	},
 	Road = {
 		Vector( 2871, -1864, 128 ),
@@ -172,12 +148,6 @@ EventPos[truenorth] = {
 		Vector( 5460, 7141, 8 ),
 		Vector( 12504, 4082, 272 )
 	},
-	Food = {
-		Vector( 10664, 9312, 8 ),
-		Vector( 14139, 1583, 19 ),
-		Vector( -9772, 7037, 0 ),
-		Vector( 12820, 3541, 6397 )
-	},
 	Road = {
 		Vector( 6275, 5781, 0 ),
 		Vector( 8494, 15230, 0 ),
@@ -207,12 +177,6 @@ EventPos[newexton] = {
 		Vector( 7166, 10635, 1552 ),
 		Vector( 10810, 2180, 1024 ),
 		Vector( -3825, 6559, 1024 )
-	},
-	Food = {
-		Vector( -9541, 5963, 1024 ),
-		Vector( 9360, 7625, 1032 ),
-		Vector( 14688, -4537, 276 ),
-		Vector( -5418, -9387, -511 )
 	},
 	Road = {
 		Vector( -8789, 6240, 1016 ),
