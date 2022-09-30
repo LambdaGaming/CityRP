@@ -2,7 +2,7 @@ if SERVER then
 --!firemayor
 	local TotalVotes = {}
 	SetGlobalBool( "MayorFireVoteActive", false )
-	hook.Add( "PlayerSay", "playersayfiremayor", function( ply, text, public )
+	hook.Add( "PlayerSay", "FireMayorCommand", function( ply, text, public )
 		local availableply = player.GetCount()
 		local mayor = TEAM_MAYOR
 		local minvotes = math.Round( availableply * 0.75 ) - 2 --Subtract 2 for IA agent and mayor
@@ -57,7 +57,7 @@ if SERVER then
 
 --!addons
 	util.AddNetworkString( "AddonCommand" )
-	hook.Add( "PlayerSay", "playersaywebsiteaddons", function( ply, text, public )
+	hook.Add( "PlayerSay", "AddonCommand", function( ply, text, public )
 		if text == "!addons" then
 			net.Start( "AddonCommand" )
 			net.Send( ply )
@@ -67,7 +67,7 @@ if SERVER then
 
 --!group
 	util.AddNetworkString( "GroupCommand" )
-	hook.Add( "PlayerSay", "playersaygroup", function( ply, text, public )
+	hook.Add( "PlayerSay", "GroupCommand", function( ply, text, public )
 		if text == "!group" then
 			net.Start( "GroupCommand" )
 			net.Send( ply )
@@ -76,7 +76,7 @@ if SERVER then
 	end )
 
 --!discord
-	hook.Add( "PlayerSay", "playersaydiscord", function( ply, text, public )
+	hook.Add( "PlayerSay", "DiscordCommand", function( ply, text, public )
 		if text == "!discord" then
 			ply:ChatPrint( "https://discord.gg/9RGdUS2" )
 			return ""
@@ -94,7 +94,7 @@ if SERVER then
 	end )
 
 --!fixeco
-	hook.Add( "PlayerSay", "playersayfixeco", function( ply, text, public )
+	hook.Add( "PlayerSay", "FixEcoCommand", function( ply, text, public )
 		if text == "!fixeco" and ply:Team() == TEAM_MAYOR then
 			local eco = GetGlobalInt( "MAYOR_EcoPoints" )
 			local funds = GetGlobalInt( "MAYOR_Money" )
@@ -121,27 +121,6 @@ if SERVER then
 		end
 	end )
 
---!showid
-	hook.Add( "PlayerSay", "ShowID", function( ply, text )
-		if text == "!showid" then
-			local name = ply:Nick()
-			local plyteam = ply:Team()
-			local fakename = ply:GetNWString( "FakeName" )
-			for k,v in pairs( ents.FindInSphere( ply:GetPos(), 250 ) ) do
-				if v:IsPlayer() then
-					DarkRP.talkToPerson( v, team.GetColor( plyteam ), "Real Name: ", color_white, name )
-					if fakename == nil or fakename == "" or fakename == " " then
-						DarkRP.talkToPerson( v, team.GetColor( plyteam ), "Fake Name: ", color_white, "N/A" )
-					else
-						DarkRP.talkToPerson( v, team.GetColor( plyteam ), "Fake Name: ", color_white, fakename )
-					end
-					DarkRP.talkToPerson( v, team.GetColor( plyteam ), "Occupation: ", color_white, team.GetName( plyteam ) )
-					return ""
-				end
-			end
-		end
-	end )
-
 --!fireoff
 	hook.Add( "PlayerSay", "playersayfireoff", function( ply, text, public )
 		if text == "!fireoff" then
@@ -153,6 +132,23 @@ if SERVER then
 			end
 			return ""
 		end
+	end )
+
+--!undercover
+	hook.Add( "PlayerSay", "SilentUndercover", function( ply, text )
+		if text == "!undercover" then
+			if ply:Team() == TEAM_UNDERCOVER then
+				DarkRP.notify( ply, 1, 6, "You are already an Undercover Officer!" )
+				return
+			end
+			if !ply:changeAllowed( TEAM_UNDERCOVER ) then
+				DarkRP.notify( ply, 1, 6, "Please wait before changing jobs again." )
+				return
+			end
+			ply:changeTeam( TEAM_UNDERCOVER, false, true )
+			ply:updateJob( "Citizen" )
+			DarkRP.notify( ply, 0, 6, "You have secretly changed your job to Undercover Officer." )
+		end	
 	end )
 end
 
