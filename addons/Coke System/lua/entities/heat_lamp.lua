@@ -1,4 +1,3 @@
-
 AddCSLuaFile()
 
 ENT.Type = "anim"
@@ -72,6 +71,8 @@ if SERVER then
 			ent:SetStove( self )
 			local weld = constraint.Weld( self, ent, 0, 0, 0, true, false )
 			self:EmitSound( "physics/metal/metal_barrel_impact_soft"..math.random( 1, 4 )..".wav" )
+			local phys = self:GetPhysicsObject()
+			phys:SetMass( 1 )
 		end
 	end
 

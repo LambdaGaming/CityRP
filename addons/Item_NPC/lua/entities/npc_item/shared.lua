@@ -1090,8 +1090,8 @@ ItemNPC["rp_chloride"] = {
 }
 
 ItemNPC["rp_pot"] = {
-	Name = "Meth Stove Pot (Consumable)",
-	Description = "Place meth ingredients in and place pot on a stove to make consumable meth.",
+	Name = "Meth Stove Pot",
+	Description = "Place meth ingredients in and place pot on a stove to make meth.",
 	Model = "models/props_c17/metalPot001a.mdl",
 	Price = 100,
 	Type = 2,
@@ -1099,20 +1099,6 @@ ItemNPC["rp_pot"] = {
 		local e = ents.Create( "rp_pot" )
 		e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
 		e:Spawn()
-	end
-}
-
-ItemNPC["rp_pot_sell"] = {
-	Name = "Meth Stove Pot (Marketable)",
-	Description = "Place meth ingredients in and place pot on a stove to make marketable meth.",
-	Model = "models/props_c17/metalPot001a.mdl",
-	Price = 2800,
-	Type = 2,
-	SpawnFunction = function( ply, self )
-		local e = ents.Create( "rp_pot" )
-		e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
-		e:Spawn()
-		e:SetNWBool( "IsMarketable", true )
 	end
 }
 
@@ -1144,7 +1130,7 @@ ItemNPC["rp_stove"] = {
 
 ItemNPC["rp_weed_plant"] = {
 	Name = "Weed Plant",
-	Description = "Grows consumable weed that can be made marketable via the purifier.",
+	Description = "Grows 1 weed every 100 seconds. Needs harvested before another one can start growing.",
 	Model = "models/props/de_inferno/flower_barrel.mdl",
 	Price = 1500,
 	Type = 2,
@@ -1237,27 +1223,14 @@ ItemNPC["weapon_agent"] = {
 	end
 }
 
-ItemNPC["coca_plant_marketable"] = {
-	Name = "Coca Plant (Marketable)",
+ItemNPC["coca_plant"] = {
+	Name = "Coca Plant",
 	Description = "Use heat lamp to grow, can be sold to the drug NPC once pure.",
-	Model = "models/props/cs_office/plant01.mdl",
-	Price = 3000,
-	Type = 2,
-	SpawnFunction = function( ply, self )
-		local e = ents.Create( "coca_plant_marketable" )
-		e:SetPos( ply:GetPos() + Vector( 0, 30, 35 ) )
-		e:Spawn()
-	end
-}
-
-ItemNPC["coca_plant_consumable"] = {
-	Name = "Coca Plant (Consumable)",
-	Description = "Use heat lamp to grow, can be consumed for ability buffs.",
 	Model = "models/props/cs_office/plant01.mdl",
 	Price = 500,
 	Type = 2,
 	SpawnFunction = function( ply, self )
-		local e = ents.Create( "coca_plant_consumable" )
+		local e = ents.Create( "coca_plant" )
 		e:SetPos( ply:GetPos() + Vector( 0, 30, 35 ) )
 		e:Spawn()
 	end
@@ -1267,10 +1240,24 @@ ItemNPC["heat_lamp"] = {
 	Name = "Heat Lamp",
 	Description = "Used to grow coca plants. Must be supervised at all times.",
 	Model = "models/props/de_nuke/IndustrialLight01.mdl",
-	Price = 1000,
+	Price = 500,
 	Type = 2,
 	SpawnFunction = function( ply, self )
 		local e = ents.Create( "heat_lamp" )
+		e:SetPos( ply:GetPos() + Vector( 0, 30, 35 ) )
+		e:Spawn()
+		e.Owner = ply
+	end
+}
+
+ItemNPC["purifier"] = {
+	Name = "Purififer",
+	Description = "Used to purify raw cocaine.",
+	Model = "models/props_wasteland/laundry_washer003.mdl",
+	Price = 3000,
+	Type = 2,
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "purifier" )
 		e:SetPos( ply:GetPos() + Vector( 0, 30, 35 ) )
 		e:Spawn()
 		e.Owner = ply

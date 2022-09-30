@@ -1,9 +1,8 @@
-
 AddCSLuaFile()
 
 ENT.Type = "anim"
 ENT.Base = "base_gmodentity"
-ENT.PrintName = "Coca Plant (Marketable)"
+ENT.PrintName = "Coca Plant"
 ENT.Author = "Lambda Gaming"
 ENT.Spawnable = true
 ENT.AdminOnly = true
@@ -47,7 +46,6 @@ function ENT:Use( caller, activator )
 		local e = ents.Create( "raw_cocaine" )
 		e:SetPos( self:GetPos() )
 		e:Spawn()
-		e:SetNWInt( "CokeType", 1 )
 		self:EmitSound( "physics/glass/glass_impact_soft"..math.random( 1, 3 )..".wav" )
 		self:Remove()
 	else
@@ -98,21 +96,19 @@ if CLIENT then
 			surface.SetFont("Bebas40Font")
 			local title = "Coca Plant"
 			local title2 = "Progress: "..CalcPercentage( growth, 1200 ).."%"
-			local title3 = "Type: Marketable"
 			
 			local ang = self:GetAngles()
 			ang:RotateAroundAxis( self:GetAngles():Right(), 270 )
 			ang:RotateAroundAxis( self:GetAngles():Forward(), 90 )
 			local pos = self:GetPos() + ang:Right() * -20 + ang:Up() * 26 + ang:Forward() * -25
 			cam.Start3D2D( pos, ang, 0.1 )
-				draw.RoundedBox( 0, 60, -120, 350, 100, Color( 38, 41, 49, 220 ) )
+				draw.RoundedBox( 0, 85, -120, 300, 80, Color( 38, 41, 49, 220 ) )
 				draw.SimpleText( title, "Bebas40Font", 240, -100, color_white, 1, 1 )
 				if self:GetNWInt( "Growth" ) == 1200 then
 					draw.SimpleText( title2, "Bebas40Font", 240, -70, Color( 15, 120, 0, 255 ), 1, 1 )
 				else
 					draw.SimpleText( title2, "Bebas40Font", 240, -70, color_white, 1, 1 )
 				end
-				draw.SimpleText( title3, "Bebas40Font", 240, -40, color_white, 1, 1 )
 			cam.End3D2D()
 		end
     end
