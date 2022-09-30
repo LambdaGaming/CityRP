@@ -53,7 +53,9 @@ local defaultblock = { --Blocked for all players including superadmins
 }
 
 local gravblacklist = {
-	["deposit_box"] = true
+	["deposit_box"] = true,
+	["deposit_computer"] = true,
+	["dumpser"] = true
 }
 
 local function PlayerPickup( ply, ent )
@@ -77,20 +79,18 @@ local function PlayerPickup( ply, ent )
 end
 hook.Add( "PhysgunPickup", "disallow_pickup", PlayerPickup)
 
-local function ToolRestrict( ply, tr, tool )
-	if IsValid( tr.Entity ) and SERVER then
-		if defaultblock[tr.Entity:GetClass()] or tr.Entity:CreatedByMap() then
+if SERVER then
+	local function ToolRestrict( ply, tr, tool )
+		if IsValid( tr.Entity ) and ( defaultblock[tr.Entity:GetClass()] or tr.Entity:CreatedByMap() ) then
 			return false
 		end
 	end
-end
-hook.Add( "CanTool", "disallow_maptools", ToolRestrict )
+	hook.Add( "CanTool", "disallow_maptools", ToolRestrict )
 
-local function GravRestrict( ply, ent )
-	if IsValid( ent ) then
-		if gravblacklist[ent:GetClass()] then
+	local function GravRestrict( ply, ent )
+		if IsValid( ent ) and gravblacklist[ent:GetClass()] then
 			return false
 		end
 	end
+	hook.Add( "GravGunPickupAllowed", "disallow_gravgun", GravRestrict )
 end
-hook.Add( "GravGunPickupAllowed", "disallow_gravgun", GravRestrict )
