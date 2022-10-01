@@ -1883,8 +1883,8 @@ ItemNPC["active_shooter"] = {
 
 ItemNPC["bus_passenger"] = {
 	Name = "Bus Passenger",
-	Description = "A passenger needs picked up and taken somewhere ASAP.",
-	Price = 500,
+	Description = "Drive around the city and pickup people and take them to a central location.",
+	Price = 3000,
 	Type = 8,
 	EventID = EVENT_BUS_PASSENGER,
 	PrimaryJobs = { TEAM_BUS },
