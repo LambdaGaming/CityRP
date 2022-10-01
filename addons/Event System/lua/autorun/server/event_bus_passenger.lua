@@ -37,20 +37,20 @@ BusDestinations = {
 	["Police Department"] = {
 		[rockford] = Vector( -8960, -5831, 8 ),
 		[southside] = Vector( 6282, 7642, 128 ),
-		[riverden] = vector_zero,
-		[truenorth] = vector_zero
+		[riverden] = Vector( -8982, 10338, 0 ),
+		[truenorth] = Vector( 3393, 5552, 0 )
 	},
 	["Fire Department"] = {
 		[rockford] = Vector( -6368, -3269, 8 ),
 		[southside] = Vector( 9038, 1522, -107 ),
-		[riverden] = vector_zero,
-		[truenorth] = vector_zero
+		[riverden] = Vector( -12274, 2367, -263 ),
+		[truenorth] = Vector( 13756, 10776, 8 )
 	},
 	["Supermarket"] = {
 		[rockford] = Vector( 2260, 5249, 536 ),
 		[southside] = Vector( -5566, -111, -80 ),
-		[riverden] = vector_zero,
-		[truenorth] = vector_zero
+		[riverden] = Vector( -10430, 2175, -264 ),
+		[truenorth] = Vector( 14374, 9923, 8 )
 	}
 }
 
@@ -88,6 +88,8 @@ end
 hook.Add( "EntityRemoved", "BusRemoved", function( ent )
 	if ActiveEvents[EVENT_BUS_PASSENGER] and ent.TotalPassengers then
 		EndBusPassenger()
-		DarkRP.notify( ent:CPPIGetOwner(), 1, 6, "Your job was cancelled due to your bus being deleted." )
+		for k,v in pairs( team.GetPlayers( TEAM_BUS ) ) do
+			DarkRP.notify( v, 1, 6, "Your job was cancelled due to your bus being deleted." )
+		end
 	end
 end )
