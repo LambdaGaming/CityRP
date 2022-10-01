@@ -110,7 +110,7 @@ end
 
 --Fish stove initializer
 util.PrecacheModel( "models/props_interiors/pot02a.mdl" )
-hook.Add( "OnPlayerChangedTeam", "CookInit", function()
+hook.Add( "OnPlayerChangedTeam", "CookInit", function( ply, before, after )
 	if after == TEAM_COOK then ply.CookFish = 0 end
 	if after != TEAM_COOK then ply.CookFish = nil end
 end )
