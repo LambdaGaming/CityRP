@@ -212,7 +212,7 @@ hook.Add( "InitPostEntity", "LoadNPCsCityRP", function()
 
 			local job = ents.Create( "npc_item" )
 			job:SetPos( Vector( -11125, 12548, 128 ) )
-			job:SetAngles( angle_ninety_neg )
+			job:SetAngles( angle_negninety )
 			job:Spawn()
 			job:ApplyType( 8 )
 
