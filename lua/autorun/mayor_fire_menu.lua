@@ -59,7 +59,7 @@ if SERVER then
 		if ply:Team() == TEAM_MAYOR then
 			local ent = ents.GetByIndex( index )
 			if IsValid( ent ) and ent:isCP() then
-				ent:teamBan( ent:Team(), 600 )
+				ent:teamBan( ent:Team(), 1800 )
 				ent:changeTeam( TEAM_CITIZEN, true, true )
 				DarkRP.notify( ent, 1, 6, "You have been fired by the mayor. You may attempt to return to your job after 10 minutes." )
 				DarkRP.notify( ply, 0, 6, "You have fired "..ent:Nick().."." )
