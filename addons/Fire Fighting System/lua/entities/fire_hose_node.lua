@@ -19,7 +19,7 @@ function ENT:SpawnFunction( ply, tr, name )
 end
 
 function ENT:Initialize()
-    self:SetModel( "models/props_street/firehydrant.mdl" )
+    self:SetModel( "models/props/cs_assault/firehydrant.mdl" )
 	self:SetMoveType( MOVETYPE_VPHYSICS )
 	self:SetSolid( SOLID_VPHYSICS )
 	if SERVER then
@@ -54,7 +54,7 @@ if SERVER then
 		if int == 1 then
 			for k,v in pairs( ents.FindInSphere( ent:GetPos(), 200 ) ) do
 				if v:IsVehicle() and v:GetModel() == "models/noble/engine_32.mdl" then
-					local constr, rope = constraint.Rope( v, ent, 0, 0, Vector( 55, -6, 45 ), Vector( 9, 0, 22 ), 400, 500, 1000, 10, "cable/cable2", false, color_white )
+					local constr, rope = constraint.Rope( v, ent, 0, 0, Vector( 55, -6, 45 ), Vector( 9, 0, 20 ), 400, 500, 1000, 10, "cable/cable2", false, color_white )
 					ent.Connection = rope
 					ent.HostTruck = v
 					break
@@ -67,7 +67,7 @@ if SERVER then
 			for k,v in pairs( ents.FindInSphere( ent:GetPos(), 200 ) ) do
 				if v:GetClass() == "fire_hose_node" and v != ent then
 					if !IsValid( v.HostTruck ) then continue end
-					local constr, rope = constraint.Rope( v, ent, 0, 0, Vector( 9, 0, 22 ), Vector( 9, 0, 22 ), 400, 500, 1000, 10, "cable/cable2", false, color_white )
+					local constr, rope = constraint.Rope( v, ent, 0, 0, Vector( 9, 0, 20 ), Vector( 9, 0, 20 ), 400, 500, 1000, 10, "cable/cable2", false, color_white )
 					ent.Connection = rope
 					ent.HostTruck = v.HostTruck
 					break
