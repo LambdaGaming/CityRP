@@ -8,9 +8,7 @@ ENT.Category = "Item NPC"
 local rockford = "rp_rockford_v2b"
 local southside = "rp_southside_day"
 local riverden = "rp_riverden_v1a"
-local florida = "rp_florida_v2"
 local truenorth = "rp_truenorth_v1a"
-local newexton = "rp_newexton2_v4h"
 local map = game.GetMap()
 
 function ENT:SetupDataTables()
@@ -27,33 +25,25 @@ if SERVER then
 			[rockford] = { Vector( -8248, -5485, 0 ), angle_zero },
 			[southside] = { Vector( 8688, 8619, -127 ), angle_ninety },
 			[riverden] = { Vector( -8703, 8141, -264 ), angle_one_eighty },
-			[florida] = { Vector( 6537, -1612, 136 ), angle_zero },
-			[truenorth] = { Vector( 3238, 3914, 0 ), angle_zero },
-			[newexton] = { Vector( -7225, 10207, 1024 ), angle_ninety_neg }
+			[truenorth] = { Vector( 3238, 3914, 0 ), angle_zero }
 		},
 		[2] = { --Fire spawns
 			[rockford] = { Vector( -5257, -3349, 8 ), angle_one_eighty },
 			[southside] = { Vector( 9431, 1260, -103 ), angle_ninety_neg },
 			[riverden] = { Vector( -12202, 1422, -256 ), angle_one_eighty },
-			[florida] = { Vector( 6604, -4522, 136 ), angle_ninety },
-			[truenorth] = { Vector( 13135, 11426, 8 ), angle_ninety },
-			[newexton] = { Vector( 199, -6835, 1024 ), angle_one_eighty }
+			[truenorth] = { Vector( 13135, 11426, 8 ), angle_ninety }
 		},
 		[4] = { --Tow truck spawns
 			[rockford] = { Vector( -7564, 680, 3 ), angle_zero },
 			[southside] = { Vector( -1656, 6421, 14 ), angle_zero },
 			[riverden] = { Vector( -1820, 6037, -264 ), angle_zero },
-			[florida] = { Vector( 2198, -2753, 131 ), angle_ninety_neg },
-			[truenorth] = { Vector( 8909, 12963, 0 ), angle_zero },
-			[newexton] = { Vector( -5618, -7700, -511 ), angle_zero }
+			[truenorth] = { Vector( 8909, 12963, 0 ), angle_zero }
 		},
 		[7] = { --Smuggle truck spawns
 			[rockford] = { Vector( -2893, -6357, 0 ) , angle_ninety_neg },
 			[southside] = { Vector( -7011, -3749, -319 ), angle_one_eighty },
 			[riverden] = { Vector( -4213, 2226, -264 ), angle_one_eighty },
-			[florida] = { Vector( 9, -135, 156 ), angle_ninety },
-			[truenorth] = { Vector( 6137, 8882, 0 ), angle_zero },
-			[newexton] = { Vector( -12616, 6635, 1016 ), Angle( 0, 145, 0 ) }
+			[truenorth] = { Vector( 6137, 8882, 0 ), angle_zero }
 		}
 	}
 end

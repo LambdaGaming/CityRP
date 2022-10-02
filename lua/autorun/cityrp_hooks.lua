@@ -26,19 +26,9 @@ if SERVER then
 		["rp_rockford_v2b"] = "models/statua/shell/shellpump1.mdl",
 		["rp_southside_day"] = "models/unioncity2/props_unioncity/gas_pump.mdl",
 		["rp_riverden_v1a"] = "models/unioncity2/props_unioncity/gaspump_712.mdl",
-		["rp_florida_v2"] = "models/props_equipment/gas_pump.mdl",
-		["rp_truenorth_v1a"] = "models/props_equipment/gas_pump.mdl",
-		["rp_newexton2_v4h"] = "models/props_equipment/gas_pump.mdl"
+		["rp_truenorth_v1a"] = "models/props_equipment/gas_pump.mdl"
 	}
 	hook.Add( "InitPostEntity", "GasPumpSpawn", function()
-		if map == "rp_newexton2_v4h" then --New exton is special since it's gas station doesn't have pumps
-			local e = ents.Create( "gas_pump" )
-			e:SetPos( Vector( 3861, 5117, 1024 ) )
-			e:SetAngles( angle_zero )
-			e:Spawn()
-			e:SetModel( GasPumpMaps[map] )
-			return
-		end
 		for k,v in pairs( ents.FindByModel( GasPumpMaps[map] ) ) do
 			if v:CreatedByMap() then
 				local pos, ang = v:GetPos(), v:GetAngles()

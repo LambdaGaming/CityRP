@@ -1,9 +1,7 @@
 local rockford = "rp_rockford_v2b"
 local southside = "rp_southside_day"
 local riverden = "rp_riverden_v1a"
-local florida = "rp_florida_v2"
 local truenorth = "rp_truenorth_v1a"
-local newexton = "rp_newexton2_v4h"
 local map = game.GetMap()
 
 EventPos = {}
@@ -97,36 +95,6 @@ EventPos[riverden] = {
 	Robbery = Vector( -11333, 14619, 0 )
 }
 
-EventPos[florida] = {
-	Truck = {
-		Vector( 5682, -1344, 180 ),
-		Vector( -5071, 404, 180 ),
-		Vector( 2468, 7806, 180 )
-	},
-	Shooter = {
-		Vector( -2159, 5129, 136 ),
-		Vector( 3637, -6783, 137 ),
-		Vector( 607, -5028, 136 ),
-		Vector( -1872, -5229, 88 ),
-		Vector( 7639, -4423, 136 )
-	},
-	Fire = {
-		Vector( 8375, 71, 288 ),
-		Vector( -6516, -752, 136 ),
-		Vector( -6244, 1369, 136 ),
-		Vector( -9334, 1147, 136 ),
-		Vector( -9322, -427, 136 ),
-		Vector( 9171, 2481, 280 )
-	},
-	Road = {
-		Vector( 2871, -1864, 128 ),
-		Vector( 5241, 10570, 128 ),
-		Vector( -7706, 757, 128 ),
-		Vector( 7162, -9455, 128 )
-	},
-	Robbery = Vector( 4734, -6663, 137 )
-}
-
 EventPos[truenorth] = {
 	Truck = {
 		Vector( 6294, 5792, 50 ),
@@ -155,36 +123,6 @@ EventPos[truenorth] = {
 		Vector( -10804, 15175, 2560 )
 	},
 	Robbery = Vector( 6737, 2556, 20 )
-}
-
-EventPos[newexton] = {
-	Truck = {
-		Vector( -8727, 6911, 1070 ),
-		Vector( -4808, -9089, -570 ),
-		Vector( 9874, 8503, 1070 )
-	},
-	Shooter = {
-		Vector( 6607, 5499, 1024 ),
-		Vector( 3409, 6446, 1024 ),
-		Vector( -8487, 8426, 1024 ),
-		Vector( -6584, -5575, 1016 ),
-		Vector( -5904, -9763, -511 )
-	},
-	Fire = {
-		Vector( -2561, -8722, -431 ),
-		Vector( -8719, 1241, -479 ),
-		Vector( -5888, -1489, 1536 ),
-		Vector( 7166, 10635, 1552 ),
-		Vector( 10810, 2180, 1024 ),
-		Vector( -3825, 6559, 1024 )
-	},
-	Road = {
-		Vector( -8789, 6240, 1016 ),
-		Vector( 3249, 3879, 1016 ),
-		Vector( 15187, 3764, -7 ),
-		Vector( -5695, -3282, -519 )
-	},
-	Robbery = Vector( -9838, -2134, 1420 )
 }
 
 ActiveEvents = {}
