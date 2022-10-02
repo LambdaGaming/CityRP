@@ -1893,7 +1893,7 @@ ItemNPC["house_fire"] = {
 
 ItemNPC["money_transfer"] = {
 	Name = "Money Transfer",
-	Description = "A check needs taken from the banker NPC to the check machine at the bank. This is a highly valuable check that can be stolen so you should have an armed escort.",
+	Description = "A check needs deposited at the bank. This is a highly valuable check that can be stolen so you need to be careful.",
 	Price = 3000,
 	Type = 8,
 	EventID = EVENT_MONEY_TRANSFER,
