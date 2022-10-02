@@ -7,7 +7,7 @@ ENT.Author = "Lambda Gaming"
 ENT.Spawnable = false
 ENT.AdminOnly = true
 
-BLUEPRINT_CONFIG_TIER1 = { --Blueprints you can get from the dumpster
+BLUEPRINT_TIER1 = { --Blueprints you can get from the dumpster
 	{ "arccw_mifl_fas2_g3", "G3A3" },
 	{ "arccw_mifl_fas2_g36c", "G36C" },
 	{ "factory_lockpick", "Premium Lockpick" },
@@ -16,7 +16,7 @@ BLUEPRINT_CONFIG_TIER1 = { --Blueprints you can get from the dumpster
 	{ "dronesrewrite_nanodr", "Nano Drone" }
 }
 
-BLUEPRINT_CONFIG_TIER2 = { --Blueprints you can get from smuggling weapons and random events
+BLUEPRINT_TIER2 = { --Blueprints you can get from smuggling weapons and random events
 	{ "arccw_mifl_fas2_ak47", "AK-47" },
 	{ "arccw_mifl_fas2_m3", "M3 Super 90" },
 	{ "arccw_mifl_fas2_toz34", "TOZ-34" },
@@ -27,7 +27,7 @@ BLUEPRINT_CONFIG_TIER2 = { --Blueprints you can get from smuggling weapons and r
 	{ "arccw_nade_frag", "Frag Grenade" },
 }
 
-BLUEPRINT_CONFIG_TIER3 = { --Blueprints you can get from gov bank, PD bank, and deposit boxes
+BLUEPRINT_TIER3 = { --Blueprints you can get from gov bank, PD bank, and deposit boxes
 	{ "arccw_mifl_fas2_ks23", "KS-23" },
 	{ "usm_c4", "Timed C4" },
 	{ "weapon_slam", "SLAM Remote Explosive" },
@@ -37,7 +37,7 @@ BLUEPRINT_CONFIG_TIER3 = { --Blueprints you can get from gov bank, PD bank, and 
 	{ "arccw_mifl_fas2_m82", "M82 Antimaterial Rifle" }
 }
 
-BLUEPRINT_COMBINED = table.Add( table.Add( BLUEPRINT_CONFIG_TIER1, BLUEPRINT_CONFIG_TIER2 ), BLUEPRINT_CONFIG_TIER3 )
+BLUEPRINT_COMBINED = table.Add( table.Add( BLUEPRINT_TIER1, BLUEPRINT_TIER2 ), BLUEPRINT_TIER3 )
 
 function ENT:SpawnFunction( ply, tr, name )
 	if !tr.Hit then return end

@@ -20,12 +20,6 @@ SWEP.Secondary.ClipSize = -1
 SWEP.Secondary.DefaultClip = -1
 SWEP.Secondary.Automatic = false
 
-if CLIENT then
-	function SWEP:ShouldDrawViewModel()
-		return false
-	end
-end
-
 function SWEP:Deploy()
 	self.Scanning = false
 end

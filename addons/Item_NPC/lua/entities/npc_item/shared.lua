@@ -48,17 +48,6 @@ if SERVER then
 	}
 end
 
-local function SpawnBlueprint( ply )
-	local randwep = table.Random( BLUEPRINT_COMBINED )
-	local e = ents.Create( "crafting_blueprint" )
-	e:SetPos( ply:GetPos() + Vector( 0, 30, 0 ) )
-	e:SetAngles( ply:GetAngles() + Angle( 0, 180, 0 ) )
-	e:Spawn()
-	e:SetEntName( randwep[1] )
-	e:SetRealName( randwep[2] )
-	e:SetUses( 3 )
-end
-
 SmuggleItems = {
 	{
 		Name = "Number Nine Large",
@@ -92,7 +81,7 @@ SmuggleItems = {
 		Model = "models/weapons/w_c4_planted.mdl",
 		Pos = Vector( 0, -110, 40 ),
 		Reward = function( ply )
-			SpawnBlueprint( ply )
+			SpawnBlueprint( BLUEPRINT_COMBINED, ply, 3 )
 			return "a random tier crafting blueprint"
 		end
 	},
@@ -101,7 +90,7 @@ SmuggleItems = {
 		Model = "models/sentry/veneno_new.mdl",
 		Pos = Vector( 0, -110, 40 ),
 		Reward = function( ply )
-			SpawnBlueprint( ply )
+			SpawnBlueprint( BLUEPRINT_COMBINED, ply, 3 )
 			ply:addMoney( 15000 )
 			return "a random tier crafting blueprint and $15,000"
 		end

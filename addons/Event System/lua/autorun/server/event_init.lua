@@ -148,13 +148,6 @@ function IsEventActive( event )
 end
 
 function GiveReward( ply, money )
-	local randwep = table.Random( BLUEPRINT_CONFIG_TIER2 )
-	local e = ents.Create( "crafting_blueprint" )
-	e:SetPos( ply:GetPos() + Vector( 0, 0, 35 ) )
-	e:SetAngles( ply:GetAngles() + Angle( 0, 180, 0 ) )
-	e:Spawn()
-	e:SetEntName( randwep[1] )
-	e:SetRealName( randwep[2] )
-	e:SetUses( 3 )
+	SpawnBlueprint( BLUEPRINT_TIER2, ply, 3 )
 	ply:addMoney( money )
 end

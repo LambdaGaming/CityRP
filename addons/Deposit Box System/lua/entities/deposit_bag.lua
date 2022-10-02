@@ -59,14 +59,7 @@ function ENT:Use( activator, caller )
 			activator:ChatPrint( "As a special bonus you got a platinum money printer!" )
 			e.dt.owning_ent = activator
 		end
-		local randwep = table.Random( BLUEPRINT_CONFIG_TIER3 )
-		local e = ents.Create( "crafting_blueprint" )
-		e:SetPos( activator:GetPos() + Vector( 0, 0, 45 ) )
-		e:SetAngles( activator:GetAngles() + Angle( 0, 180, 0 ) )
-		e:Spawn()
-		e:SetEntName( randwep[1] )
-		e:SetRealName( randwep[2] )
-		e:SetUses( 6 )
+		SpawnBlueprint( BLUEPRINT_TIER3, activator, 6 )
 		DarkRP.notify( ply, 0, 6, "You have also been rewarded with a crafting blueprint." )
 		self:Remove()
 		return
