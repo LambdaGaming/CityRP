@@ -1611,23 +1611,6 @@ ItemNPC["dodge_challenger"] = {
 	end
 }
 
-ItemNPC["hummer"] = {
-	Name = "Hummer H1 SWAT Edition",
-	Description = "SWAT hummer.",
-	Model = "models/tdmcars/hummerh1.mdl",
-	Price = 0,
-	Type = 4,
-	SpawnCheck = function( ply, self )
-		return PoliceBanCheck( ply )
-	end,
-	SpawnFunction = function( ply, self )
-		local class = "Hummer H1 SWAT Edition"
-		local model = "models/tdmcars/hummerh1.mdl"
-		local script = "scripts/vehicles/TDMCars/h1.txt"
-		SpawnVehicle( ply, class, model, script, 1 )
-	end
-}
-
 ItemNPC["chevy_impala_taxi"] = {
 	Name = "Impala Taxi Unmarked",
 	Description = "Just a normal taxi, nothing to see here.",
