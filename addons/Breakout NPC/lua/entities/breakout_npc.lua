@@ -11,10 +11,10 @@ ENT.AutomaticFrameAdvance = true
 function ENT:Initialize()
 	self:SetModel( "models/Humans/Group03/male_03.mdl" )
 	if SERVER then
-		self:SetMoveType(MOVETYPE_NONE)
+		self:SetMoveType( MOVETYPE_NONE )
 		self:SetSolid( SOLID_BBOX )
-		self:SetCollisionGroup(COLLISION_GROUP_PLAYER)
-		self:SetUseType(SIMPLE_USE)
+		self:SetCollisionGroup( COLLISION_GROUP_PLAYER )
+		self:SetUseType( SIMPLE_USE )
 		self:DropToFloor()
 	end
 	self.beingused = false
@@ -27,10 +27,10 @@ local function StartCooldown( self )
 	timer.Remove( "BreakoutLoop" )
 end
 
-function ENT:AcceptInput(inputname, caller)
+function ENT:AcceptInput( inputname, caller )
 	if !caller:IsPlayer() then return end
-	if !caller:isArrested() then
-		DarkRP.notify( caller, 1, 6, "You must be arrested to use this NPC." )
+	if !caller:isArrested() and !caller:IsHandcuffed() then
+		DarkRP.notify( caller, 1, 6, "You must be arrested or cuffed to use this NPC." )
 		return
 	end
 	if timer.Exists( "BreakoutCooldown" ) then
@@ -38,11 +38,11 @@ function ENT:AcceptInput(inputname, caller)
 		return
 	end
 	if self.beingused then
-		DarkRP.notify( caller, 1, 6, "This NPC is already being used!")
+		DarkRP.notify( caller, 1, 6, "This NPC is already being used!" )
 		return
 	end
-	caller:wanted(nil, "Breaking out of jail.") --Wants the player through DarkRP if they are a criminal job.
-	DarkRP.notify( caller, 0, 6, "Please wait for your release.")
+	caller:wanted( nil, "Breaking out of jail." )
+	DarkRP.notify( caller, 0, 6, "Please wait for your release." )
 	self.beingused = true
 	self:StartRelease( caller, self )
 	timer.Create( "BreakoutTimer", 180, 1, function() 
@@ -67,8 +67,8 @@ end
 function ENT:StartRelease( caller, self )
 	if IsValid( caller ) and self.beingused then
 		hook.Add( "Think", "BreakoutThink", function()
-			if caller:GetPos():DistToSqr( self:GetPos() ) > 250000 then --DistToSqr is better for performance than just Distance
-				DarkRP.notifyAll(1, 5, caller:Nick()..' exited the release area!')
+			if caller:GetPos():DistToSqr( self:GetPos() ) > 250000 then
+				DarkRP.notifyAll( 1, 5, caller:Nick()..' exited the release area!' )
 				StartCooldown( self )
 			end
 		end )
