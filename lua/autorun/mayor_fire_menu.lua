@@ -28,7 +28,7 @@ if CLIENT then
 		plylist:AddColumn( "Name" )
 		plylist:AddColumn( "Job" )
 		plylist:AddColumn( "Index" )
-		for k,v in pairs( player.GetAll() ) do
+		for k,v in ipairs( player.GetAll() ) do
 			local name = team.GetName( v:Team() )
 			if ( v:isCP() and !blacklist[name] ) or ems[name] then
 				plylist:AddLine( v:Nick(), name, v:EntIndex() )

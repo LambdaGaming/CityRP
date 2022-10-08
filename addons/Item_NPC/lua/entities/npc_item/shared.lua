@@ -529,7 +529,7 @@ ItemNPC["farm_box"] = {
 		local e = ents.Create( "farm_box" )
 		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
 		e:Spawn()
-		e:SetNWEntity( "owner", ply )
+		e:SetOwner( ply )
 	end
 }
 
@@ -1133,7 +1133,7 @@ ItemNPC["weapon_vfire_gascan"] = {
 
 ItemNPC["money_printer_silver"] = {
 	Name = "Silver Money Printer",
-	Description = "Inventorizable but doesn't make a lot of money compared to others.",
+	Description = "Can be stored in your inventory but doesn't make a lot of money compared to others.",
 	Model = "models/props_c17/consolebox01a.mdl",
 	Price = 600,
 	Type = 2,
@@ -1141,13 +1141,13 @@ ItemNPC["money_printer_silver"] = {
 		local e = ents.Create( "money_printer_silver" )
 		e:SetPos( ply:GetPos() + Vector( 0, 30, 35 ) )
 		e:Spawn()
-		e:SetNWEntity( "Owner", ply )
+		e:SetOwner( ply )
 	end
 }
 
 ItemNPC["money_printer_gold"] = {
 	Name = "Gold Money Printer",
-	Description = "Makes a lot of money compared to silver but is not inventorizable.",
+	Description = "Makes more money compared to silver but cannot be stored in your inventory.",
 	Model = "models/props_c17/consolebox01a.mdl",
 	Price = 1000,
 	Type = 2,
@@ -1155,7 +1155,7 @@ ItemNPC["money_printer_gold"] = {
 		local e = ents.Create( "money_printer_gold" )
 		e:SetPos( ply:GetPos() + Vector( 0, 30, 35 ) )
 		e:Spawn()
-		e.dt.owning_ent = ply
+		e:SetOwner( ply )
 	end
 }
 

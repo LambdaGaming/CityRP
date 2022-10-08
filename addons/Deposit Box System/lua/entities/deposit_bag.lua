@@ -57,7 +57,7 @@ function ENT:Use( activator, caller )
 			e:SetPos( activator:GetPos() + Vector( 0, 0, 35 ) )
 			e:Spawn()
 			activator:ChatPrint( "As a special bonus you got a platinum money printer!" )
-			e.dt.owning_ent = activator
+			e:SetOwner( activator )
 		end
 		SpawnBlueprint( BLUEPRINT_TIER3, activator, 6 )
 		DarkRP.notify( ply, 0, 6, "You have also been rewarded with a crafting blueprint." )

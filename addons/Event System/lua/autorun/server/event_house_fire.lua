@@ -17,7 +17,7 @@ end
 function HouseFire()
 	hook.Add( "vFireCreated", "FireEventCreate", FireEventCreate )
 	hook.Add( "vFireRemoved", "FireEventRemove", FireEventRemove )
-	CreateVFireBall( 1200, 200, table.Random( EventPos[map].Fire ) + Vector( 0, 0, 100 ), Vector( 0, 0, 0 ), nil )
+	CreateVFireBall( 1200, 200, table.Random( EventPos[map].Fire ) + Vector( 0, 0, 100 ), vector_origin, nil )
 	for k,v in ipairs( player.GetAll() ) do
 		if v:IsEMS() then
 			DarkRP.notify( v, 0, 10, "A fire has been reported to have broken out in a residential building. Find the fire and put it out!" )

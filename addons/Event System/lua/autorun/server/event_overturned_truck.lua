@@ -57,7 +57,7 @@ function OverturnedTruck()
 	timer.Create( "OverturnedFireTimer", math.random( 60, 300 ), 1, function()
 		local rand = math.random( 0, 1 )
 		if rand == 1 then
-			CreateVFireBall( 1200, 10, event_truck:GetPos() + Vector( 0, 0, 60 ), Vector( 0, 0, 0 ), nil )
+			CreateVFireBall( 1200, 10, event_truck:GetPos() + Vector( 0, 0, 60 ), vector_origin, nil )
 		end
 	end )
 end

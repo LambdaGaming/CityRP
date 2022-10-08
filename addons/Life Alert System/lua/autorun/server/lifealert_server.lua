@@ -1,4 +1,3 @@
-
 util.AddNetworkString( "LifeAlertSound" )
 local function LifeAlert( ply )
 	ply:SetNWBool( "LifeAlertActive", true )
@@ -6,7 +5,7 @@ local function LifeAlert( ply )
 		[TEAM_FIREBOSS] = true,
 		[TEAM_FIRE] = true
 	}
-	for k,v in pairs( player.GetAll() ) do
+	for k,v in ipairs( player.GetAll() ) do
 		if v:isCP() or emsjobs[v:Team()] then
 			DarkRP.talkToPerson( v, Color( 255, 0, 0 ), "[Life Alert]", color_white, "A life alert owned by "..ply:Nick().." has just been activated. It has been marked on your screen. Respond code 3." )
 			net.Start( "LifeAlertSound" )
