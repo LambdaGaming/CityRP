@@ -82,8 +82,8 @@ local function ShooterKilled( npc, attacker, inflictor )
 				DarkRP.notify( attacker, 0, 6, "You have been rewarded with $1500 and a crafting blueprint for killing a robber." )
 				GiveReward( attacker, 1500 )
 			end
-			RobberCount = RobberCount - 1
-			if RobberCount == 0 then
+			RobberyEventStats.RobberCount = RobberyEventStats.RobberCount - 1
+			if RobberyEventStats.RobberCount == 0 then
 				RobberyEnd()
 			end
 		end

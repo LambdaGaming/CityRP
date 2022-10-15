@@ -1,5 +1,8 @@
-local RobberCount = 0
 local map = game.GetMap()
+
+RobberyEventStats = {
+	RobberCount = 0
+}
 
 function Robbery()
 	local models = {
@@ -31,11 +34,11 @@ function Robbery()
 			shooter:AddEntityRelationship( v, D_HT, 99 )
 		end
 		shooter.IsRobber = true
-		RobberCount = RobberCount + 1
+		RobberyEventStats.RobberCount = RobberyEventStats.RobberCount + 1
 	end
 	for k,v in ipairs( player.GetAll() ) do
 		if v:isCP() then
-			DarkRP.notify( v, 0, 10, RobberCount.." armed men are attempting to rob the bank!" )
+			DarkRP.notify( v, 0, 10, RobberyEventStats.RobberCount.." armed men are attempting to rob the bank!" )
 		end
 	end
 end
@@ -46,6 +49,6 @@ function RobberyEnd()
 			DarkRP.notify( v, 0, 10, "The bank robbers have been killed!" )
 		end
 	end
-	RobberCount = 0
+	RobberyEventStats.RobberCount = 0
 	ActiveEvents[EVENT_ROBBERY] = false
 end
