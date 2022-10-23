@@ -52,31 +52,35 @@ hook.Add( "InitPostEntity", "PropertySystemApplyDoorStats", function()
 	end
 
 	PropertySystemLoad()
-	for k,v in pairs( PropertyTable ) do
-		local main = DarkRP.doorIndexToEnt( k )
-		main.IsMainDoor = true
-		main:setKeysNonOwnable( true )
-		main:keysLock()
-		if !IsValid( main:getKeysTitle() ) then
+	timer.Simple( 5, function()
+		for k,v in pairs( PropertyTable ) do
+			local main = DarkRP.doorIndexToEnt( k )
+			main.IsMainDoor = true
+			main:keysLock()
 			if OwnedProperties[k] then
-				main:setKeysTitle( v.Name )
+				local title = main:getKeysTitle()
+				main:setKeysNonOwnable( true )
+				if !isstring( title ) then
+					title = v.Name
+				end
+				main.OriginalTitle = title
+				DarkRP.offlinePlayerData( util.SteamIDFrom64( OwnedProperties[k].Owner ), function( data )
+					main:setKeysTitle( title.."\nOwned by disconnected player: "..data[1].rpname )
+				end )
 			else
+				main.OriginalTitle = v.Name
 				main:setKeysTitle( v.Name.."\nFor Sale: "..DarkRP.formatMoney( v.Price or 0 ) )
 			end
-		else
-			DarkRP.offlinePlayerData( util.SteamIDFrom64( OwnedProperties[k].Owner ), function( data )
-				main:setKeysTitle( main:getKeysTitle().."\nOwned by disconnected player: "..data[1].rpname )
-			end )
-		end
-		if v.SubDoors then
-			for a,b in pairs( v.SubDoors ) do
-				local sub = DarkRP.doorIndexToEnt( b )
-				sub.IsSubDoor = true
-				sub:setKeysNonOwnable( true )
-				sub:keysLock()
+			if v.SubDoors then
+				for a,b in pairs( v.SubDoors ) do
+					local sub = DarkRP.doorIndexToEnt( b )
+					sub.IsSubDoor = true
+					sub:setKeysNonOwnable( true )
+					sub:keysLock()
+				end
 			end
 		end
-	end
+	end )
 end )
 
 hook.Add( "PlayerInitialSpawn", "PropertySystemPlayerSpawn", function( ply )
@@ -84,17 +88,15 @@ hook.Add( "PlayerInitialSpawn", "PropertySystemPlayerSpawn", function( ply )
 		for k,v in pairs( OwnedProperties ) do
 			if v.Owner == ply:SteamID64() then
 				local ent = DarkRP.doorIndexToEnt( k )
-				ent:keysOwn( ply )
 				ent:setKeysNonOwnable( false )
+				ent:keysOwn( ply )
 				for a,b in pairs( PropertyTable[k].SubDoors ) do
 					local e = DarkRP.doorIndexToEnt( b )
-					e:keysOwn( ply )
 					e:setKeysNonOwnable( false )
+					e:keysOwn( ply )
 				end
 				timer.Simple( 1, function()
-					if !IsValid( ent:getKeysTitle() ) then
-						ent:setKeysTitle( PropertyTable[k].Name ) --Needs set again since it gets reset when the owner is applied
-					end
+					ent:setKeysTitle( ent.OriginalTitle ) --Needs set again since it gets reset when the owner is applied
 				end )
 			end
 		end
@@ -111,13 +113,9 @@ hook.Add( "PlayerDisconnected", "PropertySystemPlayerDisconnect", function( ply 
 				main:setKeysNonOwnable( true )
 				main:keysLock()
 				local ownmessage = "\nOwned by disconnected player: "..nick
-				if !IsValid( title ) then
-					main:setKeysTitle( PropertyTable[k].Name..ownmessage )
-				else
-					main:setKeysTitle( main:getKeysTitle()..ownmessage )
-				end
-				if v.SubDoors then
-					for a,b in pairs( v.SubDoors ) do
+				main:setKeysTitle( main.OriginalTitle..ownmessage )
+				if PropertyTable[k].SubDoors then
+					for a,b in pairs( PropertyTable[k].SubDoors ) do
 						local sub = DarkRP.doorIndexToEnt( b )
 						sub:setKeysNonOwnable( true )
 						sub:keysLock()
