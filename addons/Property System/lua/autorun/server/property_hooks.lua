@@ -136,6 +136,25 @@ hook.Add( "canPropertyTax", "PropertySystemTaxes", function( ply, tax )
 	return true, total
 end )
 
+hook.Add( "lockpickTime", "PropertySystemLockpickTime", function( ply, ent )
+	if ent.IsMainDoor or ent.IsSubDoor then
+		local index = ent:doorIndex()
+		return PropertyTable[index] and PropertyTable[index].Price * 0.01 or 30
+	end
+end )
+
+hook.Add( "canLockpick", "PropertySystemAllowLockpick", function( ply, ent )
+	if OwnedProperties[ent:doorIndex()] and !ent:isKeysOwned() then
+		return false
+	end
+end )
+
+hook.Add( "canDoorRam", "PropertySystemDoorRam", function( ply, trace, ent )
+	if OwnedProperties[ent:doorIndex()] and !ent:isKeysOwned() then
+		return false
+	end
+end )
+
 --Redefine DarkRP set door title function to make it compatible with this system
 hook.Add( "InitPostEntity", "PropertySystemTitleOverride", function()
 	local function SetDoorTitle( ply, args )
