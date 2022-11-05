@@ -13,7 +13,7 @@ properties.Add( "propertysave", {
 				local property = PropertyTable[k]
 				local upper = property.BoundaryUpper
 				local lower = property.BoundaryLower
-				if !isvector( upper ) then continue end
+				if !upper or !isvector( upper ) or v.Saved >= 15 then continue end
 				local center = ent:LocalToWorld( ent:OBBCenter() )
 				if v.Owner == ply:SteamID64() and center:WithinAABox( upper, lower ) then
 					onproperty = true
@@ -78,8 +78,10 @@ end
 if SERVER then
 	util.AddNetworkString( "SyncPropertyTables" )
 	function SyncPropertyTable( ply )
-		local owned = OwnedProperties
-		owned.Saved = nil --The client doesn't need this so don't network it
+		local owned = table.Copy( OwnedProperties )
+		for k,v in pairs( owned ) do
+			v.Saved = #OwnedProperties[k].Saved
+		end
 		net.Start( "SyncPropertyTables" )
 		net.WriteTable( PropertyTable )
 		net.WriteTable( owned )

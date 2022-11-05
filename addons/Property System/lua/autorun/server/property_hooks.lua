@@ -36,7 +36,7 @@ hook.Add( "playerSellDoor", "PropertySystemSellDoor", function( ply, ent )
 		end
 		for k,v in pairs( ents.FindInBox( upper, lower ) ) do
 			if v:GetNWString( "SavedProperty" ) != "" then
-				v:Remove()
+				v:SetNWString( "SavedProperty", "" )
 			end
 		end
 		ent:setKeysTitle( nil )
