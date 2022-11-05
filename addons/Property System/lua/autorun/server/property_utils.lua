@@ -1,6 +1,21 @@
 local map = game.GetMap()
 
-function PropertySystemSave()
+function PropertySystemSaveEnts( id )
+	local entlist = ents.GetAll()
+	for k,v in ipairs( entlist ) do
+		for a,b in pairs( OwnedProperties ) do
+			local saves = {}
+			if IsValid( player.GetBySteamID64( id or b.Owner ) ) then
+				local index = v:GetNWString( "SavedProperty" )
+				if index == tostring( a ) then
+					table.insert( b.Saved, duplicator.CopyEntTable( v ) )
+				end
+			end
+		end
+	end
+end
+
+function PropertySystemSaveFile()
 	local json = util.TableToJSON( OwnedProperties, true )
 	file.Write( "properties/saved/"..map..".json", json )
 end
@@ -12,4 +27,11 @@ function PropertySystemLoad()
 	if file.Exists( "properties/saved/"..map..".json", "DATA" ) then
 		OwnedProperties = util.JSONToTable( file.Read( "properties/saved/"..map..".json" ) )
 	end
+	SyncPropertyTable()
 end
+
+timer.Create( "PropertyAutosave", 300, 0, function()
+	PropertySystemSaveEnts()
+	PropertySystemSaveFile()
+	print( "Saving properties..." )
+end )

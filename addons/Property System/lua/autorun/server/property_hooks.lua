@@ -1,6 +1,3 @@
-PropertyTable = {}
-OwnedProperties = {}
-
 hook.Add( "playerBuyDoor", "PropertySystemBuyDoor", function( ply, ent )
 	if ent.IsSubDoor then
 		return false, "Buy the main door to own the whole property."
@@ -17,7 +14,7 @@ hook.Add( "playerBuyDoor", "PropertySystemBuyDoor", function( ply, ent )
 			Owner = ply:SteamID64(),
 			Saved = {}
 		}
-		PropertySystemSave()
+		PropertySystemSaveFile()
 	end
 	return true
 end )
@@ -39,7 +36,7 @@ hook.Add( "playerSellDoor", "PropertySystemSellDoor", function( ply, ent )
 			ent:setKeysTitle( PropertyTable[index].Name )
 		end )
 		OwnedProperties[index] = nil
-		PropertySystemSave()
+		PropertySystemSaveFile()
 	end
 	return true
 end )
@@ -98,6 +95,11 @@ hook.Add( "PlayerInitialSpawn", "PropertySystemPlayerSpawn", function( ply )
 				timer.Simple( 1, function()
 					ent:setKeysTitle( ent.OriginalTitle ) --Needs set again since it gets reset when the owner is applied
 				end )
+				if v.Saved and !table.IsEmpty( v.Saved ) then
+					for a,b in pairs( v.Saved ) do
+						duplicator.CreateEntityFromTable( ply, b )
+					end
+				end
 			end
 		end
 	end )
@@ -106,7 +108,11 @@ end )
 hook.Add( "PlayerDisconnected", "PropertySystemPlayerDisconnect", function( ply )
 	local id = ply:SteamID64()
 	local nick = ply:Nick()
+	PropertySystemSaveEnts( id )
+	PropertySystemSaveFile()
 	timer.Simple( 5, function()
+		local propertylist = {}
+		local entlist = ents.GetAll()
 		for k,v in pairs( OwnedProperties ) do
 			if v.Owner == id then
 				local main = DarkRP.doorIndexToEnt( k )
@@ -121,6 +127,13 @@ hook.Add( "PlayerDisconnected", "PropertySystemPlayerDisconnect", function( ply 
 						sub:keysLock()
 					end
 				end
+				propertylist[tostring( k )] = true
+			end
+		end
+		for k,v in ipairs( entlist ) do
+			local index = v:GetNWString( "SavedProperty" )
+			if propertylist[index] then
+				v:Remove()
 			end
 		end
 	end )
@@ -129,7 +142,7 @@ end )
 hook.Add( "canPropertyTax", "PropertySystemTaxes", function( ply, tax )
 	local total = 0
 	for k,v in pairs( OwnedProperties ) do
-		if PropertyTable[k] and v.Owner == ply:SteamID64() then
+		if PropertyTable[k] and PropertyTable[k].Price and v.Owner == ply:SteamID64() then
 			total = total + ( PropertyTable[k].Price * 0.01 ) --TODO: Make it so the mayor can change the property tax
 		end
 	end
