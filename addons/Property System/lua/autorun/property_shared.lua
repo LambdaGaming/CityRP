@@ -11,8 +11,11 @@ properties.Add( "propertysave", {
 			local onproperty
 			for k,v in pairs( OwnedProperties ) do
 				local property = PropertyTable[k]
-				if !isvector( property.BoundaryUpper ) then continue end
-				if v.Owner == ply:SteamID64() and ent:GetPos():WithinAABox( property.BoundaryUpper, property.BoundaryLower ) then
+				local upper = property.BoundaryUpper
+				local lower = property.BoundaryLower
+				if !isvector( upper ) then continue end
+				local center = ent:LocalToWorld( ent:OBBCenter() )
+				if v.Owner == ply:SteamID64() and center:WithinAABox( upper, lower ) then
 					onproperty = true
 					ent.PropertyIndex = k
 					break
