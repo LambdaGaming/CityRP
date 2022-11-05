@@ -75,9 +75,11 @@ end
 if SERVER then
 	util.AddNetworkString( "SyncPropertyTables" )
 	function SyncPropertyTable( ply )
+		local owned = OwnedProperties
+		owned.Saved = nil --The client doesn't need this so don't network it
 		net.Start( "SyncPropertyTables" )
 		net.WriteTable( PropertyTable )
-		net.WriteTable( OwnedProperties )
+		net.WriteTable( owned )
 		net.Send( ply or player.GetAll() )
 	end
 end

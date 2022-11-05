@@ -1,16 +1,12 @@
 local map = game.GetMap()
 
 function PropertySystemSaveEnts( id )
-	local entlist = ents.GetAll()
 	for k,v in pairs( OwnedProperties ) do
 		v.Saved = {}
-	end
-	for k,v in ipairs( entlist ) do
-		for a,b in pairs( OwnedProperties ) do
-			if IsValid( player.GetBySteamID64( id or b.Owner ) ) then
-				local index = v:GetNWString( "SavedProperty" )
-				if index == tostring( a ) then
-					table.insert( b.Saved, duplicator.CopyEntTable( v ) )
+		if IsValid( player.GetBySteamID64( id or v.Owner ) ) then
+			for a,b in pairs( ents.FindInBox( PropertyTable[k].BoundaryUpper, PropertyTable[k].BoundaryLower ) ) do
+				if b:GetNWString( "SavedProperty" ) != "" then
+					table.insert( v.Saved, duplicator.CopyEntTable( b ) )
 				end
 			end
 		end
