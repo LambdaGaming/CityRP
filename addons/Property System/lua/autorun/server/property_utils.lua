@@ -2,9 +2,11 @@ local map = game.GetMap()
 
 function PropertySystemSaveEnts( id )
 	local entlist = ents.GetAll()
+	for k,v in pairs( OwnedProperties ) do
+		v.Saved = {}
+	end
 	for k,v in ipairs( entlist ) do
 		for a,b in pairs( OwnedProperties ) do
-			local saves = {}
 			if IsValid( player.GetBySteamID64( id or b.Owner ) ) then
 				local index = v:GetNWString( "SavedProperty" )
 				if index == tostring( a ) then
@@ -13,6 +15,8 @@ function PropertySystemSaveEnts( id )
 			end
 		end
 	end
+	SyncPropertyTable()
+	PropertySystemSaveFile()
 end
 
 function PropertySystemSaveFile()
@@ -29,9 +33,3 @@ function PropertySystemLoad()
 	end
 	SyncPropertyTable()
 end
-
-timer.Create( "PropertyAutosave", 300, 0, function()
-	PropertySystemSaveEnts()
-	PropertySystemSaveFile()
-	print( "Saving properties..." )
-end )

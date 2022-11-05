@@ -15,6 +15,7 @@ hook.Add( "playerBuyDoor", "PropertySystemBuyDoor", function( ply, ent )
 			Saved = {}
 		}
 		PropertySystemSaveFile()
+		SyncPropertyTable()
 	end
 	return true
 end )
@@ -37,6 +38,7 @@ hook.Add( "playerSellDoor", "PropertySystemSellDoor", function( ply, ent )
 		end )
 		OwnedProperties[index] = nil
 		PropertySystemSaveFile()
+		SyncPropertyTable()
 	end
 	return true
 end )
@@ -99,9 +101,11 @@ hook.Add( "PlayerInitialSpawn", "PropertySystemPlayerSpawn", function( ply )
 					for a,b in pairs( v.Saved ) do
 						duplicator.CreateEntityFromTable( ply, b )
 					end
+					print( "Spawned saved entities for "..ply:Nick() )
 				end
 			end
 		end
+		SyncPropertyTable( ply )
 	end )
 end )
 
@@ -109,7 +113,6 @@ hook.Add( "PlayerDisconnected", "PropertySystemPlayerDisconnect", function( ply 
 	local id = ply:SteamID64()
 	local nick = ply:Nick()
 	PropertySystemSaveEnts( id )
-	PropertySystemSaveFile()
 	timer.Simple( 5, function()
 		local propertylist = {}
 		local entlist = ents.GetAll()

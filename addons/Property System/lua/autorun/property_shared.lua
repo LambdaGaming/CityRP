@@ -32,6 +32,7 @@ properties.Add( "propertysave", {
 		local ent = net.ReadEntity()
 		local index = net.ReadString()
 		ent:SetNWString( "SavedProperty", index )
+		PropertySystemSaveEnts()
 	end
 } )
 
@@ -54,6 +55,7 @@ properties.Add( "propertyremovesave", {
 	Receive = function( self, len, ply )
 		local ent = net.ReadEntity()
 		ent:SetNWString( "SavedProperty", "" )
+		PropertySystemSaveEnts()
 	end
 } )
 
