@@ -25,11 +25,19 @@ hook.Add( "playerSellDoor", "PropertySystemSellDoor", function( ply, ent )
 		return false, "Sell the main door to sell the whole property."
 	elseif ent.IsMainDoor then
 		local index = ent:doorIndex()
-		for k,v in pairs( PropertyTable[index].SubDoors ) do
+		local doors = PropertyTable[index].SubDoors
+		local upper = PropertyTable[index].BoundaryUpper
+		local lower = PropertyTable[index].BoundaryLower
+		for k,v in pairs( doors ) do
 			local e = DarkRP.doorIndexToEnt( v )
 			e:keysUnOwn( ply )
 			e:setKeysTitle( nil )
 			DarkRP.storeDoorData( e )
+		end
+		for k,v in pairs( ents.FindInBox( upper, lower ) ) do
+			if v:GetNWString( "SavedProperty" ) != "" then
+				v:Remove()
+			end
 		end
 		ent:setKeysTitle( nil )
 		DarkRP.storeDoorData( ent )
@@ -99,7 +107,9 @@ hook.Add( "PlayerInitialSpawn", "PropertySystemPlayerSpawn", function( ply )
 				end )
 				if v.Saved and !table.IsEmpty( v.Saved ) then
 					for a,b in pairs( v.Saved ) do
-						duplicator.CreateEntityFromTable( ply, b )
+						local e = duplicator.CreateEntityFromTable( ply, b )
+						e:SetNWString( "SavedProperty", k )
+						FreezePropertyEnt( e )
 					end
 					print( "Spawned saved entities for "..ply:Nick() )
 				end
@@ -115,7 +125,6 @@ hook.Add( "PlayerDisconnected", "PropertySystemPlayerDisconnect", function( ply 
 	PropertySystemSaveEnts( id )
 	timer.Simple( 5, function()
 		local propertylist = {}
-		local entlist = ents.GetAll()
 		for k,v in pairs( OwnedProperties ) do
 			if v.Owner == id then
 				local main = DarkRP.doorIndexToEnt( k )
@@ -131,12 +140,6 @@ hook.Add( "PlayerDisconnected", "PropertySystemPlayerDisconnect", function( ply 
 					end
 				end
 				propertylist[tostring( k )] = true
-			end
-		end
-		for k,v in ipairs( entlist ) do
-			local index = v:GetNWString( "SavedProperty" )
-			if propertylist[index] then
-				v:Remove()
 			end
 		end
 	end )
@@ -167,6 +170,20 @@ end )
 
 hook.Add( "canDoorRam", "PropertySystemDoorRam", function( ply, trace, ent )
 	if OwnedProperties[ent:doorIndex()] and !ent:isKeysOwned() then
+		return false
+	end
+end )
+
+local function DisableInteractions( ply, ent )
+	if ent:GetNWString( "SavedProperty" ) != "" then
+		return false
+	end
+end
+hook.Add( "PhysgunPickup", "PropertySystemNoPhysgun", DisableInteractions )
+hook.Add( "GravGunPickupAllowed", "PropertySystemNoGravgun", DisableInteractions )
+
+hook.Add( "CanTool", "PropertySystemNoToolgun", function( ply, tr )
+	if tr.Entity:GetNWString( "SavedProperty" ) != "" then
 		return false
 	end
 end )

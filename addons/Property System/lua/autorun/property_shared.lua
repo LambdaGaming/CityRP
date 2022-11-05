@@ -32,7 +32,9 @@ properties.Add( "propertysave", {
 		local ent = net.ReadEntity()
 		local index = net.ReadString()
 		ent:SetNWString( "SavedProperty", index )
+		FreezePropertyEnt( ent )
 		PropertySystemSaveEnts()
+		DarkRP.notify( ply, 0, 6, "Entity "..ent:GetClass().." successfully saved." )
 	end
 } )
 
@@ -55,7 +57,9 @@ properties.Add( "propertyremovesave", {
 	Receive = function( self, len, ply )
 		local ent = net.ReadEntity()
 		ent:SetNWString( "SavedProperty", "" )
+		UnfreezePropertyEnt( ent )
 		PropertySystemSaveEnts()
+		DarkRP.notify( ply, 0, 6, "Entity "..ent:GetClass().." successfully unsaved." )
 	end
 } )
 

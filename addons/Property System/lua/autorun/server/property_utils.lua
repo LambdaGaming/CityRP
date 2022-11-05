@@ -33,3 +33,17 @@ function PropertySystemLoad()
 	end
 	SyncPropertyTable()
 end
+
+function FreezePropertyEnt( ent )
+	local phys = ent:GetPhysicsObject()
+	if IsValid( phys ) then
+		phys:EnableMotion( false )
+	end
+end
+
+function UnfreezePropertyEnt( ent )
+	local phys = ent:GetPhysicsObject()
+	if IsValid( phys ) then
+		phys:EnableMotion( true )
+	end
+end
