@@ -226,3 +226,11 @@ hook.Add( "InitPostEntity", "PropertySystemTitleOverride", function()
 		DarkRP.notify( ply, 1, 6, "Command disabled." )
 	end )
 end )
+
+hook.Add( "PlayerSay", "ViewPropertiesCommand", function( ply, text )
+	if text == "!viewproperties" then
+		net.Start( "ViewPropertyBoundaries" )
+		net.Send( ply )
+		return ""
+	end
+end )

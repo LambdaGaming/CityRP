@@ -73,9 +73,25 @@ if CLIENT then
 		PropertyTable = tbl
 		OwnedProperties = owned
 	end )
+
+	net.Receive( "ViewPropertyBoundaries", function()
+		local ply = LocalPlayer()
+		if ply.ViewingProperties then
+			hook.Remove( "PreDrawEffects", "ViewPropertyBoundaries" )
+			ply.ViewingProperties = false
+		else
+			hook.Add( "PreDrawEffects", "ViewPropertyBoundaries", function()
+				for k,v in pairs( PropertyTable ) do
+					render.DrawWireframeBox( vector_origin, angle_zero, v.BoundaryLower, v.BoundaryUpper, color_green )
+				end
+			end )
+			ply.ViewingProperties = true
+		end
+	end )
 end
 
 if SERVER then
+	util.AddNetworkString( "ViewPropertyBoundaries" )
 	util.AddNetworkString( "SyncPropertyTables" )
 	function SyncPropertyTable( ply )
 		local owned = table.Copy( OwnedProperties )
