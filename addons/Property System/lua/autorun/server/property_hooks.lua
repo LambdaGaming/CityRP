@@ -92,6 +92,13 @@ end )
 
 hook.Add( "PlayerInitialSpawn", "PropertySystemPlayerSpawn", function( ply )
 	timer.Simple( 5, function()
+		local pos = ply:GetPData( "LastPos" )
+		if pos then
+			local split = string.Split( pos, " " )
+			local vec = Vector( tonumber( split[1] ), tonumber( split[2] ), tonumber( split[3] ) )
+			ply:SetPos( vec )
+		end
+
 		for k,v in pairs( OwnedProperties ) do
 			if v.Owner == ply:SteamID64() then
 				local ent = DarkRP.doorIndexToEnt( k )
@@ -122,6 +129,7 @@ end )
 hook.Add( "PlayerDisconnected", "PropertySystemPlayerDisconnect", function( ply )
 	local id = ply:SteamID64()
 	local nick = ply:Nick()
+	ply:SetPData( "LastPos", ply:GetPos() )
 	PropertySystemSaveEnts( id )
 	timer.Simple( 5, function()
 		local propertylist = {}
