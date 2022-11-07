@@ -149,7 +149,7 @@ hook.Add( "canPropertyTax", "PropertySystemTaxes", function( ply, tax )
 	local total = 0
 	for k,v in pairs( OwnedProperties ) do
 		if PropertyTable[k] and PropertyTable[k].Price and v.Owner == ply:SteamID64() then
-			total = total + ( PropertyTable[k].Price * 0.01 ) --TODO: Make it so the mayor can change the property tax
+			total = total + ( PropertyTable[k].Price * ( GetGlobalInt( "MAYOR_PropertyTax" ) * 0.01 ) )
 		end
 	end
 	return true, total
