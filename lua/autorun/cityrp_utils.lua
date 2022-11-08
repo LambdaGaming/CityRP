@@ -12,3 +12,8 @@ if SERVER then
 		e:SetUses( uses )
 	end
 end
+
+local meta = FindMetaTable( "Player" )
+function meta:IsEMS()
+	return self:Team() == TEAM_FIREBOSS or self:Team() == TEAM_FIRE
+end

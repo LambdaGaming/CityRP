@@ -138,11 +138,6 @@ EVENT_BUS_PASSENGER = 9
 EVENT_ZOMBIE = 10
 EVENT_TIME_BOMB = 11
 
-local meta = FindMetaTable( "Player" )
-function meta:IsEMS()
-	return self:Team() == TEAM_FIREBOSS or self:Team() == TEAM_FIRE
-end
-
 function IsEventActive( event )
 	return ActiveEvents[event]
 end
