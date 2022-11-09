@@ -1,42 +1,19 @@
 local map = game.GetMap()
 
 function DrunkDriver()
-	RunConsoleCommand( "bot" )
-	local veh = list.Get( "Vehicles" )
-	local randveh, name = table.Random( veh )
-	while AM_Config_Blacklist[randveh.Model] do --Prevents blacklisted vehicles such as trailers from spawning
-		randveh, name = table.Random( veh )
-	end
+	local e = ents.Create( "reckless_dr_isaac_kleiner" )
+	e:SetPos( table.Random( EventPos[map].Road ) + Vector( 0, 0, 10 ) )
+	e:Spawn()
+	e:Activate()
 
-	timer.Simple( 1, function() --The server crashes without this timer, I guess the vehicle needs time to fully initialize
-		local e = ents.Create( "prop_vehicle_jeep" )
-		e:SetKeyValue( "vehiclescript", randveh.KeyValues.vehiclescript )
-		e:SetPos( table.Random( EventPos[map].Road ) + Vector( 0, 0, 10 ) )
-		e:SetModel( randveh.Model )
-		e:Spawn()
-		e:Activate()
-		e.VehicleTable = veh[name]
-		e.DrunkVeh = true
-		e:Fire( "HandBrakeOff", "", 0.01 )
-	end )
-	timer.Simple( 1, function() --Add another timer here just to be safe
-		for k,v in pairs( player.GetBots() ) do
-			v.DrunkDriver = true
-			v:GodEnable() --Bots won't move if they're damaged
-			for a,b in pairs( ents.FindByModel( randveh.Model ) ) do
-				if b.DrunkVeh then
-					v:EnterVehicle( b )
-					AM_ToggleGodMode( b )
-				end
-			end
-		end
-	end )
 	for k,v in ipairs( player.GetAll() ) do
-		DarkRP.notify( v, 0, 10, "Citizens are reporting a drunk driver in the area. Be on the lookout." )
+		if v:isCP() then
+			DarkRP.notify( v, 0, 10, "Citizens are reporting a drunk driver in the area. Be on the lookout." )
+		end
 	end
 end
 
-function EndDrunkDriver( bot, ply )
+function EndDrunkDriver( ent, ply )
 	local numcp = 1
 	for k,v in ipairs( player.GetAll() ) do
 		if v:isCP() and v:Team() != TEAM_MAYOR then
@@ -44,10 +21,7 @@ function EndDrunkDriver( bot, ply )
 		end
 	end
 	local reward = 12000 + ( numcp * 4000 )
-	bot:Kick( "Arrested by "..ply:Nick().."." )
-	for k,v in pairs( ents.FindByClass( "prop_vehicle_jeep" ) ) do
-		if v.DrunkVeh then v:Remove() end
-	end
+	ent:Remove()
 	DarkRP.notify( ply, 0, 10, "You have been rewarded with $"..reward.." and a crafting blueprint for arresting the drunk driver." )
 	if numcp > 1 then
 		DarkRP.notify( ply, 2, 10, "Please distribute these earnings among those who helped you." )
@@ -56,9 +30,18 @@ function EndDrunkDriver( bot, ply )
 	ActiveEvents[EVENT_DRUNK_DRIVER] = false
 end
 
-local function DrunkDriverHandcuff( ply, bot, handcuffs )
-	if bot:IsBot() and bot.DrunkDriver then
-		EndDrunkDriver( bot, ply )
+local usecooldown = 0
+hook.Add( "PlayerUse", "DrunkDriverUse", function( ply, ent )
+	if usecooldown < CurTime() and ent:GetNWBool( "_OwnedByRecklessDriverKleiner" ) then
+		if ply:isCP() then
+			if ent:GetVelocity():Length() <= 10 then
+				EndDrunkDriver( ent, ply )
+			else
+				DarkRP.notify( ply, 1, 6, "Slow the car down before attempting to remove the driver." )
+			end
+		else
+			DarkRP.notify( ply, 0, 6, "This driver appears to be impaired. Call the police." )
+		end
+		usecooldown = CurTime() + 1
 	end
-end
-hook.Add( "OnHandcuffed", "DrunkDriverHandcuff", DrunkDriverHandcuff )
+end )
