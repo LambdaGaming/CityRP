@@ -6,7 +6,7 @@ properties.Add( "propertysave", {
 	Order = 1,
 	MenuIcon = "icon16/database_save.png",
 	Filter = function( self, ent, ply )
-		local owner = IsValid( ent:GetOwner() ) and ent:GetOwner() or ent:CPPIGetOwner()
+		local owner = IsValid( ent:GetOwner() ) and ent:GetOwner() or ent:CPPIGetOwner() or ent:GetNWEntity( "Owner" )
 		if IsValid( owner ) and owner == ply then
 			local onproperty
 			for k,v in pairs( OwnedProperties ) do
@@ -46,7 +46,7 @@ properties.Add( "propertyremovesave", {
 	Order = 1,
 	MenuIcon = "icon16/database_delete.png",
 	Filter = function( self, ent, ply )
-		local owner = IsValid( ent:GetOwner() ) and ent:GetOwner() or ent:CPPIGetOwner()
+		local owner = IsValid( ent:GetOwner() ) and ent:GetOwner() or ent:CPPIGetOwner() or ent:GetNWEntity( "Owner" )
 		if IsValid( owner ) and owner == ply then
 			return hook.Run( "CanProperty", ply, "propertyremovesave", ent ) and ent:GetNWString( "SavedProperty" ) != ""
 		end
