@@ -1159,14 +1159,14 @@ ItemNPC["money_printer_gold"] = {
 	end
 }
 
-ItemNPC["weapon_spraymhs"] = {
+ItemNPC["graffiti-swep"] = {
 	Name = "Graffiti Spray",
 	Description = "Used to vandalize property with paint, usually to send a message.",
 	Model = "models/props_junk/propane_tank001a.mdl",
 	Price = 50,
 	Type = 2,
 	SpawnFunction = function( ply, self )
-		ply:Give( "weapon_spraymhs" )
+		ply:Give( "graffiti-swep" )
 	end
 }
 
