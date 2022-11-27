@@ -465,9 +465,9 @@ ItemNPC["apple_seeds"] = {
 	end
 }
 
-ItemNPC["cabbage_seeds"] = {
-	Name = "Cabbage Seeds",
-	Description = "Grows a cabbage plant.",
+ItemNPC["banana_seeds"] = {
+	Name = "Banana Seeds",
+	Description = "Grows a banana plant.",
 	Price = 350,
 	Type = 1,
 	SpawnFunction = function( ply, self )
