@@ -33,14 +33,8 @@ function ENT:Initialize()
 end
 
 function ENT:Use( caller, activator )
-	caller:SetHealth( math.Clamp( caller:Health() + 50, 0, 100 ) )
-	caller:setSelfDarkRPVar( "Energy", math.Clamp( caller:getDarkRPVar( "Energy" ) + 20, 0, 100 ) )
-	self:EmitSound( "eating_and_drinking/eating.wav" )
+	caller:SetHealth( caller:GetMaxHealth() )
+	caller:setSelfDarkRPVar( "Energy", 100 )
+	self:EmitSound( "npc/barnacle/barnacle_gulp"..math.random( 1, 2 )..".wav" )
 	self:Remove()
-end
-
-if CLIENT then
-    function ENT:Draw()
-        self:DrawModel()
-    end
 end
