@@ -1,56 +1,57 @@
 if SERVER then
 --!firemayor
 	local TotalVotes = {}
+	local VoteCooldown = 0
 	SetGlobalBool( "MayorFireVoteActive", false )
 	hook.Add( "PlayerSay", "FireMayorCommand", function( ply, text, public )
-		local availableply = player.GetCount()
-		local mayor = TEAM_MAYOR
-		local minvotes = math.Round( availableply * 0.75 ) - 2 --Subtract 2 for IA agent and mayor
 		if text == "!firemayor" then
-			if ply:Team() == TEAM_BOUNTY then
-				if team.NumPlayers( mayor ) == 0 then
-					DarkRP.notify( ply, 1, 6, "There isn't a mayor to fire!" )
-					return ""
-				end
-				if availableply <= 1 then
-					DarkRP.notify( ply, 1, 6, "You and the mayor are the only two players on the server." )
-					return ""
-				end
-				SetGlobalBool( "MayorFireVoteActive", true )
-				DarkRP.notifyAll( 0, 12, "Internal affairs has initialized a vote to fire the mayor. Type !firevote in chat to add your vote." )
-				return ""
-			else
-				DarkRP.notify( ply, 1, 6, "You must be an IA Agent to initialize a vote to fire the mayor!" )
+			local availableply = player.GetCount()
+			local mayor = TEAM_MAYOR
+			local minvotes = math.Round( availableply * 0.75 ) - 1 --Subtract 1 for the mayor
+
+			if ply:Team() == mayor then
+				DarkRP.notify( ply, 1, 6, "Why do you wanna fire yourself?" )
 				return ""
 			end
-        end
-		if text == "!firevote" then
-			local numvotes = #TotalVotes
-			if !GetGlobalBool( "MayorFireVoteActive" ) then
-				DarkRP.notify( ply, 1, 6, "There is no vote currently active!" )
+			if team.NumPlayers( mayor ) == 0 then
+				DarkRP.notify( ply, 1, 6, "There isn't a mayor to fire!" )
 				return ""
 			end
-			if ply:Team() == TEAM_BOUNTY or table.HasValue( TotalVotes, ply:UniqueID() ) then
+			if TotalVotes[ply:SteamID64()] then
 				DarkRP.notify( ply, 1, 6, "Your vote is already counted!" )
 				return ""
 			end
-			table.insert( TotalVotes, ply:UniqueID() )
-			if numvotes == minvotes then
-				for k,v in ipairs( player.GetAll() ) do
-					if v:Team() == mayor then
-						v:teamBan( mayor, 600 )
-						v:changeTeam( GAMEMODE.DefaultTeam, true, false )
-						DarkRP.notifyAll( 0, 6, "The mayor has been voted out of office!" )
-						SetGlobalBool( "MayorFireVoteActive", false )
-						TotalVotes = {}
-						return ""
-					end
-				end
-			else
-				DarkRP.notifyAll( 0, 6, ply:Nick().." has voted to fire the mayor. "..minvotes - numvotes.." more vote(s) needed to pass." )
+			if VoteCooldown > CurTime() then
+				DarkRP.notify( ply, 1, 6, "Wait for the cooldown to end before starting another vote." )
 				return ""
 			end
-			DarkRP.notify( ply, 0, 6, "Your vote to fire the mayor has been added!" )
+
+			TotalVotes[ply:SteamID64()] = true
+			local numvotes = table.Count( TotalVotes )
+			if numvotes == minvotes then
+				for k,v in pairs( team.GetPlayers( TEAM_MAYOR ) ) do
+					v:teamBan( mayor, 1800 )
+					v:changeTeam( GAMEMODE.DefaultTeam, true, false )
+					DarkRP.notifyAll( 0, 6, "The mayor has been voted out of office!" )
+					SetGlobalBool( "MayorFireVoteActive", false )
+					timer.Remove( "FireMayorTimer" )
+					TotalVotes = {}
+					VoteCooldown = CurTime() + 600
+					return ""
+				end
+			else
+				if GetGlobalBool( "MayorFireVoteActive" ) then
+					DarkRP.notifyAll( 0, 6, ply:Nick().." has cast their vote to fire the mayor. "..minvotes - numvotes.." more vote(s) needed to pass." )
+				else
+					SetGlobalBool( "MayorFireVoteActive", true )
+					DarkRP.notifyAll( 0, 12, ply:Nick().." has initialized a vote to fire the mayor. Type !firemayor to cast your vote. "..minvotes - numvotes.." more vote(s) needed to pass." )
+					timer.Create( "FireMayorTimer", 300, 1, function()
+						SetGlobalBool( "MayorFireVoteActive", false )
+						DarkRP.notifyAll( 1, 6, "Not enough people voted. The mayor gets to remain in office." )
+						VoteCooldown = CurTime() + 300
+					end )
+				end
+			end
 			return ""
 		end
 	end )
