@@ -36,7 +36,7 @@ function ENT:Use( activator, caller )
 		end
 	else
 		self:SetModel( PlantTable.PlantModel )
-		self:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
+		self:SetAngles( Angle( 0, self:GetAngles().yaw, 0 ) )
 		self:EmitSound( "physics/surfaces/sand_impact_bullet"..math.random( 1, 4 )..".wav" )
 		self:SetMoveType( MOVETYPE_NONE )
 		self:SetPlanted( true )
@@ -47,8 +47,8 @@ function ENT:Think()
 	if self:GetPlanted() and !self:ReadyForHarvest() then
 		if GetGlobalBool( "FarmDraughtActive" ) then return end
 		local tr = util.TraceLine( {
-			start = self:GetPos() + Vector( 0, 0, 60 ),
-			endpos = self:GetPos() + self:GetAngles():Up() * math.huge
+			start = self:GetPos() + Vector( 0, 0, 100 ),
+			endpos = self:GetPos() + self:GetAngles():Up() * 100000
 		} )
 		if tr.HitSky then --Make sure the plant is getting sunlight
 			self:SetGrowth( self:GetGrowth() + 1 )

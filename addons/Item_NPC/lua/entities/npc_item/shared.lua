@@ -469,6 +469,7 @@ ItemNPC["apple_seeds"] = {
 ItemNPC["banana_seeds"] = {
 	Name = "Banana Seeds",
 	Description = "Grows a banana plant.",
+	Model = "models/props/cs_italy/bananna.mdl",
 	Price = 350,
 	Type = 1,
 	Discount = { [TEAM_COOK] = 0.5 },

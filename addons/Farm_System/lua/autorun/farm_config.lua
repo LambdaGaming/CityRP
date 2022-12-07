@@ -25,7 +25,7 @@ PlantTypes = {
 	},
 	{
 		Name = "Cantaloupe",
-		PlantModel = "models/props/de_inferno/fountain_bowl_p10.mdl",
+		PlantModel = "models/props/de_inferno/largebush02.mdl",
 		FoodModel = "models/hunter/misc/sphere025x025.mdl",
 		FoodMaterial = "models/props_c17/FurnitureMetal001a",
 		GrowthTime = 600,
@@ -49,7 +49,7 @@ PlantTypes = {
 	},
 	{
 		Name = "Watermelon",
-		PlantModel = "models/props/de_inferno/fountain_bowl_p10.mdl",
+		PlantModel = "models/props/de_inferno/largebush02.mdl",
 		FoodModel = "models/props_junk/watermelon01.mdl",
 		FoodMaterial = "",
 		GrowthTime = 960,
