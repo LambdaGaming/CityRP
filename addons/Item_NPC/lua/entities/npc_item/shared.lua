@@ -457,6 +457,7 @@ ItemNPC["apple_seeds"] = {
 	Model = "models/props/de_inferno/crate_fruit_break_gib2.mdl",
 	Price = 100,
 	Type = 1,
+	Discount = { [TEAM_COOK] = 0.5 },
 	SpawnFunction = function( ply, self )
 		local e = ents.Create( "farm_plant" )
 		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
@@ -470,6 +471,7 @@ ItemNPC["banana_seeds"] = {
 	Description = "Grows a banana plant.",
 	Price = 350,
 	Type = 1,
+	Discount = { [TEAM_COOK] = 0.5 },
 	SpawnFunction = function( ply, self )
 		local e = ents.Create( "farm_plant" )
 		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
@@ -483,6 +485,7 @@ ItemNPC["cantaloupe_seeds"] = {
 	Description = "Grows a cantaloupe plant.",
 	Price = 800,
 	Type = 1,
+	Discount = { [TEAM_COOK] = 0.5 },
 	SpawnFunction = function( ply, self )
 		local e = ents.Create( "farm_plant" )
 		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
@@ -497,6 +500,7 @@ ItemNPC["potato_seeds"] = {
 	Model = "models/props_phx/misc/potato.mdl",
 	Price = 225,
 	Type = 1,
+	Discount = { [TEAM_COOK] = 0.5 },
 	SpawnFunction = function( ply, self )
 		local e = ents.Create( "farm_plant" )
 		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
@@ -511,6 +515,7 @@ ItemNPC["watermelon_seeds"] = {
 	Model = "models/props_junk/watermelon01.mdl",
 	Price = 1300,
 	Type = 1,
+	Discount = { [TEAM_COOK] = 0.5 },
 	SpawnFunction = function( ply, self )
 		local e = ents.Create( "farm_plant" )
 		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
@@ -525,6 +530,7 @@ ItemNPC["farm_box"] = {
 	Model = "models/props_junk/wood_crate002a.mdl",
 	Price = 100,
 	Type = 1,
+	Discount = { [TEAM_COOK] = 0.5 },
 	SpawnFunction = function( ply, self )
 		local e = ents.Create( "farm_box" )
 		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )

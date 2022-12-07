@@ -77,6 +77,12 @@ net.Receive( "CreateItem", function( len, ply )
 	local primary = ItemNPC[ent].PrimaryJobs
 	local event = ItemNPC[ent].EventID
 	local salestax = price * ( GetGlobalInt( "MAYOR_SalesTax" ) * 0.01 )
+	local discount = ItemNPC[ent].Discount
+	local discountamt
+	if discountamt then
+		discountamt = discount[ply:Team()]
+		price = price * discountamt
+	end
 	if price > 0 and self:GetNPCType() != 2 and self:GetNPCType() != 8 then
 		price = price + salestax
 		SetGlobalBool( "MAYOR_Money", GetGlobalBool( "MAYOR_Money" ) + salestax )
@@ -97,7 +103,11 @@ net.Receive( "CreateItem", function( len, ply )
 		if SpawnItem then
 			SpawnItem( ply, self )
 			if !event then
-				DarkRP.notify( ply, 0, 6, "You have purchased a "..name.."." )
+				if discountamt then
+					DarkRP.notify( ply, 0, 6, "You have purchased a "..name.." with a "..( discountamt * 100 ).."% discount." )
+				else
+					DarkRP.notify( ply, 0, 6, "You have purchased a "..name.."." )
+				end
 			end
 		else
 			DarkRP.notify( ply, 1, 6, "ERROR: SpawnFunction for this item not detected!" )
