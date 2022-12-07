@@ -221,8 +221,8 @@ ItemNPCType[6] = {
 }
 
 ItemNPCType[7] = {
-	Name = "Tower",
-	Model = "models/monk.mdl",
+	Name = "Trucker",
+	Model = "models/player/monk.mdl",
 	MenuColor = Color( 49, 53, 61, 200 ),
 	ButtonColor = Color( 230, 93, 80, 255 ),
 	Allowed = {

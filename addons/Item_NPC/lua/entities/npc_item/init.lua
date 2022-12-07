@@ -55,7 +55,8 @@ end
 local animnpcs = {
 	[3] = true,
 	[4] = true,
-	[5] = true
+	[5] = true,
+	[7] = true
 }
 
 function ENT:Think()
