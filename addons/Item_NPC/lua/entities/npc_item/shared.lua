@@ -970,6 +970,20 @@ ItemNPC["rp_gas"] = {
 	end
 }
 
+ItemNPC["news_tv"] = {
+	Name = "News TV",
+	Description = "Displays live feed from any active news cameras.",
+	Model = "models/props/cs_office/TV_plasma.mdl",
+	Price = 50,
+	Type = 1,
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "news_tv" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
+		e:Spawn()
+		e:SetOwner( ply )
+	end
+}
+
 -----CONTRABAND ITEMS-----
 ItemNPC["dronesrewrite_console"] = {
 	Name = "Drone Console",
