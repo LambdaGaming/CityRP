@@ -64,7 +64,7 @@ local function PlayerPickup( ply, ent )
 	if physblacklist[ent:GetClass()] and !ply:IsSuperAdmin() then --Prevents players who arent superadmin from physgunning blacklisted entities
 		return false
 	end
-	if defaultblock[ent:GetClass()] or ( ent:GetClass() == "prop_physics" and ( ent.IsEventTruck or ent.IsEventTrailer ) ) then --Prevents all players from physgunning blacklisted entities
+	if defaultblock[ent:GetClass()] or ( ent:GetClass() == "prop_physics" and ent.IsEventTruck ) then --Prevents all players from physgunning blacklisted entities
 		return false
 	end
 	if string.find( ent:GetClass():lower(), "npc_" ) and !ply:IsSuperAdmin() then --Only superadmins can pick up NPCs
@@ -73,7 +73,7 @@ local function PlayerPickup( ply, ent )
 	if string.find( ent:GetClass():lower(), "fs_" ) then --Farming items can only be gravgunned
 		return false
 	end
-	if !ply:IsSuperAdmin() and ( ent:GetClass() == "prop_vehicle_jeep" and !string.find( ent:GetModel(), "models/tdmcars/trailers/*.mdl" ) ) then --Only superadmins can pick up vehicles
+	if !ply:IsSuperAdmin() and ent:GetClass() == "prop_vehicle_jeep" then --Only superadmins can pick up vehicles
 		return false
 	end
 end

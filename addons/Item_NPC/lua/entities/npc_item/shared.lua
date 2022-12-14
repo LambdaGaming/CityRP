@@ -1766,20 +1766,6 @@ ItemNPC["dodge_tow"] = {
 	end
 }
 
-ItemNPC["peterbilt_tow"] = {
-	Name = "Peterbilt Towtruck",
-	Description = "Large tow truck for heavy tow jobs.",
-	Model = "models/sentry/p379_tow.mdl",
-	Price = 0,
-	Type = 7,
-	SpawnFunction = function( ply, self )
-		local class = "Peterbilt Towtruck"
-		local model = "models/sentry/p379_tow.mdl"
-		local script = "scripts/vehicles/sentry/p379_tow.txt"
-		SpawnVehicle( ply, class, model, script, 4 )
-	end
-}
-
 -----SMUGGLE ITEMS-----
 ItemNPC["smuggle_numbernine"] = {
 	Name = "Number Nine Large",
