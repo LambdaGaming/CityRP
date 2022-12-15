@@ -10,7 +10,6 @@ function RoadWork()
 end
 
 function RoadWorkEnd( ply, ent )
-	local pos = ent:GetPos()
 	DarkRP.notify( ply, 0, 10, "You have been rewarded with $4500 and a crafting blueprint for removing a pothole." )
 	GiveReward( ply, 4500 )
 	ActiveEvents[EVENT_ROAD_WORK] = false

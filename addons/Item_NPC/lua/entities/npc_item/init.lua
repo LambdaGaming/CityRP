@@ -92,7 +92,7 @@ net.Receive( "CreateItem", function( len, ply )
 		DarkRP.notify( ply, 1, 6, "You are not qualified for this job!" )
 		return
 	end
-	if event then
+	if event and event > 0 then
 		if ActiveEvents[event] then
 			DarkRP.notify( ply, 1, 6, "There is already an ongoing job that you can partake in." )
 			return

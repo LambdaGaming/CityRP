@@ -2,7 +2,7 @@ AddCSLuaFile()
 
 ENT.Type = "ai"
 ENT.Base = "base_ai"
-ENT.PrintName = "Smuggle Buyer"
+ENT.PrintName = "Smuggler"
 ENT.Category = "Misc NPCs"
 ENT.Spawnable = true
 ENT.AdminOnly = true
@@ -43,9 +43,7 @@ if SERVER then
 				end
 			end
 			if foundtruck then
-				local item = SmuggleItems[truckent.SmuggleID]
-				local reward = item.Reward( caller )
-				DarkRP.notify( caller, 0, 6, "You successfully sold the "..item.Name.." and have been rewarded with "..reward.."." )
+				SmuggleEnd( caller )
 				truckent:Remove()
 				usecooldown = CurTime() + 1
 				return
@@ -58,6 +56,6 @@ end
 
 if CLIENT then
 	function ENT:Draw()
-		self:DrawNPCText( "Smuggle Buyer" )
+		self:DrawNPCText( "Smuggler" )
 	end
 end

@@ -5,132 +5,8 @@ ENT.Author = "Lambda Gaming"
 ENT.Spawnable = true
 ENT.Category = "Item NPC"
 
-local rockford = "rp_rockford_v2b"
-local southside = "rp_southside_day"
-local riverden = "rp_riverden_v1a"
-local truenorth = "rp_truenorth_v1a"
-local map = game.GetMap()
-
 function ENT:SetupDataTables()
 	self:NetworkVar( "Int", 0, "NPCType" )
-end
-
-local VehicleSpawns
-if SERVER then
-	local angle_ninety = Angle( 0, 90, 0 )
-	local angle_ninety_neg = Angle( 0, -90, 0 )
-	local angle_one_eighty = Angle( 0, 180, 0 )
-	VehicleSpawns = {
-		[1] = { --Police spawns
-			[rockford] = { Vector( -8248, -5485, 0 ), angle_zero },
-			[southside] = { Vector( 8688, 8619, -127 ), angle_ninety },
-			[riverden] = { Vector( -8703, 8141, -264 ), angle_one_eighty },
-			[truenorth] = { Vector( 3238, 3914, 0 ), angle_zero }
-		},
-		[2] = { --Fire spawns
-			[rockford] = { Vector( -5257, -3349, 8 ), angle_one_eighty },
-			[southside] = { Vector( 9431, 1260, -103 ), angle_ninety_neg },
-			[riverden] = { Vector( -12202, 1422, -256 ), angle_one_eighty },
-			[truenorth] = { Vector( 13135, 11426, 8 ), angle_ninety }
-		},
-		[4] = { --Tow truck spawns
-			[rockford] = { Vector( -7564, 680, 3 ), angle_zero },
-			[southside] = { Vector( -1656, 6421, 14 ), angle_zero },
-			[riverden] = { Vector( -1820, 6037, -264 ), angle_zero },
-			[truenorth] = { Vector( 8909, 12963, 0 ), angle_zero }
-		},
-		[7] = { --Smuggle truck spawns
-			[rockford] = { Vector( -2893, -6357, 0 ) , angle_ninety_neg },
-			[southside] = { Vector( -7011, -3749, -319 ), angle_one_eighty },
-			[riverden] = { Vector( -4213, 2226, -264 ), angle_one_eighty },
-			[truenorth] = { Vector( 6137, 8882, 0 ), angle_zero }
-		}
-	}
-end
-
-SmuggleItems = {
-	{
-		Name = "Number Nine Large",
-		Model = "models/food/burger.mdl",
-		Pos = Vector( 0, -110, 30 ),
-		Reward = function( ply )
-			ply:addMoney( 1300 )
-			return "$1,300"
-		end
-	},
-	{
-		Name = "Illegal Ammunition",
-		Model = "models/Items/item_item_crate_dynamic.mdl",
-		Pos = Vector( 0, -110, 40 ),
-		Reward = function( ply )
-			ply:addMoney( 3500 )
-			return "$3,500"
-		end
-	},
-	{
-		Name = "Unregistered Weapons",
-		Model = "models/props/CS_militia/footlocker01_closed.mdl",
-		Pos = Vector( 0, -50, 50 ),
-		Reward = function( ply )
-			ply:addMoney( 6500 )
-			return "$6,500"
-		end
-	},
-	{
-		Name = "C4",
-		Model = "models/weapons/w_c4_planted.mdl",
-		Pos = Vector( 0, -110, 40 ),
-		Reward = function( ply )
-			SpawnBlueprint( BLUEPRINT_COMBINED, ply, 3 )
-			return "a random tier crafting blueprint"
-		end
-	},
-	{
-		Name = "Stolen Sports Car",
-		Model = "models/sentry/veneno_new.mdl",
-		Pos = Vector( 0, -110, 40 ),
-		Reward = function( ply )
-			SpawnBlueprint( BLUEPRINT_COMBINED, ply, 3 )
-			ply:addMoney( 15000 )
-			return "a random tier crafting blueprint and $15,000"
-		end
-	}
-}
-
-local function SpawnVehicle( ply, class, model, script, type, noenter, smugid )
-	if SERVER then
-		local realpos = VehicleSpawns[type][map][1]
-		if model == "models/tdmcars/dod_ram_3500.mdl" then --Fix for this truck since it spawns below the map for some reason
-			realpos = realpos + Vector( 0, 0, 50 )
-		end
-		local e = ents.Create( "prop_vehicle_jeep" )
-		e:SetKeyValue( "vehiclescript", script )
-		e:SetPos( realpos )
-		e:SetAngles( VehicleSpawns[type][map][2] )
-		e:SetModel( model )
-		e:Spawn()
-		e:Activate()
-		e.VehicleTable = list.GetForEdit( "Vehicles" )[class]
-		e:Fire( "HandBrakeOff", "", 0.01 )
-		e:SetNWEntity( "VehicleOwner", ply )
-		if smugid then
-			local item = SmuggleItems[smugid]
-			e.SmuggleTruck = true
-			e.SmuggleOwner = ply
-			e.SmuggleID = smugid
-			e:SetBodygroup( 1, 1 )
-			local prop = ents.Create( "prop_dynamic" )
-			prop:SetModel( item.Model )
-			prop:SetParent( e )
-			prop:SetLocalPos( item.Pos )
-			prop:SetLocalAngles( angle_zero )
-			prop:Spawn()
-			DarkRP.notify( ply, 0, 6, "Deliver this truck to the Smuggle Sell NPC for a reward." )
-		end
-		if !noenter then
-			ply:EnterVehicle( e )
-		end
-	end
 end
 
 local function PoliceBanCheck( ply )
@@ -147,29 +23,8 @@ local function ApplyBlueprintData( ent, index )
 	ent:SetUses( 3 )
 end
 
-local function SmuggleCheck( ply )
-	local copcount = team.NumPlayers( TEAM_POLICEBOSS ) + team.NumPlayers( TEAM_OFFICER ) + team.NumPlayers( TEAM_UNDERCOVER ) + team.NumPlayers( TEAM_FBI )
-	if ply.SmuggleCooldown and ply.SmuggleCooldown > CurTime() then
-		DarkRP.notify( ply, 1, 6, "Please wait "..string.ToMinutesSeconds( ply.SmuggleCooldown - CurTime() ).." to smuggle again." )
-		return false
-	end
-	if copcount < 2 then
-		DarkRP.notify( ply, 1, 6, "There needs to be at least 2 cops on the server for smuggling to unlock." )
-		return false
-	end
-	return true
-end
-
-local function DoSmuggle( ply, id )
-	local class = "c5500tdm"
-	local model = "models/tdmcars/trucks/gmc_c5500.mdl"
-	local script = "scripts/vehicles/TDMCars/c5500.txt"
-	SpawnVehicle( ply, class, model, script, 7, false, id )
-	ply.SmuggleCooldown = CurTime() + 600
-end
-
-ItemNPC = {} --Initializes the item table, don't touch
-ItemNPCType = {} --Initializes the type table, don't touch
+ItemNPC = {}
+ItemNPCType = {}
 
 ItemNPCType[1] = {
 	Name = "Supermarket",
@@ -236,20 +91,6 @@ ItemNPCType[8] = {
 	MenuColor = Color( 49, 53, 61, 200 ),
 	ButtonColor = Color( 230, 93, 80, 255 ),
 	Allowed = {}
-}
-
-ItemNPCType[9] = {
-	Name = "Smuggle Seller",
-	Model = "models/humans/group03/male_01.mdl",
-	MenuColor = Color( 49, 53, 61, 200 ),
-	ButtonColor = Color( 230, 93, 80, 255 ),
-	Allowed = {
-		[TEAM_CITIZEN] = true,
-		[TEAM_TOWER] = true,
-		[TEAM_CAMERA] = true,
-		[TEAM_BUS] = true,
-		[TEAM_HITMAN] = true
-	}
 }
 
 -----SHOP NPC ITEMS-----
@@ -1272,10 +1113,7 @@ ItemNPC["fire_truck"] = {
 	Price = 0,
 	Type = 3,
 	SpawnFunction = function( ply, self )
-		local class = "2014 Seagrave Marauder II Engine"
-		local model = "models/noble/engine_32.mdl"
-		local script = "scripts/vehicles/noble/noble_engine32.txt"
-		SpawnVehicle( ply, class, model, script, 2 )
+		SpawnVehicle( ply, "2014 Seagrave Marauder II Engine", 2 )
 	end
 }
 
@@ -1286,10 +1124,7 @@ ItemNPC["fire_truck_tesla"] = {
 	Price = 0,
 	Type = 3,
 	SpawnFunction = function( ply, self )
-		local class = "Tesla Cybertruck - FD"
-		local model = "models/sentry/cybertruck.mdl"
-		local script = "scripts/vehicles/sentry/cybertruck.txt"
-		SpawnVehicle( ply, class, model, script, 2 )
+		SpawnVehicle( ply, "Tesla Cybertruck - FD", 2 )
 	end
 }
 
@@ -1300,10 +1135,7 @@ ItemNPC["ambulance"] = {
 	Price = 0,
 	Type = 3,
 	SpawnFunction = function( ply, self )
-		local class = "Ford F350 Ambulance Photon"
-		local model = "models/lonewolfie/ford_f350_ambu.mdl"
-		local script = "scripts/vehicles/lwcars/ford_f350_ambu.txt"
-		SpawnVehicle( ply, class, model, script, 2 )
+		SpawnVehicle( ply, "Ford F350 Ambulance Photon", 2 )
 	end
 }
 
@@ -1314,10 +1146,7 @@ ItemNPC["crownvic_med"] = {
 	Price = 0,
 	Type = 3,
 	SpawnFunction = function( ply, self )
-		local class = "2011 CVPI Medic"
-		local model = "models/tdmcars/emergency/for_crownvic_fh3.mdl"
-		local script = "scripts/vehicles/TDMCars/for_crownvic_fh3.txt"
-		SpawnVehicle( ply, class, model, script, 2 )
+		SpawnVehicle( ply, "2011 CVPI Medic", 2 )
 	end
 }
 
@@ -1332,10 +1161,7 @@ ItemNPC["chevy_impala"] = {
 		return PoliceBanCheck( ply )
 	end,
 	SpawnFunction = function( ply, self )
-		local class = "Chevrolet Impala Police"
-		local model = "models/lonewolfie/chev_impala_09_police.mdl"
-		local script = "scripts/vehicles/lwcars/chev_impala_09.txt"
-		SpawnVehicle( ply, class, model, script, 1 )
+		SpawnVehicle( ply, "Chevrolet Impala Police", 1 )
 	end
 }
 
@@ -1349,10 +1175,7 @@ ItemNPC["chev_tahoe_police_lw"] = {
 		return PoliceBanCheck( ply )
 	end,
 	SpawnFunction = function( ply, self )
-		local class = "Unmarked Chevy Tahoe"
-		local model = "models/LoneWolfie/chev_tahoe_police.mdl"
-		local script = "scripts/vehicles/LWCars/chev_tahoe.txt"
-		SpawnVehicle( ply, class, model, script, 1 )
+		SpawnVehicle( ply, "Unmarked Chevy Tahoe", 1 )
 	end
 }
 
@@ -1366,10 +1189,7 @@ ItemNPC["chev_suburban_pol"] = {
 		return PoliceBanCheck( ply )
 	end,
 	SpawnFunction = function( ply, self )
-		local class = "Chicago Police Chevy Suburban"
-		local model = "models/LoneWolfie/chev_suburban_pol.mdl"
-		local script = "scripts/vehicles/LWCars/chev_suburban.txt"
-		SpawnVehicle( ply, class, model, script, 1 )
+		SpawnVehicle( ply, "Chicago Police Chevy Suburban", 1 )
 	end
 }
 
@@ -1383,10 +1203,7 @@ ItemNPC["swat_van"] = {
 		return PoliceBanCheck( ply )
 	end,
 	SpawnFunction = function( ply, self )
-		local class = "Lenco Bearcat G3"
-		local model = "models/perrynsvehicles/bearcat_g3/bearcat_g3.mdl"
-		local script = "scripts/vehicles/perryn/bearcat_g3.txt"
-		SpawnVehicle( ply, class, model, script, 1 )
+		SpawnVehicle( ply, "Lenco Bearcat G3", 1 )
 	end
 }
 
@@ -1400,10 +1217,7 @@ ItemNPC["ford_crownvic"] = {
 		return PoliceBanCheck( ply )
 	end,
 	SpawnFunction = function( ply, self )
-		local class = "Ford Crown Vic Police"
-		local model = "models/tdmcars/emergency/for_crownvic_fh3.mdl"
-		local script = "scripts/vehicles/TDMCars/for_crownvic_fh3.txt"
-		SpawnVehicle( ply, class, model, script, 1 )
+		SpawnVehicle( ply, "Ford Crown Vic Police", 1 )
 	end
 }
 
@@ -1417,10 +1231,7 @@ ItemNPC["ford_crownvic_und"] = {
 		return PoliceBanCheck( ply )
 	end,
 	SpawnFunction = function( ply, self )
-		local class = "Ford Crown Vic Undercover"
-		local model = "models/tdmcars/emergency/for_crownvic_fh3.mdl"
-		local script = "scripts/vehicles/TDMCars/for_crownvic_fh3.txt"
-		SpawnVehicle( ply, class, model, script, 1 )
+		SpawnVehicle( ply, "Ford Crown Vic Undercover", 1 )
 	end
 }
 
@@ -1434,10 +1245,7 @@ ItemNPC["ram_3500"] = {
 		return PoliceBanCheck( ply )
 	end,
 	SpawnFunction = function( ply, self )
-		local class = "Dodge Ram 3500 Police"
-		local model = "models/tdmcars/dod_ram_3500.mdl"
-		local script = "scripts/vehicles/TDMCars/dod_ram_3500.txt"
-		SpawnVehicle( ply, class, model, script, 1 )
+		SpawnVehicle( ply, "Dodge Ram 3500 Police", 1 )
 	end
 }
 
@@ -1451,10 +1259,7 @@ ItemNPC["charger_police"] = {
 		return PoliceBanCheck( ply )
 	end,
 	SpawnFunction = function( ply, self )
-		local class = "Dodge Charger 2015 Pursuit"
-		local model = "models/lonewolfie/dodge_charger_2015_police.mdl"
-		local script = "scripts/vehicles/lwcars/dodge_charger_2015_police.txt"
-		SpawnVehicle( ply, class, model, script, 1 )
+		SpawnVehicle( ply, "Dodge Charger 2015 Pursuit", 1 )
 	end
 }
 
@@ -1468,10 +1273,7 @@ ItemNPC["charger_und"] = {
 		return PoliceBanCheck( ply )
 	end,
 	SpawnFunction = function( ply, self )
-		local class = "Dodge Charger 2015 Undercover"
-		local model = "models/lonewolfie/dodge_charger_2015_undercover.mdl"
-		local script = "scripts/vehicles/lwcars/dodge_charger_2015_police.txt"
-		SpawnVehicle( ply, class, model, script, 1 )
+		SpawnVehicle( ply, "Dodge Charger 2015 Undercover", 1 )
 	end
 }
 
@@ -1485,10 +1287,7 @@ ItemNPC["lambosine"] = {
 		return PoliceBanCheck( ply )
 	end,
 	SpawnFunction = function( ply, self )
-		local class = "lambosine"
-		local model = "models/sentry/lambosine.mdl"
-		local script = "scripts/vehicles/sentry/lambosine.txt"
-		SpawnVehicle( ply, class, model, script, 1 )
+		SpawnVehicle( ply, "lambosine", 1 )
 	end
 }
 
@@ -1502,10 +1301,7 @@ ItemNPC["lambo_veneno"] = {
 		return PoliceBanCheck( ply )
 	end,
 	SpawnFunction = function( ply, self )
-		local class = "Lamborghini Veneno Police Edition"
-		local model = "models/sentry/veneno_new_cop.mdl"
-		local script = "scripts/vehicles/sentry/veneno_new.txt"
-		SpawnVehicle( ply, class, model, script, 1 )
+		SpawnVehicle( ply, "Lamborghini Veneno Police Edition", 1 )
 	end
 }
 
@@ -1519,10 +1315,7 @@ ItemNPC["dodge_monaco"] = {
 		return PoliceBanCheck( ply )
 	end,
 	SpawnFunction = function( ply, self )
-		local class = "Dodge Monaco Police "
-		local model = "models/lonewolfie/dodge_monaco_police.mdl"
-		local script = "scripts/vehicles/LWCars/dodge_monaco.txt"
-		SpawnVehicle( ply, class, model, script, 1 )
+		SpawnVehicle( ply, "Dodge Monaco Police ", 1 )
 	end
 }
 
@@ -1536,10 +1329,7 @@ ItemNPC["transport_truck"] = {
 		return PoliceBanCheck( ply )
 	end,
 	SpawnFunction = function( ply, self )
-		local class = "c5500tdm"
-		local model = "models/tdmcars/trucks/gmc_c5500.mdl"
-		local script = "scripts/vehicles/TDMCars/c5500.txt"
-		SpawnVehicle( ply, class, model, script, 1 )
+		SpawnVehicle( ply, "c5500tdm", 1 )
 	end
 }
 
@@ -1553,10 +1343,7 @@ ItemNPC["ford_explorer"] = {
 		return PoliceBanCheck( ply )
 	end,
 	SpawnFunction = function( ply, self )
-		local class = "2016 Ford Police Interceptor Utility"
-		local model = "models/schmal/fpiu/ford_utility.mdl"
-		local script = "scripts/vehicles/schmal/ford_pol_int_2016.txt"
-		SpawnVehicle( ply, class, model, script, 1 )
+		SpawnVehicle( ply, "2016 Ford Police Interceptor Utility", 1 )
 	end
 }
 
@@ -1570,10 +1357,7 @@ ItemNPC["ford_taurus"] = {
 		return PoliceBanCheck( ply )
 	end,
 	SpawnFunction = function( ply, self )
-		local class = "2010 Ford Taurus Police Interceptor"
-		local model = "models/sentry/taurussho.mdl"
-		local script = "scripts/vehicles/sentry/taurus.txt"
-		SpawnVehicle( ply, class, model, script, 1 )
+		SpawnVehicle( ply, "2010 Ford Taurus Police Interceptor", 1 )
 	end
 }
 
@@ -1587,10 +1371,7 @@ ItemNPC["lambo_huracan"] = {
 		return PoliceBanCheck( ply )
 	end,
 	SpawnFunction = function( ply, self )
-		local class = "Lamborghini Huracan Undercover"
-		local model = "models/lonewolfie/lam_huracan.mdl"
-		local script = "scripts/vehicles/LWCars/lam_huracan.txt"
-		SpawnVehicle( ply, class, model, script, 1 )
+		SpawnVehicle( ply, "Lamborghini Huracan Undercover", 1 )
 	end
 }
 
@@ -1604,10 +1385,7 @@ ItemNPC["dodge_challenger"] = {
 		return PoliceBanCheck( ply )
 	end,
 	SpawnFunction = function( ply, self )
-		local class = "2015 Challenger Unmarked"
-		local model = "models/tdmcars/dod_challenger15.mdl"
-		local script = "scripts/vehicles/TDMCars/dod_challenger15.txt"
-		SpawnVehicle( ply, class, model, script, 1 )
+		SpawnVehicle( ply, "2015 Challenger Unmarked", 1 )
 	end
 }
 
@@ -1621,10 +1399,7 @@ ItemNPC["chevy_impala_taxi"] = {
 		return PoliceBanCheck( ply )
 	end,
 	SpawnFunction = function( ply, self )
-		local class = "Impala Taxi Unmarked"
-		local model = "models/lonewolfie/chev_impala_09_taxi.mdl"
-		local script = "scripts/vehicles/LWCars/chev_impala_09.txt"
-		SpawnVehicle( ply, class, model, script, 1 )
+		SpawnVehicle( ply, "Impala Taxi Unmarked", 1 )
 	end
 }
 
@@ -1638,10 +1413,7 @@ ItemNPC["laferrari"] = {
 		return PoliceBanCheck( ply )
 	end,
 	SpawnFunction = function( ply, self )
-		local class = "Unmarked LaFerrari"
-		local model = "models/tdmcars/fer_lafer.mdl"
-		local script = "scripts/vehicles/TDMCars/laferrari.txt"
-		SpawnVehicle( ply, class, model, script, 1 )
+		SpawnVehicle( ply, "Unmarked LaFerrari", 1 )
 	end
 }
 
@@ -1655,10 +1427,7 @@ ItemNPC["charger_old"] = {
 		return PoliceBanCheck( ply )
 	end,
 	SpawnFunction = function( ply, self )
-		local class = "Charger SRT-8 Police Undercover"
-		local model = "models/tdmcars/dod_charger12.mdl"
-		local script = "scripts/vehicles/TDMCars/charger2012.txt"
-		SpawnVehicle( ply, class, model, script, 1 )
+		SpawnVehicle( ply, "Charger SRT-8 Police Undercover", 1 )
 	end
 }
 
@@ -1759,81 +1528,7 @@ ItemNPC["dodge_tow"] = {
 	Price = 0,
 	Type = 7,
 	SpawnFunction = function( ply, self )
-		local class = "Dodge Ram 3500 Towtruck"
-		local model = "models/statetrooper/ram_tow.mdl"
-		local script = "scripts/vehicles/statetrooper/ram3500_tow.txt"
-		SpawnVehicle( ply, class, model, script, 4 )
-	end
-}
-
------SMUGGLE ITEMS-----
-ItemNPC["smuggle_numbernine"] = {
-	Name = "Number Nine Large",
-	Description = "Stolen number nine large from Cluckin Bell.",
-	Model = "models/food/burger.mdl",
-	Price = 500,
-	Type = 9,
-	SpawnCheck = function( ply, self )
-		return SmuggleCheck( ply )
-	end,
-	SpawnFunction = function( ply, self )
-		DoSmuggle( ply, 1 )
-	end
-}
-
-ItemNPC["smuggle_illegalammo"] = {
-	Name = "Illegal Ammunition",
-	Description = "Ammunition from China. Illegally smuggled into the US.",
-	Model = "models/Items/item_item_crate_dynamic.mdl",
-	Price = 2000,
-	Type = 9,
-	SpawnCheck = function( ply, self )
-		return SmuggleCheck( ply )
-	end,
-	SpawnFunction = function( ply, self )
-		DoSmuggle( ply, 2 )
-	end
-}
-
-ItemNPC["smuggle_unregisteredweps"] = {
-	Name = "Unregistered Weapons",
-	Description = "Unregistered weapons to be sold on the black market.",
-	Model = "models/props/CS_militia/footlocker01_closed.mdl",
-	Price = 3500,
-	Type = 9,
-	SpawnCheck = function( ply, self )
-		return SmuggleCheck( ply )
-	end,
-	SpawnFunction = function( ply, self )
-		DoSmuggle( ply, 3 )
-	end
-}
-
-ItemNPC["smuggle_c4"] = {
-	Name = "C4",
-	Description = "C4 explosives to be used in terrorist attacks.",
-	Model = "models/weapons/w_c4_planted.mdl",
-	Price = 8000,
-	Type = 9,
-	SpawnCheck = function( ply, self )
-		return SmuggleCheck( ply )
-	end,
-	SpawnFunction = function( ply, self )
-		DoSmuggle( ply, 4 )
-	end
-}
-
-ItemNPC["smuggle_lambo"] = {
-	Name = "Stolen Sports Car",
-	Description = "Stolen Lamborghini from Dubai.",
-	Model = "models/sentry/veneno_new.mdl",
-	Price = 12000,
-	Type = 9,
-	SpawnCheck = function( ply, self )
-		return SmuggleCheck( ply )
-	end,
-	SpawnFunction = function( ply, self )
-		DoSmuggle( ply, 5 )
+		SpawnVehicle( ply, "Dodge Ram 3500 Towtruck", 4 )
 	end
 }
 
@@ -1943,5 +1638,19 @@ ItemNPC["bank_robbery"] = {
 	PrimaryJobs = { TEAM_OFFICER },
 	SpawnFunction = function()
 		Robbery()
+	end
+}
+
+ItemNPC["smuggle_job"] = {
+	Name = "Item Smuggling",
+	Description = "You don't know where these items came from, all you know is that they need delivered to a guy named the smuggler.",
+	Price = 5000,
+	Type = 8,
+	EventID = 0,
+	SpawnCheck = function( ply )
+		return SmuggleCheck( ply )
+	end,
+	SpawnFunction = function( ply )
+		SmuggleStart( ply )
 	end
 }
