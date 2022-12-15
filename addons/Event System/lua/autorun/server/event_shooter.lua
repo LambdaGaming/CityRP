@@ -16,7 +16,7 @@ function ActiveShooter()
 	SetGlobalString( "ActiveEvent", "Active Shooter" )
 	for k,v in ipairs( player.GetAll() ) do
 		if v:isCP() then
-			DarkRP.notifyAll( 0, 6, "Shots fired reported somewhere in the city! Suspect is holding out in a nearby building!" )
+			DarkRP.notify( v, 0, 6, "Shots fired reported somewhere in the city! Suspect is holding out in a nearby building!" )
 		end
 	end
 end
