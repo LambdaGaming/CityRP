@@ -92,16 +92,21 @@ net.Receive( "CreateItem", function( len, ply )
 		DarkRP.notify( ply, 1, 6, "You are not qualified for this job!" )
 		return
 	end
-	if event and event > 0 then
-		if ActiveEvents[event] then
-			DarkRP.notify( ply, 1, 6, "There is already an ongoing job that you can partake in." )
-			return
-		end
-		ActiveEvents[event] = true
+	if ply.JobCooldown and ply.JobCooldown > CurTime() then
+		DarkRP.notify( ply, 1, 6, "Please wait 30 minutes after taking a job to take another one." )
+		return
 	end
 	if money >= price then
 		if SpawnCheck and SpawnCheck( ply, self ) == false then return end
 		if SpawnItem then
+			if event and event > 0 then
+				if ActiveEvents[event] then
+					DarkRP.notify( ply, 1, 6, "There is already an ongoing job that you can partake in." )
+					return
+				end
+				ActiveEvents[event] = true
+				ply.JobCooldown = CurTime() + 1800
+			end
 			SpawnItem( ply, self )
 			if !event then
 				if discountamt then
