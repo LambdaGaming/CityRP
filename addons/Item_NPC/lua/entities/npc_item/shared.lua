@@ -826,6 +826,20 @@ ItemNPC["news_tv"] = {
 	end
 }
 
+ItemNPC["printer_paper"] = {
+	Name = "Printer Paper",
+	Description = "Standard paper commonly used in printers. Can also be written on.",
+	Model = "models/props_lab/bindergreen.mdl",
+	Price = 50,
+	Type = 1,
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "printer_paper" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
+		e:Spawn()
+		e:SetOwner( ply )
+	end
+}
+
 -----CONTRABAND ITEMS-----
 ItemNPC["dronesrewrite_console"] = {
 	Name = "Drone Console",
@@ -835,19 +849,6 @@ ItemNPC["dronesrewrite_console"] = {
 	Type = 2,
 	SpawnFunction = function( ply, self )
 		local e = ents.Create( "dronesrewrite_console" )
-		e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
-		e:Spawn()
-	end
-}
-
-ItemNPC["printer_paper"] = {
-	Name = "Money Printer Paper",
-	Description = "Paper required for the money printer to work.",
-	Model = "models/props_lab/binderblue.mdl",
-	Price = 50,
-	Type = 2,
-	SpawnFunction = function( ply, self )
-		local e = ents.Create( "printer_paper" )
 		e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
 		e:Spawn()
 	end
