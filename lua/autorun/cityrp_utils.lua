@@ -78,6 +78,11 @@ if SERVER then
 		end
 		return e
 	end
+
+	timer.Create( "DayNightLoop", 1800, 0, function()
+		local day = StormFox2.Time.IsDay()
+		StormFox2.Time.Set( day and "12:00 AM" or "12:00 PM" )
+	end )
 end
 
 local meta = FindMetaTable( "Player" )
