@@ -1,4 +1,3 @@
-
 AddCSLuaFile()
 
 ENT.Type = "anim"
@@ -22,45 +21,37 @@ function ENT:Initialize()
 	end
 end
 
-function ENT:Use( activator, caller )
-	local price
-	if activator:isCP() then
-		if GetGlobalInt( "MAYOR_SalesTax" ) >= 50 then
-			price = 300
-		else
-			price = 0
-		end
-	else
-		price = 300
-	end
-	if activator:canAfford( price ) then
-		local pos = self:GetPos()
-		local findveh = ents.FindInSphere( pos, 300 )
-		local foundveh = false
-		price = price + ( price * ( GetGlobalInt( "MAYOR_SalesTax" ) * 0.01 ) )
-		for k,v in pairs( findveh ) do
-			if v:GetClass() == "prop_vehicle_jeep" and v:GetNWEntity( "VehicleOwner" ) == activator then
+function ENT:Use( ply )
+	local pos = self:GetPos()
+	local findveh = ents.FindInSphere( pos, 300 )
+	local foundveh = false
+	for k,v in pairs( findveh ) do
+		if v:GetClass() == "prop_vehicle_jeep" and v:GetNWEntity( "VehicleOwner" ) == ply then
+			local tax = GetGlobalInt( "MAYOR_SalesTax" )
+			local required = 100 - v:GetNWInt( "AM_FuelAmount" )
+			local discount = ply:isCP() and tax < 50
+			local price = discount and 0 or required * 3
+			price = price + ( price * ( tax * 0.01 ) )
+			if required == 0 then
+				DarkRP.notify( ply, 1, 6, "Your vehicle's fuel tank is already full!" )
+				return
+			end
+			if ply:canAfford( price ) then
 				v:SetNWInt( "AM_FuelAmount", 100 )
-				activator:addMoney( -price )
-				if price == 0 then
-					DarkRP.notify( activator, 0, 6, "You have purchased a full fuel tank. You have not been charged." )
+				ply:addMoney( -price )
+				if price <= 0 then
+					DarkRP.notify( ply, 0, 6, "You have purchased a full fuel tank. You have not been charged." )
 				else
-					DarkRP.notify( activator, 0, 6, "You have purchased a full fuel tank for $"..price.."." )
+					DarkRP.notify( ply, 0, 6, "You have purchased a full fuel tank for $"..price.."." )
 				end
 				foundveh = true
-				break
+			else
+				DarkRP.notify( ply, 1, 6, "You don't have enough money to purchase fuel!" )
 			end
+			break
 		end
-		if !foundveh then
-			DarkRP.notify( activator, 1, 6, "No vehicle detected. Move it closer." )
-		end
-	else
-		DarkRP.notify( activator, 1, 6, "You don't have enough money to purchase fuel!" )
 	end
-end
-
-if CLIENT then
-	function ENT:Draw()
-		self:DrawModel()
+	if !foundveh then
+		DarkRP.notify( ply, 1, 6, "No vehicle detected. Move it closer." )
 	end
 end
