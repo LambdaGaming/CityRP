@@ -1,13 +1,62 @@
 PropertyTable = {}
 OwnedProperties = {}
 
+if CLIENT then
+	net.Receive( "SyncPropertyTables", function()
+		local tbl = net.ReadTable()
+		local owned = net.ReadTable()
+		PropertyTable = tbl
+		OwnedProperties = owned
+	end )
+
+	net.Receive( "ViewPropertyBoundaries", function()
+		local ply = LocalPlayer()
+		if ply.ViewingProperties then
+			hook.Remove( "PreDrawEffects", "ViewPropertyBoundaries" )
+			ply.ViewingProperties = false
+		else
+			hook.Add( "PreDrawEffects", "ViewPropertyBoundaries", function()
+				for k,v in pairs( PropertyTable ) do
+					render.DrawWireframeBox( vector_origin, angle_zero, v.BoundaryLower, v.BoundaryUpper, color_green )
+				end
+			end )
+			ply.ViewingProperties = true
+		end
+	end )
+
+	function PropertyBlacklisted( ent )
+		local blacklist = {}
+		local class = ent:GetClass()
+		if blacklist[class] then return true end
+		if class == "prop_vehicle_jeep" and ent:GetNWString( "dealerName" ) == "" then
+			return true
+		end
+		return false
+	end
+end
+
+if SERVER then
+	util.AddNetworkString( "ViewPropertyBoundaries" )
+	util.AddNetworkString( "SyncPropertyTables" )
+	function SyncPropertyTable( ply )
+		local owned = table.Copy( OwnedProperties )
+		for k,v in pairs( owned ) do
+			v.Saved = #OwnedProperties[k].Saved
+		end
+		net.Start( "SyncPropertyTables" )
+		net.WriteTable( PropertyTable )
+		net.WriteTable( owned )
+		net.Send( ply or player.GetAll() )
+	end
+end
+
 properties.Add( "propertysave", {
 	MenuLabel = "Save To Property",
 	Order = 1,
 	MenuIcon = "icon16/database_save.png",
 	Filter = function( self, ent, ply )
 		local owner = IsValid( ent:GetOwner() ) and ent:GetOwner() or ent:CPPIGetOwner() or ent:GetNWEntity( "Owner" )
-		if IsValid( owner ) and owner == ply then
+		if IsValid( owner ) and owner == ply and !PropertyBlacklisted( ent ) then
 			local onproperty
 			for k,v in pairs( OwnedProperties ) do
 				local property = PropertyTable[k]
@@ -65,42 +114,3 @@ properties.Add( "propertyremovesave", {
 		DarkRP.notify( ply, 0, 6, "Entity "..ent:GetClass().." successfully unsaved." )
 	end
 } )
-
-if CLIENT then
-	net.Receive( "SyncPropertyTables", function()
-		local tbl = net.ReadTable()
-		local owned = net.ReadTable()
-		PropertyTable = tbl
-		OwnedProperties = owned
-	end )
-
-	net.Receive( "ViewPropertyBoundaries", function()
-		local ply = LocalPlayer()
-		if ply.ViewingProperties then
-			hook.Remove( "PreDrawEffects", "ViewPropertyBoundaries" )
-			ply.ViewingProperties = false
-		else
-			hook.Add( "PreDrawEffects", "ViewPropertyBoundaries", function()
-				for k,v in pairs( PropertyTable ) do
-					render.DrawWireframeBox( vector_origin, angle_zero, v.BoundaryLower, v.BoundaryUpper, color_green )
-				end
-			end )
-			ply.ViewingProperties = true
-		end
-	end )
-end
-
-if SERVER then
-	util.AddNetworkString( "ViewPropertyBoundaries" )
-	util.AddNetworkString( "SyncPropertyTables" )
-	function SyncPropertyTable( ply )
-		local owned = table.Copy( OwnedProperties )
-		for k,v in pairs( owned ) do
-			v.Saved = #OwnedProperties[k].Saved
-		end
-		net.Start( "SyncPropertyTables" )
-		net.WriteTable( PropertyTable )
-		net.WriteTable( owned )
-		net.Send( ply or player.GetAll() )
-	end
-end
