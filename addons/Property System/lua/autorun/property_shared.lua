@@ -25,12 +25,9 @@ if CLIENT then
 	end )
 
 	function PropertyBlacklisted( ent )
-		local blacklist = {}
+		local blacklist = { ["prop_vehicle_jeep"] = true, ["prop_vehicle_airboat"] = true }
 		local class = ent:GetClass()
 		if blacklist[class] then return true end
-		if class == "prop_vehicle_jeep" and ent:GetNWString( "dealerName" ) == "" then
-			return true
-		end
 		return false
 	end
 end
