@@ -143,6 +143,6 @@ function IsEventActive( event )
 end
 
 function GiveReward( ply, money )
-	SpawnBlueprint( BLUEPRINT_TIER2, ply, 3 )
+	SpawnBlueprint( ply, 3 )
 	ply:addMoney( money )
 end

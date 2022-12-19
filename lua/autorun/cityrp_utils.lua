@@ -1,7 +1,7 @@
 if SERVER then
 	--Spawn blueprint function
-	function SpawnBlueprint( tier, owner, uses )
-		local randwep = table.Random( tier )
+	function SpawnBlueprint( owner, uses )
+		local randwep = table.Random( BLUEPRINT_TABLE )
 		local e = ents.Create( "crafting_blueprint" )
 		e:SetPos( owner:GetPos() + Vector( 0, 0, 35 ) )
 		e:SetAngles( owner:GetAngles() )

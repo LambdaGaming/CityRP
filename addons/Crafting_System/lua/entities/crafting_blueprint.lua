@@ -7,37 +7,15 @@ ENT.Author = "Lambda Gaming"
 ENT.Spawnable = false
 ENT.AdminOnly = true
 
-BLUEPRINT_TIER1 = { --Blueprints you can get from the dumpster
-	{ "arccw_mifl_fas2_g3", "G3A3" },
-	{ "arccw_mifl_fas2_g36c", "G36C" },
-	{ "factory_lockpick", "Premium Lockpick" },
-	{ "arccw_mifl_fas2_ragingbull", "Raging Bull" },
-	{ "arccw_fml_fas2_custom_mass26", "MASS-26" },
-	{ "dronesrewrite_nanodr", "Nano Drone" }
-}
-
-BLUEPRINT_TIER2 = { --Blueprints you can get from smuggling weapons and random events
-	{ "arccw_mifl_fas2_ak47", "AK-47" },
-	{ "arccw_mifl_fas2_m3", "M3 Super 90" },
-	{ "arccw_mifl_fas2_toz34", "TOZ-34" },
-	{ "arccw_mifl_fas2_m24", "M24" },
-	{ "arccw_mifl_fas2_sg55x", "SG552" },
-	{ "arccw_mifl_fas2_m4a1", "M4A1" },
-	{ "weapon_car_bomb", "Car Bomb" },
-	{ "arccw_nade_frag", "Frag Grenade" },
-}
-
-BLUEPRINT_TIER3 = { --Blueprints you can get from gov bank, PD bank, and deposit boxes
-	{ "arccw_mifl_fas2_ks23", "KS-23" },
+BLUEPRINT_TABLE = {
 	{ "usm_c4", "Timed C4" },
 	{ "weapon_slam", "SLAM Remote Explosive" },
 	{ "arccw_mifl_fas2_minimi", "M249" },
 	{ "arccw_mifl_fas2_m79", "M79 Grenade Launcher" },
-	{ "arccw_mifl_fas2_rpk", "RPK47" },
-	{ "arccw_mifl_fas2_m82", "M82 Antimaterial Rifle" }
+	{ "weapon_car_bomb", "Car Bomb" },
+	{ "arccw_nade_frag", "Frag Grenade" },
+	{ "rtx4090", "RTX 4090" }
 }
-
-BLUEPRINT_COMBINED = table.Add( table.Add( BLUEPRINT_TIER1, BLUEPRINT_TIER2 ), BLUEPRINT_TIER3 )
 
 function ENT:SpawnFunction( ply, tr, name )
 	if !tr.Hit then return end
