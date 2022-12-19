@@ -25,6 +25,7 @@ function ENT:Initialize()
 	if SERVER then
 		self:PhysicsInit( SOLID_VPHYSICS )
 		self:SetTrigger( true )
+		self:SetUseType( SIMPLE_USE )
 	end
  
     local phys = self:GetPhysicsObject()
@@ -61,7 +62,8 @@ local wepvalues = {
 local entvalues = {
 	["wrench"] = 1,
 	["dronesrewrite_nanodr"] = 11,
-	["dronesrewrite_spyspider"] = 11
+	["dronesrewrite_spyspider"] = 11,
+	["rtx4090"] = 4
 }
 
 local ores = {
@@ -78,6 +80,44 @@ local ores = {
 		NewEnt = "diamond"
 	}
 }
+
+function ENT:Use( ply )
+	local found = ents.FindInSphere( self:GetPos(), 200 )
+	local foundowned = false
+	local total = 0
+	if #found == 0 then
+		DarkRP.notify( ply, 1, 6, "No iron detected. Move it closer. If you are trying to smelt something, touch it with the refiner." )
+		return
+	end
+	for k,v in pairs( found ) do
+		if v:GetOwner() == ply then
+			total = total + 1
+		end
+	end
+	if total == 0 then
+		DarkRP.notify( ply, 1, 6, "Iron was found but none of it seems to be owned by you." )
+		return
+	elseif !ply:canAfford( total * 50 ) then
+		DarkRP.notify( ply, 1, 6, "You can't afford to refine this iron! You need at least "..DarkRP.formatMoney( total * 50 ).."." )
+		return
+	end
+	ply:addMoney( -( total * 50 ) )
+	for k,v in pairs( found ) do
+		if v:GetOwner() == ply then
+			v:Remove()
+		end
+	end
+	DarkRP.notify( ply, 0, 6, total.." iron detected. This will take "..( total * 60 ).." minutes." )
+	timer.Simple( total * 60, function()
+		if !IsValid( ply ) then return end
+		for i=1,2 do
+			local e = ents.Create( "ironbar" )
+			e:SetPos( self:GetPos() + Vector( 0, 0, i * 20 ) )
+			e:Spawn()
+		end
+		DarkRP.notify( ply, 0, 6, "Your refined iron is ready." )
+	end )
+end
 
 function ENT:Touch( ent )
 	if self:GetNWInt( "TotalSmelting" ) >= 3 then return end
