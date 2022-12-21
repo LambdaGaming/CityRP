@@ -6,7 +6,7 @@ ENT.PrintName = "Iron Refiner"
 ENT.Author = "Lambda Gaming"
 ENT.Spawnable = true
 ENT.AdminOnly = true
-ENT.Category = "Crafting System"
+ENT.Category = "Crafting Table"
 
 function ENT:SpawnFunction( ply, tr, name )
 	if not tr.Hit then return end
@@ -82,20 +82,16 @@ local ores = {
 }
 
 function ENT:Use( ply )
-	local found = ents.FindInSphere( self:GetPos(), 200 )
+	local found = ents.FindInSphere( self:GetPos(), 400 )
 	local foundowned = false
 	local total = 0
-	if #found == 0 then
-		DarkRP.notify( ply, 1, 6, "No iron detected. Move it closer. If you are trying to smelt something, touch it with the refiner." )
-		return
-	end
 	for k,v in pairs( found ) do
-		if v:GetOwner() == ply then
+		if v:GetClass() == "ironbar" and v:GetOwner() == ply then
 			total = total + 1
 		end
 	end
 	if total == 0 then
-		DarkRP.notify( ply, 1, 6, "Iron was found but none of it seems to be owned by you." )
+		DarkRP.notify( ply, 1, 6, "No iron detected. Move it closer. If you are trying to smelt something, touch it with the refiner." )
 		return
 	elseif !ply:canAfford( total * 50 ) then
 		DarkRP.notify( ply, 1, 6, "You can't afford to refine this iron! You need at least "..DarkRP.formatMoney( total * 50 ).."." )
@@ -103,11 +99,11 @@ function ENT:Use( ply )
 	end
 	ply:addMoney( -( total * 50 ) )
 	for k,v in pairs( found ) do
-		if v:GetOwner() == ply then
+		if v:GetClass() == "ironbar" and v:GetOwner() == ply then
 			v:Remove()
 		end
 	end
-	DarkRP.notify( ply, 0, 6, total.." iron detected. This will take "..( total * 60 ).." minutes." )
+	DarkRP.notify( ply, 0, 6, total.." iron detected. This will cost "..DarkRP.formatMoney( total * 50 ).." and will take "..( total * 60 ).." minutes." )
 	timer.Simple( total * 60, function()
 		if !IsValid( ply ) then return end
 		for i=1,2 do

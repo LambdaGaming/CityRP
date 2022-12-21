@@ -499,6 +499,17 @@ ItemNPC["rock_scanner"] = {
 	end
 }
 
+ItemNPC["rock_decimator"] = {
+	Name = "Rock Decimator",
+	Description = "Gun that instantly mines rocks by destroying them. Has 3 uses.",
+	Model = "models/props/cs_militia/furnace01.mdl",
+	Price = 3000,
+	Type = 1,
+	SpawnFunction = function( ply, self )
+		ply:Give( "rock_decimator" )
+	end
+}
+
 ItemNPC["rp_gas"] = {
 	Name = "Propane Canister",
 	Description = "Propane gas for fueling industrial appliances.",

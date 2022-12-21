@@ -548,3 +548,16 @@ CraftingTable["rtx4090"] = {
 		e:Spawn()
 	end
 }
+
+CraftingTable["rock_decimator"] = {
+	Name = "Rock Decimator",
+	Description = "Needs 10 iron and 2 wrenches.",
+	Category = "Tools",
+	Materials = {
+		ironbar = 10,
+		wrench = 2
+	},
+	SpawnFunction = function( ply, self )
+		ply:Give( "rock_decimator" )
+	end
+}
