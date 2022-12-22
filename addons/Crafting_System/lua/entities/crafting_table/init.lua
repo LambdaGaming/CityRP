@@ -104,8 +104,21 @@ net.Receive( "StartCrafting", function( len, ply )
 			net.Send( ply )
 			return
 		end
+		local discount = false
 		for k,v in pairs( CraftMaterials ) do
-			self:SetNWInt( "Craft_"..k, self:GetNWInt( "Craft_"..k ) - v ) --Only removes required materials
+			local amount = v
+			if ply:Team() == TEAM_GUN then
+				if k == "ironbar" and amount >= 4 then
+					amount = math.Round( amount / 2 )
+				elseif k == "wrench" and amount >= 2 then
+					amount = math.Round( amount / 2 )
+				end
+				discount = true
+			end
+			self:SetNWInt( "Craft_"..k, self:GetNWInt( "Craft_"..k ) - amount ) --Only removes required materials
+		end
+		if discount then
+			ply:SendLua( [[chat.AddText( Color( 100, 100, 255 ), "[Crafting Table]: ", color_white, "Gun dealer discount applied." )]] )
 		end
 	end
 end )
