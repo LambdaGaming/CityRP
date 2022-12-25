@@ -131,19 +131,6 @@ CraftingTable["arccw_mifl_fas2_famas"] = {
 	end
 }
 
-CraftingTable["arccw_mifl_fas2_sr25"] = {
-	Name = "SR-25",
-	Description = "Requires 5 iron and 2 wrenches.",
-	Category = "Rifles",
-	Materials = {
-		ironbar = 5,
-		wrench = 2
-	},
-	SpawnFunction = function( ply, self )
-		ply:Give( "arccw_mifl_fas2_sr25" )
-	end
-}
-
 CraftingTable["arccw_mifl_fas2_mp5"] = {
 	Name = "MP5",
 	Description = "Requires 5 iron and 1 wrench.",
@@ -418,14 +405,27 @@ CraftingTable["usm_c4"] = {
 
 CraftingTable["arccw_mifl_fas2_ragingbull"] = {
 	Name = "Raging Bull",
-	Description = "Needs 5 iron and 1 wrench",
+	Description = "Needs 5 iron and 2 wrenches",
 	Category = "Pistols",
 	Materials = {
 		ironbar = 5,
-		wrench = 1,
+		wrench = 2,
 	},
 	SpawnFunction = function( ply, self )
 		ply:Give( "arccw_mifl_fas2_ragingbull" )
+	end
+}
+
+CraftingTable["arccw_mifl_fas2_deagle"] = {
+	Name = "Desert Eagle",
+	Description = "Needs 4 iron and 1 wrench",
+	Category = "Pistols",
+	Materials = {
+		ironbar = 4,
+		wrench = 1,
+	},
+	SpawnFunction = function( ply, self )
+		ply:Give( "arccw_mifl_fas2_deagle" )
 	end
 }
 

@@ -110,39 +110,6 @@ ItemNPC["arccw_mifl_fas2_p226"] = {
 	end
 }
 
-ItemNPC["arccw_mifl_fas2_deagle"] = {
-	Name = "Desert Eagle",
-	Description = "Does heavy amounts of damage at all ranges, most powerful sidearm.",
-	Model = "models/weapons/w_pist_deagle.mdl",
-	Price = 1500,
-	Type = 1,
-	SpawnFunction = function( ply, self )
-		ply:Give( "arccw_mifl_fas2_deagle" )
-	end
-}
-
-ItemNPC["arccw_mifl_fas2_mac11"] = {
-	Name = "MAC-11",
-	Description = "Automatic pistol, does fair amounts of damage.",
-	Model = "models/weapons/w_cst_mac11.mdl",
-	Price = 2500,
-	Type = 1,
-	SpawnFunction = function( ply, self )
-		ply:Give( "arccw_mifl_fas2_mac11" )
-	end
-}
-
-ItemNPC["arccw_mifl_fas2_mp5"] = {
-	Name = "MP5",
-	Description = "Automatic weapon, does fair amounts of damage.",
-	Model = "models/weapons/w_smg_mp5.mdl",
-	Price = 3500,
-	Type = 1,
-	SpawnFunction = function( ply, self )
-		ply:Give( "arccw_mifl_fas2_mp5" )
-	end
-}
-
 ItemNPC["mediaplayer_tv"] = {
 	Name = "Media Player",
 	Description = "Watch meme videos and torture prisoners with Undertale cringe.",
@@ -248,17 +215,6 @@ ItemNPC["automod_repair_kit"] = {
 		local e = ents.Create( "automod_repair_kit" )
 		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
 		e:Spawn()
-	end
-}
-
-ItemNPC["arccw_mifl_fas2_famas"] = {
-	Name = "FAMAS",
-	Description = "Large, automatic rifle.",
-	Model = "models/weapons/arccw/mifl/fas2/c_famas.mdl",
-	Price = 5000,
-	Type = 1,
-	SpawnFunction = function( ply, self )
-		ply:Give( "arccw_mifl_fas2_famas" )
 	end
 }
 
