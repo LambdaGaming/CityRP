@@ -51,14 +51,7 @@ function SmuggleEnd( ply )
 end
 
 function SmuggleCheck( ply )
-	local allowed = {
-		[TEAM_CITIZEN] = true,
-		[TEAM_TOWER] = true,
-		[TEAM_CAMERA] = true,
-		[TEAM_BUS] = true,
-		[TEAM_HITMAN] = true
-	}
-	if !allowed[ply:Team()] then
+	if !ply:IsCivilian() then
 		DarkRP.notify( ply, 1, 6, "You need to be a civilian job to smuggle items." )
 		return false
 	end

@@ -116,3 +116,19 @@ local meta = FindMetaTable( "Player" )
 function meta:IsEMS()
 	return self:Team() == TEAM_FIREBOSS or self:Team() == TEAM_FIRE
 end
+
+function meta:IsCivilian()
+	local allowed = {
+		[TEAM_CITIZEN] = true,
+		[TEAM_TOWER] = true,
+		[TEAM_CAMERA] = true,
+		[TEAM_BUS] = true,
+		[TEAM_HITMAN] = true,
+		[TEAM_GUN] = true
+	}
+	return allowed[self:Team()]
+end
+
+function meta:isCPNoMayor()
+	return self:isCP() and self:Team() != TEAM_MAYOR
+end

@@ -25,32 +25,44 @@ if SERVER then
 	local usecooldown
 	function ENT:AcceptInput( name, caller )
 		if usecooldown and usecooldown > CurTime() then return end
-		local allowed = {
-			[TEAM_CITIZEN] = true,
-			[TEAM_TOWER] = true,
-			[TEAM_CAMERA] = true,
-			[TEAM_BUS] = true,
-			[TEAM_HITMAN] = true
-		}
-		if allowed[caller:Team()] then
+		if caller:IsCivilian() then
+			usecooldown = CurTime() + 1
 			local foundtruck = false
-			local truckent
+			local foundshipment = false
+			local foundent
 			for k,v in pairs( ents.FindInSphere( self:GetPos(), 500 ) ) do
 				if v.SmuggleTruck then
 					foundtruck = true
-					truckent = v
+					foundent = v
 					break
+				elseif v:GetClass() == "custom_shipment" and v.Ready and v:GetOwner() != caller then
+					foundshipment = true
+					foundent = v
 				end
 			end
 			if foundtruck then
 				SmuggleEnd( caller )
-				truckent:Remove()
-				usecooldown = CurTime() + 1
+				foundent:Remove()
+				return
+			elseif foundshipment then
+				foundent:Remove()
+				local amt = math.Round( foundent:GetAmount() / 2 )
+				for i=1,amt do
+					local class = ShipmentWepList[foundent:GetGunType()][1]
+					local e = ents.Create( "spawned_weapon" )
+					e:SetWeaponClass( class )
+					e:SetModel( weapons.GetStored( class ).WorldModel )
+					e:SetPos( self:GetPos() + ( self:GetForward() * 10 ) + Vector( 0, 0, i * 20 ) )
+					e.nodupe = true
+					e:Spawn()
+				end
+				DarkRP.notify( caller, 0, 6, "Successfully smuggled a weapon shipment." )
 				return
 			end
-			DarkRP.notify( caller, 1, 6, "Truck not detected. Try moving it closer." )
+			DarkRP.notify( caller, 1, 6, "No item detected. Try moving it closer." )
+		else
+			DarkRP.notify( caller, 1, 6, "Only civilian jobs can use this NPC." )
 		end
-		usecooldown = CurTime() + 1
 	end
 end
 

@@ -6,7 +6,7 @@ ENT.PrintName = "Customizable Shipment"
 ENT.Author = "Lambda Gaming"
 ENT.Spawnable = false
 
-local WepList = {
+ShipmentWepList = {
 	{"arccw_mifl_fas2_famas", 1250}, {"arccw_mifl_fas2_sr25", 750}, {"arccw_mifl_fas2_mp5", 1000},
 	{"arccw_mifl_fas2_mac11", 1000}, {"arccw_mifl_fas2_rpk", 3000}, {"arccw_mifl_fas2_m82", 3000},
 	{"arccw_mifl_fas2_ak47", 2500}, {"arccw_mifl_fas2_m4a1", 2500}, {"arccw_mifl_fas2_m3", 2500},
@@ -17,7 +17,7 @@ local WepList = {
 }
 
 local function FinalPrice( index, amount )
-	local price = WepList[index][2]
+	local price = ShipmentWepList[index][2]
 	return ( price - ( price * ( amount * 0.05 ) ) ) * amount 
 end
 
@@ -55,7 +55,7 @@ if SERVER then
 		if self.Ready then
 			local price = self:GetPrice()
 			local wep = self:GetGunType()
-			local name = WepList[wep][1]
+			local name = ShipmentWepList[wep][1]
 			if ply.WepBuyCooldown and ply.WepBuyCooldown > CurTime() then
 				DarkRP.notify( ply, 1, 6, "Please wait 2 minutes before buying another weapon." )
 				return
@@ -123,7 +123,7 @@ if CLIENT then
 		self:DrawModel()
 		local plyShootPos = LocalPlayer():GetShootPos()
 		if self:GetPos():DistToSqr( plyShootPos ) < 562500 then
-			local name = WepList[self:GetGunType()]
+			local name = ShipmentWepList[self:GetGunType()]
 			local data = name and GetStored( name[1] ) or nil
 			local wepname = data and ( data.TrueName or data.PrintName ) or "Unconfigured"
 			local title = wepname.." Weapon Box"
@@ -169,7 +169,7 @@ if CLIENT then
 		weps:DockMargin( 0, 0, 0, 5 )
 		weps:SetSize( 375, 30 )
 		weps:SetValue( "Select Weapon" )
-		for k,v in ipairs( WepList ) do
+		for k,v in ipairs( ShipmentWepList ) do
 			local data = GetStored( v[1] )
 			weps:AddChoice( data.TrueName or data.PrintName or "Undefined" )
 		end
@@ -240,7 +240,7 @@ if CLIENT then
 				net.SendToServer()
 				if IsValid( menu1 ) then menu1:Close() end
 				menu2:Close()
-				ent.Preview:SetModel( GetStored( WepList[wep][1] ).WorldModel )
+				ent.Preview:SetModel( GetStored( ShipmentWepList[wep][1] ).WorldModel )
 			end
 		end
 	end )
