@@ -78,11 +78,6 @@ if SERVER then
 		end
 		return e
 	end
-
-	timer.Create( "DayNightLoop", 1800, 0, function()
-		local day = StormFox2.Time.IsDay()
-		StormFox2.Time.Set( day and "12:00 AM" or "12:00 PM" )
-	end )
 else
 	--NPC text drawing function, modified from https://github.com/Bhoonn/bh_accessories/blob/main/lua/entities/bh_acc_vendor/cl_init.lua
 	local ent = FindMetaTable( "Entity" )
