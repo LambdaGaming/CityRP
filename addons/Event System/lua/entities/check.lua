@@ -26,9 +26,7 @@ if SERVER then
 			caller:addMoney( 2000 )
 			DarkRP.notify( caller, 0, 6, "You have collected $2000 from a bank check." )
 			MoneyTransferEnd()
-			for k,v in pairs( team.GetPlayers( TEAM_BANKER ) ) do
-				DarkRP.notify( v, 1, 6, "You have failed to protect the check. It has been stolen!" )
-			end
+			NotifyJob( TEAM_BANKER, 1, 6, "You have failed to protect the check. It has been stolen!" )
 			self:Remove()
 		end
 	end

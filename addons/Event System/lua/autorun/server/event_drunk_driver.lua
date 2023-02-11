@@ -5,12 +5,7 @@ function DrunkDriver()
 	e:SetPos( table.Random( EventPos[map].Road ) + Vector( 0, 0, 10 ) )
 	e:Spawn()
 	e:Activate()
-
-	for k,v in ipairs( player.GetAll() ) do
-		if v:isCP() then
-			DarkRP.notify( v, 0, 10, "Citizens are reporting a drunk driver in the area. Be on the lookout." )
-		end
-	end
+	NotifyCops( 0, 10, "Citizens are reporting a drunk driver in the area. Be on the lookout." )
 end
 
 function EndDrunkDriver( ent, ply )

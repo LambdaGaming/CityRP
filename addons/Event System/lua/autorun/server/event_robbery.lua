@@ -36,19 +36,11 @@ function Robbery()
 		shooter.IsRobber = true
 		RobberyEventStats.RobberCount = RobberyEventStats.RobberCount + 1
 	end
-	for k,v in ipairs( player.GetAll() ) do
-		if v:isCP() then
-			DarkRP.notify( v, 0, 10, RobberyEventStats.RobberCount.." armed men are attempting to rob the bank!" )
-		end
-	end
+	NotifyCops( 0, 10, RobberyEventStats.RobberCount.." armed men are attempting to rob the bank!" )
 end
 
 function RobberyEnd()
-	for k,v in ipairs( player.GetAll() ) do
-		if v:isCP() then
-			DarkRP.notify( v, 0, 10, "The bank robbers have been killed!" )
-		end
-	end
+	NotifyCops( 0, 10, "The bank robbers have been killed!" )
 	RobberyEventStats.RobberCount = 0
 	ActiveEvents[EVENT_ROBBERY] = false
 end

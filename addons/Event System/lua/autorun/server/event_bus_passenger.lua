@@ -69,9 +69,7 @@ function BusPassenger()
 	end
 	local randtbl, randkey = table.Random( BusDestinations )
 	BusPassengerEventStats.DestinationName = randkey
-	for k,v in pairs( team.GetPlayers( TEAM_BUS ) ) do
-		DarkRP.notify( v, 0, 10, "Drive around to bus stops and pickup passengers." )
-	end
+	NotifyJob( TEAM_BUS, 0, 10, "Drive around to bus stops and pickup passengers." )
 end
 
 function EndBusPassenger()
@@ -88,8 +86,6 @@ end
 hook.Add( "EntityRemoved", "BusRemoved", function( ent )
 	if ActiveEvents[EVENT_BUS_PASSENGER] and ent.TotalPassengers then
 		EndBusPassenger()
-		for k,v in pairs( team.GetPlayers( TEAM_BUS ) ) do
-			DarkRP.notify( v, 1, 6, "Your job was cancelled due to your bus being deleted." )
-		end
+		NotifyJob( TEAM_BUS, 1, 6, "Your job was cancelled due to your bus being deleted." )
 	end
 end )

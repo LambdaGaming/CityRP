@@ -4,9 +4,7 @@ function RoadWork()
 	local e = ents.Create( "pot_hole" )
 	e:SetPos( table.Random( EventPos[map].Road ) )
 	e:Spawn()
-	for k,v in pairs( team.GetPlayers( TEAM_TOWER ) ) do
-		DarkRP.notify( v, 0, 10, "Citizens have reported a large pothole in the area. Find and repair it." )
-	end
+	NotifyJob( TEAM_TOWER, 0, 10, "Citizens have reported a large pothole in the area. Find and repair it." )
 end
 
 function RoadWorkEnd( ply, ent )

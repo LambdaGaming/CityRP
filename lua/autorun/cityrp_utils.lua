@@ -78,6 +78,39 @@ if SERVER then
 		end
 		return e
 	end
+
+	function NotifyCops( typ, time, text, nomayor )
+		for k,v in ipairs( player.GetAll() ) do
+			if v:isCP() then
+				if v:Team() == TEAM_MAYOR and nomayor then
+					continue
+				end
+				DarkRP.notify( v, typ, time, text )
+			end
+		end
+	end
+
+	function NotifyEMS( typ, time, text )
+		for k,v in ipairs( player.GetAll() ) do
+			if v:IsEMS() then
+				DarkRP.notify( v, typ, time, text )
+			end
+		end
+	end
+
+	function NotifyCivilians( typ, time, text )
+		for k,v in ipairs( player.GetAll() ) do
+			if !v:isCP() and !v:IsEMS() then
+				DarkRP.notify( v, typ, time, text )
+			end
+		end
+	end
+
+	function NotifyJob( job, typ, time, text )
+		for k,v in ipairs( team.GetPlayers( job ) ) do
+			DarkRP.notify( v, typ, time, text )
+		end
+	end
 else
 	--NPC text drawing function, modified from https://github.com/Bhoonn/bh_accessories/blob/main/lua/entities/bh_acc_vendor/cl_init.lua
 	local ent = FindMetaTable( "Entity" )
@@ -91,7 +124,7 @@ else
 
 		local origin = self:GetPos()
 		local ply = LocalPlayer()
-		if ply:GetPos():DistToSqr( origin ) >= ( 768 * 768 ) then return end
+		if ply:GetPos():DistToSqr( origin ) >= 589824 then return end
 
 		local pos = origin + ( override or offset )
 		local ang = ( ply:EyePos() - pos ):Angle()
@@ -99,7 +132,7 @@ else
 		ang:RotateAroundAxis( ang:Right(), 90 )
 		ang:RotateAroundAxis( ang:Up(), 90 )
 		ang:RotateAroundAxis( ang:Forward(), 180 )
-		cam.Start3D2D(pos, ang, 0.035)
+		cam.Start3D2D( pos, ang, 0.035 )
 			surface_SetFont( "BHACC_VendorTextFont" )
 			local tw, th = surface_GetTextSize( text )
 			Draw_SimpleText( text, "BHACC_VendorTextFont", 0, 0, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP )
