@@ -64,7 +64,7 @@ if SERVER then
 		timer.Simple( 1.5, function()
 			if !IsValid( self ) then return end
 			local pos, ang = LocalToWorld( Vector( 20, -5, -30 ), Angle( -90, -90, 0 ), self:GetPos(), self:GetAngles() )
-			local mayorfunds = GetGlobalInt( "MAYOR_Money" )
+			local mayorfunds = GetVaultAmount()
 			local salestax = price * ( GetGlobalInt( "MAYOR_SalesTax" ) * 0.01 )
 			if mayorfunds < salestax and ply:isCP() then
 				DarkRP.notify( ply, 1, 6, "There is not enough mayor funds to buy ammo for this weapon." )
@@ -75,10 +75,10 @@ if SERVER then
 			ammo:SetAngles( ang )
 			ammo:Spawn()
 			if ply:isCP() then
-				SetGlobalInt( "MAYOR_Money", mayorfunds - salestax )
+				AddVaultFunds( -salestax )
 			else
 				local finalprice = price + salestax
-				SetGlobalInt( "MAYOR_Money", mayorfunds + salestax )
+				AddVaultFunds( salestax )
 				ply:addMoney( -finalprice )
 			end
 			self.Used = false

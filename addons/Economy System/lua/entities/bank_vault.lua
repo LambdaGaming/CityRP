@@ -19,7 +19,7 @@ function ENT:SpawnFunction( ply, tr, name )
 end
 
 function ENT:Initialize()
-    self:SetModel( "models/props/cs_assault/MoneyPallet03A.mdl" )
+	self:SetModel( "models/props/cs_assault/MoneyPallet03A.mdl" )
 	self:SetMoveType( MOVETYPE_VPHYSICS )
 	self:SetSolid( SOLID_VPHYSICS )
 	if SERVER then
@@ -31,7 +31,7 @@ function ENT:Initialize()
 		self.BagsLeft = 0
 	end
  
-    local phys = self:GetPhysicsObject()
+	local phys = self:GetPhysicsObject()
 	if phys:IsValid() then
 		phys:Wake()
 	end
@@ -124,8 +124,8 @@ end
 
 if CLIENT then
 	surface.CreateFont( "BankFont", { font = 'Roboto', size = 100 } )
-    function ENT:Draw()
-        self:DrawModel()
+	function ENT:Draw()
+		self:DrawModel()
 		local ply = LocalPlayer()
 		if ply:GetPos():DistToSqr( self:GetPos() ) <= 250000 then
 			local pos = self:GetPos()
@@ -138,5 +138,5 @@ if CLIENT then
 				draw.SimpleText( "Bank Vault", "BankFont", 0, -565, color_white, 1, 1 )
 			cam.End3D2D()
 		end
-    end
+	end
 end

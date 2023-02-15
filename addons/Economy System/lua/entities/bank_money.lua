@@ -6,7 +6,7 @@ ENT.PrintName = "Bank Money"
 ENT.Author = "Lambda Gaming"
 
 function ENT:Initialize()
-    self:SetModel( "models/props_c17/BriefCase001a.mdl" )
+	self:SetModel( "models/props_c17/BriefCase001a.mdl" )
 	self:SetMoveType( MOVETYPE_VPHYSICS )
 	self:SetSolid( SOLID_VPHYSICS )
 	if SERVER then
@@ -14,7 +14,7 @@ function ENT:Initialize()
 		self:SetUseType( SIMPLE_USE )
 	end
  
-    local phys = self:GetPhysicsObject()
+	local phys = self:GetPhysicsObject()
 	if phys:IsValid() then
 		phys:Wake()
 	end
@@ -67,17 +67,17 @@ if CLIENT then
 		size = 60
 	} )
 
-    function ENT:Draw()
-        self:DrawModel()
+	function ENT:Draw()
+		self:DrawModel()
 		local ply = LocalPlayer()
 		if ply:GetPos():DistToSqr( self:GetPos() ) < 250000 then
 			local pos = self:GetPos()
 			local ang = self:GetAngles()
 			ang:RotateAroundAxis( ang:Forward(), 90 )
 			cam.Start3D2D( pos + ang:Up() * 4.2, ang, 0.04 )
-				draw.SimpleText( "Bank Money", "MoneyBag", 0, 0, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 3, color_black)
-				draw.SimpleText("$4,000", "MoneyBag", 0, 50, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 3, color_black)
+				draw.SimpleText( "Bank Money", "MoneyBag", 0, 0, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 3, color_black )
+				draw.SimpleText( "$4,000", "MoneyBag", 0, 50, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 3, color_black )
 			cam.End3D2D()
 		end
-    end
+	end
 end

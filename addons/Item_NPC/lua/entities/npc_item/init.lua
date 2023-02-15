@@ -86,7 +86,7 @@ net.Receive( "CreateItem", function( len, ply )
 	end
 	if price > 0 and self:GetNPCType() != 2 and self:GetNPCType() != 8 then
 		price = price + salestax
-		SetGlobalBool( "MAYOR_Money", GetGlobalBool( "MAYOR_Money" ) + salestax )
+		AddVaultFunds( salestax )
 	end
 	if primary and !table.HasValue( primary, ply:Team() ) then
 		DarkRP.notify( ply, 1, 6, "You are not qualified for this job!" )

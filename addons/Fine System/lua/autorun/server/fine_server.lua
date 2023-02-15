@@ -1,4 +1,3 @@
-
 util.AddNetworkString( "VehicleFine" )
 local function VehicleFine( len, ply )
 	local veh = net.ReadEntity()
@@ -50,8 +49,7 @@ local function AcceptFine( len, ply )
 		return
 	end
 	ply:addMoney( -price )
-	sender:addMoney( price )
-	SetGlobalInt( "MAYOR_Money", GetGlobalInt( "MAYOR_Money" ) + price * 0.75 )
+	AddVaultFunds( price )
 	DarkRP.notify( ply, 0, 6, "You have paid the $"..price.." fine." )
 	DarkRP.notify( sender, 0, 6, ply:Nick().." has paid their $"..price.." fine." )
 end
