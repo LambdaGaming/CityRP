@@ -13,8 +13,6 @@ function GetEcoPoints()
 end
 
 if SERVER then
-	EconomyPerks = {}
-
 	local function CalculateEcoPoints()
 		local income = math.Clamp( math.Round( ( GetCityIncome() + 5000 ) * 25 / 5000 - 25 ), -25, 25 )
 		local funds = math.Clamp( math.Round( ( GetVaultAmount() + 50000 ) * 25 / 75000 - 25 ), -25, 25 )
@@ -70,7 +68,7 @@ if SERVER then
 			local term = income > 0 and "gained" or "lost"
 			AddVaultFunds( income )
 			if IsValid( mayor ) then
-				DarkRP.notify( mayor, 0, 6, "The city has "..term.." "..DarkRP.formatMoney( income ) )
+				DarkRP.notify( mayor, 0, 6, "The city has "..term.." "..math.abs( DarkRP.formatMoney( income ) ) )
 			end
 		end
 	end )
