@@ -68,7 +68,7 @@ if SERVER then
 			local term = income > 0 and "gained" or "lost"
 			AddVaultFunds( income )
 			if IsValid( mayor ) then
-				DarkRP.notify( mayor, 0, 6, "The city has "..term.." "..math.abs( DarkRP.formatMoney( income ) ) )
+				DarkRP.notify( mayor, 0, 6, "The city has "..term.." "..DarkRP.formatMoney( math.abs( income ) ) )
 			end
 		end
 	end )
