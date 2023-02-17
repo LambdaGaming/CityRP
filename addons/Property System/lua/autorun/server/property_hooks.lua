@@ -153,14 +153,34 @@ hook.Add( "PlayerDisconnected", "PropertySystemPlayerDisconnect", function( ply 
 	end )
 end )
 
+PropertyTaxWarnings = {}
 hook.Add( "canPropertyTax", "PropertySystemTaxes", function( ply, tax )
 	local total = 0
+	local id = ply:SteamID64()
+	if !PropertyTaxWarnings[id] then PropertyTaxWarnings[id] = 0 end
 	for k,v in pairs( OwnedProperties ) do
 		if PropertyTable[k] and PropertyTable[k].Price and v.Owner == ply:SteamID64() then
 			total = total + ( PropertyTable[k].Price * ( GetGlobalInt( "MAYOR_PropertyTax" ) * 0.01 ) )
 		end
 	end
+	if !ply:canAfford( total ) then
+		if PropertyTaxWarnings[id] < 2 then
+			DarkRP.notify( ply, 1, 15, "WARNING: You cannot afford property taxes. You will be given two breaks before all of your properties are sold." )
+			timer.Simple( 0.1, function()
+				DarkRP.notify( ply, 1, 15, "At the current tax rate and with your currently owned properties, you will need "..DarkRP.formatMoney( total ).." for the next cycle." )
+			end )
+			PropertyTaxWarnings[id] = PropertyTaxWarnings[id] + 1
+			return false
+		end
+	end
 	return true, total
+end )
+
+hook.Add( "onPropertyTax", "PropertySystemCityTaxes", function( ply, tax, canAfford )
+	if canAfford then
+		PropertyTaxWarnings[ply:SteamID64()] = 0
+		AddVaultFunds( tax )
+	end
 end )
 
 hook.Add( "lockpickTime", "PropertySystemLockpickTime", function( ply, ent )
