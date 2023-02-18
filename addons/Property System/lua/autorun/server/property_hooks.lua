@@ -14,6 +14,8 @@ hook.Add( "playerBuyDoor", "PropertySystemBuyDoor", function( ply, ent )
 			Owner = ply:SteamID64(),
 			Saved = {}
 		}
+		local tbl = PropertyTable[index]
+		ent:setKeysTitle( tbl.Name )
 		PropertySystemSaveFile()
 		SyncPropertyTable()
 	end
@@ -39,10 +41,14 @@ local function HandleDoorSell( ply, ent )
 				v:SetNWString( "SavedProperty", "" )
 			end
 		end
+		ent:removeAllKeysExtraOwners()
+		ent:removeAllKeysAllowedToOwn()
+		ent:keysUnOwn( ply )
 		ent:setKeysTitle( nil )
 		DarkRP.storeDoorData( ent )
 		timer.Simple( 1, function()
-			ent:setKeysTitle( PropertyTable[index].Name )
+			local tbl = PropertyTable[index]
+			ent:setKeysTitle( tbl.Name.."\nFor Sale: "..DarkRP.formatMoney( tbl.Price or 0 ) )
 		end )
 		OwnedProperties[index] = nil
 		PropertySystemSaveFile()
@@ -80,13 +86,11 @@ hook.Add( "InitPostEntity", "PropertySystemApplyDoorStats", function()
 		else
 			if PropertyTaxWarnings[id] < 2 then
 				DarkRP.notify( self, 1, 15, "WARNING: You cannot afford property taxes. You will be given two breaks before all of your properties are unowned." )
-				timer.Simple( 0.1, function()
-					DarkRP.notify( self, 1, 15, "At the current tax rate and with your currently owned properties, you will need "..DarkRP.formatMoney( total ).." for the next cycle." )
-				end )
+				DarkRP.notify( self, 1, 15, "At the current tax rate and with your currently owned properties, you will need "..DarkRP.formatMoney( total ).." for the next cycle." )
 				PropertyTaxWarnings[id] = PropertyTaxWarnings[id] + 1
-			elseif PropertyTaxWarnings[id] > 2 then
+			elseif PropertyTaxWarnings[id] >= 2 then
 				for k,v in pairs( OwnedProperties ) do
-					if v.Owner == ply:SteamID64() then
+					if v.Owner == id then
 						local ent = DarkRP.doorIndexToEnt( k )
 						HandleDoorSell( self, ent )
 					end
