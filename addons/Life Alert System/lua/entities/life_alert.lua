@@ -1,4 +1,3 @@
-
 AddCSLuaFile()
 
 ENT.Type = "anim"
@@ -8,11 +7,10 @@ ENT.Author = "Lambda Gaming"
 ENT.Spawnable = true
 ENT.AdminOnly = true
 ENT.Category = "Life Alert System"
-ENT.DoNotDuplicate = true
 
 function ENT:SpawnFunction( ply, tr, name )
 	if !tr.Hit then return end
-	local SpawnPos = tr.HitPos + tr.HitNormal * 1
+	local SpawnPos = tr.HitPos + tr.HitNormal
 	local ent = ents.Create( name )
 	ent:SetPos( SpawnPos )
 	ent:Spawn()
@@ -46,10 +44,4 @@ function ENT:Use( activator, caller )
 			self:Remove()
 		end
 	end
-end
-
-if CLIENT then
-    function ENT:Draw()
-        self:DrawModel()
-    end
 end

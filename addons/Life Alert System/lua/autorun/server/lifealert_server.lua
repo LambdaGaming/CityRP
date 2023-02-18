@@ -1,13 +1,10 @@
 util.AddNetworkString( "LifeAlertSound" )
-local function LifeAlert( ply )
+local function LifeAlert( ply, type )
 	ply:SetNWBool( "LifeAlertActive", true )
-	local emsjobs = {
-		[TEAM_FIREBOSS] = true,
-		[TEAM_FIRE] = true
-	}
 	for k,v in ipairs( player.GetAll() ) do
-		if v:isCP() or emsjobs[v:Team()] then
-			DarkRP.talkToPerson( v, Color( 255, 0, 0 ), "[Life Alert]", color_white, "A life alert owned by "..ply:Nick().." has just been activated. It has been marked on your screen. Respond code 3." )
+		if v:isCPNoMayor() or v:IsEMS() then
+			local types = { "Death", "Injury", "Manual Alert" }
+			DarkRP.talkToPerson( v, Color( 255, 0, 0 ), "[Life Alert]", color_white, "A life alert owned by "..ply:Nick().." has just been activated. It has been marked on your screen. Reason: "..types[type] )
 			net.Start( "LifeAlertSound" )
 			net.Send( v )
 		end
@@ -19,13 +16,23 @@ local function LifeAlert( ply )
 	end )
 end
 
-hook.Add( "PlayerDeath", "LifeAlertReset", function( ply )
+hook.Add( "DoPlayerDeath", "LifeAlertReset", function( ply )
 	local pos = ply:GetPos()
 	if ply.haslifealert then
 		ply:SetNWBool( "LifeAlertActiveDeath", true )
 		ply:SetNWVector( "LifeAlertDeathPos", pos )
-		LifeAlert( ply )
+		LifeAlert( ply, 1 )
 		ply.haslifealert = false
+	end
+end )
+
+hook.Add( "PostEntityTakeDamage", "LifeAlertDamage", function( ent, dmg, took )
+	if ent:IsPlayer() and ent.haslifealert and took then
+		if ent.LifeAlertCooldown and ent.LifeAlertCooldown > CurTime() then
+			return
+		end
+		LifeAlert( ent, 2 )
+		ent.LifeAlertCooldown = CurTime() + 120
 	end
 end )
 
@@ -47,7 +54,7 @@ hook.Add( "PlayerSay", "LifeAlertCheck", function( ply, text, public )
 	if text == "!alert" then
 		if ply.haslifealert and ply:Alive() then
 			ply:ChatPrint( "Life alert activated. Police and EMS have been notified of your location." )
-			LifeAlert( ply )
+			LifeAlert( ply, 3 )
 		elseif ply:GetNWBool( "LifeAlertActive" ) then
 			ply:ChatPrint( "Your life alert is already active!" )
 		else
