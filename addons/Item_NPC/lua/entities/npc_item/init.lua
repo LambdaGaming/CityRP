@@ -84,7 +84,7 @@ net.Receive( "CreateItem", function( len, ply )
 		discountamt = discount[ply:Team()]
 		price = price * discountamt
 	end
-	if price > 0 and self:GetNPCType() != 2 and self:GetNPCType() != 8 then
+	if price > 0 and self:GetNPCType() != 2 then
 		price = price + salestax
 		AddVaultFunds( salestax )
 	end
@@ -93,7 +93,7 @@ net.Receive( "CreateItem", function( len, ply )
 		return
 	end
 	if ply.JobCooldown and ply.JobCooldown > CurTime() then
-		DarkRP.notify( ply, 1, 6, "Please wait 30 minutes after taking a job to take another one." )
+		DarkRP.notify( ply, 1, 6, "Please wait 30 minutes after taking a job before taking another one." )
 		return
 	end
 	if money >= price then
