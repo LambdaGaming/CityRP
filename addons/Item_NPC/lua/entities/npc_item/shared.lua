@@ -9,14 +9,6 @@ function ENT:SetupDataTables()
 	self:NetworkVar( "Int", 0, "NPCType" )
 end
 
-local function PoliceBanCheck( ply )
-	if GetGlobalBool( "PoliceCarBanActive" ) then
-		DarkRP.notify( ply, 1, 6, "You cannot spawn this vehicle due to the mayor ordering a temporary ban on all police cars." )
-		return false
-	end
-	return true
-end
-
 ItemNPC = {}
 ItemNPCType = {}
 
@@ -825,9 +817,6 @@ ItemNPC["chevy_impala"] = {
 	Model = "models/lonewolfie/chev_impala_09_police.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnCheck = function( ply, self )
-		return PoliceBanCheck( ply )
-	end,
 	SpawnFunction = function( ply, self )
 		SpawnVehicle( ply, "Chevrolet Impala Police", 1 )
 	end
@@ -839,9 +828,6 @@ ItemNPC["chev_tahoe_police_lw"] = {
 	Model = "models/LoneWolfie/chev_tahoe_police.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnCheck = function( ply, self )
-		return PoliceBanCheck( ply )
-	end,
 	SpawnFunction = function( ply, self )
 		SpawnVehicle( ply, "Unmarked Chevy Tahoe", 1 )
 	end
@@ -853,9 +839,6 @@ ItemNPC["chev_suburban_pol"] = {
 	Model = "models/LoneWolfie/chev_suburban_pol.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnCheck = function( ply, self )
-		return PoliceBanCheck( ply )
-	end,
 	SpawnFunction = function( ply, self )
 		SpawnVehicle( ply, "Chicago Police Chevy Suburban", 1 )
 	end
@@ -867,9 +850,6 @@ ItemNPC["swat_van"] = {
 	Model = "models/perrynsvehicles/bearcat_g3/bearcat_g3.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnCheck = function( ply, self )
-		return PoliceBanCheck( ply )
-	end,
 	SpawnFunction = function( ply, self )
 		SpawnVehicle( ply, "Lenco Bearcat G3", 1 )
 	end
@@ -881,9 +861,6 @@ ItemNPC["ford_crownvic"] = {
 	Model = "models/tdmcars/emergency/for_crownvic_fh3.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnCheck = function( ply, self )
-		return PoliceBanCheck( ply )
-	end,
 	SpawnFunction = function( ply, self )
 		SpawnVehicle( ply, "Ford Crown Vic Police", 1 )
 	end
@@ -895,9 +872,6 @@ ItemNPC["ford_crownvic_und"] = {
 	Model = "models/tdmcars/emergency/for_crownvic_fh3.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnCheck = function( ply, self )
-		return PoliceBanCheck( ply )
-	end,
 	SpawnFunction = function( ply, self )
 		SpawnVehicle( ply, "Ford Crown Vic Undercover", 1 )
 	end
@@ -909,9 +883,6 @@ ItemNPC["ram_3500"] = {
 	Model = "models/tdmcars/dod_ram_3500.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnCheck = function( ply, self )
-		return PoliceBanCheck( ply )
-	end,
 	SpawnFunction = function( ply, self )
 		SpawnVehicle( ply, "Dodge Ram 3500 Police", 1 )
 	end
@@ -923,9 +894,6 @@ ItemNPC["charger_police"] = {
 	Model = "models/lonewolfie/dodge_charger_2015_police.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnCheck = function( ply, self )
-		return PoliceBanCheck( ply )
-	end,
 	SpawnFunction = function( ply, self )
 		SpawnVehicle( ply, "Dodge Charger 2015 Pursuit", 1 )
 	end
@@ -937,9 +905,6 @@ ItemNPC["charger_und"] = {
 	Model = "models/lonewolfie/dodge_charger_2015_undercover.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnCheck = function( ply, self )
-		return PoliceBanCheck( ply )
-	end,
 	SpawnFunction = function( ply, self )
 		SpawnVehicle( ply, "Dodge Charger 2015 Undercover", 1 )
 	end
@@ -951,9 +916,6 @@ ItemNPC["lambosine"] = {
 	Model = "models/sentry/lambosine.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnCheck = function( ply, self )
-		return PoliceBanCheck( ply )
-	end,
 	SpawnFunction = function( ply, self )
 		SpawnVehicle( ply, "lambosine", 1 )
 	end
@@ -965,9 +927,6 @@ ItemNPC["lambo_veneno"] = {
 	Model = "models/sentry/veneno_new_cop.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnCheck = function( ply, self )
-		return PoliceBanCheck( ply )
-	end,
 	SpawnFunction = function( ply, self )
 		SpawnVehicle( ply, "Lamborghini Veneno Police Edition", 1 )
 	end
@@ -979,9 +938,6 @@ ItemNPC["dodge_monaco"] = {
 	Model = "models/lonewolfie/dodge_monaco_police.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnCheck = function( ply, self )
-		return PoliceBanCheck( ply )
-	end,
 	SpawnFunction = function( ply, self )
 		SpawnVehicle( ply, "Dodge Monaco Police ", 1 )
 	end
@@ -993,9 +949,6 @@ ItemNPC["transport_truck"] = {
 	Model = "models/tdmcars/trucks/gmc_c5500.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnCheck = function( ply, self )
-		return PoliceBanCheck( ply )
-	end,
 	SpawnFunction = function( ply, self )
 		SpawnVehicle( ply, "c5500tdm", 1 )
 	end
@@ -1007,9 +960,6 @@ ItemNPC["ford_explorer"] = {
 	Model = "models/schmal/fpiu/ford_utility.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnCheck = function( ply, self )
-		return PoliceBanCheck( ply )
-	end,
 	SpawnFunction = function( ply, self )
 		SpawnVehicle( ply, "2016 Ford Police Interceptor Utility", 1 )
 	end
@@ -1021,9 +971,6 @@ ItemNPC["ford_taurus"] = {
 	Model = "models/sentry/taurussho.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnCheck = function( ply, self )
-		return PoliceBanCheck( ply )
-	end,
 	SpawnFunction = function( ply, self )
 		SpawnVehicle( ply, "2010 Ford Taurus Police Interceptor", 1 )
 	end
@@ -1035,9 +982,6 @@ ItemNPC["lambo_huracan"] = {
 	Model = "models/lonewolfie/lam_huracan.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnCheck = function( ply, self )
-		return PoliceBanCheck( ply )
-	end,
 	SpawnFunction = function( ply, self )
 		SpawnVehicle( ply, "Lamborghini Huracan Undercover", 1 )
 	end
@@ -1049,9 +993,6 @@ ItemNPC["dodge_challenger"] = {
 	Model = "models/tdmcars/dod_challenger15.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnCheck = function( ply, self )
-		return PoliceBanCheck( ply )
-	end,
 	SpawnFunction = function( ply, self )
 		SpawnVehicle( ply, "2015 Challenger Unmarked", 1 )
 	end
@@ -1063,9 +1004,6 @@ ItemNPC["chevy_impala_taxi"] = {
 	Model = "models/lonewolfie/chev_impala_09_taxi.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnCheck = function( ply, self )
-		return PoliceBanCheck( ply )
-	end,
 	SpawnFunction = function( ply, self )
 		SpawnVehicle( ply, "Impala Taxi Unmarked", 1 )
 	end
@@ -1077,9 +1015,6 @@ ItemNPC["laferrari"] = {
 	Model = "models/tdmcars/fer_lafer.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnCheck = function( ply, self )
-		return PoliceBanCheck( ply )
-	end,
 	SpawnFunction = function( ply, self )
 		SpawnVehicle( ply, "Unmarked LaFerrari", 1 )
 	end
@@ -1091,9 +1026,6 @@ ItemNPC["charger_old"] = {
 	Model = "models/tdmcars/dod_charger12.mdl",
 	Price = 0,
 	Type = 4,
-	SpawnCheck = function( ply, self )
-		return PoliceBanCheck( ply )
-	end,
 	SpawnFunction = function( ply, self )
 		SpawnVehicle( ply, "Charger SRT-8 Police Undercover", 1 )
 	end
