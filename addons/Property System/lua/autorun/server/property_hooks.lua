@@ -20,7 +20,7 @@ hook.Add( "playerBuyDoor", "PropertySystemBuyDoor", function( ply, ent )
 	return true
 end )
 
-hook.Add( "playerSellDoor", "PropertySystemSellDoor", function( ply, ent )
+local function HandleDoorSell( ply, ent )
 	if ent.IsSubDoor then
 		return false, "Sell the main door to sell the whole property."
 	elseif ent.IsMainDoor then
@@ -49,13 +49,52 @@ hook.Add( "playerSellDoor", "PropertySystemSellDoor", function( ply, ent )
 		SyncPropertyTable()
 	end
 	return true
-end )
+end
+hook.Add( "playerSellDoor", "PropertySystemSellDoor", HandleDoorSell )
 
 hook.Add( "InitPostEntity", "PropertySystemApplyDoorStats", function()
-	--Override DarkRP function for getting door cost
+	--Override DarkRP functions for getting door cost and applying property taxes
 	function GAMEMODE:getDoorCost( ply, ent )
 		local tbl = PropertyTable[ent:doorIndex()]
 		return tbl and tbl.Price or 100
+	end
+
+	local meta = FindMetaTable( "Player" )
+	function meta:doPropertyTax()
+		local total = 0
+		local id = self:SteamID64()
+		if !PropertyTaxWarnings[id] then PropertyTaxWarnings[id] = 0 end
+		for k,v in pairs( OwnedProperties ) do
+			if PropertyTable[k] and PropertyTable[k].Price and v.Owner == id then
+				total = total + ( PropertyTable[k].Price * ( GetGlobalInt( "MAYOR_PropertyTax" ) * 0.01 ) )
+			end
+		end
+	
+		if total == 0 then return end
+		local canAfford = self:canAfford( total )
+		if canAfford then
+			self:addMoney( -total )
+			DarkRP.notify( self, 0, 6, "You have paid "..DarkRP.formatMoney( total ).." in property taxes." )
+			PropertyTaxWarnings[id] = 0
+			AddVaultFunds( total )
+		else
+			if PropertyTaxWarnings[id] < 2 then
+				DarkRP.notify( self, 1, 15, "WARNING: You cannot afford property taxes. You will be given two breaks before all of your properties are unowned." )
+				timer.Simple( 0.1, function()
+					DarkRP.notify( self, 1, 15, "At the current tax rate and with your currently owned properties, you will need "..DarkRP.formatMoney( total ).." for the next cycle." )
+				end )
+				PropertyTaxWarnings[id] = PropertyTaxWarnings[id] + 1
+			elseif PropertyTaxWarnings[id] > 2 then
+				for k,v in pairs( OwnedProperties ) do
+					if v.Owner == ply:SteamID64() then
+						local ent = DarkRP.doorIndexToEnt( k )
+						HandleDoorSell( self, ent )
+					end
+				end
+				PropertyTaxWarnings[id] = 0
+				DarkRP.notify( self, 1, 10, "All of your properties have been forfeited because you failed to pay your taxes." )
+			end
+		end
 	end
 
 	PropertySystemLoad()
@@ -153,36 +192,6 @@ hook.Add( "PlayerDisconnected", "PropertySystemPlayerDisconnect", function( ply 
 	end )
 end )
 
-PropertyTaxWarnings = {}
-hook.Add( "canPropertyTax", "PropertySystemTaxes", function( ply, tax )
-	local total = 0
-	local id = ply:SteamID64()
-	if !PropertyTaxWarnings[id] then PropertyTaxWarnings[id] = 0 end
-	for k,v in pairs( OwnedProperties ) do
-		if PropertyTable[k] and PropertyTable[k].Price and v.Owner == ply:SteamID64() then
-			total = total + ( PropertyTable[k].Price * ( GetGlobalInt( "MAYOR_PropertyTax" ) * 0.01 ) )
-		end
-	end
-	if !ply:canAfford( total ) then
-		if PropertyTaxWarnings[id] < 2 then
-			DarkRP.notify( ply, 1, 15, "WARNING: You cannot afford property taxes. You will be given two breaks before all of your properties are sold." )
-			timer.Simple( 0.1, function()
-				DarkRP.notify( ply, 1, 15, "At the current tax rate and with your currently owned properties, you will need "..DarkRP.formatMoney( total ).." for the next cycle." )
-			end )
-			PropertyTaxWarnings[id] = PropertyTaxWarnings[id] + 1
-			return false
-		end
-	end
-	return true, total
-end )
-
-hook.Add( "onPropertyTax", "PropertySystemCityTaxes", function( ply, tax, canAfford )
-	if canAfford then
-		PropertyTaxWarnings[ply:SteamID64()] = 0
-		AddVaultFunds( tax )
-	end
-end )
-
 hook.Add( "lockpickTime", "PropertySystemLockpickTime", function( ply, ent )
 	if ent.IsMainDoor or ent.IsSubDoor then
 		local index = ent:doorIndex()
@@ -209,11 +218,8 @@ local function DisableInteractions( ply, ent )
 end
 hook.Add( "PhysgunPickup", "PropertySystemNoPhysgun", DisableInteractions )
 hook.Add( "GravGunPickupAllowed", "PropertySystemNoGravgun", DisableInteractions )
-
 hook.Add( "CanTool", "PropertySystemNoToolgun", function( ply, tr )
-	if tr.Entity:GetNWString( "SavedProperty" ) != "" then
-		return false
-	end
+	return DisableInteractions( ply, tr.Entity )
 end )
 
 --Redefine DarkRP set door title function to make it compatible with this system

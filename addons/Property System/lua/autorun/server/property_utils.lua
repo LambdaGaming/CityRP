@@ -1,4 +1,5 @@
 local map = game.GetMap()
+PropertyTaxWarnings = {}
 
 function PropertySystemSaveEnts( id )
 	for k,v in pairs( OwnedProperties ) do
