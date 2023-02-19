@@ -25,6 +25,7 @@ if SERVER then
 			local wallet = ply:getDarkRPVar( "money" )
 			local walletpercent = math.Round( wallet * 0.012 ) --1.2% of the players wallet
 			ply:addMoney( -walletpercent )
+			DarkRP.createMoneyBag( ply:GetPos() + Vector( 0, 0, 10 ), walletpercent )
 			DarkRP.notify( ply, 0, 6, "You have lost $"..walletpercent.." as a result of your death." )
 		end
 	end )
