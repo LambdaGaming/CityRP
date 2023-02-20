@@ -53,8 +53,8 @@ end
 function FoodDeliveryEnd()
 	ActiveEvents[EVENT_FOOD_DELIVERY] = false
 	for k,v in pairs( team.GetPlayers( TEAM_COOK ) ) do
-		v:ChatPrint( "Thanks. Here's $4500 and a crafting blueprint." )
-		GiveReward( v, 4500 )
+		v:ChatPrint( "Thanks. Here's $3,000 and a crafting blueprint." )
+		GiveReward( v, 3000 )
 	end
 	PizzaEventStats = {
 		SetPizza = "",

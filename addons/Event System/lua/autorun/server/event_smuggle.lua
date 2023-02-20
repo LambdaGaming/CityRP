@@ -46,8 +46,8 @@ end
 
 function SmuggleEnd( ply )
 	ply.Smuggling = false
-	DarkRP.notify( ply, 0, 10, "You have been rewarded with $8000 and a crafting blueprint for removing a pothole." )
-	GiveReward( ply, 8000 )
+	DarkRP.notify( ply, 0, 10, "You have been rewarded with $6,000 and a crafting blueprint for delivering the smuggled goods." )
+	GiveReward( ply, 6000 )
 end
 
 function SmuggleCheck( ply )

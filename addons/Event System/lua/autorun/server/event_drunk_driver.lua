@@ -9,19 +9,14 @@ function DrunkDriver()
 end
 
 function EndDrunkDriver( ent, ply )
-	local numcp = 1
-	for k,v in ipairs( player.GetAll() ) do
-		if v:isCP() and v:Team() != TEAM_MAYOR then
-			numcp = numcp + 1
+	local pos = ent:GetPos()
+	ent:Remove()
+	for k,v in pairs( ents.FindInSphere( pos, 800 ) ) do
+		if v:isCPNoMayor() then
+			DarkRP.notify( ply, 0, 10, "You have been rewarded with $4,000 and a crafting blueprint for helping stop the drunk driver." )
+			GiveReward( ply, 4000 )
 		end
 	end
-	local reward = 12000 + ( numcp * 4000 )
-	ent:Remove()
-	DarkRP.notify( ply, 0, 10, "You have been rewarded with $"..reward.." and a crafting blueprint for arresting the drunk driver." )
-	if numcp > 1 then
-		DarkRP.notify( ply, 2, 10, "Please distribute these earnings among those who helped you." )
-	end
-	GiveReward( ply, reward )
 	ActiveEvents[EVENT_DRUNK_DRIVER] = false
 end
 

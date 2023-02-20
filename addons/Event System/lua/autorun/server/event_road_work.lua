@@ -8,7 +8,7 @@ function RoadWork()
 end
 
 function RoadWorkEnd( ply, ent )
-	DarkRP.notify( ply, 0, 10, "You have been rewarded with $4500 and a crafting blueprint for removing a pothole." )
-	GiveReward( ply, 4500 )
+	DarkRP.notify( ply, 0, 10, "You have been rewarded with $2500 and a crafting blueprint for removing a pothole." )
+	GiveReward( ply, 2500 )
 	ActiveEvents[EVENT_ROAD_WORK] = false
 end

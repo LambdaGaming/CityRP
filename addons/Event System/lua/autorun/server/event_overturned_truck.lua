@@ -44,9 +44,8 @@ function OverturnedTruckEnd()
 	if cooldown > CurTime() then return end
 	if IsValid( event_truck ) then event_truck:Remove() end
 	for k,v in pairs( team.GetPlayers( TEAM_TOWER ) ) do
-		local reward = 7500 * team.NumPlayers( TEAM_TOWER )
-		DarkRP.notify( v, 0, 10, "You have been given $"..reward.." and a crafting blueprint for clearing the overturned truck." )
-		GiveReward( v, reward )
+		DarkRP.notify( v, 0, 10, "You have been given $4500 and a crafting blueprint for clearing the overturned truck." )
+		GiveReward( v, 4500 )
 	end
 	timer.Remove( "OverturnedFireTimer" )
 	hook.Remove( "Think", "OverturnedTruckThink" )

@@ -44,7 +44,7 @@ function ENT:Think()
 				if IsValid( driver ) and bus:GetVelocity():LengthSqr() == 0 then
 					local dist = driver:GetPos():DistToSqr( BusDestinations[stopname][game.GetMap()] )
 					if dist <= 250000 then
-						local reward = 500 * BusPassengerEventStats.TotalPassengers
+						local reward = 250 * BusPassengerEventStats.TotalPassengers
 						DarkRP.notify( driver, 0, 6, "You have been given $"..reward.." for transporting these people." )
 						GiveReward( driver, reward )
 						EndBusPassenger()

@@ -1,5 +1,6 @@
 local map = game.GetMap()
 local FirePicked = false
+local FirePos = vector_origin
 
 local function FireEventCreate( fire, parent )
 	if !FirePicked then
@@ -15,17 +16,18 @@ local function FireEventRemove( fire, parent )
 end
 
 function HouseFire()
+	FirePos = table.Random( EventPos[map].Fire )
 	hook.Add( "vFireCreated", "FireEventCreate", FireEventCreate )
 	hook.Add( "vFireRemoved", "FireEventRemove", FireEventRemove )
-	CreateVFireBall( 1200, 200, table.Random( EventPos[map].Fire ) + Vector( 0, 0, 100 ), vector_origin, nil )
+	CreateVFireBall( 1200, 200, FirePos + Vector( 0, 0, 100 ), vector_origin, nil )
 	NotifyEMS( 0, 10, "A fire has been reported to have broken out in a residential building. Find the fire and put it out!" )
 end
 
 function HouseFireEnd()
-    for k,v in ipairs( player.GetAll() ) do
+    for k,v in pairs( ents.FindInSphere( FirePos, 800 ) ) do
     	if v:IsEMS() then
-    		DarkRP.notify( v, 0, 10, "You have been rewarded with $7500 and a crafting blueprint for helping extinguish a building fire." )
-			GiveReward( v, 7500 )
+    		DarkRP.notify( v, 0, 10, "You have been rewarded with $4,000 and a crafting blueprint for helping extinguish a building fire." )
+			GiveReward( v, 4000 )
     	end
 	end
 	hook.Remove( "vFireCreated", "FireEventCreate" )

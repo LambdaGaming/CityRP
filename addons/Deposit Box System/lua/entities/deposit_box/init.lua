@@ -52,10 +52,10 @@ util.AddNetworkString( "Deposit_UpdateAmount" )
 function ENT:StartTouch( ent )
 	if ent:GetClass() == "check" then
 		for _,ply in pairs( team.GetPlayers( TEAM_BANKER ) ) do
-			DarkRP.notify( ply, 0, 10, "Check successfully delivered. You have been awarded $4500!" )
+			DarkRP.notify( ply, 0, 10, "Check successfully delivered. You have been awarded $3000!" )
 			ent:Remove()
 			MoneyTransferEnd()
-			GiveReward( ply, 4500 )
+			GiveReward( ply, 3000 )
 		end
 		return
 	end

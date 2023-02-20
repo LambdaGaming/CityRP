@@ -19,8 +19,8 @@ end
 
 function ActiveShooterEnd( npc )
 	for k,v in pairs( npc.Participants ) do
-		DarkRP.notify( v, 0, 10, "You have been given $12,000 and a crafting blueprint for helping stop the threat." )
-		GiveReward( v, 12000 )
+		DarkRP.notify( v, 0, 10, "You have been given $4,500 and a crafting blueprint for helping stop the threat." )
+		GiveReward( v, 4500 )
 	end
 	ActiveEvents[EVENT_ACTIVE_SHOOTER] = false
 end
@@ -60,8 +60,8 @@ local function ShooterKilled( npc, attacker, inflictor )
 			end )
 		end
 		if attacker:IsPlayer() then
-			DarkRP.notify( attacker, 0, 6, "You have been rewarded with $1500 and a crafting blueprint for killing a robber." )
-			GiveReward( attacker, 1500 )
+			DarkRP.notify( attacker, 0, 6, "You have been rewarded with $500 and a crafting blueprint for killing a robber." )
+			GiveReward( attacker, 500 )
 		end
 		RobberyEventStats.RobberCount = RobberyEventStats.RobberCount - 1
 		if RobberyEventStats.RobberCount == 0 then
