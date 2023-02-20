@@ -433,6 +433,9 @@ ItemNPC["automod_fuel"] = {
 		local e = ents.Create( "automod_fuel" )
 		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
 		e:Spawn()
+		if EcoPerkActive( "Increase Oil and Gas Budget" ) then
+			e.FuelPercent = 100
+		end
 	end
 }
 

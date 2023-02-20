@@ -32,6 +32,13 @@ if SERVER then
 			if v:isCP() then
 				govmoney = govmoney - DarkRP.retrieveSalary( v )
 			end
+			if EcoPerkActive( "Double Gov Paychecks" ) then
+				govmoney = govmoney * 2
+			elseif EcoPerkActive( "Cut Gov Paychecks In Half" ) then
+				govmoney = math.Round( govmoney / 2 )
+			elseif EcoPerkActive( "Eliminate Gov Paychecks" ) then
+				govmoney = 0
+			end
 		end
 		SetGlobalInt( "CityGovPayout", govmoney )
 	end
@@ -79,14 +86,11 @@ if SERVER then
 				return false, "You do not receive a paycheck this cycle because the city is out of money.", 0
 			end
 			AddVaultFunds( -amount )
+			return false, "[Paycheck] You have received "..DarkRP.formatMoney( amount ).." from your government salary.", amount
 		end
 	end )
 
-	hook.Add( "OnPlayerChangedTeam", "UpdateCityIncome", function()
-		UpdateGovPayout()
-	end )
-
-	hook.Add( "PlayerDisconnected", "UpdateCityIncomeDisconnect", function()
-		UpdateGovPayout()
-	end )
+	hook.Add( "OnPlayerChangedTeam", "UpdateCityIncome", UpdateGovPayout )
+	hook.Add( "PlayerDisconnected", "UpdateCityIncomeDisconnect", UpdateGovPayout )
+	hook.Add( "OnPerkChange", "PerkGovUpdate", UpdateGovPayout )
 end

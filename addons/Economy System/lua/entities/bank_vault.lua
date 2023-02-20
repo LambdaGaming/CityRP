@@ -94,7 +94,14 @@ if SERVER then
 					DarkRP.notify( ply, 0, 6, "All bags have spawned! You can now make your escape!" )
 					self:EndRobbery()
 				end
-				self.NextBag = CurTime() + 5
+
+				local cooldown = 120
+				if EcoPerkActive( "Cut Bank Security Budget" ) then
+					cooldown = 60
+				elseif EcoPerkActive( "Increase Bank Security Budget" ) then
+					cooldown = 180
+				end
+				self.NextBag = CurTime() + cooldown
 				self.BagsLeft = self.BagsLeft - 1
 			else
 				if IsValid( self.Robber ) then
@@ -115,7 +122,7 @@ if SERVER then
 	function ENT:EndRobbery()
 		hook.Remove( "Think", "BankRobberyThink" )
 		NotifyCops( 0, 10, "The bank robbery has ended. Secure the vault and make sure all money is accounted for!" )
-		self.Cooldown = CurTime() + 1200
+		self.Cooldown = CurTime() + 3600
 		self.Alarm:Stop()
 		self.Robber = nil
 		self.NextBag = 0

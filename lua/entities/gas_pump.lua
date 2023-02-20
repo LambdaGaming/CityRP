@@ -22,6 +22,10 @@ function ENT:Initialize()
 end
 
 function ENT:Use( ply )
+	if EcoPerkActive( "Cut Oil and Gas Budget" ) then
+		DarkRP.notify( ply, 1, 6, "Fuel cannot be bought from here at this time." )
+		return
+	end
 	local pos = self:GetPos()
 	local findveh = ents.FindInSphere( pos, 300 )
 	local foundveh = false

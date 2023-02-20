@@ -62,7 +62,13 @@ function ENT:Think()
 	} )
 	if IsValid( tr.Entity ) and tr.Entity:GetClass() == "heat_lamp" and SERVER then
 		if tr.Entity:GetNWInt( "TurnedOn" ) then
-			self:SetNWInt( "Growth", math.Clamp( growth + 1, 0, 1200 ) )
+			local amount = 1
+			if EcoPerkActive( "Cut Agricultural Budget" ) then
+				amount = 0.5
+			elseif EcoPerkActive( "Increase Agricultural Budget" ) then
+				amount = 2
+			end
+			self:SetNWInt( "Growth", math.Clamp( growth + amount, 0, 1200 ) )
 		end
 	end
 	self:NextThink( CurTime() + 1 )

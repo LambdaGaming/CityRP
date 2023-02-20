@@ -45,13 +45,18 @@ end
 
 function ENT:Think()
 	if self:GetPlanted() and !self:ReadyForHarvest() then
-		if GetGlobalBool( "FarmDraughtActive" ) then return end
 		local tr = util.TraceLine( {
 			start = self:GetPos() + Vector( 0, 0, 100 ),
 			endpos = self:GetPos() + self:GetAngles():Up() * 100000
 		} )
 		if tr.HitSky then --Make sure the plant is getting sunlight
-			self:SetGrowth( self:GetGrowth() + 1 )
+			local amount = 1
+			if EcoPerkActive( "Cut Agricultural Budget" ) then
+				amount = 0.5
+			elseif EcoPerkActive( "Increase Agricultural Budget" ) then
+				amount = 2
+			end
+			self:SetGrowth( self:GetGrowth() + amount )
 		end
 	end
 	self:NextThink( CurTime() + 1 )
