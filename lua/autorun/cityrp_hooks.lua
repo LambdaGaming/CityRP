@@ -1,7 +1,7 @@
 local map = game.GetMap()
 
 if SERVER then
-	--Vehicle and weapon model precache
+	--Vehicle model precache
 	hook.Add( "InitPostEntity", "PrecacheModels", function()
 		local vehicles = list.Get( "Vehicles" )
 		local weps = weapons.GetList()
@@ -9,13 +9,6 @@ if SERVER then
 			local model = v.Model
 			util.PrecacheModel( model )
 			print( "Precaching "..model )
-		end
-		for k,v in pairs( weps ) do
-			local model = v.WorldModel
-			if model and #model > 0 then
-				util.PrecacheModel( model )
-				print( "Precaching "..model )
-			end
 		end
 	end )
 
