@@ -36,36 +36,6 @@ function ENT:Initialize()
 	self:SetNWInt( "TotalSmelting", 0 )
 end
 
-local wepvalues = {
-	["arccw_mifl_fas2_ak47"] = 7,
-	["arccw_mifl_fas2_m4a1"] = 7,
-	["arccw_mifl_fas2_m3"] = 10,
-	["arccw_mifl_fas2_toz34"] = 8,
-	["arccw_mifl_fas2_g3"] = 6,
-	["arccw_mifl_fas2_g36c"] = 6,
-	["arccw_mifl_fas2_m24"] = 10,
-	["arccw_mifl_fas2_sg55x"] = 8,
-	["lockpick"] = 1,
-	["factory_lockpick"] = 14,
-	["usm_c4"] = 11,
-	["arccw_mifl_fas2_ragingbull"] = 5,
-	["arccw_fml_fas2_custom_mass26"] = 8,
-	["arccw_mifl_fas2_minimi"] = 16,
-	["weapon_slam"] = 13,
-	["car_bomb"] = 10,
-	["arccw_mifl_fas2_m79"] = 42,
-	["arccw_mifl_fas2_m82"] = 11,
-	["arccw_mifl_fas2_rpk"] = 17,
-	["arccw_mifl_fas2_ks23"] = 8
-}
-
-local entvalues = {
-	["wrench"] = 1,
-	["dronesrewrite_nanodr"] = 11,
-	["dronesrewrite_spyspider"] = 11,
-	["rtx4090"] = 4
-}
-
 local ores = {
 	["Ruby"] = {
 		Time = 150,
@@ -118,7 +88,6 @@ end
 function ENT:Touch( ent )
 	if self:GetNWInt( "TotalSmelting" ) >= 3 then return end
 	local class = ent:GetClass()
-
 	if class == "mgs_ore" then
 		local oretype = ent:GetNWString( "type" )
 		if ores[oretype] then
@@ -133,30 +102,33 @@ function ENT:Touch( ent )
 			ent:Remove()
 			return
 		end
-	end
-
-	local entamount = entvalues[class]
-	if !entamount then return end
-	local finalamount
-	if class == "spawned_weapon" and wepamount then
-		local wepamount = wepvalues[ent:GetWeaponClass()]
-		if wepamount then
-			finalamount = wepamount
-		else
+	elseif class == "spawned_weapon" or CraftingTable[class] then
+		local finalamount = 0
+		local finalclass = ent.GetWeaponClass and ent:GetWeaponClass() or ent:GetClass()
+		if !CraftingTable[finalclass] then return end
+		local iron = CraftingTable[finalclass].Materials.ironbar
+		local wrench = CraftingTable[finalclass].Materials.wrench
+		if iron then
+			finalamount = finalamount + iron
+		end
+		if wrench then
+			finalamount = finalamount + ( wrench * 2 )
+		end
+		if !iron and !wrench then
 			finalamount = entamount
 		end
+		self:SetNWInt( "TotalSmelting", self:GetNWInt( "TotalSmelting" ) + 1 )
+		timer.Simple( 15 * finalamount, function()
+			for i=1, finalamount do
+				local e = ents.Create( "ironbar" )
+				e:SetPos( self:GetPos() + Vector( 0, 0, i * 20 ) )
+				e:Spawn()
+			end
+			self:EmitSound( "ambient/energy/weld"..math.random( 1, 2 )..".wav" )
+			self:SetNWInt( "TotalSmelting", self:GetNWInt( "TotalSmelting" ) - 1 )
+		end )
+		ent:Remove()
 	end
-	self:SetNWInt( "TotalSmelting", self:GetNWInt( "TotalSmelting" ) + 1 )
-	timer.Simple( 30 * finalamount, function()
-		for i=1, finalamount do
-			local e = ents.Create( "ironbar" )
-			e:SetPos( self:GetPos() + Vector( 0, 0, i * 20 ) )
-			e:Spawn()
-		end
-		self:EmitSound( "ambient/energy/weld"..math.random( 1, 2 )..".wav" )
-		self:SetNWInt( "TotalSmelting", self:GetNWInt( "TotalSmelting" ) - 1 )
-	end )
-	ent:Remove()
 end
 
 if CLIENT then
