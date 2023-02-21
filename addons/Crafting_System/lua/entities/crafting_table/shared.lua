@@ -10,13 +10,6 @@ CraftingCategory = {}
 CraftingIngredient = {}
 local COLOR_DEFAULT = Color( 49, 53, 61, 255 )
 
---Template Ingredient
---[[
-	CraftingIngredient["iron"] = {
-		Name = "Iron"
-	}
-]]
-
 CraftingIngredient["ironbar"] = {
 	Name = "Iron"
 }
@@ -44,15 +37,6 @@ CraftingIngredient["ruby"] = {
 CraftingIngredient["diamond"] = {
 	Name = "Diamond"
 }
-
---Template Category
---[[
-	CraftingCategory[1] = {
-		Name = "Pistols",
-		Color = COLOR_DEFAULT,
-		StartCollapsed = false
-	}
-]]
 
 CraftingCategory[1] = {
 	Name = "Pistols",
@@ -99,61 +83,94 @@ CraftingCategory[9] = {
 	Color = COLOR_DEFAULT
 }
 
---Template Item
---[[
-	CraftingTable["weapon_crowbar"] = {
-		Name = "Crowbar",
-		Description = "Requires 1 ball.",
-		NeedsBlueprint = true,
-		Category = "Tools",
-		Materials = {
-			sent_ball = 2,
-			edit_fog = 1
-		},
-		SpawnFunction = function( ply, self )
-			local e = ents.Create( "weapon_crowbar" )
-			e:SetPos( self:GetPos() - Vector( 0, 0, -5 ) )
-			e:Spawn()
-		end
-	}
-]]
-
-CraftingTable["arccw_mifl_fas2_famas"] = {
+CraftingTable["arc9_fas_famas"] = {
 	Name = "FAMAS",
-	Description = "Requires 7 iron and 1 wrench.",
+	Description = "Requires 6 iron and 1 wrench.",
 	Category = "Rifles",
 	Materials = {
-		ironbar = 7,
+		ironbar = 6,
 		wrench = 1
 	},
-	SpawnFunction = function( ply, self )
-		ply:Give( "arccw_mifl_fas2_famas" )
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_famas" )
 	end
 }
 
-CraftingTable["arccw_mifl_fas2_mp5"] = {
+CraftingTable["arc9_fas_mp5"] = {
 	Name = "MP5",
-	Description = "Requires 5 iron and 1 wrench.",
-	Category = "SMGs",
-	Materials = {
-		ironbar = 5,
-		wrench = 1
-	},
-	SpawnFunction = function( ply, self )
-		ply:Give( "arccw_mifl_fas2_mp5" )
-	end
-}
-
-CraftingTable["arccw_mifl_fas2_mac11"] = {
-	Name = "MAC-11",
 	Description = "Requires 4 iron and 1 wrench.",
 	Category = "SMGs",
 	Materials = {
 		ironbar = 4,
 		wrench = 1
 	},
-	SpawnFunction = function( ply, self )
-		ply:Give( "arccw_mifl_fas2_mac11" )
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_mp5" )
+	end
+}
+
+CraftingTable["arc9_fas_colt"] = {
+	Name = "Colt M639",
+	Description = "Requires 4 iron and 1 wrench.",
+	Category = "SMGs",
+	Materials = {
+		ironbar = 4,
+		wrench = 1
+	},
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_colt" )
+	end
+}
+
+CraftingTable["arc9_fas_mac11"] = {
+	Name = "MAC-11",
+	Description = "Requires 3 iron and 1 wrench.",
+	Category = "SMGs",
+	Materials = {
+		ironbar = 3,
+		wrench = 1
+	},
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_mac11" )
+	end
+}
+
+CraftingTable["arc9_fas_bizon"] = {
+	Name = "PP-19 Bizon",
+	Description = "Requires 3 iron and 1 wrench.",
+	Category = "SMGs",
+	Materials = {
+		ironbar = 3,
+		wrench = 1
+	},
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_bizon" )
+	end
+}
+
+CraftingTable["arc9_fas_sterling"] = {
+	Name = "Sterling L2A3",
+	Description = "Requires 5 iron and 1 wrench.",
+	Category = "SMGs",
+	Materials = {
+		ironbar = 5,
+		wrench = 1
+	},
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_sterling" )
+	end
+}
+
+CraftingTable["arc9_fas_uzi"] = {
+	Name = "Uzi",
+	Description = "Requires 4 iron and 1 wrench.",
+	Category = "SMGs",
+	Materials = {
+		ironbar = 4,
+		wrench = 1
+	},
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_uzi" )
 	end
 }
 
@@ -190,69 +207,173 @@ CraftingTable["dronesrewrite_nanodr"] = {
 	end
 }
 
-CraftingTable["arccw_mifl_fas2_rpk"] = {
-	Name = "RPK47",
-	Description = "Needs 5 wrenches and 12 iron",
+CraftingTable["arc9_fas_rpk"] = {
+	Name = "RPK",
+	Description = "Needs 7 iron and 2 wrenches",
 	Category = "Rifles",
+	NeedsBlueprint = true,
 	Materials = {
-		wrench = 5,
-		ironbar = 12,
+		wrench = 2,
+		ironbar = 7
 	},
-	SpawnFunction = function( ply, self )
-		ply:Give( "arccw_mifl_fas2_rpk" )
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_rpk" )
 	end
 }
 
-CraftingTable["arccw_mifl_fas2_m82"] = {
-	Name = "M82 Antimaterial Rifle",
-	Description = "Needs 4 wrenches, and 7 iron",
+CraftingTable["arc9_fas_m82"] = {
+	Name = "Barrett M82",
+	Description = "Needs 16 iron",
+	Category = "Rifles",
+	Materials = {
+		ironbar = 16
+	},
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_m82" )
+	end
+}
+
+CraftingTable["arc9_fas_ak47"] = {
+	Name = "AK-47",
+	Description = "Needs 2 wood, 1 wrench, and 7 iron",
+	Category = "Rifles",
+	Materials = {
+		wood = 2,
+		ironbar = 7,
+		wrench = 1
+	},
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_ak47" )
+	end
+}
+
+CraftingTable["arc9_fas_svd"] = {
+	Name = "SVD",
+	Description = "Needs 2 wood and 11 iron",
+	Category = "Rifles",
+	Materials = {
+		wood = 2,
+		ironbar = 11
+	},
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_svd" )
+	end
+}
+
+CraftingTable["arc9_fas_sks"] = {
+	Name = "SKS",
+	Description = "Needs 2 wood and 9 iron",
+	Category = "Rifles",
+	Materials = {
+		wood = 2,
+		ironbar = 9
+	},
+	SpawnFunction = function( ply, self )
+		ply:Give( "arc9_fas_sks" )
+	end
+}
+
+CraftingTable["arc9_fas_sr25"] = {
+	Name = "SR-25",
+	Description = "Needs 9 iron",
+	Category = "Rifles",
+	Materials = {
+		ironbar = 9
+	},
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_sr25" )
+	end
+}
+
+CraftingTable["arc9_fas_m14"] = {
+	Name = "M14",
+	Description = "Needs 2 wood, 1 wrench, and 9 iron",
+	Category = "Rifles",
+	Materials = {
+		wood = 2,
+		ironbar = 9,
+		wrench = 1
+	},
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_m14" )
+	end
+}
+
+CraftingTable["arc9_fas_m16a2"] = {
+	Name = "M16",
+	Description = "Needs 1 wrench and 6 iron",
+	Category = "Rifles",
+	Materials = {
+		ironbar = 6,
+		wrench = 1
+	},
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_m16a2" )
+	end
+}
+
+CraftingTable["arc9_fas_ots33"] = {
+	Name = "Ots-33 Pernach",
+	Description = "Needs 1 wrench and 4 iron",
+	Category = "Pistols",
+	Materials = {
+		ironbar = 4,
+		wrench = 1
+	},
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_ots33" )
+	end
+}
+
+CraftingTable["arc9_fas_rk95"] = {
+	Name = "RK-95",
+	Description = "Needs 1 wrench and 7 iron",
 	Category = "Rifles",
 	Materials = {
 		ironbar = 7,
-		wrench = 4,
+		wrench = 1
 	},
-	SpawnFunction = function( ply, self )
-		ply:Give( "arccw_mifl_fas2_m82" )
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_rk95" )
 	end
 }
 
-CraftingTable["arccw_mifl_fas2_ak47"] = {
-	Name = "AK-47",
-	Description = "Needs 4 wood, 2 wrenches, and 6 iron",
+CraftingTable["arc9_fas_ak74"] = {
+	Name = "AK-74",
+	Description = "Needs 1 wrench and 6 iron",
 	Category = "Rifles",
 	Materials = {
-		wood = 4,
 		ironbar = 6,
-		wrench = 2,
+		wrench = 1
 	},
-	SpawnFunction = function( ply, self )
-		ply:Give( "arccw_mifl_fas2_ak47" )
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_ak74" )
 	end
 }
 
-CraftingTable["arccw_mifl_fas2_m4a1"] = {
+CraftingTable["arc9_fas_m4a1"] = {
 	Name = "M4A1",
-	Description = "Needs 6 iron and 2 wrenches",
+	Description = "Needs 6 iron and 1 wrench",
 	Category = "Rifles",
 	Materials = {
-		wrench = 2,
-		ironbar = 6,
+		wrench = 1,
+		ironbar = 6
 	},
-	SpawnFunction = function( ply, self )
-		ply:Give( "arccw_mifl_fas2_m4a1" )
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_m4a1" )
 	end
 }
 
-CraftingTable["arccw_mifl_fas2_m3"] = {
+CraftingTable["arc9_fas_m3super90"] = {
 	Name = "M3 Super 90",
-	Description = "Needs 3 wrenches and 8 iron",
+	Description = "Needs 4 wrenches and 3 iron",
 	Category = "Shotguns",
 	Materials = {
-		wrench = 3,
-		ironbar = 8,
+		wrench = 4,
+		ironbar = 3
 	},
-	SpawnFunction = function( ply, self )
-		ply:Give( "arccw_mifl_fas2_m3" )
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_m3super90" )
 	end
 }
 
@@ -261,7 +382,7 @@ CraftingTable["wrench"] = {
 	Description = "Needs 2 iron",
 	Category = "Crafting Ingredients",
 	Materials = {
-		ironbar = 2,
+		ironbar = 2
 	},
 	SpawnFunction = function( ply, self )
 		local e = ents.Create( "wrench" )
@@ -270,46 +391,46 @@ CraftingTable["wrench"] = {
 	end
 }
 
-CraftingTable["arccw_mifl_fas2_toz34"] = {
-	Name = "TOZ-34",
-	Description = "Needs 8 iron and 2 wrenches",
+CraftingTable["arc9_fas_saiga"] = {
+	Name = "Saiga 12K",
+	Description = "Needs 5 iron and 4 wrenches",
 	Category = "Shotguns",
 	Materials = {
-		ironbar = 8,
-		wrench = 2,
+		ironbar = 5,
+		wrench = 4
 	},
-	SpawnFunction = function( ply, self )
-		ply:Give( "arccw_mifl_fas2_toz34" )
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_saiga" )
 	end
 }
 
-CraftingTable["arccw_mifl_fas2_g3"] = {
+CraftingTable["arc9_fas_g3"] = {
 	Name = "G3A3",
-	Description = "Needs 6 iron and 1 wrench",
+	Description = "Needs 9 iron and 1 wrench",
 	Category = "Rifles",
 	Materials = {
-		ironbar = 6,
-		wrench = 1,
+		ironbar = 9,
+		wrench = 1
 	},
-	SpawnFunction = function( ply, self )
-		ply:Give( "arccw_mifl_fas2_g3" )
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_g3" )
 	end
 }
 
-CraftingTable["arccw_mifl_fas2_g36c"] = {
+CraftingTable["arc9_fas_g36c"] = {
 	Name = "G36C",
 	Description = "Needs 6 iron and 1 wrench",
 	Category = "Rifles",
 	Materials = {
 		ironbar = 6,
-		wrench = 1,
+		wrench = 1
 	},
-	SpawnFunction = function( ply, self )
-		ply:Give( "arccw_mifl_fas2_g36c" )
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_g36c" )
 	end
 }
 
-CraftingTable["arccw_nade_frag"] = {
+CraftingTable["arc9_fas_m67"] = {
 	Name = "Frag Grenade",
 	Description = "Needs 4 iron, 1 diamond, and 1 ruby.",
 	NeedsBlueprint = true,
@@ -317,36 +438,35 @@ CraftingTable["arccw_nade_frag"] = {
 	Materials = {
 		ironbar = 4,
 		diamond = 1,
-		ruby = 1,
+		ruby = 1
 	},
-	SpawnFunction = function( ply, self )
-		ply:Give( "arccw_nade_frag" )
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_m67" )
 	end
 }
 
-CraftingTable["arccw_mifl_fas2_m24"] = {
+CraftingTable["arc9_fas_m24"] = {
 	Name = "M24 Sniper",
-	Description = "Needs 10 iron and 2 wrenches",
+	Description = "Needs 13 iron",
 	Category = "Rifles",
 	Materials = {
-		ironbar = 10,
-		wrench = 2,
+		ironbar = 13
 	},
-	SpawnFunction = function( ply, self )
-		ply:Give( "arccw_mifl_fas2_m24" )
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_m24" )
 	end
 }
 
-CraftingTable["arccw_mifl_fas2_sg55x"] = {
-	Name = "SG552",
-	Description = "Needs 7 iron and 2 wrenches",
+CraftingTable["arc9_fas_sg550"] = {
+	Name = "SG550",
+	Description = "Needs 6 iron and 1 wrench",
 	Category = "Rifles",
 	Materials = {
-		ironbar = 7,
-		wrench = 2,
+		ironbar = 6,
+		wrench = 1
 	},
-	SpawnFunction = function( ply, self )
-		ply:Give( "arccw_mifl_fas2_sg55x" )
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_sg550" )
 	end
 }
 
@@ -355,7 +475,7 @@ CraftingTable["sent_turtle"] = {
 	Description = "Needs 2 wood",
 	Category = "Other",
 	Materials = {
-		wood = 2,
+		wood = 2
 	},
 	SpawnFunction = function( ply, self )
 		local e = ents.Create( "sent_turtle" )
@@ -369,9 +489,9 @@ CraftingTable["lockpick"] = {
 	Description = "Needs 3 iron",
 	Category = "Tools",
 	Materials = {
-		ironbar = 3,
+		ironbar = 3
 	},
-	SpawnFunction = function( ply, self )
+	SpawnFunction = function( ply )
 		ply:Give( "lockpick" )
 	end
 }
@@ -381,9 +501,9 @@ CraftingTable["factory_lockpick"] = {
 	Description = "Needs 20 iron",
 	Category = "Tools",
 	Materials = {
-		ironbar = 20,
+		ironbar = 20
 	},
-	SpawnFunction = function( ply, self )
+	SpawnFunction = function( ply )
 		ply:Give( "factory_lockpick" )
 	end
 }
@@ -396,36 +516,34 @@ CraftingTable["usm_c4"] = {
 	Materials = {
 		ironbar = 8,
 		goldbar = 1,
-		diamond = 1,
+		diamond = 1
 	},
-	SpawnFunction = function( ply, self )
+	SpawnFunction = function( ply )
 		ply:Give( "usm_c4" )
 	end
 }
 
-CraftingTable["arccw_mifl_fas2_ragingbull"] = {
+CraftingTable["arc9_fas_ragingbull"] = {
 	Name = "Raging Bull",
-	Description = "Needs 5 iron and 2 wrenches",
+	Description = "Needs 14 iron",
 	Category = "Pistols",
 	Materials = {
-		ironbar = 5,
-		wrench = 2,
+		ironbar = 14
 	},
-	SpawnFunction = function( ply, self )
-		ply:Give( "arccw_mifl_fas2_ragingbull" )
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_ragingbull" )
 	end
 }
 
-CraftingTable["arccw_mifl_fas2_deagle"] = {
+CraftingTable["arc9_fas_deagle"] = {
 	Name = "Desert Eagle",
-	Description = "Needs 4 iron and 1 wrench",
+	Description = "Needs 11 iron",
 	Category = "Pistols",
 	Materials = {
-		ironbar = 4,
-		wrench = 1,
+		ironbar = 11
 	},
-	SpawnFunction = function( ply, self )
-		ply:Give( "arccw_mifl_fas2_deagle" )
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_deagle" )
 	end
 }
 
@@ -435,7 +553,7 @@ CraftingTable["item_box_buckshot"] = {
 	Category = "Ammo & Upgrades",
 	Materials = {
 		ironbar = 4,
-		wrench = 1,
+		wrench = 1
 	},
 	SpawnFunction = function( ply, self )
 		local e = ents.Create( "item_box_buckshot" )
@@ -444,43 +562,72 @@ CraftingTable["item_box_buckshot"] = {
 	end
 }
 
-CraftingTable["arccw_fml_fas2_custom_mass26"] = {
-	Name = "MASS-26",
-	Description = "Needs 3 wrenches and 6 iron",
+CraftingTable["arc9_fas_870"] = {
+	Name = "Remington 870",
+	Description = "Needs 3 iron and 3 wrenches",
 	Category = "Shotguns",
 	Materials = {
 		wrench = 3,
-		ironbar = 6,
+		ironbar = 3
 	},
-	SpawnFunction = function( ply, self )
-		ply:Give( "arccw_fml_fas2_custom_mass26" )
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_870" )
 	end
 }
 
-CraftingTable["arccw_mifl_fas2_ks23"] = {
+CraftingTable["arc9_fas_ks23"] = {
 	Name = "KS-23",
-	Description = "Needs 4 wrenches and 8 iron",
+	Description = "Needs 2 wood, 3 wrenches, and 4 iron",
 	Category = "Shotguns",
 	Materials = {
-		wrench = 4,
-		ironbar = 8,
+		wrench = 3,
+		ironbar = 4,
+		wood = 2
 	},
-	SpawnFunction = function( ply, self )
-		ply:Give( "arccw_mifl_fas2_ks23" )
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_ks23" )
 	end
 }
 
-CraftingTable["arccw_mifl_fas2_minimi"] = {
+CraftingTable["arc9_fas_m249"] = {
 	Name = "M429",
-	Description = "Needs 2 wrenches and 10 iron",
+	Description = "Needs 2 wrenches and 6 iron",
 	NeedsBlueprint = true,
 	Category = "Rifles",
 	Materials = {
 		wrench = 2,
-		ironbar = 10,
+		ironbar = 6
 	},
-	SpawnFunction = function( ply, self )
-		ply:Give( "arccw_mifl_fas2_minimi" )
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_m249" )
+	end
+}
+
+CraftingTable["arc9_fas_mc51"] = {
+	Name = "MC51B Vollmer",
+	Description = "Needs 2 wrenches and 7 iron",
+	NeedsBlueprint = true,
+	Category = "Rifles",
+	Materials = {
+		wrench = 2,
+		ironbar = 7
+	},
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_mc51" )
+	end
+}
+
+CraftingTable["arc9_fas_m60"] = {
+	Name = "M60",
+	Description = "Needs 2 wrenches and 7 iron",
+	NeedsBlueprint = true,
+	Category = "Rifles",
+	Materials = {
+		wrench = 2,
+		ironbar = 7
+	},
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_m60" )
 	end
 }
 
@@ -492,9 +639,9 @@ CraftingTable["weapon_slam"] = {
 	Materials = {
 		ironbar = 10,
 		goldbar = 1,
-		diamond = 1,
+		diamond = 1
 	},
-	SpawnFunction = function( ply, self )
+	SpawnFunction = function( ply )
 		ply:Give( "weapon_slam" )
 	end
 }
@@ -507,28 +654,26 @@ CraftingTable["weapon_car_bomb"] = {
 	Materials = {
 		ironbar = 6,
 		goldbar = 1,
-		diamond = 1,
+		diamond = 1
 	},
-	SpawnFunction = function( ply, self )
+	SpawnFunction = function( ply )
 		ply:Give( "weapon_car_bomb" )
 	end
 }
 
-CraftingTable["arccw_mifl_fas2_m79"] = {
+CraftingTable["arc9_fas_m79"] = {
 	Name = "M79 Grenade Launcher",
-	Description = "Needs 25 iron, 3 diamonds, 2 rubys, and 10 wood",
+	Description = "Needs 15 iron, 3 diamonds, 2 rubys, and 8 wood",
 	NeedsBlueprint = true,
 	Category = "Explosives",
 	Materials = {
-		ironbar = 25,
+		ironbar = 15,
 		diamond = 3,
 		ruby = 2,
-		wood = 10,
+		wood = 8,
 	},
-	SpawnFunction = function( ply, self )
-		local e = ents.Create( "arccw_mifl_fas2_m79" )
-		e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
-		e:Spawn()
+	SpawnFunction = function( ply )
+		ply:Give( "arc9_fas_m79" )
 	end
 }
 
@@ -557,7 +702,7 @@ CraftingTable["rock_decimator"] = {
 		ironbar = 10,
 		wrench = 2
 	},
-	SpawnFunction = function( ply, self )
+	SpawnFunction = function( ply )
 		ply:Give( "rock_decimator" )
 	end
 }

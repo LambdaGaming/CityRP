@@ -10,10 +10,13 @@ ENT.AdminOnly = true
 BLUEPRINT_TABLE = {
 	{ "usm_c4", "Timed C4" },
 	{ "weapon_slam", "SLAM Remote Explosive" },
-	{ "arccw_mifl_fas2_minimi", "M249" },
-	{ "arccw_mifl_fas2_m79", "M79 Grenade Launcher" },
+	{ "arc9_fas_m249", "M249" },
+	{ "arc9_fas_m60", "M60" },
+	{ "arc9_fas_rpk", "RPK" },
+	{ "arc9_fas_mc51", "MC51B Vollmer" },
+	{ "arc9_fas_m79", "M79 Grenade Launcher" },
 	{ "weapon_car_bomb", "Car Bomb" },
-	{ "arccw_nade_frag", "Frag Grenade" },
+	{ "arc9_fas_m67", "Frag Grenade" },
 	{ "rtx4090", "RTX 4090" }
 }
 

@@ -7,13 +7,17 @@ ENT.Author = "Lambda Gaming"
 ENT.Spawnable = false
 
 ShipmentWepList = {
-	{"arccw_mifl_fas2_famas", 1250}, {"arccw_mifl_fas2_sr25", 750}, {"arccw_mifl_fas2_mp5", 1000},
-	{"arccw_mifl_fas2_mac11", 1000}, {"arccw_mifl_fas2_rpk", 3000}, {"arccw_mifl_fas2_m82", 3000},
-	{"arccw_mifl_fas2_ak47", 2500}, {"arccw_mifl_fas2_m4a1", 2500}, {"arccw_mifl_fas2_m3", 2500},
-	{"arccw_mifl_fas2_toz34", 1500}, {"arccw_mifl_fas2_g3", 2000}, {"arccw_mifl_fas2_g36c", 2000},
-	{"arccw_mifl_fas2_m24", 2500}, {"arccw_mifl_fas2_sg55x", 2000}, {"arccw_mifl_fas2_ragingbull", 750},
-	{"arccw_fml_fas2_custom_mass26", 2000}, {"arccw_mifl_fas2_ks23", 2000}, {"arccw_mifl_fas2_g20", 150},
-	{"arccw_mifl_fas2_p226", 90}, {"arccw_mifl_fas2_deagle", 375}, {"arccw_mifl_fas2_m1911", 50}
+	{ "arc9_fas_g20", 1300 }, { "arc9_fas_p226", 1050 }, { "arc9_fas_m93r", 825 },
+	{ "arc9_fas_m1911", 1375 }, { "arc9_fas_grach", 900 }, { "arc9_fas_famas", 1950 },
+	{ "arc9_fas_mp5", 1550 }, { "arc9_fas_mac11", 1025 }, { "arc9_fas_m82", 4500 },
+	{ "arc9_fas_ak47", 2050 }, { "arc9_fas_rk95", 2050 }, { "arc9_fas_ak74", 1700 },
+	{ "arc9_fas_m4a1", 1950 }, { "arc9_fas_m3super90", 3600 }, { "arc9_fas_saiga", 4725 },
+	{ "arc9_fas_g3", 3100 }, { "arc9_fas_g36c", 1950 }, { "arc9_fas_m24", 3400 },
+	{ "arc9_fas_sg550", 1950 }, { "arc9_fas_ragingbull", 2700 }, { "arc9_fas_deagle", 2600 },
+	{ "arc9_fas_870", 1600 }, { "arc9_fas_ks23", 2300 }, { "arc9_fas_colt", 1000 },
+	{ "arc9_fas_m14", 3100 }, { "arc9_fas_m16a2", 1950 }, { "arc9_fas_ots33", 1000 },
+	{ "arc9_fas_bizon", 1225 }, { "arc9_fas_sks", 2275 }, { "arc9_fas_sr25", 2275 },
+	{ "arc9_fas_sterling", 1800 }, { "arc9_fas_svd", 3150 }, { "arc9_fas_uzi", 1550 }
 }
 
 local function FinalPrice( index, amount )

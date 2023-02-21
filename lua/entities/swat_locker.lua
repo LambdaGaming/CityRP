@@ -17,8 +17,8 @@ if SERVER then
 
 	local chiefweps = {
 		"weapon_bomb_checker",
-		"arccw_mifl_fas2_m4a1",
-		"arccw_mifl_fas2_p226",
+		"arc9_fas_m4a1",
+		"arc9_fas_p226",
 		"weapon_confiscate",
 		"door_ram",
 		"weapon_checker",
@@ -30,16 +30,16 @@ if SERVER then
 
 	local normalweps = {
 		"weapon_bomb_checker",
-		"arccw_mifl_fas2_m4a1",
-		"arccw_mifl_fas2_p226",
+		"arc9_fas_m4a1",
+		"arc9_fas_p226",
 		"weapon_confiscate",
 		"door_ram",
 		"weapon_checker",
 		"weapon_leash_police",
 		"policebadge",
 		"realrbn_tazer_mr",
-		"arccw_nade_flash",
-		"arccw_nade_smoke"
+		"arc9_fas_m84",
+		"arc9_fas_m18"
 	}
 
 	local allowed = {

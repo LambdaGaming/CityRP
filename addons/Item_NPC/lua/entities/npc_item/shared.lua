@@ -80,31 +80,53 @@ ItemNPCType[8] = {
 }
 
 -----SHOP NPC ITEMS-----
-ItemNPC["arccw_mifl_fas2_g20"] = {
+ItemNPC["arc9_fas_g20"] = {
 	Name = "Glock 20",
-	Description = "Does good amounts of damage at medium range.",
-	Model = "models/weapons/arccw/mifl/fas2/c_glock20.mdl",
-	Price = 800,
+	Description = "German pistol that does up to 48 damage.",
+	Model = "models/weapons/w_pist_glock18.mdl",
+	Price = 1950,
 	Type = 1,
 	SpawnFunction = function( ply, self )
-		ply:Give( "arccw_mifl_fas2_g20" )
+		ply:Give( "arc9_fas_g20" )
 	end
 }
 
-ItemNPC["arccw_mifl_fas2_p226"] = {
-	Name = "P226",
-	Description = "Does fair amounts of damage at medium range.",
-	Model = "models/weapons/w_pist_p228.mdl",
+ItemNPC["arc9_fas_dv2"] = {
+	Name = "Combat Knife",
+	Description = "Medium-sized knife commonly carried by soldiers.",
+	Model = "models/weapons/arc9_fas/misc/dv2.mdl",
+	Price = 200,
+	Type = 1,
+	SpawnFunction = function( ply, self )
+		ply:Give( "arc9_fas_dv2" )
+	end
+}
+
+ItemNPC["arc9_fas_machete"] = {
+	Name = "Combat Knife",
+	Description = "Large knife used for a variety of things and can be used with two hands.",
+	Model = "models/weapons/arc9_fas/misc/machete.mdl",
 	Price = 500,
 	Type = 1,
 	SpawnFunction = function( ply, self )
-		ply:Give( "arccw_mifl_fas2_p226" )
+		ply:Give( "arc9_fas_machete" )
+	end
+}
+
+ItemNPC["arc9_fas_p226"] = {
+	Name = "P226",
+	Description = "German/Swiss pistol that does up to 38 damage.",
+	Model = "models/weapons/w_pist_p228.mdl",
+	Price = 1575,
+	Type = 1,
+	SpawnFunction = function( ply, self )
+		ply:Give( "arc9_fas_p226" )
 	end
 }
 
 ItemNPC["mediaplayer_tv"] = {
 	Name = "Media Player",
-	Description = "Watch meme videos and torture prisoners with Undertale cringe.",
+	Description = "Useful for watching meme videos and torturing prisoners.",
 	Model = "models/gmod_tower/suitetv_large.mdl",
 	Price = 200,
 	Type = 1,
@@ -173,14 +195,25 @@ ItemNPC["weapon_extinguisher_infinite"] = {
 	end
 }
 
-ItemNPC["arccw_mifl_fas2_sr25"] = {
-	Name = "SR-25",
-	Description = "Small sniper rifle.",
-	Model = "models/weapons/arccw/mifl/fas2/c_sr25.mdl",
-	Price = 4000,
+ItemNPC["arc9_fas_m93r"] = {
+	Name = "Beretta 93R",
+	Description = "Beretta with burst-fire option. Does up to 30 damage.",
+	Model = "models/weapons/arc9_fas/pistols/m9.mdl",
+	Price = 1250,
 	Type = 1,
 	SpawnFunction = function( ply, self )
-		ply:Give( "arccw_mifl_fas2_sr25" )
+		ply:Give( "arc9_fas_m93r" )
+	end
+}
+
+ItemNPC["arc9_fas_grach"] = {
+	Name = "MP-443 Grach",
+	Description = "Russian pistol that does up to 33 damage.",
+	Model = "models/weapons/arc9_fas/pistols/grach.mdl",
+	Price = 1350,
+	Type = 1,
+	SpawnFunction = function( ply, self )
+		ply:Give( "arc9_fas_grach" )
 	end
 }
 
@@ -210,14 +243,14 @@ ItemNPC["automod_repair_kit"] = {
 	end
 }
 
-ItemNPC["arccw_mifl_fas2_m1911"] = {
+ItemNPC["arc9_fas_m1911"] = {
 	Name = "M1911",
-	Description = "Does alright damage, least powerful sidearm.",
-	Model = "models/weapons/arccw/mifl/fas2/c_m1911.mdl",
-	Price = 300,
+	Description = "American pistol that does up to 50 damage.",
+	Model = "models/weapons/arc9_fas/pistols/m1911.mdl",
+	Price = 2050,
 	Type = 1,
 	SpawnFunction = function( ply, self )
-		ply:Give( "arccw_mifl_fas2_m1911" )
+		ply:Give( "arc9_fas_m1911" )
 	end
 }
 
@@ -548,25 +581,25 @@ ItemNPC["weapon_cuff_shackles"] = {
 	end
 }
 
-ItemNPC["arccw_nade_flash"] = {
+ItemNPC["arc9_fas_m84"] = {
 	Name = "Flashbang",
 	Description = "Temporarily blinds any player that looks at the grenade.",
 	Model = "models/weapons/w_eq_flashbang.mdl",
 	Price = 300,
 	Type = 2,
 	SpawnFunction = function( ply, self )
-		ply:Give( "arccw_nade_flash" )
+		ply:Give( "arc9_fas_m84" )
 	end
 }
 
-ItemNPC["arccw_nade_smoke"] = {
+ItemNPC["arc9_fas_m18"] = {
 	Name = "Smoke Grenade",
-	Description = "Emits a dense cloud of grey smoke.",
+	Description = "Emits a dense cloud of green smoke.",
 	Model = "models/weapons/w_eq_smokegrenade.mdl",
 	Price = 200,
 	Type = 2,
 	SpawnFunction = function( ply, self )
-		ply:Give( "arccw_nade_smoke" )
+		ply:Give( "arc9_fas_m18" )
 	end
 }
 
