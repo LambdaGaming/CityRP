@@ -27,11 +27,12 @@ if SERVER then
 	end
 
 	local AmmoTypes = {
-		["Buckshot"] = { "item_box_buckshot", 40 },
-		["Pistol"] = {"item_ammo_pistol_large", 20 },
-		["SMG1"] = { "item_ammo_smg1", 30 },
-		["357"] = { "item_ammo_357", 20 },
-		["AR2"] = { "item_ammo_ar2", 30 }
+		["Buckshot"] = { 60, 20 }, --Price, amount
+		["Pistol"] = { 25, 30 },
+		["SMG1"] = { 30, 30 },
+		["357"] = { 80, 15 },
+		["AR2"] = { 50, 30 },
+		["SniperPenetratedRound"] = { 100, 10 }
 	}
 
 	function ENT:BreakOpen( ply ) --Integrate with the Enterprise ATM for robbing feature
@@ -45,12 +46,12 @@ if SERVER then
 		local getwep = ply:GetActiveWeapon()
 		local primaryammo = getwep:GetPrimaryAmmoType()
 		local primaryname = game.GetAmmoName( primaryammo )
-		if !AmmoTypes[primaryname] or !AmmoTypes[primaryname][1] then
+		if !AmmoTypes[primaryname] then
 			DarkRP.notify( ply, 1, 6, "Ammo is not available for this weapon." )
 			return
 		end
-		local name = AmmoTypes[primaryname][1]
-		local price = AmmoTypes[primaryname][2]
+		local price = AmmoTypes[primaryname][1]
+		local amount = AmmoTypes[primaryname][2]
 		if !ply:canAfford( price ) and !ply:isCP() then
 			DarkRP.notify( ply, 1, 6, "You can't afford ammo for this weapon." )
 			return
@@ -62,18 +63,15 @@ if SERVER then
 		self.Used = true
 		ply:EmitSound( "doors/metal_stop1.wav", 50, 100 )
 		timer.Simple( 1.5, function()
-			if !IsValid( self ) then return end
-			local pos, ang = LocalToWorld( Vector( 20, -5, -30 ), Angle( -90, -90, 0 ), self:GetPos(), self:GetAngles() )
+			if !IsValid( self ) or !IsValid( ply ) then return end
 			local mayorfunds = GetVaultAmount()
 			local salestax = price * ( GetGlobalInt( "MAYOR_SalesTax" ) * 0.01 )
 			if mayorfunds < salestax and ply:isCP() then
-				DarkRP.notify( ply, 1, 6, "There is not enough mayor funds to buy ammo for this weapon." )
+				DarkRP.notify( ply, 1, 6, "There is not enough in the city bank to buy ammo for this weapon." )
 				return
 			end
-			local ammo = ents.Create( name )
-			ammo:SetPos( pos )
-			ammo:SetAngles( ang )
-			ammo:Spawn()
+			ply:EmitSound( "items/ammo_pickup.wav" )
+			ply:SetAmmo( ply:GetAmmoCount( primaryname ) + amount, primaryname )
 			if ply:isCP() then
 				AddVaultFunds( -salestax )
 			else
