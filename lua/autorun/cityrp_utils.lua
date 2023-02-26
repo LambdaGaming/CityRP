@@ -76,6 +76,24 @@ if SERVER then
 		if !noenter then
 			ply:EnterVehicle( e )
 		end
+
+		if !ply.VehicleList then ply.VehicleList = {} end
+		if table.Count( ply.VehicleList ) >= 3 then --Limit active vehicles
+			local found = false
+			for k,v in pairs( ply.VehicleList ) do
+				if !IsValid( v ) then
+					ply.VehicleList[k] = e
+					found = true
+					break
+				end
+			end
+			if !found then
+				ply.VehicleList[1]:Remove()
+				ply.VehicleList[1] = e
+			end
+		else
+			table.insert( ply.VehicleList, e )
+		end
 		return e
 	end
 

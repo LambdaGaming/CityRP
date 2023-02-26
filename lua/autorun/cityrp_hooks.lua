@@ -72,6 +72,17 @@ if SERVER then
 	end
 	hook.Add( "DoPlayerDeath", "MayorEndCommands", EndEvents )
 	hook.Add( "PlayerDisconnected", "MayorEndCommandsDisconnect", EndEvents )
+
+	--Remove active job-specific vehicles
+	local function RemoveVehicles( ply )
+		if ply.VehicleList then
+			for k,v in pairs( ply.VehicleList ) do
+				if IsValid( v ) then v:Remove() end
+			end
+		end
+	end
+	hook.Add( "PlayerDisconnected", "DisconnectRemoveVehicle", RemoveVehicles )
+	hook.Add( "OnPlayerChangedTeam", "ChangeTeamRemoveVehicle", RemoveVehicles )
 end
 
 if CLIENT then
