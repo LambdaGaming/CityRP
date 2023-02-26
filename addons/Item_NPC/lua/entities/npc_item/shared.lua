@@ -979,28 +979,6 @@ ItemNPC["dodge_monaco"] = {
 	end
 }
 
-ItemNPC["transport_truck"] = {
-	Name = "Transport Truck",
-	Description = "A truck used to transport evidence.",
-	Model = "models/tdmcars/trucks/gmc_c5500.mdl",
-	Price = 0,
-	Type = 4,
-	SpawnFunction = function( ply, self )
-		SpawnVehicle( ply, "c5500tdm", 1 )
-	end
-}
-
-ItemNPC["ford_explorer"] = {
-	Name = "2016 Ford Police Interceptor Utility",
-	Description = "Modern police SUV.",
-	Model = "models/schmal/fpiu/ford_utility.mdl",
-	Price = 0,
-	Type = 4,
-	SpawnFunction = function( ply, self )
-		SpawnVehicle( ply, "2016 Ford Police Interceptor Utility", 1 )
-	end
-}
-
 ItemNPC["ford_taurus"] = {
 	Name = "2010 Ford Taurus Police Interceptor",
 	Description = "Modern police interceptor.",
