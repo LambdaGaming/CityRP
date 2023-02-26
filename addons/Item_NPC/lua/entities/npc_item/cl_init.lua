@@ -88,17 +88,19 @@ local function DrawItemMenu( ent ) --Panel that draws the main menu
 			end
 		end
 
-		local realprice
-		if type == 2 then
-			realprice = v.Price
-		else
-			realprice = v.Price + ( v.Price * ( GetGlobalInt( "MAYOR_SalesTax" ) * 0.01 ) )
+		local realprice = 0
+		if v.Price then
+			if type == 2 then
+				realprice = v.Price
+			else
+				realprice = v.Price + ( v.Price * ( GetGlobalInt( "MAYOR_SalesTax" ) * 0.01 ) )
+			end
 		end
 
 		local itemprice = vgui.Create( "DLabel", itembackground )
 		itemprice:SetFont( "Trebuchet24" )
 		itemprice:SetColor( color_white )
-		if v.Price <= 0 then
+		if realprice <= 0 then
 			itemprice:SetText( "Price: Free" )
 		else
 			itemprice:SetText( "Price: "..DarkRP.formatMoney( realprice ) )
