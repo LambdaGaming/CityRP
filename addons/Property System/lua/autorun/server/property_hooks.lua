@@ -58,7 +58,7 @@ local function HandleDoorSell( ply, ent )
 end
 hook.Add( "playerSellDoor", "PropertySystemSellDoor", HandleDoorSell )
 
-hook.Add( "InitPostEntity", "PropertySystemApplyDoorStats", function()
+hook.Add( "InitPostEntity", "PropertySystemInit", function()
 	--Override DarkRP functions for getting door cost and applying property taxes
 	function GAMEMODE:getDoorCost( ply, ent )
 		local tbl = PropertyTable[ent:doorIndex()]
@@ -100,6 +100,42 @@ hook.Add( "InitPostEntity", "PropertySystemApplyDoorStats", function()
 			end
 		end
 	end
+
+	--Redefine DarkRP set door title function to make it compatible with this system
+	local function SetDoorTitle( ply, args )
+		local trace = ply:GetEyeTrace()
+		local ent = trace.Entity
+
+		if not IsValid( ent ) or !ent:isKeysOwnable() or ply:GetPos():DistToSqr( ent:GetPos() ) >= 40000 then
+			DarkRP.notify( ply, 1, 4, DarkRP.getPhrase( "must_be_looking_at", DarkRP.getPhrase( "door_or_vehicle" ) ) )
+			return ""
+		end
+
+		if ent:isKeysOwnedBy( ply ) then
+			ent:setKeysTitle( args )
+			DarkRP.storeDoorData( trace.Entity )
+			return ""
+		end
+
+		local function onCAMIResult( allowed )
+			if !allowed then
+				DarkRP.notify( ply, 1, 6, DarkRP.getPhrase( "no_privilege" ) )
+				return
+			end
+
+			local hasTeams = !fn.Null( ent:getKeysDoorTeams() or {} )
+			if ent:isKeysOwned() or ent:getKeysNonOwnable() or ent:getKeysDoorGroup() or hasTeams then
+				ent:setKeysTitle( args )
+			end
+			DarkRP.storeDoorData( trace.Entity )
+		end
+		CAMI.PlayerHasAccess( ply, "DarkRP_ChangeDoorSettings", onCAMIResult )
+		return ""
+	end
+	DarkRP.defineChatCommand( "title", SetDoorTitle )
+	DarkRP.defineChatCommand( "unownalldoors", function( ply )
+		DarkRP.notify( ply, 1, 6, "Command disabled." )
+	end )
 
 	PropertySystemLoad()
 	timer.Simple( 5, function()
@@ -225,44 +261,8 @@ hook.Add( "GravGunPickupAllowed", "PropertySystemNoGravgun", DisableInteractions
 hook.Add( "CanTool", "PropertySystemNoToolgun", function( ply, tr )
 	return DisableInteractions( ply, tr.Entity )
 end )
-
---Redefine DarkRP set door title function to make it compatible with this system
-hook.Add( "InitPostEntity", "PropertySystemTitleOverride", function()
-	local function SetDoorTitle( ply, args )
-		local trace = ply:GetEyeTrace()
-		local ent = trace.Entity
-
-		if not IsValid( ent ) or !ent:isKeysOwnable() or ply:GetPos():DistToSqr( ent:GetPos() ) >= 40000 then
-			DarkRP.notify( ply, 1, 4, DarkRP.getPhrase( "must_be_looking_at", DarkRP.getPhrase( "door_or_vehicle" ) ) )
-			return ""
-		end
-
-		if ent:isKeysOwnedBy( ply ) then
-			ent:setKeysTitle( args )
-			DarkRP.storeDoorData( trace.Entity )
-			return ""
-		end
-
-		local function onCAMIResult( allowed )
-			if !allowed then
-				DarkRP.notify( ply, 1, 6, DarkRP.getPhrase( "no_privilege" ) )
-				return
-			end
-
-			local hasTeams = !fn.Null( ent:getKeysDoorTeams() or {} )
-			if ent:isKeysOwned() or ent:getKeysNonOwnable() or ent:getKeysDoorGroup() or hasTeams then
-				ent:setKeysTitle( args )
-			end
-			DarkRP.storeDoorData( trace.Entity )
-		end
-		CAMI.PlayerHasAccess( ply, "DarkRP_ChangeDoorSettings", onCAMIResult )
-		return ""
-	end
-	DarkRP.defineChatCommand( "title", SetDoorTitle )
-
-	DarkRP.defineChatCommand( "unownalldoors", function( ply )
-		DarkRP.notify( ply, 1, 6, "Command disabled." )
-	end )
+hook.Add( "ItemStoreCanPickup", "PropertySystemNoInventory", function( ply, item, ent )
+	return DisableInteractions( ply, ent )
 end )
 
 hook.Add( "PlayerSay", "ViewPropertiesCommand", function( ply, text )
