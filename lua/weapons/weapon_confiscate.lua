@@ -32,38 +32,56 @@ local whitelist = {
 	["weapon_handcuffed"] = true
 }
 
-function SWEP:PrimaryAttack()
+local meta = FindMetaTable("Player")
+
+function meta:CanConfiscateFrom(target)
+	if not target:IsPlayer() then return end
+
+	local weapon = self:GetActiveWeapon()
+	if weapon:GetClass() ~= "weapon_confiscate" then return end
+	
+	if self:GetPos():DistToSqr( target:GetPos() ) > 22500 then return end
+
 	if SERVER then
-		if self.cooldown > CurTime() then return end
-		if IsFirstTimePredicted() then
-			local tr = self.Owner:GetEyeTrace().Entity
-			if tr:IsPlayer() and self.Owner:GetPos():DistToSqr( tr:GetPos() ) < 22500 then
-				if tr:isCP() then
-					DarkRP.notify( self:GetOwner(), 1, 6, "You cannot confiscate weapons from your colleagues!" )
-				elseif !tr:IsHandcuffed() then
-					DarkRP.notify( self:GetOwner(), 1, 6, "You need to cuff this person before you can search them." )
-				else
-					local foundwep = false
-					local plyweps = tr:GetWeapons()
-					for k,v in pairs( plyweps ) do
-						if !whitelist[v:GetClass()] and !table.HasValue( tr:getJobTable().weapons, v:GetClass() ) then
-							foundwep = true
-							break
-						end
-					end
-					if foundwep then
-						net.Start( "ViewWeapons" )
-						net.WriteEntity( tr )
-						net.WriteTable( plyweps )
-						net.Send( self:GetOwner() )
-					else
-						DarkRP.notify( self:GetOwner(), 1, 6, "No illegal weapons detected." )
-					end
-				end
-			end
+		if target:isCP() then
+			DarkRP.notify( self, 1, 6, "You cannot confiscate weapons from your colleagues!" )
+			return
 		end
-		self.cooldown = CurTime() + 1
+		if !target:IsHandcuffed() then
+			DarkRP.notify( self, 1, 6, "You need to cuff this person before you can search them." )
+			return
+		end
 	end
+
+	return true
+end
+
+function SWEP:PrimaryAttack()
+	if not SERVER then return end
+	if not IsFirstTimePredicted() then return end
+
+	if self.cooldown > CurTime() then return end
+
+	local target = self.Owner:GetEyeTrace().Entity
+	if not self.Owner:CanConfiscateFrom(target) then return end
+
+	local foundwep = false
+	local plyweps = tr:GetWeapons()
+	for k,v in pairs( plyweps ) do
+		if !whitelist[v:GetClass()] and !table.HasValue( tr:getJobTable().weapons, v:GetClass() ) then
+			foundwep = true
+			break
+		end
+	end
+	if foundwep then
+		net.Start( "ViewWeapons" )
+		net.WriteEntity( tr )
+		net.WriteTable( plyweps )
+		net.Send( self:GetOwner() )
+	else
+		DarkRP.notify( self:GetOwner(), 1, 6, "No illegal weapons detected." )
+	end
+	self.cooldown = CurTime() + 1
 end
 
 function SWEP:SecondaryAttack()
@@ -112,6 +130,8 @@ if SERVER then
 	util.AddNetworkString( "ViewWeapons" )
 	net.Receive( "TakeWeapon", function( len, ply )
 		local target = net.ReadEntity()
+		if ply:GetEyeTrace().Entity ~= target then return end
+		if not ply:CanConfiscateFrom(target) then return end
 		local wep = net.ReadEntity()
 		if ply:HasWeapon( wep:GetClass() ) then
 			local e = ents.Create( "spawned_weapon" )
