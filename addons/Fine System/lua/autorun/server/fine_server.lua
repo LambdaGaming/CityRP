@@ -50,7 +50,7 @@ local function AcceptFine( len, ply )
 		ply:wanted( nil, "Refusing to pay fine.", 600 )
 		return
 	end
-	if ply:getDarkRPVar( "money" ) < price then
+	if !ply:canAfford( price ) then
 		return
 	end
 	ply:addMoney( -price )
