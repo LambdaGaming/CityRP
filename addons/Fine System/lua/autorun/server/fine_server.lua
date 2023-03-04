@@ -48,6 +48,9 @@ local function AcceptFine( len, ply )
 		ply:wanted( nil, "Refusing to pay fine.", 600 )
 		return
 	end
+	if ply:getDarkRPVar( "money" ) < price then
+		return
+	end
 	ply:addMoney( -price )
 	AddVaultFunds( price )
 	DarkRP.notify( ply, 0, 6, "You have paid the $"..price.." fine." )
