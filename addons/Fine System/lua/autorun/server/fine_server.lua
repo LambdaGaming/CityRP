@@ -18,6 +18,7 @@ local function SendFine( len, ply )
 	local receiver = net.ReadEntity()
 	local price = net.ReadInt( 32 )
 	local reason = net.ReadString()
+	ply.activeFine = true
 	net.Start( "SendFineClient" )
 	net.WriteEntity( ply )
 	net.WriteInt( price, 32 )
@@ -41,6 +42,7 @@ hook.Add( "CanPlayerEnterVehicle", "VehicleFineEnter", VehicleFineEnter )
 
 util.AddNetworkString( "AcceptFine" )
 local function AcceptFine( len, ply )
+	if ply.activeFine then return end
 	local price = net.ReadInt( 32 )
 	local sender = net.ReadEntity()
 	local refuse = net.ReadBool()
@@ -48,10 +50,14 @@ local function AcceptFine( len, ply )
 		ply:wanted( nil, "Refusing to pay fine.", 600 )
 		return
 	end
+	if !ply:canAfford( price ) then
+		return
+	end
 	ply:addMoney( -price )
 	AddVaultFunds( price )
 	DarkRP.notify( ply, 0, 6, "You have paid the $"..price.." fine." )
 	DarkRP.notify( sender, 0, 6, ply:Nick().." has paid their $"..price.." fine." )
+	ply.activeFine = false
 end
 net.Receive( "AcceptFine", AcceptFine )
 
