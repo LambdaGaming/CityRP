@@ -32,23 +32,21 @@ local whitelist = {
 	["weapon_handcuffed"] = true
 }
 
-local meta = FindMetaTable("Player")
-
-function meta:CanConfiscateFrom(target)
+local function CanConfiscateFrom(player, target)
 	if not target:IsPlayer() then return end
 
-	local weapon = self:GetActiveWeapon()
+	local weapon = player:GetActiveWeapon()
 	if weapon:GetClass() ~= "weapon_confiscate" then return end
 	
-	if self:GetPos():DistToSqr( target:GetPos() ) > 22500 then return end
+	if player:GetPos():DistToSqr( target:GetPos() ) > 22500 then return end
 
 	if SERVER then
 		if target:isCP() then
-			DarkRP.notify( self, 1, 6, "You cannot confiscate weapons from your colleagues!" )
+			DarkRP.notify( player, 1, 6, "You cannot confiscate weapons from your colleagues!" )
 			return
 		end
 		if !target:IsHandcuffed() then
-			DarkRP.notify( self, 1, 6, "You need to cuff this person before you can search them." )
+			DarkRP.notify( player, 1, 6, "You need to cuff this person before you can search them." )
 			return
 		end
 	end
@@ -63,7 +61,7 @@ function SWEP:PrimaryAttack()
 	if self.cooldown > CurTime() then return end
 
 	local target = self.Owner:GetEyeTrace().Entity
-	if not self.Owner:CanConfiscateFrom(target) then return end
+	if not CanConfiscateFrom( self.Owner, target ) then return end
 
 	local foundwep = false
 	local plyweps = tr:GetWeapons()
@@ -131,7 +129,7 @@ if SERVER then
 	net.Receive( "TakeWeapon", function( len, ply )
 		local target = net.ReadEntity()
 		if ply:GetEyeTrace().Entity ~= target then return end
-		if not ply:CanConfiscateFrom(target) then return end
+		if not CanConfiscateFrom( ply, target ) then return end
 		local wep = net.ReadEntity()
 		if ply:HasWeapon( wep:GetClass() ) then
 			local e = ents.Create( "spawned_weapon" )
