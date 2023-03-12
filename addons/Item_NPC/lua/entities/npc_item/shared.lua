@@ -835,17 +835,6 @@ ItemNPC["ambulance"] = {
 	end
 }
 
-ItemNPC["crownvic_med"] = {
-	Name = "2011 CVPI Medic",
-	Description = "Ford Crown Victoria with EMS lighting.",
-	Model = "models/tdmcars/emergency/for_crownvic_fh3.mdl",
-	Price = 0,
-	Type = 3,
-	SpawnFunction = function( ply, self )
-		SpawnVehicle( ply, "2011 CVPI Medic", 2 )
-	end
-}
-
 -----GOV VEHICLE NPC ITEMS-----
 ItemNPC["chevy_impala"] = {
 	Name = "Chevrolet Impala Police",
@@ -1143,6 +1132,18 @@ ItemNPC["dodge_tow"] = {
 	Type = 7,
 	SpawnFunction = function( ply, self )
 		SpawnVehicle( ply, "Dodge Ram 3500 Towtruck", 4 )
+	end
+}
+
+ItemNPC["flatbed"] = {
+	Name = "Flatbed Tow Truck",
+	Description = "Flatbed truck for towing larger vehicles.",
+	Model = "models/cipro/tow_truck/towtruck.mdl",
+	Price = 0,
+	Type = 7,
+	SpawnFunction = function( ply, self )
+		local e = SpawnVehicle( ply, "Flatbed Tow Truck", 4 )
+		e:CreateFlatbed()
 	end
 }
 
