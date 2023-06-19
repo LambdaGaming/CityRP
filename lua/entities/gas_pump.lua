@@ -43,6 +43,7 @@ function ENT:Use( ply )
 			if ply:canAfford( price ) then
 				v:SetNWInt( "AM_FuelAmount", 100 )
 				ply:addMoney( -price )
+				AddVaultFunds( price * ( tax * 0.01 ) )
 				if price <= 0 then
 					DarkRP.notify( ply, 0, 6, "You have purchased a full fuel tank. You have not been charged." )
 				else
