@@ -572,8 +572,8 @@ ItemNPC["weapon_molotov"] = {
 }
 
 ItemNPC["weapon_cuff_shackles"] = {
-	Name = "Strong Cable Tie",
-	Description = "Used to tie players up. Steel, doesn't break easily.",
+	Name = "Shackles",
+	Description = "Used to tie players up to make them walk slower and prevent them from using weapons. Moderately strong.",
 	Price = 900,
 	Type = 2,
 	SpawnFunction = function( ply, self )
@@ -740,8 +740,8 @@ ItemNPC["realrbn_tazer_mr"] = {
 }
 
 ItemNPC["weapon_leash_rope"] = {
-	Name = "Weak Tie (Leash)",
-	Description = "Weak cuffs, but players can be dragged with them.",
+	Name = "Rope Leash",
+	Description = "Similar to shackles, but players can be dragged with them.",
 	Price = 800,
 	Type = 2,
 	SpawnFunction = function( ply, self )
