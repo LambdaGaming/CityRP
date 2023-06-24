@@ -728,14 +728,14 @@ ItemNPC["graffiti-swep"] = {
 	end
 }
 
-ItemNPC["realrbn_tazer_mr"] = {
-	Name = "One-Time Taser",
-	Description = "Stuns a player, then removes itself.",
+ItemNPC["stungun"] = {
+	Name = "Taser",
+	Description = "Stuns a player. Requires special ammo.",
 	Model = "models/weapons/cg_ocrp2/w_taser.mdl",
-	Price = 50,
+	Price = 1000,
 	Type = 2,
 	SpawnFunction = function( ply, self )
-		ply:Give( "realrbn_tazer_mr" )
+		ply:Give( "stungun" )
 	end
 }
 

@@ -24,7 +24,7 @@ if SERVER then
 		"weapon_checker",
 		"weapon_leash_police",
 		"policebadge",
-		"realrbn_tazer_mr",
+		"stungun",
 		"ershield_swat"
 	}
 
@@ -37,7 +37,7 @@ if SERVER then
 		"weapon_checker",
 		"weapon_leash_police",
 		"policebadge",
-		"realrbn_tazer_mr",
+		"stungun",
 		"arc9_fas_m84",
 		"arc9_fas_m18"
 	}

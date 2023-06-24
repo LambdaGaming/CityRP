@@ -32,13 +32,16 @@ if SERVER then
 		["SMG1"] = { 30, 30 },
 		["357"] = { 80, 15 },
 		["AR2"] = { 50, 30 },
-		["SniperPenetratedRound"] = { 100, 10 }
+		["SniperPenetratedRound"] = { 100, 10 },
+		["Taser"] = { 20, 3 }
 	}
 
 	function ENT:BreakOpen( ply ) --Integrate with the Enterprise ATM for robbing feature
-		local m = ents.Create( "item_box_buckshot" )
-		m:SetPos( self:GetPos() + ( self:GetForward() * 35 ) + ( self:GetUp() * 30 ) )
-		m:Spawn()
+		if ply:HasWeapon( "stungun" ) then
+			ply:GiveAmmo( 3, "Taser" )
+			return
+		end
+		ply:GiveAmmo( 20, "Buckshot" )
 	end
 
 	function ENT:Use( ply )
@@ -56,8 +59,8 @@ if SERVER then
 			DarkRP.notify( ply, 1, 6, "You can't afford ammo for this weapon." )
 			return
 		end
-		if primaryname == "Buckshot" and !ply:isCP() then
-			DarkRP.notify( ply, 1, 10, "Only police can purchase shotgun ammo from this locker. You may be able to get it through more forceful means though..." )
+		if ( primaryname == "Buckshot" or primaryname == "Taser" ) and !ply:isCP() then
+			DarkRP.notify( ply, 1, 10, "Only police can purchase shotgun and taser ammo from this locker. You may be able to get it through more forceful means though..." )
 			return
 		end
 		self.Used = true
@@ -71,7 +74,7 @@ if SERVER then
 				return
 			end
 			ply:EmitSound( "items/ammo_pickup.wav" )
-			ply:SetAmmo( ply:GetAmmoCount( primaryname ) + amount, primaryname )
+			ply:GiveAmmo( amount, primaryname )
 			if ply:isCP() then
 				AddVaultFunds( -salestax )
 			else
