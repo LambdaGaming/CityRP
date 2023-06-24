@@ -56,7 +56,7 @@ if SERVER then
 	
 		local spawn = VehicleSpawns[type][map]
 		local realpos = spawn[1]
-		if model == "models/tdmcars/dod_ram_3500.mdl" then --Fix for this truck since it spawns below the map for some reason
+		if vehlist.Model == "models/tdmcars/dod_ram_3500.mdl" then --Fix for this truck since it spawns below the map for some reason
 			realpos = realpos + Vector( 0, 0, 50 )
 		end
 	
