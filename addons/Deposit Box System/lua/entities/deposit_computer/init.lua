@@ -2,16 +2,6 @@ AddCSLuaFile( "cl_init.lua" )
 AddCSLuaFile( "shared.lua" )
 include( "shared.lua" )
 
-function ENT:SpawnFunction( ply, tr, name )
-	if !tr.Hit then return end
-	local SpawnPos = tr.HitPos + tr.HitNormal * 1
-	local ent = ents.Create( name )
-	ent:SetPos( SpawnPos )
-	ent:Spawn()
-	ent:Activate()
-	return ent
-end
-
 function ENT:Initialize()
     self:SetModel( "models/props/cs_office/computer.mdl" )
 	self:PhysicsInit( SOLID_VPHYSICS )
@@ -26,11 +16,13 @@ function ENT:Initialize()
 end
 
 util.AddNetworkString( "OpenDepositComputerMenu" )
-function ENT:Use( activator, caller )
-	if activator:Team() != TEAM_BANKER then
-		DarkRP.notify( activator, 1, 6, "Only bankers can access the deposit computer." )
+function ENT:Use( ply )
+	if ply:Team() != TEAM_BANKER then
+		DarkRP.notify( ply, 1, 6, "Only bankers can access the bank computer." )
 		return
 	end
+	local tbl = ReadLoanFile()
 	net.Start( "OpenDepositComputerMenu" )
-	net.Send( activator )
+	net.WriteTable( tbl )
+	net.Send( ply )
 end
