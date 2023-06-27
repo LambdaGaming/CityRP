@@ -603,16 +603,6 @@ ItemNPC["arc9_fas_m18"] = {
 	end
 }
 
-ItemNPC["epic_carevicter"] = {
-	Name = "Car Evictor",
-	Description = "Forces players out of the drivers seat of any vehicle.",
-	Price = 300,
-	Type = 2,
-	SpawnFunction = function( ply, self )
-		ply:Give( "epic_carevicter" )
-	end
-}
-
 ItemNPC["rp_chloride"] = {
 	Name = "Chloride (Meth)",
 	Description = "One of two ingredients for making meth.",
