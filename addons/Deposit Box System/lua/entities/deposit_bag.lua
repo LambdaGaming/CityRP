@@ -8,16 +8,6 @@ ENT.Spawnable = true
 ENT.AdminOnly = true
 ENT.Category = "Deposit Box"
 
-function ENT:SpawnFunction( ply, tr, name )
-	if !tr.Hit then return end
-	local SpawnPos = tr.HitPos + tr.HitNormal * 1
-	local ent = ents.Create( name )
-	ent:SetPos( SpawnPos )
-	ent:Spawn()
-	ent:Activate()
-	return ent
-end
-
 function ENT:Initialize()
     self:SetModel( "models/tobadforyou/duffel_bag.mdl" )
 	self:SetMoveType( MOVETYPE_VPHYSICS )
@@ -65,10 +55,4 @@ function ENT:Use( activator, caller )
 		return
 	end
 	DarkRP.notify( activator, 1, 6, "This money bag belongs to "..self.MoneyOwner:Nick()..". If you are stealing it, take it to the banker NPC." )
-end
-
-if CLIENT then
-    function ENT:Draw()
-        self:DrawModel()
-    end
 end
