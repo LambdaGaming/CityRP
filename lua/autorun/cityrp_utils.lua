@@ -170,7 +170,8 @@ function meta:IsCivilian()
 		[TEAM_CAMERA] = true,
 		[TEAM_BUS] = true,
 		[TEAM_HITMAN] = true,
-		[TEAM_GUN] = true
+		[TEAM_GUN] = true,
+		[TEAM_UNDERCOVER] = true
 	}
 	return allowed[self:Team()]
 end
