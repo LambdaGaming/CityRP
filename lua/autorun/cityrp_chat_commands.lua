@@ -106,23 +106,6 @@ if SERVER then
 			return ""
 		end
 	end )
-
---!undercover
-	hook.Add( "PlayerSay", "SilentUndercover", function( ply, text )
-		if text == "!undercover" then
-			if ply:Team() == TEAM_UNDERCOVER then
-				DarkRP.notify( ply, 1, 6, "You are already an Undercover Officer!" )
-				return
-			end
-			if !ply:changeAllowed( TEAM_UNDERCOVER ) then
-				DarkRP.notify( ply, 1, 6, "Please wait before changing jobs again." )
-				return
-			end
-			ply:changeTeam( TEAM_UNDERCOVER, false, true )
-			ply:updateJob( "Citizen" )
-			DarkRP.notify( ply, 0, 6, "You have secretly changed your job to Undercover Officer." )
-		end	
-	end )
 end
 
 if CLIENT then
