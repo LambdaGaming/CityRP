@@ -85,7 +85,7 @@ CraftingCategory[9] = {
 
 CraftingTable["arc9_fas_famas"] = {
 	Name = "FAMAS",
-	Description = "Requires 6 iron and 1 wrench.",
+	Description = "Needs 6 iron and 1 wrench.",
 	Category = "Rifles",
 	Materials = {
 		ironbar = 6,
@@ -98,7 +98,7 @@ CraftingTable["arc9_fas_famas"] = {
 
 CraftingTable["arc9_fas_mp5"] = {
 	Name = "MP5",
-	Description = "Requires 4 iron and 1 wrench.",
+	Description = "Needs 4 iron and 1 wrench.",
 	Category = "SMGs",
 	Materials = {
 		ironbar = 4,
@@ -111,7 +111,7 @@ CraftingTable["arc9_fas_mp5"] = {
 
 CraftingTable["arc9_fas_colt"] = {
 	Name = "Colt M639",
-	Description = "Requires 4 iron and 1 wrench.",
+	Description = "Needs 4 iron and 1 wrench.",
 	Category = "SMGs",
 	Materials = {
 		ironbar = 4,
@@ -124,7 +124,7 @@ CraftingTable["arc9_fas_colt"] = {
 
 CraftingTable["arc9_fas_mac11"] = {
 	Name = "MAC-11",
-	Description = "Requires 3 iron and 1 wrench.",
+	Description = "Needs 3 iron and 1 wrench.",
 	Category = "SMGs",
 	Materials = {
 		ironbar = 3,
@@ -137,7 +137,7 @@ CraftingTable["arc9_fas_mac11"] = {
 
 CraftingTable["arc9_fas_bizon"] = {
 	Name = "PP-19 Bizon",
-	Description = "Requires 3 iron and 1 wrench.",
+	Description = "Needs 3 iron and 1 wrench.",
 	Category = "SMGs",
 	Materials = {
 		ironbar = 3,
@@ -150,7 +150,7 @@ CraftingTable["arc9_fas_bizon"] = {
 
 CraftingTable["arc9_fas_sterling"] = {
 	Name = "Sterling L2A3",
-	Description = "Requires 5 iron and 1 wrench.",
+	Description = "Needs 5 iron and 1 wrench.",
 	Category = "SMGs",
 	Materials = {
 		ironbar = 5,
@@ -163,7 +163,7 @@ CraftingTable["arc9_fas_sterling"] = {
 
 CraftingTable["arc9_fas_uzi"] = {
 	Name = "Uzi",
-	Description = "Requires 4 iron and 1 wrench.",
+	Description = "Needs 4 iron and 1 wrench.",
 	Category = "SMGs",
 	Materials = {
 		ironbar = 4,
@@ -174,17 +174,16 @@ CraftingTable["arc9_fas_uzi"] = {
 	end
 }
 
-CraftingTable["dronesrewrite_spyspider"] = {
-	Name = "Spider Drone",
-	Description = "Requires 5 iron, 3 wrenches, and 1 spy drone.",
+CraftingTable["dronesrewrite_cargo"] = {
+	Name = "Cargo Drone",
+	Description = "Needs 6 iron and 3 wrenches.",
 	Category = "Tools",
 	Materials = {
 		wrench = 3,
-		ironbar = 5,
-		dronesrewrite_spy = 1
+		ironbar = 6
 	},
 	SpawnFunction = function( ply, self )
-		local e = ents.Create( "dronesrewrite_spyspider" )
+		local e = ents.Create( "dronesrewrite_cargo" )
 		e:SetPos( self:GetPos() - Vector( 0, 0, -5 ) )
 		e:Spawn()
 		e:SetupOwner( ply )
@@ -193,7 +192,7 @@ CraftingTable["dronesrewrite_spyspider"] = {
 
 CraftingTable["dronesrewrite_nanodr"] = {
 	Name = "Nano Drone",
-	Description = "Requires 5 iron and 3 wrenches.",
+	Description = "Needs 5 iron and 3 wrenches.",
 	Category = "Tools",
 	Materials = {
 		wrench = 3,
@@ -207,14 +206,63 @@ CraftingTable["dronesrewrite_nanodr"] = {
 	end
 }
 
+CraftingTable["dronesrewrite_gunner"] = {
+	Name = "Gun Drone",
+	Description = "Needs 120 iron and 20 wrenches.",
+	Category = "Tools",
+	Materials = {
+		wrench = 20,
+		ironbar = 120
+	},
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "dronesrewrite_gunner" )
+		e:SetPos( self:GetPos() + Vector( 0, 0, 100 ) )
+		e:Spawn()
+		e:SetupOwner( ply )
+	end
+}
+
+CraftingTable["dronesrewrite_plotdr"] = {
+	Name = "PLOT-130",
+	Description = "Needs 400 iron and 50 wrenches.",
+	Category = "Tools",
+	Materials = {
+		wrench = 50,
+		ironbar = 400
+	},
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "dronesrewrite_plotdr" )
+		e:SetPos( self:GetPos() + Vector( 0, 0, 100 ) )
+		e:Spawn()
+		e:SetupOwner( ply )
+	end
+}
+
+CraftingTable["dronesrewrite_turret"] = {
+	Name = "Controllable Turret",
+	Description = "Needs 50 iron and 5 wrenches.",
+	Category = "Tools",
+	Materials = {
+		wrench = 5,
+		ironbar = 50
+	},
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "dronesrewrite_turret" )
+		e:SetPos( self:GetPos() + Vector( 0, 0, 100 ) )
+		e:Spawn()
+		e:SetupOwner( ply )
+	end
+}
+
 CraftingTable["arc9_fas_rpk"] = {
 	Name = "RPK",
-	Description = "Needs 7 iron and 2 wrenches",
+	Description = "Needs 7 iron, 2 wrenches, and 4 wood.",
 	Category = "Rifles",
 	NeedsBlueprint = true,
 	Materials = {
 		wrench = 2,
-		ironbar = 7
+		ironbar = 7,
+		wood = 4
 	},
 	SpawnFunction = function( ply )
 		ply:Give( "arc9_fas_rpk" )
