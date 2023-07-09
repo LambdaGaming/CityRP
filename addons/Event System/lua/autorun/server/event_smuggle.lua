@@ -52,19 +52,16 @@ end
 
 function SmuggleCheck( ply )
 	if !ply:IsCivilian() then
-		DarkRP.notify( ply, 1, 6, "You need to be a civilian job to smuggle items." )
-		return false
+		return false, "You need to be a civilian job to smuggle items."
 	end
 
 	local copcount = team.NumPlayers( TEAM_POLICEBOSS ) + team.NumPlayers( TEAM_OFFICER ) + team.NumPlayers( TEAM_UNDERCOVER ) + team.NumPlayers( TEAM_FBI )
 	if copcount < 2 then
-		DarkRP.notify( ply, 1, 6, "There needs to be at least 2 cops on the server for smuggling to unlock." )
-		return false
+		return false, "There needs to be at least 2 cops on the server for smuggling to unlock."
 	end
 
 	if ply.Smuggling then
-		DarkRP.notify( ply, 1, 6, "You are already smuggling something!" )
-		return false
+		return false, "You are already smuggling something!"
 	end
 	return true
 end

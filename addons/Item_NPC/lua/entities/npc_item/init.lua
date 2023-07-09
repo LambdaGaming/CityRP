@@ -97,7 +97,13 @@ net.Receive( "CreateItem", function( len, ply )
 		return
 	end
 	if money >= price then
-		if SpawnCheck and SpawnCheck( ply, self ) == false then return end
+		if SpawnCheck then
+			local check, err = SpawnCheck( ply, self )
+			if check == false then
+				DarkRP.notify( ply, 1, 6, err )
+				return
+			end
+		end
 		if SpawnItem then
 			if event and event > 0 then
 				if ActiveEvents[event] then

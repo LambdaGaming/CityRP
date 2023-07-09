@@ -1031,11 +1031,7 @@ ItemNPC["health"] = {
 	Price = 300,
 	Type = 6,
 	SpawnCheck = function( ply, self )
-		if ply:Health() >= ply:GetMaxHealth() then
-			DarkRP.notify( ply, 1, 6, "Your health is already at max." )
-			return false
-		end
-		return true
+		return ply:Health() >= ply:GetMaxHealth(), "Your health is already at max."
 	end,
 	SpawnFunction = function( ply, self )
 		ply:SetHealth( ply:GetMaxHealth() )
@@ -1051,11 +1047,7 @@ ItemNPC["onetimehealth"] = {
 	Price = 500,
 	Type = 6,
 	SpawnCheck = function( ply, self )
-		if ply:HasWeapon( "onetime_medkit" ) then
-			DarkRP.notify( ply, 1, 6, "You already have a one-time med kit!" )
-			return
-		end
-		return true
+		return ply:HasWeapon( "onetime_medkit" ), "You already have a one-time med kit!"
 	end,
 	SpawnFunction = function( ply, self )
 		ply:Give( "onetime_medkit" )
@@ -1068,11 +1060,7 @@ ItemNPC["onetimearmor"] = {
 	Price = 1000,
 	Type = 6,
 	SpawnCheck = function( ply, self )
-		if ply:HasWeapon( "onetime_armorkit" ) then
-			DarkRP.notify( ply, 1, 6, "You already have a one-time armor kit!" )
-			return
-		end
-		return true
+		return ply:HasWeapon( "onetime_armorkit" ), "You already have a one-time armor kit!"
 	end,
 	SpawnFunction = function( ply, self )
 		ply:Give( "onetime_armorkit" )
@@ -1085,11 +1073,7 @@ ItemNPC["armor"] = {
 	Price = 800,
 	Type = 6,
 	SpawnCheck = function( ply, self )
-		if ply:Armor() >= 100 then
-			DarkRP.notify( ply, 1, 6, "Your armor is already at max." )
-			return false
-		end
-		return true
+		return ply:Armor() >= 100, "Your armor is already at max."
 	end,
 	SpawnFunction = function( ply, self )
 		ply:SetArmor( 100 )
@@ -1102,11 +1086,7 @@ ItemNPC["lifeinsurance"] = {
 	Price = 3000,
 	Type = 6,
 	SpawnCheck = function( ply, self )
-		if ply.HasLifeInsurance then
-			DarkRP.notify( ply, 1, 6, "You already have life insurance." )
-			return false
-		end
-		return true
+		return ply.HasLifeInsurance, "You already have life insurance."
 	end,
 	SpawnFunction = function( ply, self )
 		ply.HasLifeInsurance = true
