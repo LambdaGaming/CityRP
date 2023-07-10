@@ -1093,6 +1093,22 @@ ItemNPC["lifeinsurance"] = {
 	end
 }
 
+ItemNPC["steroid"] = {
+	Name = "Experimental Steroid",
+	Description = "Regenerates a player's health by 3 HP every second, for 10 minutes. May behave unexpectedly under certain conditions...",
+	Model = "models/props_lab/jar01b.mdl",
+	Price = 5000,
+	Type = 6,
+	SpawnCheck = function( ply, self )
+		return ply:Team() == TEAM_FIREBOSS, "Only fire chiefs can purchase this item."
+	end,
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "zombie_experiment" )
+		e:SetPos( ply:GetPos() + Vector( 0, 30, 35 ) )
+		e:Spawn()
+	end
+}
+
 -----TOW TRUCK NPC ITEMS-----
 ItemNPC["dodge_tow"] = {
 	Name = "Dodge Ram 3500 Towtruck",
