@@ -6,7 +6,7 @@ ENT.PrintName = "Heat Lamp"
 ENT.Author = "Lambda Gaming"
 ENT.Spawnable = true
 ENT.AdminOnly = true
-ENT.Category = "Cocaine System"
+ENT.Category = "Drugs"
 
 function ENT:SetupDataTables()
 	self:NetworkVar( "Bool", 0, "HasCanister" )

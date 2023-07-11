@@ -6,40 +6,7 @@ ENT.PrintName = "Pure Cocaine"
 ENT.Author = "Lambda Gaming"
 ENT.Spawnable = true
 ENT.AdminOnly = true
-ENT.Category = "Cocaine System"
-
-function ENT:SpawnFunction( ply, tr, name )
-	if !tr.Hit then return end
-	local SpawnPos = tr.HitPos + tr.HitNormal
-	local ent = ents.Create( name )
-	ent:SetPos( SpawnPos )
-	ent:Spawn()
-	ent:Activate()
-	return ent
-end
-
-local COKE_GOOD_PURITY
-local COKE_GOOD_PURITY_LESS
-local COKE_GOOD_PURITY_MORE
-local COKE_PAYOUT
-
-if SERVER then
-	COKE_GOOD_PURITY = file.Read( "cokekey.txt", "DATA" )
-	COKE_GOOD_PURITY_LESS = COKE_GOOD_PURITY - 10
-	COKE_GOOD_PURITY_MORE = COKE_GOOD_PURITY + 10
-	COKE_PAYOUT = 30000
-end
-
-function PurityPayout( purity )
-	if purity == COKE_GOOD_PURITY then
-		return COKE_PAYOUT
-	elseif purity >= COKE_GOOD_PURITY_LESS and purity <= COKE_GOOD_PURITY_MORE and purity > COKE_GOOD_PURITY then
-		return COKE_PAYOUT - ( ( purity - COKE_GOOD_PURITY ) * 1000 )
-	elseif purity >= COKE_GOOD_PURITY_LESS and purity <= COKE_GOOD_PURITY_MORE and purity < COKE_GOOD_PURITY then
-		return COKE_PAYOUT - ( ( COKE_GOOD_PURITY - purity ) * 1000 )
-	end
-	return 10000
-end
+ENT.Category = "Drugs"
 
 function ENT:Initialize()
     self:SetModel( "models/props/cs_assault/Money.mdl" )

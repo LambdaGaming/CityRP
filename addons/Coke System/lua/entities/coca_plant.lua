@@ -6,17 +6,7 @@ ENT.PrintName = "Coca Plant"
 ENT.Author = "Lambda Gaming"
 ENT.Spawnable = true
 ENT.AdminOnly = true
-ENT.Category = "Cocaine System"
-
-function ENT:SpawnFunction( ply, tr, name )
-	if !tr.Hit then return end
-	local SpawnPos = tr.HitPos + tr.HitNormal * 1
-	local ent = ents.Create( name )
-	ent:SetPos( SpawnPos )
-	ent:Spawn()
-	ent:Activate()
-	return ent
-end
+ENT.Category = "Drugs"
 
 function ENT:Initialize()
     self:SetModel( "models/props/cs_office/plant01.mdl" )
@@ -41,27 +31,27 @@ function ENT:FullyGrown()
 	return self:GetNWInt( "Growth" ) == 1200
 end
 
-function ENT:Use( caller, activator )
-	if self:FullyGrown() then
-		local e = ents.Create( "raw_cocaine" )
-		e:SetPos( self:GetPos() )
-		e:Spawn()
-		self:EmitSound( "physics/glass/glass_impact_soft"..math.random( 1, 3 )..".wav" )
-		self:Remove()
-	else
-		DarkRP.notify( caller, 1, 6, "You cannot harvest this plant yet." )
+if SERVER then
+	function ENT:Use( caller, activator )
+		if self:FullyGrown() then
+			local e = ents.Create( "raw_cocaine" )
+			e:SetPos( self:GetPos() )
+			e:Spawn()
+			self:EmitSound( "physics/glass/glass_impact_soft"..math.random( 1, 3 )..".wav" )
+			self:Remove()
+		else
+			DarkRP.notify( caller, 1, 6, "You cannot harvest this plant yet." )
+		end
 	end
-end
 
-function ENT:Think()
-	local growth = self:GetNWInt( "Growth" )
-	if growth == 1200 then return end
-	local tr = util.TraceLine( {
-		start = self:GetPos() + Vector( 0, 0, 50 ),
-		endpos = self:GetPos() + self:GetAngles():Up() * 200
-	} )
-	if IsValid( tr.Entity ) and tr.Entity:GetClass() == "heat_lamp" and SERVER then
-		if tr.Entity:GetNWInt( "TurnedOn" ) then
+	function ENT:Think()
+		local growth = self:GetNWInt( "Growth" )
+		if growth == 1200 then return end
+		local tr = util.TraceLine( {
+			start = self:GetPos() + Vector( 0, 0, 50 ),
+			endpos = self:GetPos() + self:GetAngles():Up() * 200
+		} )
+		if IsValid( tr.Entity ) and tr.Entity:GetClass() == "heat_lamp" and tr.Entity:GetNWInt( "TurnedOn" ) then
 			local amount = 1
 			if EcoPerkActive( "Cut Agricultural Budget" ) then
 				amount = 0.5
@@ -70,19 +60,19 @@ function ENT:Think()
 			end
 			self:SetNWInt( "Growth", math.Clamp( growth + amount, 0, 1200 ) )
 		end
+		self:NextThink( CurTime() + 1 )
+		return true
 	end
-	self:NextThink( CurTime() + 1 )
-	return true
-end
 
-function ENT:OnTakeDamage( dmg )
-	local d = dmg:GetDamage()
-	local health = self:Health()
-	if health > 0 then
-		self:SetHealth( health - d )
-	else
-		self:GibBreakClient( vector_origin )
-		self:Remove()
+	function ENT:OnTakeDamage( dmg )
+		local d = dmg:GetDamage()
+		local health = self:Health()
+		if health > 0 then
+			self:SetHealth( health - d )
+		else
+			self:GibBreakClient( vector_origin )
+			self:Remove()
+		end
 	end
 end
 

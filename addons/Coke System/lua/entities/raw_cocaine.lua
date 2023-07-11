@@ -1,4 +1,3 @@
-
 AddCSLuaFile()
 
 ENT.Type = "anim"
@@ -7,17 +6,7 @@ ENT.PrintName = "Raw Cocaine"
 ENT.Author = "Lambda Gaming"
 ENT.Spawnable = true
 ENT.AdminOnly = true
-ENT.Category = "Cocaine System"
-
-function ENT:SpawnFunction( ply, tr, name )
-	if !tr.Hit then return end
-	local SpawnPos = tr.HitPos + tr.HitNormal * 1
-	local ent = ents.Create( name )
-	ent:SetPos( SpawnPos )
-	ent:Spawn()
-	ent:Activate()
-	return ent
-end
+ENT.Category = "Drugs"
 
 function ENT:Initialize()
     self:SetModel( "models/props/cs_assault/Money.mdl" )
@@ -34,11 +23,4 @@ function ENT:Initialize()
 	end
 	self:SetMaterial( "models/debug/debugwhite" )
 	self:SetColor( color_darkgray )
-	self:SetNWInt( "CokeType", 0 )
-end
-
-if CLIENT then
-    function ENT:Draw()
-        self:DrawModel()
-    end
 end
