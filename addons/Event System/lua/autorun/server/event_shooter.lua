@@ -1,14 +1,21 @@
 function ActiveShooter()
 	local map = game.GetMap()
 	local shooter = ents.Create( "npc_citizen" )
+	local weps = {}
 	shooter:SetPos( table.Random( EventPos[map].Shooter ) )
+	shooter:SetKeyValue( "spawnflags", bit.bor( SF_NPC_NO_WEAPON_DROP, SF_NPC_FADE_CORPSE, SF_NPC_LONG_RANGE ) )
 	shooter:Spawn()
 	shooter:Activate()
-	shooter:Give( "weapon_smg1" )
 	shooter:SetHealth( math.random( 100, 500 ) )
 	for k,v in ipairs( player.GetAll() ) do
 		shooter:AddEntityRelationship( v, D_HT, 99 )
 	end
+	for k,v in pairs( list.GetForEdit( "Weapon" ) ) do
+		if string.find( k, "arc9" ) then
+			table.insert( weps, k )
+		end
+	end
+	shooter:Give( table.Random( weps ) )
 	shooter.IsEventNPC = true
 	shooter.Participants = {}
 	
@@ -39,26 +46,7 @@ hook.Add( "PlayerInitialSpawn", "ActiveShooterRelationship", ActiveShooterRelati
 local function ShooterKilled( npc, attacker, inflictor )
 	if npc.IsEventNPC then
 		ActiveShooterEnd( npc )
-		for k,v in pairs( ents.FindInSphere( npc:GetPos(), 50 ) ) do
-			if v:GetClass() == "weapon_smg1" then
-				v:Remove()
-			end
-		end
 	elseif npc.IsRobber then
-		for k,v in pairs( ents.FindInSphere( npc:GetPos(), 50 ) ) do
-			timer.Simple( 1, function()
-				if IsValid( v ) then
-					local weplist = {
-						["weapon_smg1"] = true,
-						["weapon_pistol"] = true,
-						["weapon_shotgun"] = true
-					}
-					if weplist[v:GetClass()] and !IsValid( v:GetOwner() ) then
-						v:Remove()
-					end
-				end
-			end )
-		end
 		if attacker:IsPlayer() then
 			DarkRP.notify( attacker, 0, 6, "You have been rewarded with $500 and a crafting blueprint for killing a robber." )
 			GiveReward( attacker, 500 )
