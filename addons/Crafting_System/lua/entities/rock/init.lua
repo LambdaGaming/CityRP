@@ -9,16 +9,6 @@ local ores = {
 	["Rock"] = { Color( 128, 128, 128 ), 10, { 1, 3 } }
 }
 
-function ENT:SpawnFunction( ply, tr, name )
-	if !tr.Hit then return end
-	local SpawnPos = tr.HitPos + tr.HitNormal
-	local ent = ents.Create( name )
-	ent:SetPos( SpawnPos )
-	ent:Spawn()
-	ent:Activate()
-	return ent
-end
-
 function ENT:Initialize()
     self:SetModel( table.Random( CRAFT_CONFIG_ROCK_MODELS ) )
 	self:PhysicsInit( SOLID_VPHYSICS )

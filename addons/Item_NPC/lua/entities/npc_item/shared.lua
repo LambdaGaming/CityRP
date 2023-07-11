@@ -498,7 +498,7 @@ ItemNPC["rp_gas"] = {
 	Name = "Propane Canister",
 	Description = "Propane gas for fueling industrial appliances.",
 	Model = "models/props_junk/propane_tank001a.mdl",
-	Price = 250,
+	Price = 500,
 	Type = 1,
 	SpawnFunction = function( ply, self )
 		local e = ents.Create( "rp_gas" )
@@ -603,40 +603,14 @@ ItemNPC["arc9_fas_m18"] = {
 	end
 }
 
-ItemNPC["rp_chloride"] = {
-	Name = "Chloride (Meth)",
-	Description = "One of two ingredients for making meth.",
-	Model = "models/props_junk/garbage_plasticbottle001a.mdl",
-	Price = 1500,
-	Type = 2,
-	SpawnFunction = function( ply, self )
-		local e = ents.Create( "rp_chloride" )
-		e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
-		e:Spawn()
-	end
-}
-
 ItemNPC["rp_pot"] = {
 	Name = "Meth Stove Pot",
-	Description = "Place meth ingredients in and place pot on a stove to make meth.",
+	Description = "Used to make meth and the ingredients to make meth.",
 	Model = "models/props_c17/metalPot001a.mdl",
-	Price = 100,
+	Price = 500,
 	Type = 2,
 	SpawnFunction = function( ply, self )
 		local e = ents.Create( "rp_pot" )
-		e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
-		e:Spawn()
-	end
-}
-
-ItemNPC["rp_sodium"] = {
-	Name = "Sodium (Meth)",
-	Description = "One of two ingredients for making meth.",
-	Model = "models/props_junk/garbage_plasticbottle002a.mdl",
-	Price = 1500,
-	Type = 2,
-	SpawnFunction = function( ply, self )
-		local e = ents.Create( "rp_sodium" )
 		e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
 		e:Spawn()
 	end
