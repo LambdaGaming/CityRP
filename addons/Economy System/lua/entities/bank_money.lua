@@ -40,7 +40,7 @@ if SERVER then
 				SpawnBlueprint( ply, 6 )
 				local rand = math.random( 1, 10 )
 				if rand <= 3 then
-					local e = ents.Create( "money_printer_diamond" )
+					local e = ents.Create( "printer_upgrade_output" )
 					e:SetPos( ply:GetPos() + Vector( 0, 0, 35 ) )
 					e:Spawn()
 					e:SetOwner( ply )

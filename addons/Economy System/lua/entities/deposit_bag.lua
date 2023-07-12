@@ -43,7 +43,7 @@ function ENT:Use( activator, caller )
 		DarkRP.notify( activator, 0, 6, "You have received "..DarkRP.formatMoney( self.MoneyAmount ).." from a stolen money bag." )
 		local rand = math.random( 1, 10 )
 		if rand <= 3 then
-			local e = ents.Create( "money_printer_platinum" )
+			local e = ents.Create( "printer_upgrade_output" )
 			e:SetPos( activator:GetPos() + Vector( 0, 0, 35 ) )
 			e:Spawn()
 			activator:ChatPrint( "As a special bonus you got a platinum money printer!" )

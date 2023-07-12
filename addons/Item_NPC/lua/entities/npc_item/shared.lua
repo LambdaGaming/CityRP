@@ -653,31 +653,56 @@ ItemNPC["weapon_vfire_gascan"] = {
 	end
 }
 
-ItemNPC["money_printer_silver"] = {
-	Name = "Silver Money Printer",
-	Description = "Can be stored in your inventory but doesn't make a lot of money compared to others.",
+ItemNPC["money_printer_advanced"] = {
+	Name = "Money Printer",
+	Description = "Prints counterfeit money that can be used like regular money. Can be upgraded to improve things such as output amount and sound level.",
 	Model = "models/props_c17/consolebox01a.mdl",
-	Price = 600,
+	Price = 9000,
 	Type = 2,
 	SpawnFunction = function( ply, self )
-		local e = ents.Create( "money_printer_silver" )
+		local e = ents.Create( "money_printer_advanced" )
 		e:SetPos( ply:GetPos() + Vector( 0, 30, 35 ) )
 		e:Spawn()
 		e:SetOwner( ply )
 	end
 }
 
-ItemNPC["money_printer_gold"] = {
-	Name = "Gold Money Printer",
-	Description = "Makes more money compared to silver but cannot be stored in your inventory.",
-	Model = "models/props_c17/consolebox01a.mdl",
+ItemNPC["printer_upgrade_paper"] = {
+	Name = "Money Printer Paper Upgrade",
+	Description = "Increases the max amount of paper a printer can hold.",
+	Model = "",
 	Price = 1000,
 	Type = 2,
 	SpawnFunction = function( ply, self )
-		local e = ents.Create( "money_printer_gold" )
+		local e = ents.Create( "printer_upgrade_paper" )
 		e:SetPos( ply:GetPos() + Vector( 0, 30, 35 ) )
 		e:Spawn()
-		e:SetOwner( ply )
+	end
+}
+
+ItemNPC["printer_upgrade_sound"] = {
+	Name = "Money Printer Sound Upgrade",
+	Description = "Reduces the volume of the sound produced by a money printer.",
+	Model = "",
+	Price = 5000,
+	Type = 2,
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "printer_upgrade_sound" )
+		e:SetPos( ply:GetPos() + Vector( 0, 30, 35 ) )
+		e:Spawn()
+	end
+}
+
+ItemNPC["printer_upgrade_cooling"] = {
+	Name = "Money Printer Cooling Upgrade",
+	Description = "Reduces the chance of a money printer overheating and catching fire.",
+	Model = "",
+	Price = 3000,
+	Type = 2,
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "printer_upgrade_cooling" )
+		e:SetPos( ply:GetPos() + Vector( 0, 30, 35 ) )
+		e:Spawn()
 	end
 }
 

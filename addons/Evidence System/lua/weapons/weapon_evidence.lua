@@ -23,9 +23,9 @@ local whitelist = {
 	["coca_plant"] = true, ["heat_lamp"] = true, ["pure_cocaine"] = true,
 	["purifier"] = true, ["rp_weed"] = true, ["rp_weed_plant"] = true,
 	["rp_meth"] = true, ["rp_chloride"] = true, ["rp_sodium"] = true,
-	["spawned_weapon"] = true, ["money_printer_bronze"] = true,
-	["money_printer_diamond"] = true, ["money_printer_gold"] = true,
-	["money_printer_platinum"] = true, ["money_printer_silver"] = true,
+	["spawned_weapon"] = true, ["money_printer_advanced"] = true,
+	["printer_upgrade_paper"] = true, ["printer_upgrade_sound"] = true,
+	["printer_upgrade_cooling"] = true, ["printer_upgrade_output"] = true,
 	["dronesrewrite_console"] = true, ["rp_pot"] = true, ["rp_stove"] = true,
 	["raw_cocaine"] = true, ["mediaplayer_tv"] = true, ["slot_machine"] = true
 }
