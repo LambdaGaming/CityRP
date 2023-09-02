@@ -24,7 +24,7 @@ end
 if SERVER then
 	local usecooldown
 	function ENT:AcceptInput( name, caller )
-		if usecooldown and usecooldown > CurTime() then return end
+		if usecooldown and usecooldown > CurTime() or !caller:IsPlayer() then return end
 		if caller:IsCivilian() then
 			usecooldown = CurTime() + 1
 			local foundtruck = false
