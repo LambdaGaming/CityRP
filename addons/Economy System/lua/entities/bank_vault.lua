@@ -58,7 +58,7 @@ if SERVER then
 	
 		local numcops = 0
 		for k,v in ipairs( player.GetAll() ) do
-			if v:isCPNoMayor() then
+			if v:isCPNoMayor() and v:Team() != TEAM_UNDERCOVER then
 				numcops = numcops + 1
 			end
 		end
