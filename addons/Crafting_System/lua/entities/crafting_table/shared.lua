@@ -763,3 +763,18 @@ CraftingTable["rock_decimator"] = {
 		ply:Give( "rock_decimator" )
 	end
 }
+
+CraftingTable["police_scanner"] = {
+	Name = "Police Scanner",
+	Description = "Needs 8 iron and 1 electronic component.",
+	Category = "Tools",
+	Materials = {
+		ironbar = 8,
+		electronic = 1
+	},
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "police_scanner" )
+		e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
+		e:Spawn()
+	end
+}
