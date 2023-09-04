@@ -38,6 +38,10 @@ CraftingIngredient["diamond"] = {
 	Name = "Diamond"
 }
 
+CraftingIngredient["electronic"] = {
+	Name = "Electronic Component"
+}
+
 CraftingCategory[1] = {
 	Name = "Pistols",
 	Color = COLOR_DEFAULT
@@ -176,11 +180,12 @@ CraftingTable["arc9_fas_uzi"] = {
 
 CraftingTable["dronesrewrite_cargo"] = {
 	Name = "Cargo Drone",
-	Description = "Needs 6 iron and 3 wrenches.",
+	Description = "Needs 6 iron, 3 wrenches, and 1 electronic component.",
 	Category = "Tools",
 	Materials = {
 		wrench = 3,
-		ironbar = 6
+		ironbar = 6,
+		electronic = 1
 	},
 	SpawnFunction = function( ply, self )
 		local e = ents.Create( "dronesrewrite_cargo" )
@@ -208,11 +213,12 @@ CraftingTable["dronesrewrite_nanodr"] = {
 
 CraftingTable["dronesrewrite_gunner"] = {
 	Name = "Gun Drone",
-	Description = "Needs 120 iron and 20 wrenches.",
+	Description = "Needs 120 iron, 20 wrenches, and 2 electronic components.",
 	Category = "Tools",
 	Materials = {
 		wrench = 20,
-		ironbar = 120
+		ironbar = 120,
+		electronic = 2
 	},
 	SpawnFunction = function( ply, self )
 		local e = ents.Create( "dronesrewrite_gunner" )
@@ -224,11 +230,12 @@ CraftingTable["dronesrewrite_gunner"] = {
 
 CraftingTable["dronesrewrite_plotdr"] = {
 	Name = "PLOT-130",
-	Description = "Needs 400 iron and 50 wrenches.",
+	Description = "Needs 400 iron, 50 wrenches, and 3 electronic components",
 	Category = "Tools",
 	Materials = {
 		wrench = 50,
-		ironbar = 400
+		ironbar = 400,
+		electronic = 3
 	},
 	SpawnFunction = function( ply, self )
 		local e = ents.Create( "dronesrewrite_plotdr" )
@@ -240,11 +247,12 @@ CraftingTable["dronesrewrite_plotdr"] = {
 
 CraftingTable["dronesrewrite_turret"] = {
 	Name = "Controllable Turret",
-	Description = "Needs 50 iron and 5 wrenches.",
+	Description = "Needs 50 iron, 5 wrenches, and 1 electronic component.",
 	Category = "Tools",
 	Materials = {
 		wrench = 5,
-		ironbar = 50
+		ironbar = 50,
+		electronic = 1
 	},
 	SpawnFunction = function( ply, self )
 		local e = ents.Create( "dronesrewrite_turret" )
@@ -727,13 +735,14 @@ CraftingTable["arc9_fas_m79"] = {
 
 CraftingTable["rtx4090"] = {
 	Name = "RTX 4090",
-	Description = "Needs 4 iron, 4 gold, and 1 diamond.",
+	Description = "Needs 4 iron, 4 gold, 1 diamond, and 1 electronic component.",
 	NeedsBlueprint = true,
 	Category = "Explosives",
 	Materials = {
 		ironbar = 4,
 		goldbar = 4,
 		diamond = 1,
+		electronic = 1
 	},
 	SpawnFunction = function( ply, self )
 		local e = ents.Create( "rtx4090" )

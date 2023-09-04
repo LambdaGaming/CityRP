@@ -22,6 +22,9 @@ function ENT:Initialize()
 	if phys:IsValid() then
 		phys:Wake()
 	end
+	self.BreakOpenHealthMax = 15
+	self.BreakOpenHealth = 15
+	self.BreakOpenBroken = false
 end
 
 if SERVER then
@@ -60,6 +63,12 @@ if SERVER then
 			end
 		end
 	end )
+
+	function ENT:BreakOpen( ply )
+		local e = ents.Create( "electronic" )
+		e:SetPos( self:GetPos() + self:GetForward() * 30 )
+		e:Spawn()
+	end
 end
 
 if CLIENT then
