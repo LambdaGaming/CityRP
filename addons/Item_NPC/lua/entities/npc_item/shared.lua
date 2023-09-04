@@ -48,8 +48,7 @@ ItemNPCType[4] = {
 		[TEAM_MAYOR] = true,
 		[TEAM_POLICEBOSS] = true,
 		[TEAM_OFFICER] = true,
-		[TEAM_UNDERCOVER] = true,
-		[TEAM_FBI] = true
+		[TEAM_UNDERCOVER] = true
 	}
 }
 

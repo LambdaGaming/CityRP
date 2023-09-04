@@ -55,7 +55,7 @@ function SmuggleCheck( ply )
 		return false, "You need to be a civilian job to smuggle items."
 	end
 
-	local copcount = team.NumPlayers( TEAM_POLICEBOSS ) + team.NumPlayers( TEAM_OFFICER ) + team.NumPlayers( TEAM_UNDERCOVER ) + team.NumPlayers( TEAM_FBI )
+	local copcount = team.NumPlayers( TEAM_POLICEBOSS ) + team.NumPlayers( TEAM_OFFICER ) + team.NumPlayers( TEAM_UNDERCOVER )
 	if copcount < 2 then
 		return false, "There needs to be at least 2 cops on the server for smuggling to unlock."
 	end

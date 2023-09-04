@@ -51,7 +51,6 @@ if SERVER then
 			[TEAM_POLICEBOSS] = true,
 			[TEAM_OFFICER] = true,
 			[TEAM_UNDERCOVER] = true,
-			[TEAM_FBI] = true,
 			[TEAM_BANKER] = true,
 			[TEAM_DETECTIVE] = true
 		}
