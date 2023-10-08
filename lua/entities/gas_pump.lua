@@ -32,7 +32,7 @@ function ENT:Use( ply )
 	for k,v in pairs( findveh ) do
 		if v:GetClass() == "prop_vehicle_jeep" and v:GetNWEntity( "VehicleOwner" ) == ply then
 			local tax = GetGlobalInt( "MAYOR_SalesTax" )
-			local required = 100 - v:GetNWInt( "AM_FuelAmount" )
+			local required = 100 - v:GetNWInt( "GAuto_FuelAmount" )
 			local discount = ply:isCP() and tax < 50
 			local price = discount and 0 or required * 3
 			price = price + ( price * ( tax * 0.01 ) )
@@ -41,7 +41,7 @@ function ENT:Use( ply )
 				return
 			end
 			if ply:canAfford( price ) then
-				v:SetNWInt( "AM_FuelAmount", 100 )
+				v:SetNWInt( "GAuto_FuelAmount", 100 )
 				ply:addMoney( -price )
 				AddVaultFunds( price * ( tax * 0.01 ) )
 				if price <= 0 then

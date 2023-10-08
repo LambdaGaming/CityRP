@@ -43,7 +43,7 @@ function ENT:StartTouch( ent )
 	if ent:IsVehicle() and SERVER then
 		local rand = math.random( 1, 10 )
 		if rand == 1 then
-			AM_PopTire( ent, 1 ) --10% chance of the pothole popping a tire
+			GAuto.PopTire( ent, 1 ) --10% chance of the pothole popping a tire
 		end
 	end
 end

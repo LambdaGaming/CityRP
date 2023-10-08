@@ -229,14 +229,14 @@ ItemNPC["crafting_table"] = {
 	end
 }
 
-ItemNPC["automod_repair_kit"] = {
+ItemNPC["ent_gauto_repair"] = {
 	Name = "Vehicle Repair Kit",
 	Description = "Repairs 30% of your vehicles max health.",
 	Model = "models/Items/HealthKit.mdl",
 	Price = 200,
 	Type = 1,
 	SpawnFunction = function( ply, self )
-		local e = ents.Create( "automod_repair_kit" )
+		local e = ents.Create( "ent_gauto_repair" )
 		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
 		e:Spawn()
 	end
@@ -455,14 +455,14 @@ ItemNPC["weapon_drr_repairtool"] = {
 	end
 }
 
-ItemNPC["automod_fuel"] = {
+ItemNPC["ent_gauto_fuel"] = {
 	Name = "Fuel Can",
 	Description = "Fuels up to 75% of a vehicle's fuel capacity.",
 	Model = "models/props_junk/gascan001a.mdl",
 	Price = 200,
 	Type = 1,
 	SpawnFunction = function( ply, self )
-		local e = ents.Create( "automod_fuel" )
+		local e = ents.Create( "ent_gauto_fuel" )
 		e:SetPos( self:GetPos() + Vector( 0, 30, 10 ) )
 		e:Spawn()
 		if EcoPerkActive( "Increase Oil and Gas Budget" ) then
