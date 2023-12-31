@@ -82,6 +82,14 @@ if SERVER then
 	end
 	hook.Add( "PlayerDisconnected", "DisconnectRemoveVehicle", RemoveVehicles )
 	hook.Add( "OnPlayerChangedTeam", "ChangeTeamRemoveVehicle", RemoveVehicles )
+
+	--Apply lottery tax
+	hook.Add( "lotteryEnded", "LotteryTax", function( players, chosen, amount )
+		local tax = math.Round( amount * 0.25 )
+		chosen:addMoney( -tax )
+		AddVaultFunds( tax )
+		DarkRP.notify( chosen, 0, 6, "The city has taken 25% of your winnings ("..DarkRP.formatMoney( tax )..") as tax." )
+	end )
 end
 
 if CLIENT then
