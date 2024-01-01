@@ -42,16 +42,10 @@ local wepWhitelist = {
 }
 
 local function CanConfiscateFrom( ply, target )
-	if !target:IsPlayer() then return end
-
-	local weapon = ply:GetActiveWeapon()
-	if weapon:GetClass() != "weapon_confiscate" or ply:GetPos():DistToSqr( target:GetPos() ) > 22500 then return end
-
-	if SERVER then
-		if !target:IsHandcuffed() then
-			DarkRP.notify( ply, 1, 6, "You need to cuff this person before you can search them." )
-			return
-		end
+	if !target:IsPlayer() or ply:GetPos():DistToSqr( target:GetPos() ) > 10000 then return false end
+	if !target:IsHandcuffed() then
+		DarkRP.notify( ply, 1, 6, "You need to cuff this person before you can search them." )
+		return false
 	end
 	return true
 end
@@ -62,21 +56,23 @@ function SWEP:PrimaryAttack()
     local tr = ply:GetEyeTrace().Entity
 
 	if tr:IsPlayer() then
-		if !CanConfiscateFrom( ply, target ) then return end
+		if !CanConfiscateFrom( ply, tr ) then return end
 		local foundwep = false
 		local plyweps = tr:GetWeapons()
 		for k,v in pairs( plyweps ) do
-			if !whitelist[v:GetClass()] and !table.HasValue( tr:getJobTable().weapons, v:GetClass() ) then
+			if !wepWhitelist[v:GetClass()] and !table.HasValue( tr:getJobTable().weapons, v:GetClass() ) then
 				foundwep = true
 				break
 			end
 		end
 		if foundwep then
+			ply:EmitSound( "weapons/stunstick/alyx_stunner2.wav" )
 			net.Start( "ViewWeapons" )
 			net.WriteEntity( tr )
 			net.WriteTable( plyweps )
 			net.Send( self:GetOwner() )
 		else
+			ply:EmitSound( "buttons/combine_button_locked.wav" )
 			DarkRP.notify( self:GetOwner(), 1, 6, "No illegal weapons detected." )
 		end
 		self:SetNextPrimaryFire( CurTime() + 1 )
