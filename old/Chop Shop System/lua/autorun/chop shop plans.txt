@@ -1,0 +1,12 @@
+1. 3 cars will spawn at the car dealer when the server starts
+2. One car will spawn from each tier
+3. Tier 1: Utility (Quads, pickup trucks, moving trucks)
+4. Tier 2: Average (Cheap and slow sedans like the crown vic and volkswagen beetle)
+5. Tier 3: Sport (All expensive sports cars like lamborghinis and ferraris)
+6. Tier 1 cars will warrant the player when they sell the car
+7. Tier 2 cars will warrant the player when they start driving the car
+8. Tier 3 cars will warrant the player then they start lockpicking the car
+9. Players will then take the stolen car to the smuggle NPC and will recieve a profit based on how expensive the car is
+9. Cars can also be rented by players that need a car but dont want to buy it permenately
+10. Rented cars will come with a 1000 upfront fee, while automatically taking money out of the players wallet every 5 minutes, money taken will depend on the price of the car
+11. If a player cannot afford a payment, they will get a warning, if they fail to pay again, the car will be instantly taken from them and a new car will spawn in it's spot back at the car dealer
