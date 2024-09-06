@@ -62,7 +62,7 @@ local animnpcs = {
 function ENT:Think()
 	local type = self:GetNPCType()
 	if animnpcs[type] then
-		self:SetSequence( "pose_standing_02" )
+		self:SetSequence( 20 )
 	end
 end
 
