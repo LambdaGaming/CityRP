@@ -534,6 +534,20 @@ ItemNPC["printer_paper"] = {
 	end
 }
 
+ItemNPC["boombox"] = {
+	Name = "Boombox",
+	Description = "Plays internet radio streams in 3D space.",
+	Model = "models/rammel/boombox.mdl",
+	Price = 350,
+	Type = 1,
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "boombox" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
+		e:Spawn()
+		e:SetOwner( ply )
+	end
+}
+
 -----CONTRABAND ITEMS-----
 ItemNPC["dronesrewrite_console"] = {
 	Name = "Drone Console",
