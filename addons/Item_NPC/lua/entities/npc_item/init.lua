@@ -73,8 +73,8 @@ net.Receive( "CreateItem", function( len, ply )
 	local SpawnCheck = ItemNPC[ent].SpawnCheck
 	local SpawnItem = ItemNPC[ent].SpawnFunction
 	local money = ply:getDarkRPVar( "money" )
-	local name = ItemNPC[ent].Name
-	local price = ItemNPC[ent].Price
+	local name = ItemNPC[ent].Name or "Unknown"
+	local price = ItemNPC[ent].Price or 0
 	local primary = ItemNPC[ent].PrimaryJobs
 	local event = ItemNPC[ent].EventID
 	local salestax = price * ( GetGlobalInt( "MAYOR_SalesTax" ) * 0.01 )
