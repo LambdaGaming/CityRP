@@ -548,6 +548,20 @@ ItemNPC["boombox"] = {
 	end
 }
 
+ItemNPC["itemstore_box"] = {
+	Name = "Inventory Box",
+	Description = "Portable box for carrying inventory items. Will drop items when broken.",
+	Model = "models/props/cs_office/Cardboard_box02.mdl",
+	Price = 500,
+	Type = 1,
+	SpawnFunction = function( ply, self )
+		local e = ents.Create( "itemstore_box" )
+		e:SetPos( self:GetPos() + Vector( 0, 30, 35 ) )
+		e:Spawn()
+		e:SetOwner( ply )
+	end
+}
+
 -----CONTRABAND ITEMS-----
 ItemNPC["dronesrewrite_console"] = {
 	Name = "Drone Console",
