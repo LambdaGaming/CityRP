@@ -159,7 +159,7 @@ end )
 
 hook.Add( "ItemNPC_ModifyPrice", "ItemNPCModifyPrice", function( ply, npc, item )
 	local tbl = ItemNPC[item]
-	local price = tbl.Price
+	local price = tbl.Price or 0
 
 	--Apply 50% discount on farm items for the cook
 	if ply:Team() == TEAM_COOK and ( string.find( tbl.Name, "Seed" ) or string.find( tbl.Name, "Farm" ) ) then
