@@ -139,6 +139,13 @@ if SERVER then
 			ply.JobCooldown = CurTime() + 1800
 		end
 	end )
+
+	hook.Add( "PlayerInitialSpawn", "CityRPInitialSpawn", function( ply )
+		--Hacky solution to drawing text above item NPCs, to keep code consistent between servers and GitHub
+		timer.Simple( 30, function()
+			ply:SendLua( [[for k,v in ipairs( ents.FindByClass( "npc_item" ) ) do v.Draw = function() v:DrawNPCText( ItemNPCType[v:GetNPCType()].Name ) end end]] )
+		end )
+	end )
 end
 
 if CLIENT then
