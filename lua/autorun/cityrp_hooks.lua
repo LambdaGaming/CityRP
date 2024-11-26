@@ -85,10 +85,10 @@ if SERVER then
 
 	--Apply lottery tax
 	hook.Add( "lotteryEnded", "LotteryTax", function( players, chosen, amount )
-		local tax = math.Round( amount * 0.25 )
+		local tax = amount * ( GetGlobalInt( "MAYOR_EcoTax" ) * 0.01 )
 		chosen:addMoney( -tax )
 		AddVaultFunds( tax )
-		DarkRP.notify( chosen, 0, 6, "The city has taken 25% of your winnings ("..DarkRP.formatMoney( tax )..") as tax." )
+		DarkRP.notify( chosen, 0, 6, "The city has taken "..GetGlobalInt( "MAYOR_EcoTax" ).."% of your winnings ("..DarkRP.formatMoney( tax )..") as tax." )
 	end )
 
 	hook.Add( "ItemNPC_CanUse", "ItemNPCCanUse", function( ply, npc )
