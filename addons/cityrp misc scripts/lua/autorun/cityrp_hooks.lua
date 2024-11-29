@@ -149,16 +149,11 @@ if CLIENT then
 		end
 	end )
 
-	hook.Add( "InitPostEntity", "InitEntityNPCText", function()
-		print("works")
-		for k,v in ipairs( ents.FindByClass( "npc_item" ) ) do
-			v.Draw = function()
-				local type = v:GetNPCType()
-				local name = ItemNPCType[type].Name
-				v:DrawNPCText( name )
-				print(type)
-			end
-		end
+	--Draw text on item NPCs
+	hook.Add( "ItemNPC_OnDraw", "ItemNPCDraw", function( npc )
+		local type = npc:GetNPCType()
+		local name = ItemNPCType[type].Name
+		npc:DrawNPCText( name )
 	end )
 end
 
