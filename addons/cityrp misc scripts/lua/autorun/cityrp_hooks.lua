@@ -139,13 +139,6 @@ if SERVER then
 			ply.JobCooldown = CurTime() + 1800
 		end
 	end )
-
-	hook.Add( "PlayerInitialSpawn", "CityRPInitialSpawn", function( ply )
-		--Hacky solution to drawing text above item NPCs, to keep code consistent between servers and GitHub
-		timer.Simple( 30, function()
-			ply:SendLua( [[for k,v in ipairs( ents.FindByClass( "npc_item" ) ) do v.Draw = function() v:DrawNPCText( ItemNPCType[v:GetNPCType()].Name ) end end]] )
-		end )
-	end )
 end
 
 if CLIENT then
@@ -153,6 +146,18 @@ if CLIENT then
 	hook.Add( "OnEntityCreated", "PhotonSuppress", function( ent )
 		if ent:GetClass() == "prop_vehicle_jeep" then
 			ent.PhotonAlertedMissingRequirements = true
+		end
+	end )
+
+	hook.Add( "InitPostEntity", "InitEntityNPCText", function()
+		print("works")
+		for k,v in ipairs( ents.FindByClass( "npc_item" ) ) do
+			v.Draw = function()
+				local type = v:GetNPCType()
+				local name = ItemNPCType[type].Name
+				v:DrawNPCText( name )
+				print(type)
+			end
 		end
 	end )
 end

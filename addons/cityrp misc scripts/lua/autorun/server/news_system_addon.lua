@@ -1,6 +1,6 @@
 local prefixlist = { ["/"] = true, ["!"] = true, ["@"] = true }
 
-timer.Create( "news_pay_loop", 60, 0, function()
+timer.Create( "news_pay_loop", 180, 0, function()
 	if team.NumPlayers( TEAM_CAMERA ) <= 0 then return end
 	for k,v in ipairs( team.GetPlayers( TEAM_CAMERA ) ) do
 		local tvs = ents.FindByClass( "news_tv" )
