@@ -2,6 +2,7 @@ local map = game.GetMap()
 PropertyTaxWarnings = {}
 
 function PropertySystemSaveEnts( id )
+	if !GetConVar( "PropertySavingEnabled" ):GetBool() then return end
 	for k,v in pairs( OwnedProperties ) do
 		v.Saved = {}
 		if IsValid( player.GetBySteamID64( id or v.Owner ) ) then
@@ -25,7 +26,7 @@ function PropertySystemLoad()
 	if file.Exists( "properties/default/"..map..".json", "DATA" ) then
 		PropertyTable = util.JSONToTable( file.Read( "properties/default/"..map..".json" ) )
 	end
-	if file.Exists( "properties/saved/"..map..".json", "DATA" ) then
+	if GetConVar( "PropertySavingEnabled" ):GetBool() and file.Exists( "properties/saved/"..map..".json", "DATA" ) then
 		OwnedProperties = util.JSONToTable( file.Read( "properties/saved/"..map..".json" ) )
 	end
 	SyncPropertyTable()

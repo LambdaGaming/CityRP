@@ -1,6 +1,8 @@
 PropertyTable = {}
 OwnedProperties = {}
 
+local savingEnabled = CreateConVar( "PropertySavingEnabled", "0", { FCVAR_ARCHIVE, FCVAR_REPLICATED }, "Enable/disable saving properties across sessions." )
+
 if CLIENT then
 	net.Receive( "SyncPropertyTables", function()
 		local tbl = net.ReadTable()
@@ -30,6 +32,13 @@ if CLIENT then
 		if blacklist[class] then return true end
 		return false
 	end
+
+	hook.Add( "CanProperty", "CheckSavingEnabled", function( ply, property, ent )
+		if property == "propertysave" and !savingEnabled:GetBool() then
+			DarkRP.notify( ply, 1, 6, "Cross-session property ownership is currently disabled." )
+			return false
+		end
+	end )
 end
 
 if SERVER then
@@ -54,7 +63,7 @@ properties.Add( "propertysave", {
 	Filter = function( self, ent, ply )
 		local owner = IsValid( ent:GetOwner() ) and ent:GetOwner() or ent:CPPIGetOwner() or ent:GetNWEntity( "Owner" )
 		if IsValid( owner ) and owner == ply and !PropertyBlacklisted( ent ) then
-			local onproperty
+			local onproperty = false
 			for k,v in pairs( OwnedProperties ) do
 				local property = PropertyTable[k]
 				local upper = property.BoundaryUpper
@@ -80,6 +89,7 @@ properties.Add( "propertysave", {
 	Receive = function( self, len, ply )
 		local ent = net.ReadEntity()
 		local index = net.ReadString()
+		if !savingEnabled:GetBool() then return end
 		ent:SetNWString( "SavedProperty", index )
 		FreezePropertyEnt( ent )
 		PropertySystemSaveEnts()
@@ -105,6 +115,7 @@ properties.Add( "propertyremovesave", {
 	end,
 	Receive = function( self, len, ply )
 		local ent = net.ReadEntity()
+		if !savingEnabled:GetBool() then return end
 		ent:SetNWString( "SavedProperty", "" )
 		UnfreezePropertyEnt( ent )
 		PropertySystemSaveEnts()
