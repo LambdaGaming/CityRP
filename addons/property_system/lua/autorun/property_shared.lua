@@ -35,7 +35,6 @@ if CLIENT then
 
 	hook.Add( "CanProperty", "CheckSavingEnabled", function( ply, property, ent )
 		if property == "propertysave" and !savingEnabled:GetBool() then
-			DarkRP.notify( ply, 1, 6, "Cross-session property ownership is currently disabled." )
 			return false
 		end
 	end )
