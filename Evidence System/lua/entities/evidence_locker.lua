@@ -65,7 +65,7 @@ if SERVER then
 	end )
 
 	function ENT:BreakOpen( ply )
-		local e = ents.Create( "electronic" )
+		local e = ents.Create( "ucs_pcb" )
 		e:SetPos( self:GetPos() + self:GetForward() * 30 )
 		e:Spawn()
 	end

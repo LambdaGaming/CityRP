@@ -52,7 +52,7 @@ function ENT:OnTakeDamage( damage )
 	local ply = damage:GetAttacker()
 	local wep = ply:GetActiveWeapon():GetClass()
 	local hp = self:Health()
-	if ply:IsPlayer() and ply:Team() == TEAM_TOWER and wep == "mgs_pickaxe" then
+	if ply:IsPlayer() and ply:Team() == TEAM_TOWER and wep == "weapon_hl2pickaxe" then
 		local randinterval = math.random( 1, 5 )
 		self:SetHealth( hp - randinterval )
 	end
