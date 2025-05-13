@@ -16,11 +16,7 @@ function ENT:Initialize()
 		self:PhysicsInit( SOLID_VPHYSICS )
 		self:SetUseType( SIMPLE_USE )
 	end
- 
-    local phys = self:GetPhysicsObject()
-	if phys:IsValid() then
-		phys:Wake()
-	end
+	self:PhysWake()
 	self:SetMaterial( "models/debug/debugwhite" )
 	self:SetColor( color_darkgray )
 end

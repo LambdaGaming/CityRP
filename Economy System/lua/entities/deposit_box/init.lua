@@ -20,30 +20,26 @@ function ENT:Initialize()
 	self:SetSolid( SOLID_VPHYSICS )
 	self:SetUseType( SIMPLE_USE )
 	self:SetTrigger( true )
-
-    local phys = self:GetPhysicsObject()
-	if phys:IsValid() then
-		phys:Wake()
-	end
+	self:PhysWake()
 	self:Open()
 end
 
-function ENT:Use( activator, caller )
-	if activator:Team() == TEAM_BANKER then
+function ENT:Use( ply )
+	if ply:Team() == TEAM_BANKER then
 		if self.MoneyOwner and !self.MoneyOwner.PendingRequest then
-			DarkRP.notify( activator, 0, 6, "Sending request to "..self.MoneyOwner:Nick().." to have their money withdrawn." )
+			DarkRP.notify( ply, 0, 6, "Sending request to "..self.MoneyOwner:Nick().." to have their money withdrawn." )
 			self.MoneyOwner:ChatPrint( "WARNING: The banker is attempting to withdraw money from your deposit box. If you authorized this, type !withdraw. Otherwise, you can safely ignore this message." )
 			DarkRP.notify( self.MoneyOwner, 0, 10, "WARNING: The banker is attempting to withdraw money from your deposit box. If you authorized this, type !withdraw." )
 			self.MoneyOwner.PendingRequest = true
 			self.MoneyOwner.RequestedBox = self
 			timer.Create( "WithdrawRequest"..self.MoneyOwner:EntIndex(), 60, 1, function()
-				DarkRP.notify( activator, 1, 6, self.MoneyOwner:Nick().." did not accept your request." )
+				DarkRP.notify( ply, 1, 6, self.MoneyOwner:Nick().." did not accept your request." )
 			end )
 		else
-			DarkRP.notify( activator, 1, 6, "This deposit box doesn't have an owner." )
+			DarkRP.notify( ply, 1, 6, "This deposit box doesn't have an owner." )
 		end
 	else
-		DarkRP.notify( activator, 1, 6, "Only bankers can withdraw money from deposit boxes. If you wish to rob this deposit box, use a lockpick." )
+		DarkRP.notify( ply, 1, 6, "Only bankers can withdraw money from deposit boxes. If you wish to rob this deposit box, use a lockpick." )
 	end
 end
 

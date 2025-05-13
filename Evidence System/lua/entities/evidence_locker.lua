@@ -18,10 +18,7 @@ function ENT:Initialize()
 		self:SetUseType( SIMPLE_USE )
 		EvidenceLockerStash = {}
 	end
-    local phys = self:GetPhysicsObject()
-	if phys:IsValid() then
-		phys:Wake()
-	end
+	self:PhysWake()
 	self.BreakOpenHealthMax = 15
 	self.BreakOpenHealth = 15
 	self.BreakOpenBroken = false

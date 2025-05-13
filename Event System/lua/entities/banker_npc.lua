@@ -15,11 +15,7 @@ function ENT:Initialize()
 		self:SetSolid( SOLID_BBOX )
 		self:SetCollisionGroup( COLLISION_GROUP_PLAYER )
 	end
-	local phys = self:GetPhysicsObject()
-	if IsValid( phys ) then
-		phys:Wake()
-	end
-	
+	self:PhysWake()
 	self.checkused = false
 end
 

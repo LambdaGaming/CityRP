@@ -8,16 +8,6 @@ ENT.Spawnable = true
 ENT.AdminOnly = true
 ENT.Category = "Superadmin Only"
 
-function ENT:SpawnFunction( ply, tr, name )
-	if !tr.Hit then return end
-	local SpawnPos = tr.HitPos + tr.HitNormal - 5
-	local ent = ents.Create( name )
-	ent:SetPos( SpawnPos )
-	ent:Spawn()
-	ent:Activate()
-	return ent
-end
-
 function ENT:Initialize()
     self:SetModel( "models/props_debris/plaster_floor003a.mdl" )
 	self:SetMoveType( MOVETYPE_NONE )
@@ -60,10 +50,4 @@ function ENT:OnTakeDamage( damage )
 		RoadWorkEnd( ply, self )
 		self:Remove()
 	end
-end
-
-if CLIENT then
-    function ENT:Draw()
-        self:DrawModel()
-    end
 end

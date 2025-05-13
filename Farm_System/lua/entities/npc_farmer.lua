@@ -1,4 +1,3 @@
-
 AddCSLuaFile()
 
 ENT.Base = "base_ai"
@@ -9,16 +8,6 @@ ENT.Spawnable = true
 ENT.AdminOnly = true
 ENT.Category = "Farm System"
 ENT.AutomaticFrameAdvance = true
-
-function ENT:SpawnFunction( ply, tr, name )
-	if !tr.Hit then return end
-	local SpawnPos = tr.HitPos + tr.HitNormal * 1
-	local ent = ents.Create( name )
-	ent:SetPos( SpawnPos )
-	ent:Spawn()
-	ent:Activate()
-	return ent
-end
 
 function ENT:Initialize()
 	self:SetModel( "models/Humans/Group02/male_06.mdl" )

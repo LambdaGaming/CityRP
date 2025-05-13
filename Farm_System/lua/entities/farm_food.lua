@@ -1,4 +1,3 @@
-
 AddCSLuaFile()
 
 ENT.Type = "anim"
@@ -23,23 +22,13 @@ function ENT:Initialize()
 		self:PhysicsInit( SOLID_VPHYSICS )
 		self:SetUseType( SIMPLE_USE )
 	end
- 
-    local phys = self:GetPhysicsObject()
-	if phys:IsValid() then
-		phys:Wake()
-	end
+	self:PhysWake()
 end
 
-function ENT:Use( activator, caller )
+function ENT:Use( ply )
 	local PlantType = self:GetPlantType()
 	local PlantTable = PlantTypes[PlantType]
-	activator:SetHealth( math.Clamp( activator:Health() + PlantTable.HealthAmount, 0, activator:GetMaxHealth() ) )
+	ply:SetHealth( math.Clamp( ply:Health() + PlantTable.HealthAmount, 0, ply:GetMaxHealth() ) )
 	self:EmitSound( "npc/barnacle/barnacle_crunch"..math.random( 2, 3 )..".wav" )
 	self:Remove()
-end
-
-if CLIENT then
-    function ENT:Draw()
-        self:DrawModel()
-    end
 end

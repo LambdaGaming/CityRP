@@ -42,11 +42,7 @@ function ENT:Initialize()
 		self:SetHealth( 200 )
 		self:SetMaxHealth( 200 )
 	end
- 
-    local phys = self:GetPhysicsObject()
-	if phys:IsValid() then
-		phys:Wake()
-	end
+	self:PhysWake()
 	self:SetNWBool( "TurnedOn", false )
 	timer.Create( "LampFire"..self:EntIndex(), 300, 0, function()
 		if self:GetNWBool( "TurnedOn" ) then
@@ -154,10 +150,4 @@ function ENT:OnTakeDamage( dmg )
 		e:Fire( "Explode", 0, 0 )
 		self:Remove()
 	end
-end
-
-if CLIENT then
-    function ENT:Draw()
-        self:DrawModel()
-    end
 end

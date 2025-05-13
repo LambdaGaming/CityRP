@@ -8,16 +8,6 @@ ENT.Spawnable = true
 ENT.AdminOnly = true
 ENT.Category = "Life Alert System"
 
-function ENT:SpawnFunction( ply, tr, name )
-	if !tr.Hit then return end
-	local SpawnPos = tr.HitPos + tr.HitNormal
-	local ent = ents.Create( name )
-	ent:SetPos( SpawnPos )
-	ent:Spawn()
-	ent:Activate()
-	return ent
-end
-
 function ENT:Initialize()
     self:SetModel( "models/props_lab/reciever01d.mdl" )
 	self:SetMoveType(MOVETYPE_VPHYSICS)
@@ -26,22 +16,16 @@ function ENT:Initialize()
 		self:PhysicsInit(SOLID_VPHYSICS)
 		self:SetUseType(SIMPLE_USE)
 	end
- 
-    local phys = self:GetPhysicsObject()
-	if phys:IsValid() then
-		phys:Wake()
-	end
+	self:PhysWake()
 end
 
-function ENT:Use( activator, caller )
-	if IsValid( caller ) and caller:IsPlayer() then
-		if caller.haslifealert then
-			caller:ChatPrint( "You already have life alert!" )
-		else
-			caller.haslifealert = true
-			caller:ChatPrint( "You now have life alert!" )
-			self:EmitSound( "buttons/button18.wav" )
-			self:Remove()
-		end
+function ENT:Use( ply )
+	if ply.haslifealert then
+		ply:ChatPrint( "You already have life alert!" )
+		return
 	end
+	ply.haslifealert = true
+	ply:ChatPrint( "You now have life alert!" )
+	self:EmitSound( "buttons/button18.wav" )
+	self:Remove()
 end

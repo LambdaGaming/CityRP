@@ -19,11 +19,7 @@ function ENT:Initialize()
 		self:SetHealth( 300 )
 		self:SetMaxHealth( 300 )
 	end
- 
-    local phys = self:GetPhysicsObject()
-	if phys:IsValid() then
-		phys:Wake()
-	end
+	self:PhysWake()
 end
 
 if SERVER then

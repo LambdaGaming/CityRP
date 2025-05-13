@@ -8,16 +8,6 @@ ENT.Spawnable = true
 ENT.AdminOnly = true
 ENT.Category = "Superadmin Only"
 
-function ENT:SpawnFunction( ply, tr, name )
-	if !tr.Hit then return end
-	local SpawnPos = tr.HitPos + tr.HitNormal
-	local ent = ents.Create( name )
-	ent:SetPos( SpawnPos )
-	ent:Spawn()
-	ent:Activate()
-	return ent
-end
-
 function ENT:Initialize()
 	self:SetModel( "models/props/cs_assault/MoneyPallet03A.mdl" )
 	self:SetMoveType( MOVETYPE_VPHYSICS )
@@ -30,11 +20,7 @@ function ENT:Initialize()
 		self.NextBag = 0
 		self.BagsLeft = 0
 	end
- 
-	local phys = self:GetPhysicsObject()
-	if phys:IsValid() then
-		phys:Wake()
-	end
+	self:PhysWake()
 end
 
 if SERVER then

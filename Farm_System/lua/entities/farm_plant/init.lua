@@ -11,14 +11,10 @@ function ENT:Initialize()
 	self:SetMaxHealth( 50 )
 	self:SetUseType( SIMPLE_USE )
 	self:PrecacheGibs()
- 
-    local phys = self:GetPhysicsObject()
-	if phys:IsValid() then
-		phys:Wake()
-	end
+	self:PhysWake()
 end
 
-function ENT:Use( activator, caller )
+function ENT:Use( ply )
 	if self:GetPlanted() and !self:ReadyForHarvest() then return end --Don't need to do anything while the plant is growing
 
 	local PlantType = self:GetPlantType()

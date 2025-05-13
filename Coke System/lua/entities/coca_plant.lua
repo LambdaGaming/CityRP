@@ -19,11 +19,7 @@ function ENT:Initialize()
 		self:SetMaxHealth( 100 )
 		self:PrecacheGibs()
 	end
- 
-    local phys = self:GetPhysicsObject()
-	if phys:IsValid() then
-		phys:Wake()
-	end
+	self:PhysWake()
 	self:SetNWInt( "Growth", 0 )
 end
 
@@ -32,7 +28,7 @@ function ENT:FullyGrown()
 end
 
 if SERVER then
-	function ENT:Use( caller, activator )
+	function ENT:Use( ply )
 		if self:FullyGrown() then
 			local e = ents.Create( "raw_cocaine" )
 			e:SetPos( self:GetPos() )
@@ -40,7 +36,7 @@ if SERVER then
 			self:EmitSound( "physics/glass/glass_impact_soft"..math.random( 1, 3 )..".wav" )
 			self:Remove()
 		else
-			DarkRP.notify( caller, 1, 6, "You cannot harvest this plant yet." )
+			DarkRP.notify( ply, 1, 6, "You cannot harvest this plant yet." )
 		end
 	end
 

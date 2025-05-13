@@ -8,16 +8,6 @@ ENT.Spawnable = true
 ENT.AdminOnly = true
 ENT.Category = "Superadmin Only"
 
-function ENT:SpawnFunction( ply, tr, name )
-	if !tr.Hit then return end
-	local SpawnPos = tr.HitPos + tr.HitNormal
-	local ent = ents.Create( name )
-	ent:SetPos( SpawnPos )
-	ent:Spawn()
-	ent:Activate()
-	return ent
-end
-
 function ENT:Initialize()
     self:SetModel( "models/props/cs_assault/firehydrant.mdl" )
 	self:SetMoveType( MOVETYPE_VPHYSICS )
@@ -26,21 +16,17 @@ function ENT:Initialize()
 		self:PhysicsInit( SOLID_VPHYSICS )
 		self:SetUseType( SIMPLE_USE )
 	end
- 
-    local phys = self:GetPhysicsObject()
-	if phys:IsValid() then
-		phys:Wake()
-	end
+	self:PhysWake()
 	self.Connection = NULL
 	self.HostTruck = NULL
 end
 
 if SERVER then
 	util.AddNetworkString( "OpenHoseNodeMenu" )
-	function ENT:Use( activator, caller )
+	function ENT:Use( ply )
 		net.Start( "OpenHoseNodeMenu" )
 		net.WriteEntity( self )
-		net.Send( activator )
+		net.Send( ply )
 	end
 
 	util.AddNetworkString( "FireNodeAction" )
