@@ -47,10 +47,10 @@ if SERVER then
 		}
 	}
 
-	function SpawnVehicle( ply, class, type, noenter, pos, ang )
-		local vehlist = list.GetForEdit( "Vehicles" )[class]
+	function SpawnVehicle( ply, name, type, noenter, pos, ang )
+		local vehlist = list.Get( "Vehicles" )[name]
 		if !vehlist then
-			print( "Tried to spawn a vehicle but its class ("..class..") doesn't exist." )
+			print( "Tried to spawn "..name.." but it doesn't seem to exist." )
 			return
 		end
 	
@@ -69,10 +69,14 @@ if SERVER then
 				e:SetKeyValue( k, v )
 			end
 		end
-		e.VehicleTable = vehlist
 		e:Spawn()
 		e:Activate()
 		e:SetNWEntity( "VehicleOwner", ply )
+		e:SetVehicleClass( name )
+		e.VehicleName = name
+		e.VehicleTable = vehlist
+		e.ClassOverride = vehlist.Class
+
 		if !noenter then
 			ply:EnterVehicle( e )
 		end
