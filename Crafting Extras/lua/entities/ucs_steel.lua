@@ -10,7 +10,7 @@ ENT.Category = "Universal Crafting System"
 
 function ENT:Initialize()
 	if SERVER then
-		self:SetModel( "models/props_c17/tools_wrench01a.mdl" )
+		self:SetModel( "models/mechanics/solid_steel/i_beam_4.mdl" )
 		self:PhysicsInit( SOLID_VPHYSICS )
 		self:SetMoveType( MOVETYPE_VPHYSICS )
 		self:SetSolid( SOLID_VPHYSICS )
