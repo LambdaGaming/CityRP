@@ -21,8 +21,7 @@ MineableEntity["tree"] = {
 CraftingTable["default"] = {
 	Name = "Crafting Table",
 	Model = "models/props_wasteland/controlroom_desk001b.mdl",
-	AllowAutomation = true,
-	TextOffset = Vector( 0, 0, 30 )
+	AllowAutomation = true
 }
 
 CraftingIngredient["ucs_iron"] = {
