@@ -69,6 +69,14 @@ if SERVER then
 		local e = ents.Create( "ucs_pcb" )
 		e:SetPos( self:GetPos() + self:GetForward() * 30 )
 		e:Spawn()
+
+		local rand = math.random( 1, 10 )
+		if rand > 5 then
+			local bonus = { "item_suit_battery", "arc9_fas_p226", "arc9_fas_m4a1" }
+			local e = ents.Create( table.Random( bonus ) )
+			e:SetPos( self:GetPos() + self:GetForward() * 35 )
+			e:Spawn()
+		end
 	end
 
 	function ENT:Use( ply )
