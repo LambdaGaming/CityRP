@@ -61,8 +61,16 @@ if SERVER then
 			phys:EnableMotion( false )
 			phys:Wake()
 		end
-		
+		self.BreakOpenHealthMax = 15
+		self.BreakOpenHealth = 15
+		self.BreakOpenBroken = false
 		self.ActiveSwat = {}
+	end
+
+	function ENT:BreakOpen( ply )
+		local e = ents.Create( "ucs_pcb" )
+		e:SetPos( self:GetPos() + self:GetForward() * 30 )
+		e:Spawn()
 	end
 
 	function ENT:Use( ply )
