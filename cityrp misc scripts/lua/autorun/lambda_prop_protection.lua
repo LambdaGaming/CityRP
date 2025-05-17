@@ -11,8 +11,7 @@ local physblacklist = { --Entities that can't be physgunned by anyone but supera
 	["smuggle_sell"] = true,
 	["itemstore_bank"] = true,
 	["enterprise_atm"] = true,
-	["bank_vault"] = true,
-	["vault_money"] = true
+	["bank_vault"] = true
 }
 
 local defaultblock = { --Blocked for all players including superadmins

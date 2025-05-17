@@ -70,7 +70,7 @@ if SERVER then
 
 		hook.Add( "Think", "BankRobberyThink", function()
 			if self.NextBag <= CurTime() then
-				local e = ents.Create( "bank_money" )
+				local e = ents.Create( "money_bag" )
 				e:SetPos( self:GetPos() + Vector( 0, 0, 50 ) )
 				e:SetMoney( 4000 )
 				e:Spawn()

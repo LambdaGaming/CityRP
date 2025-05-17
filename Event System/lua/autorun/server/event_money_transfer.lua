@@ -15,7 +15,7 @@ end
 
 hook.Add( "PlayerUse", "BankerTransferUse", function( ply, ent )
 	if ent:GetClass() == "npc_item" and ent.HasMoneyBag then
-		local e = ents.Create( "bank_money" )
+		local e = ents.Create( "money_bag" )
 		e:SetPos( ent:GetPos() + ent:GetForward() * 10 )
 		e:SetMoney( 2000 )
 		e:Spawn()

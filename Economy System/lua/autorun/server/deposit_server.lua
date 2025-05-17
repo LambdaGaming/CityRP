@@ -24,7 +24,7 @@ local function ChatCommands( ply, text )
 				DarkRP.notifyAll( 1, 10, "Something went wrong and the deposit box owners ended up getting mismatched during the withdraw process. OP needs to fix this." )
 				return ""
 			end
-			local e = ents.Create( "deposit_bag" )
+			local e = ents.Create( "money_bag" )
 			e:SetPos( ply.RequestedBox:GetPos() + Vector( 0, 0, 30 ) )
 			e:SetAngles( ply.RequestedBox:GetAngles() )
 			e:Spawn()

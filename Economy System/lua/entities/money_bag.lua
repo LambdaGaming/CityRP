@@ -10,7 +10,7 @@ function ENT:SetupDataTables()
 end
 
 function ENT:Initialize()
-	self:SetModel( "models/props_c17/BriefCase001a.mdl" )
+	self:SetModel( "models/tobadforyou/duffel_bag.mdl" )
 	self:SetMoveType( MOVETYPE_VPHYSICS )
 	self:SetSolid( SOLID_VPHYSICS )
 	if SERVER then
@@ -22,6 +22,13 @@ end
 
 if SERVER then
 	function ENT:Use( ply )
+		if self.MoneyOwner and self.MoneyOwner == ply then
+			ply:addMoney( self.MoneyAmount )
+			DarkRP.notify( ply, 0, 6, "You have received "..DarkRP.formatMoney( self.MoneyAmount ).." from your money bag." )
+			self:Remove()
+			return
+		end
+
 		local foundNpc = false
 		local foundBank = false
 		local goodJob = ply:isCP() or ply:Team() == TEAM_BANKER
@@ -40,7 +47,7 @@ if SERVER then
 			if self.Legal then
 				NotifyJob( TEAM_BANKER, 1, 6, "Your money bag was stolen and cashed in!" )
 				MoneyTransferEnd()
-			elseif self.LastBag then
+			elseif self.LastBag or self.MoneyOwner then
 				SpawnBlueprint( ply, 6 )
 				local rand = math.random( 1, 10 )
 				if rand <= 3 then
@@ -49,7 +56,7 @@ if SERVER then
 					e:Spawn()
 					e:SetOwner( ply )
 				end
-				DarkRP.notify( ply, 0, 6, "You have also received extra items for cashing in the final bag." )
+				DarkRP.notify( ply, 0, 6, "You have also received bonus items." )
 			end
 		elseif foundBank and goodJob then
 			self:Remove()
@@ -87,7 +94,7 @@ if CLIENT then
 			local formatted = DarkRP.formatMoney( money )
 			ang:RotateAroundAxis( ang:Forward(), 90 )
 			cam.Start3D2D( pos + ang:Up() * 4.2, ang, 0.04 )
-				draw.SimpleText( "Bank Money", "MoneyBag", 0, 0, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 3, color_black )
+				draw.SimpleText( "Money Bag", "MoneyBag", 0, 0, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 3, color_black )
 				draw.SimpleText( formatted, "MoneyBag", 0, 50, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 3, color_black )
 			cam.End3D2D()
 		end
