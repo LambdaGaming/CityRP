@@ -37,8 +37,8 @@ function ENT:Initialize()
 	self:PhysWake()
 end
 
-function ENT:Use( caller, activator )
-	DarkRP.notify( caller, 0, 6, "Place this near a crafting table to use it." )
+function ENT:Use( ply )
+	DarkRP.notify( ply, 0, 6, "Place this near a crafting table to use it." )
 end
 
 if CLIENT then
