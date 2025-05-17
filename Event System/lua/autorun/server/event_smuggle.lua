@@ -42,6 +42,7 @@ function SmuggleStart( ply )
 	prop:SetLocalAngles( angle_zero )
 	prop:Spawn()
 	DarkRP.notify( ply, 0, 6, "Deliver this truck to the Smuggler for a reward." )
+	ply:wanted( nil, "Smuggling stolen goods." )
 end
 
 function SmuggleEnd( ply )
