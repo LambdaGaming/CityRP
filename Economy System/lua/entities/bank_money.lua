@@ -5,6 +5,10 @@ ENT.Base = "base_gmodentity"
 ENT.PrintName = "Bank Money"
 ENT.Author = "Lambda Gaming"
 
+function ENT:SetupDataTables()
+	self:NetworkVar( "Int", "Money" )
+end
+
 function ENT:Initialize()
 	self:SetModel( "models/props_c17/BriefCase001a.mdl" )
 	self:SetMoveType( MOVETYPE_VPHYSICS )
@@ -18,21 +22,25 @@ end
 
 if SERVER then
 	function ENT:Use( ply )
-		local foundnpc = false
-		local foundbank = false
-		local goodjob = ply:isCP() or ply:Team() == TEAM_BANKER
-		for k,v in pairs( ents.FindInSphere( self:GetPos(), 200 ) ) do
-			if v:GetClass() == "banker_npc" then
-				foundnpc = true
+		local foundNpc = false
+		local foundBank = false
+		local goodJob = ply:isCP() or ply:Team() == TEAM_BANKER
+		for k,v in ipairs( ents.FindInSphere( self:GetPos(), 200 ) ) do
+			if v:GetClass() == "smuggle_sell" and !goodJob then
+				foundNpc = true
 			elseif v:GetClass() == "bank_vault" then
-				foundbank = true
+				foundBank = true
 			end
 		end
-		if foundnpc and !goodjob then
-			ply:addMoney( 4000 )
-			DarkRP.notify( ply, 0, 6, "You have received $4,000 for cashing in a stolen money bag." )
+		if foundNpc and !goodJob then
+			local money = self:GetMoney()
+			ply:addMoney( money )
+			DarkRP.notify( ply, 0, 6, "You have received "..DarkRP.formatMoney( money ).." for cashing in a stolen money bag." )
 			self:Remove()
-			if self.LastBag then
+			if self.Legal then
+				NotifyJob( TEAM_BANKER, 1, 6, "Your money bag was stolen and cashed in!" )
+				MoneyTransferEnd()
+			elseif self.LastBag then
 				SpawnBlueprint( ply, 6 )
 				local rand = math.random( 1, 10 )
 				if rand <= 3 then
@@ -43,15 +51,21 @@ if SERVER then
 				end
 				DarkRP.notify( ply, 0, 6, "You have also received extra items for cashing in the final bag." )
 			end
-		elseif foundbank and goodjob then
+		elseif foundBank and goodJob then
+			self:Remove()
+			if self.Legal then
+				AddVaultFunds( 2000 )
+				DarkRP.notify( ply, 0, 6, "You have deposited a money bag into the bank vault." )
+				MoneyTransferEnd()
+				return
+			end
 			AddVaultFunds( 4000 )
 			DarkRP.notify( ply, 0, 6, "You have returned stolen money to the bank vault." )
-			self:Remove()
 		else
-			if goodjob then
+			if goodJob then
 				DarkRP.notify( ply, 1, 6, "Take this bag back to the bank vault to return the stolen money." )
 			else
-				DarkRP.notify( ply, 1, 6, "Take this to the banker NPC to cash it in." )
+				DarkRP.notify( ply, 1, 6, "Take this to the smuggler to cash it in." )
 			end
 		end
 	end
@@ -69,10 +83,12 @@ if CLIENT then
 		if ply:GetPos():DistToSqr( self:GetPos() ) < 250000 then
 			local pos = self:GetPos()
 			local ang = self:GetAngles()
+			local money = self:GetMoney()
+			local formatted = DarkRP.formatMoney( money )
 			ang:RotateAroundAxis( ang:Forward(), 90 )
 			cam.Start3D2D( pos + ang:Up() * 4.2, ang, 0.04 )
 				draw.SimpleText( "Bank Money", "MoneyBag", 0, 0, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 3, color_black )
-				draw.SimpleText( "$4,000", "MoneyBag", 0, 50, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 3, color_black )
+				draw.SimpleText( formatted, "MoneyBag", 0, 50, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 3, color_black )
 			cam.End3D2D()
 		end
 	end

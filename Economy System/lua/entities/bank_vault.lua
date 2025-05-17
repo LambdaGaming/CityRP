@@ -72,6 +72,7 @@ if SERVER then
 			if self.NextBag <= CurTime() then
 				local e = ents.Create( "bank_money" )
 				e:SetPos( self:GetPos() + Vector( 0, 0, 50 ) )
+				e:SetMoney( 4000 )
 				e:Spawn()
 				e:SetOwner( ply )
 				AddVaultFunds( -4000 )

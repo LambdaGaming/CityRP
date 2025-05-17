@@ -19,36 +19,38 @@ function ENT:Initialize()
 	self:PhysWake()
 end
 
-function ENT:Use( activator, caller )
-	if self.MoneyOwner == activator then
-		activator:addMoney( self.MoneyAmount )
-		DarkRP.notify( activator, 0, 6, "You have received "..DarkRP.formatMoney( self.MoneyAmount ).." from your money bag." )
-		self:Remove()
-		return
-	end
+if SERVER then
+	function ENT:Use( ply )
+		if self.MoneyOwner == ply then
+			ply:addMoney( self.MoneyAmount )
+			DarkRP.notify( ply, 0, 6, "You have received "..DarkRP.formatMoney( self.MoneyAmount ).." from your money bag." )
+			self:Remove()
+			return
+		end
 
-	local foundbanker = false
-	for k,v in pairs( ents.FindInSphere( self:GetPos(), 200 ) ) do
-		if v:GetClass() == "banker_npc" then
-			foundbanker = true
-			break
+		local foundbanker = false
+		for k,v in ipairs( ents.FindInSphere( self:GetPos(), 200 ) ) do
+			if v:GetClass() == "smuggle_sell" then
+				foundbanker = true
+				break
+			end
 		end
-	end
-	if foundbanker then
-		activator:addMoney( self.MoneyAmount )
-		DarkRP.notify( activator, 0, 6, "You have received "..DarkRP.formatMoney( self.MoneyAmount ).." from a stolen money bag." )
-		local rand = math.random( 1, 10 )
-		if rand <= 3 then
-			local e = ents.Create( "printer_upgrade_output" )
-			e:SetPos( activator:GetPos() + Vector( 0, 0, 35 ) )
-			e:Spawn()
-			activator:ChatPrint( "As a special bonus you got a platinum money printer!" )
-			e:SetOwner( activator )
+		if foundbanker then
+			ply:addMoney( self.MoneyAmount )
+			DarkRP.notify( ply, 0, 6, "You have received "..DarkRP.formatMoney( self.MoneyAmount ).." from a stolen money bag." )
+			local rand = math.random( 1, 10 )
+			if rand <= 3 then
+				local e = ents.Create( "printer_upgrade_output" )
+				e:SetPos( ply:GetPos() + Vector( 0, 0, 35 ) )
+				e:Spawn()
+				ply:ChatPrint( "As a special bonus you got a platinum money printer!" )
+				e:SetOwner( ply )
+			end
+			SpawnBlueprint( ply, 6 )
+			DarkRP.notify( ply, 0, 6, "You have also been rewarded with a crafting blueprint." )
+			self:Remove()
+			return
 		end
-		SpawnBlueprint( activator, 6 )
-		DarkRP.notify( ply, 0, 6, "You have also been rewarded with a crafting blueprint." )
-		self:Remove()
-		return
+		DarkRP.notify( ply, 1, 6, "This money bag belongs to "..self.MoneyOwner:Nick()..". If you are stealing it, take it to the smuggler." )
 	end
-	DarkRP.notify( activator, 1, 6, "This money bag belongs to "..self.MoneyOwner:Nick()..". If you are stealing it, take it to the banker NPC." )
 end
