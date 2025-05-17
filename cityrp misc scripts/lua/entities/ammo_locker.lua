@@ -60,7 +60,7 @@ if SERVER then
 			return
 		end
 		if ( primaryname == "Buckshot" or primaryname == "Taser" ) and !ply:isCP() then
-			DarkRP.notify( ply, 1, 10, "Only police can purchase shotgun and taser ammo from this locker. You may be able to get it through more forceful means though..." )
+			DarkRP.notify( ply, 1, 10, "Only police can purchase shotgun and taser ammo from this locker. Shotgun ammo can be obtained by crafting." )
 			return
 		end
 		self.Used = true

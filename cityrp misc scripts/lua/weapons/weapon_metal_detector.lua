@@ -1,7 +1,7 @@
 AddCSLuaFile()
 
 SWEP.PrintName = "Metal Detector"
-SWEP.Category = "DarkRP"
+SWEP.Category = "DarkRP (Utility)"
 SWEP.Spawnable = true
 SWEP.AdminOnly = true
 SWEP.Base = "weapon_base"
@@ -56,12 +56,12 @@ local function CanConfiscateFrom( ply, target )
 end
 
 function SWEP:PrimaryAttack()
-	self:SetWeaponAnim( ACT_VM_PRIMARYATTACK )
+	self:SendWeaponAnim( ACT_VM_PRIMARYATTACK )
 	self:SetNextPrimaryFire( CurTime() + 1 )
 	self:SetNextSecondaryFire( CurTime() + 1 )
 	if SERVER then
-		local tr = ply:GetEyeTrace().Entity
 		local owner = self:GetOwner()
+		local tr = owner:GetEyeTrace().Entity
 		if !tr:IsPlayer() or owner:GetPos():DistToSqr( tr:GetPos() ) > 10000 then return end
 		local weps = tr:GetWeapons()
 		local found = {}

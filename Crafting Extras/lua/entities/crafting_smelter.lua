@@ -50,15 +50,19 @@ function ENT:Touch( ent )
 		self:SetSmelt( CraftingRecipe[finalClass].Name )
 		self.Smelting = true
 		self.SmeltSound:Play()
+		self.SmeltSound:ChangePitch( 30 )
 		local time = ( self.SmeltTable["ucs_iron"] or 1 ) * 30
 		timer.Simple( time, function()
 			if !IsValid( self ) then return end
-			local count = 0
+			local count = 1
 			for k,v in pairs( self.SmeltTable ) do
 				for i=1,v do
 					local e = ents.Create( k )
-					e:SetPos( self:GetPos() + ( self:GetForward() * 30 ) + Vector( 0, 0, count * 10 ) )
+					e:SetPos( self:GetPos() + ( self:GetForward() * 30 ) + Vector( 0, 0, count * 20 ) )
 					e:Spawn()
+					if k == "ucs_iron" then
+						e.DontSmelt = true
+					end
 					count = count + 1
 				end
 			end
@@ -66,28 +70,32 @@ function ENT:Touch( ent )
 			self:SetSmelt( "N/A" )
 			self.Smelting = false
 			self.SmeltSound:Stop()
+			self.SmeltTable = {}
 		end )
-	elseif class = "ucs_iron" then
+	elseif class == "ucs_iron" and !ent.DontSmelt then
 		ent:Remove()
 		self:SetSmelt( "Iron" )
 		self.Smelting = true
 		self.SmeltSound:Play()
+		self.SmeltSound:ChangePitch( 30 )
 		timer.Simple( 30, function()
 			if !IsValid( self ) then return end
 			local e = ents.Create( "ucs_steel" )
-			e:SetPos( self:GetPos() + self:GetForward() * 30 )
+			e:SetPos( self:GetPos() + self:GetForward() * 30 + Vector( 0, 0, 10 ) )
 			e:Spawn()
 			self:EmitSound( "ambient/fire/mtov_flame2.wav" )
 			self:SetSmelt( "N/A" )
 			self.Smelting = false
 			self.SmeltSound:Stop()
+			self.SmeltTable = {}
 		end )
 	end
 end
 
 if CLIENT then
+	local offset = Vector( 0, 10, 90 )
 	function ENT:Draw()
 		local smelt = self:GetSmelt()
-		self:DrawNPCText( "Currently Smelting: "..smelt )
+		self:DrawNPCText( "Currently Smelting: "..smelt, offset )
 	end
 end
