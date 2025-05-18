@@ -45,7 +45,8 @@ function ENT:Think()
 			start = self:GetPos() + Vector( 0, 0, 100 ),
 			endpos = self:GetPos() + self:GetAngles():Up() * 100000
 		} )
-		if tr.HitSky then --Make sure the plant is getting sunlight
+		local gotHeat = IsValid( tr.Entity ) and tr.Entity:GetClass() == "heat_lamp" and tr.Entity:GetActive()
+		if tr.HitSky or gotHeat then --Make sure the plant is getting sunlight or is below an active heat lamp
 			local amount = 1
 			if EcoPerkActive( "Cut Agricultural Budget" ) then
 				amount = 0.5
