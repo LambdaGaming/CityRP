@@ -47,7 +47,7 @@ if SERVER then
 			start = self:GetPos() + Vector( 0, 0, 50 ),
 			endpos = self:GetPos() + self:GetAngles():Up() * 200
 		} )
-		if IsValid( tr.Entity ) and tr.Entity:GetClass() == "heat_lamp" and tr.Entity:GetNWInt( "TurnedOn" ) then
+		if IsValid( tr.Entity ) and tr.Entity:GetClass() == "heat_lamp" and tr.Entity:GetActive() then
 			local amount = 1
 			if EcoPerkActive( "Cut Agricultural Budget" ) then
 				amount = 0.5
