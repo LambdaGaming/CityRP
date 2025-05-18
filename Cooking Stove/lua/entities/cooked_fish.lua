@@ -21,7 +21,7 @@ end
 
 function ENT:Use( ply )
 	ply:SetHealth( ply:GetMaxHealth() )
-	ply:setSelfDarkRPVar( "Energy", 100 )
+	ply:setDarkRPVar( "Energy", 100 )
 	self:EmitSound( "npc/barnacle/barnacle_gulp"..math.random( 1, 2 )..".wav" )
 	self:Remove()
 end

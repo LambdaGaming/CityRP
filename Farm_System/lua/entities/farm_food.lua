@@ -16,7 +16,7 @@ function ENT:Initialize()
     self:SetModel( PlantTable.FoodModel )
 	self:SetMoveType( MOVETYPE_VPHYSICS )
 	self:SetSolid( SOLID_VPHYSICS )
-	self:SetMaterial( PlantTable.FoodMaterial )
+	self:SetMaterial( PlantTable.FoodMaterial or "" )
 	self:SetColor( PlantTable.LabelColor )
 	if SERVER then
 		self:PhysicsInit( SOLID_VPHYSICS )
@@ -28,7 +28,9 @@ end
 function ENT:Use( ply )
 	local PlantType = self:GetPlantType()
 	local PlantTable = PlantTypes[PlantType]
-	ply:SetHealth( math.Clamp( ply:Health() + PlantTable.HealthAmount, 0, ply:GetMaxHealth() ) )
+	local amount = PlantTable.HealthAmount
+	ply:SetHealth( math.Clamp( ply:Health() + amount, 0, ply:GetMaxHealth() ) )
+	ply:setDarkRPVar( "Energy", math.Clamp( ply:getDarkRPVar( "Energy" ) + ( amount * 0.5 ), 0, 100 ) )
 	self:EmitSound( "npc/barnacle/barnacle_crunch"..math.random( 2, 3 )..".wav" )
 	self:Remove()
 end
