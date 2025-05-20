@@ -22,10 +22,14 @@ function ENT:Use( ply )
 	if self:GetPlanted() then
 		if self:ReadyForHarvest() then
 			for i=1, PlantTable.HarvestAmount do
-				local e = ents.Create( "farm_food" )
-				e:SetPos( self:GetPos() + Vector( 0, 0, i * 5 ) )
-				e:SetPlantType( self:GetPlantType() )
-				e:Spawn()
+				if PlantTable.HarvestOverride then
+					PlantTable.HarvestOverride( self, i )
+				else
+					local e = ents.Create( "farm_food" )
+					e:SetPos( self:GetPos() + Vector( 0, 0, i * 5 ) )
+					e:SetPlantType( self:GetPlantType() )
+					e:Spawn()
+				end
 			end
 			self:EmitSound( "physics/surfaces/sand_impact_bullet"..math.random( 1, 4 )..".wav" )
 			self:SetGrowth( 0 )
@@ -45,7 +49,8 @@ function ENT:Think()
 			start = self:GetPos() + Vector( 0, 0, 100 ),
 			endpos = self:GetPos() + self:GetAngles():Up() * 100000
 		} )
-		local gotHeat = IsValid( tr.Entity ) and tr.Entity:GetClass() == "heat_lamp" and tr.Entity:GetActive()
+		local lamp = tr.Entity
+		local gotHeat = IsValid( lamp ) and lamp:GetClass() == "heat_lamp" and lamp.Active
 		if tr.HitSky or gotHeat then --Make sure the plant is getting sunlight or is below an active heat lamp
 			local amount = 1
 			if EcoPerkActive( "Cut Agricultural Budget" ) then

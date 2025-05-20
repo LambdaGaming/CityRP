@@ -51,7 +51,7 @@ function ENT:Use( ply )
 end
 
 function ENT:StartTouch( ent )
-	if ent:GetClass() == "rp_weed" and !self.Infected then
+	if ent:GetClass() == "drug_weed" and !self.Infected then
 		ent:Remove()
 		self:EmitSound( "ambient/levels/canals/toxic_slime_gurgle"..math.random( 2, 8 )..".wav" )
 		self:SetColor( color_green )
