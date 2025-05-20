@@ -38,10 +38,12 @@ function ENT:Use( ply )
 	end
 	ply:AddOD( 1 )
 	ply:DrugEffect()
+	ply:SetDSP( 6 )
 	timer.Simple( 180, function()
 		if IsValid( ply ) then
 			ply:GodDisable()
 			ply:DrugEffect( true )
+			ply:SetDSP( 1 )
 		end
 	end )
 	self:Remove()

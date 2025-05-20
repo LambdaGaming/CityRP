@@ -20,12 +20,11 @@ if CLIENT then
 			hook.Add( "RenderScreenspaceEffects", "DrugEffects", function()
 				local ply = LocalPlayer()
 				local od = ply:GetNWInt( "Overdose" )
-				local intensity = od * 0.1
+				local intensity = ( od * 0.1 ) + 0.2
 				DrawMotionBlur( 0.4, intensity, 0.01 )
 				if od >= 5 then
 					DrawColorModify( tab )
 				end
-				ply:SetDSP( 26 )
 			end )
 		end
 	end )
@@ -39,9 +38,9 @@ if SERVER then
 		if od > 8 then
 			self:Kill()
 		elseif od >= 5 then
-			timer.Create( "ODGroan"..ply:EntIndex(), 5, 0, function()
-				if IsValid( ply ) and ply:GetNWInt( "Overdose" ) < 5 then
-					ply:EmitSound( "vo/npc/male01/moan0"..math.random( 1, 5 )..".wav" )
+			timer.Create( "ODGroan"..self:EntIndex(), 10, 0, function()
+				if IsValid( self ) then
+					self:EmitSound( "vo/npc/male01/moan0"..math.random( 1, 5 )..".wav" )
 				end
 			end )
 		end
@@ -50,6 +49,7 @@ if SERVER then
 	function meta:ResetOD()
 		self:SetRunSpeed( 245 )
 		self:SetWalkSpeed( 165 )
+		self:SetGravity( 1 )
 		self:SetNWInt( "Overdose", 0 )
 		timer.Remove( "ODGroan"..self:EntIndex() )
 	end
@@ -57,7 +57,7 @@ if SERVER then
 	util.AddNetworkString( "DrugEffects" )
 	function meta:DrugEffect( disable )
 		net.Start( "DrugEffects" )
-		net.WriteBool( disable )
+		net.WriteBool( disable or false )
 		net.Send( self )
 	end
 
@@ -69,6 +69,6 @@ end
 hook.Add( "SetupMove", "ODSpeed", function( ply, mv )
 	local od = ply:GetNWInt( "Overdose" )
 	if od >= 5 and od <= 8 then
-		mv:SetClientMaxSpeed( 100 )
+		mv:SetMaxClientSpeed( 100 )
 	end
 end )

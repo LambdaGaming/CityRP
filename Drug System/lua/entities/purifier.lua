@@ -64,7 +64,7 @@ if SERVER then
 					self.Snd:Play()
 				end
 			end )
-		elseif ent:GetClass() = "ent_gauto_fuel" then
+		elseif ent:GetClass() == "ent_gauto_fuel" then
 			self:EmitSound( "physics/metal/metal_barrel_impact_soft"..math.random( 1, 4 )..".wav" )
 			self:SetFuel( 100 )
 			ent:Remove()
