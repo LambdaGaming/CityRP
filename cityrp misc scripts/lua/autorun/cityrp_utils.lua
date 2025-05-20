@@ -157,7 +157,7 @@ else
 		ang:RotateAroundAxis( ang:Up(), 90 )
 		ang:RotateAroundAxis( ang:Forward(), 180 )
 		cam.Start3D2D( pos, ang, 0.035 )
-			draw.SimpleText( text, "NPCOverheadText", 0, 0, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP )
+			draw.DrawText( text, "NPCOverheadText", 0, 0, color_white, TEXT_ALIGN_CENTER )
 		cam.End3D2D()
 	end
 end
