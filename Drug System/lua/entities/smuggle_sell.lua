@@ -53,6 +53,13 @@ function ENT:Use( ply )
 						payout = payout + 200
 					end
 				elseif b.Class == "drug_cocaine" then
+					--Chance of being wanted
+					local rand = math.random( 1, 100 )
+					if rand > b.Stat then
+						ply:wanted( "Selling drugs" )
+						ply:ChatPrint( "The smuggler has refused your offer and called the cops because of your poor quality drugs." )
+						return
+					end
 					--Payout based on purity
 					payout = payout + ( b.Stat * 50 )
 				else
