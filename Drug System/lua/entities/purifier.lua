@@ -54,7 +54,7 @@ if SERVER then
 	end
 	
 	function ENT:StartTouch( ent )
-		if ent:GetClass() == "raw_cocaine" and !self.Purifying then
+		if ent:GetClass() == "raw_cocaine" and !self.Purifying and self:GetFuel() > 0 then
 			self.Purifying = true
 			ent:Remove()
 			self:EmitSound( "ambient/machines/combine_terminal_idle4.wav", 75, 70 )
@@ -78,7 +78,7 @@ if SERVER then
 				self:Ignite()
 			end
 			self:SetPurity( self:GetPurity() + 1 )
-			self:SetFuel( self:GetFuel() - 1 )
+			self:SetFuel( math.Clamp( self:GetFuel() - 3, 0, 100 ) )
 			if self:GetPurity() >= 100 or self:GetFuel() <= 0 then
 				self:ExtractCoke()
 			end
@@ -93,7 +93,7 @@ if SERVER then
 		if health > 0 then
 			self:SetHealth( health - d )
 		else
-			local explosion = ents.Create( "env_explosion" )			
+			local explosion = ents.Create( "env_explosion" )
 			explosion:SetPos( self:GetPos() )
 			explosion:SetKeyValue( "iMagnitude", 200 )
 			explosion:Spawn()
@@ -111,32 +111,15 @@ if SERVER then
 end
 
 if CLIENT then
+	local offset = Vector( 0, 0, 60 )
     function ENT:Draw()
-		self:DrawModel()
-		local plyShootPos = LocalPlayer():GetShootPos()
-		if self:GetPos():DistToSqr( plyShootPos ) < 562500 then
-			local pos = self:GetPos()
-			pos.z = pos.z + 15
-			local ang = self:GetAngles()
-			
-			surface.SetFont( "Bebas40Font" )
-			local title = "Purifier"
-			local tw = surface.GetTextSize( title )
-			ang:RotateAroundAxis( ang:Forward(), 90 )
-			ang:RotateAroundAxis( ang:Right(), 180 )
-			
-			local purity = self:GetPurity()
-			cam.Start3D2D( pos + ang:Right() * -10, ang, 0.2 )
-				draw.WordBox( 2, -tw *0.5 + 20, -130, title, "Bebas40Font", color_theme, color_white )
-			cam.End3D2D()
-			cam.Start3D2D( pos + ang:Right() * 1, ang, 0.2 )
-			draw.WordBox( 2, -tw *0.5 - 70, -140, "Fuel: "..self:GetFuel().."%", "Bebas40Font", color_theme, color_white )
-			if purity >= 0 then
-				draw.WordBox( 2, -tw *0.5 - 70, -150, "Purity: "..self:GetPurity().."%", "Bebas40Font", color_theme, color_white )
-			else
-				draw.WordBox( 2, -tw *0.5 - 70, -150, "Insert raw cocaine to start purifying", "Bebas40Font", color_theme, color_white )
-			end
-			cam.End3D2D()
+		local txt = "Purifier\nFuel: "..self:GetFuel().."%\n"
+		local purity = self:GetPurity()
+		if purity >= 0 then
+			txt = txt.."Purity: "..purity.."%"
+		else
+			txt = txt.."Insert raw cocaine to start purifying"
 		end
+		self:DrawNPCText( txt, offset )
 	end
 end
