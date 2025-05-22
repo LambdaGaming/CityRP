@@ -1,11 +1,3 @@
-local function Explode( pos )
-    local explode = ents.Create( "env_explosion" )
-    explode:SetPos( pos )
-    explode:Spawn()
-    explode:SetKeyValue( "iMagnitude", 100 )
-    explode:Fire( "Explode", 0, 0 )
-end
-
 local function CreateProp( pos, ang, model )
     local e = ents.Create( "prop_physics" )
     e:SetPos( pos )
@@ -18,7 +10,7 @@ local function CreateProp( pos, ang, model )
 end
 
 local function BlowUp( ply, veh )
-	Explode( veh:GetPos() )
+	CreateExplosion( veh:GetPos(), 100 )
 	veh:Remove()
 	local prop = CreateProp( veh:GetPos(), veh:GetAngles(), veh:GetModel() )
 	prop:GetPhysicsObject():SetVelocity( veh:GetVelocity() + Vector( 0, 0, 500 ) )

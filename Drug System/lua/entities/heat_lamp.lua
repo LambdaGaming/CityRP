@@ -136,11 +136,7 @@ if SERVER then
 			self:SetHealth( health - d )
 		else
 			self:TurnOff()
-			local e = ents.Create( "env_explosion" )
-			e:SetPos( self:GetPos() )
-			e:Spawn()
-			e:SetKeyValue( "iMagnitude", "100" )
-			e:Fire( "Explode", 0, 0 )
+			CreateExplosion( self:GetPos(), 100 )
 			self:Remove()
 		end
 	end

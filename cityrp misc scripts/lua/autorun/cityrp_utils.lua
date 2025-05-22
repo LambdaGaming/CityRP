@@ -133,6 +133,14 @@ if SERVER then
 			DarkRP.notify( v, typ, time, text )
 		end
 	end
+
+	function CreateExplosion( pos, magnitude )
+		local e = ents.Create( "env_explosion" )
+		e:SetPos( pos )
+		e:Spawn()
+		e:SetKeyValue( "iMagnitude", tostring( magnitude ) )
+		e:Fire( "Explode", 0, 0 )
+	end
 else
 	--NPC text drawing function, modified from https://github.com/Bhoonn/bh_accessories/blob/main/lua/entities/bh_acc_vendor/cl_init.lua
 	local ent = FindMetaTable( "Entity" )
