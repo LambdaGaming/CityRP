@@ -1,11 +1,11 @@
 if CLIENT then
 	local tab = {
-		["$pp_colour_addr"] = 0,
+		["$pp_colour_addr"] = 0.4,
 		["$pp_colour_addg"] = 0,
 		["$pp_colour_addb"] = 0,
 		["$pp_colour_brightness"] = 0,
 		["$pp_colour_colour"] = 1,
-		["$pp_colour_inv"] = 1,
+		["$pp_colour_inv"] = 0,
 		["$pp_colour_contrast"] = 1,
 		["$pp_colour_mulr"] = 0,
 		["$pp_colour_mulg"] = 0,
@@ -63,6 +63,7 @@ if SERVER then
 
 	hook.Add( "PlayerDeath", "ResetOD", function( ply )
 		ply:ResetOD()
+		ply:DrugEffect( true )
 	end )
 end
 
