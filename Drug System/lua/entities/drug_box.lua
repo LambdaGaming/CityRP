@@ -37,7 +37,7 @@ function ENT:StartTouch( ent )
 	elseif class == "drug_cocaine" then
 		stat = ent:GetPurity()
 	else
-		stat = ent:GetIngredients()
+		stat = ent.Quality
 	end
 	table.insert( self.Drugs, { Class = class, Stat = stat } )
 	ent:Remove()

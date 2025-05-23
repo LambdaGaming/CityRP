@@ -1,6 +1,6 @@
 if CLIENT then
 	local tab = {
-		["$pp_colour_addr"] = 0.4,
+		["$pp_colour_addr"] = 0.2,
 		["$pp_colour_addg"] = 0,
 		["$pp_colour_addb"] = 0,
 		["$pp_colour_brightness"] = 0,
@@ -35,6 +35,7 @@ if SERVER then
 	function meta:AddOD( amount )
 		local od = self:GetNWInt( "Overdose", 0 ) + amount
 		self:SetNWInt( "Overdose", od )
+		self:EmitSound( "vo/npc/male01/moan0"..math.random( 1, 5 )..".wav" )
 		if od > 8 then
 			self:Kill()
 		elseif od >= 5 then
@@ -46,12 +47,25 @@ if SERVER then
 		end
 	end
 
-	function meta:ResetOD()
+	function meta:EndHigh()
 		self:SetRunSpeed( 245 )
 		self:SetWalkSpeed( 165 )
 		self:SetGravity( 1 )
+		self:GodDisable()
+		self:SetDSP( 1 )
+		self:SetRunSpeed( 245 )
+		self:SetWalkSpeed( 165 )
+		self:DrugEffect( true )
+		if IsValid( self.DrugGlow ) then
+			self.DrugGlow:Remove()
+		end
+	end
+	
+	function meta:ResetOD()
+		self:EndHigh()
 		self:SetNWInt( "Overdose", 0 )
 		timer.Remove( "ODGroan"..self:EntIndex() )
+		timer.Remove( "MethHigh"..self:EntIndex() )
 	end
 
 	util.AddNetworkString( "DrugEffects" )
@@ -63,7 +77,6 @@ if SERVER then
 
 	hook.Add( "PlayerDeath", "ResetOD", function( ply )
 		ply:ResetOD()
-		ply:DrugEffect( true )
 	end )
 end
 

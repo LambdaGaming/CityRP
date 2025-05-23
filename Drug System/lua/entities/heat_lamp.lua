@@ -68,14 +68,10 @@ if SERVER then
 	end
 
 	function ENT:Think()
-		if self.Active and self:GetFuel() > 0 then
-			local fuel = self:GetCanister():GetFuel()
-			if fuel > 0 then
-				self:SetFuel( math.Clamp( fuel - 1, 0, 200 ) )
-			else
-				self:TurnOff()
-			end
-		elseif self.Active and self:GetFuel() <= 0 then
+		local fuel = self:GetFuel()
+		if self.Active and fuel > 0 then
+			self:SetFuel( math.Clamp( fuel - 1, 0, 200 ) )
+		elseif self.Active and fuel <= 0 then
 			self:TurnOff()
 		end
 		self:NextThink( CurTime() + 2 )

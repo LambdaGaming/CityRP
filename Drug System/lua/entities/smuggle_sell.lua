@@ -40,7 +40,7 @@ function ENT:Use( ply )
 				return
 			end
 			if self.DrugCooldowns[id] and self.DrugCooldowns[id] > CurTime() then
-				DarkRP.notify( ply, 1, 6, "Please wait for the cooldown to end before selling more drugs." )
+				DarkRP.notify( ply, 1, 6, "Please wait "..string.ToMinutesSeconds( self.DrugCooldowns[id] - CurTime() ).." before selling more drugs." )
 				return
 			end
 			local payout = 0
@@ -63,8 +63,13 @@ function ENT:Use( ply )
 					--Payout based on purity
 					payout = payout + ( b.Stat * 50 )
 				else
-					--Payout based on ingredient amount
-					payout = payout + ( b.Stat * 500 )
+					--Payout based on quality
+					if b.Stat <= 1500 then
+						ply:wanted( "Selling drugs" )
+						ply:ChatPrint( "The smuggler has refused your offer and called the cops because of your poor quality drugs." )
+						return
+					end
+					payout = payout + b.Stat
 				end
 			end
 			if ply:isCP() then
