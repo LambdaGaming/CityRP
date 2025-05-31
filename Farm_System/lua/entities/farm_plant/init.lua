@@ -71,6 +71,12 @@ function ENT:OnTakeDamage( dmg )
 	if health > 0 then
 		self:SetHealth( health - d )
 	else
+		local ply = dmg:GetAttacker()
+		local contraband = { [6] = true, [7] = true, [8] = true }
+		if ply:IsPlayer() and ply:isCP() and contraband[self:GetPlantType()] then
+			ply:addMoney( 200 )
+			DarkRP.notify( ply, 0, 6, "You have been given $200 for destroying illegal contraband." )
+		end
 		self:GibBreakClient( vector_origin )
 		self:Remove()
 	end

@@ -131,6 +131,11 @@ if SERVER then
 		if health > 0 then
 			self:SetHealth( health - d )
 		else
+			local ply = dmg:GetAttacker()
+			if ply:IsPlayer() and ply:isCP() then
+				ply:addMoney( 200 )
+				DarkRP.notify( ply, 0, 6, "You have been given $200 for destroying illegal contraband." )
+			end
 			self:TurnOff()
 			CreateExplosion( self:GetPos(), 100 )
 			self:Remove()
