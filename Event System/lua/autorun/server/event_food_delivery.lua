@@ -25,7 +25,6 @@ local npcs = {
 	{ "npc_item", 4 }, --Police Secretary
 	{ "npc_item", 6 }, --Healer
 	{ "npc_item", 7 }, --Tow Truck Driver
-	{ "npc_item", 8 }, --Job Broker
 	{ "npc_item", 9 }, --Accessory vendor
 	"npc_farmer",
 	"npc_fishshop",

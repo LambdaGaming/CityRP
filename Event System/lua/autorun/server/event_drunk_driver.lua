@@ -12,7 +12,7 @@ function EndDrunkDriver( ent, ply )
 	local pos = ent:GetPos()
 	ent:Remove()
 	for k,v in pairs( ents.FindInSphere( pos, 800 ) ) do
-		if v:isCPNoMayor() then
+		if v:IsPlayer() and v:isCPNoMayor() then
 			DarkRP.notify( ply, 0, 10, "You have been rewarded with $4,000 and a crafting blueprint for helping stop the drunk driver." )
 			GiveReward( ply, 4000 )
 		end

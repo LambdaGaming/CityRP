@@ -100,29 +100,6 @@ if SERVER then
 		end
 	end )
 
-	hook.Add( "ItemNPC_CanBuy", "ItemNPCBuyChecks", function( ply, npc, item )
-		local tbl = ItemNPC[item]
-
-		--Prevent players from using the job broker if they are on cooldown from it
-		if tbl.EventID and ply.JobCooldown and ply.JobCooldown > CurTime() then
-			DarkRP.notify( ply, 1, 6, "Please wait 30 minutes after taking a job before taking another one." )
-			return false
-		end
-
-		--Prevent players from taking jobs they can't do
-		if tbl.PrimaryJobs and !table.HasValue( tbl.PrimaryJobs, ply:Team() ) then
-			DarkRP.notify( ply, 1, 6, "You are not qualified for this job!" )
-			return false
-		end
-
-		--Prevent players from taking job that's already active
-		local event = tbl.EventID
-		if event and ActiveEvents[event] then
-			DarkRP.notify( ply, 1, 6, "There is already an ongoing job that you can partake in." )
-			return false
-		end
-	end )
-
 	hook.Add( "ItemNPC_PostBuy", "ItemNPCPostBuy", function( ply, npc, item, finalPrice, ent )
 		local tbl = ItemNPC[item]
 		local price = tbl.Price
@@ -131,13 +108,6 @@ if SERVER then
 		if price > 0 and tbl.Type != 2 then
 			local salesTax = price * ( GetGlobalInt( "MAYOR_SalesTax" ) * 0.01 )
 			AddVaultFunds( salesTax )
-		end
-
-		--Activate job and cooldown
-		local event = tbl.EventID
-		if event then
-			ActiveEvents[event] = true
-			ply.JobCooldown = CurTime() + 1800
 		end
 	end )
 end

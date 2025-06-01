@@ -126,18 +126,9 @@ EventPos[truenorth] = {
 }
 
 ActiveEvents = {}
-EVENT_OVERTURNED_TRUCK = 1
-EVENT_ACTIVE_SHOOTER = 2
-EVENT_HOUSE_FIRE = 3
-EVENT_MONEY_TRANSFER = 4
-EVENT_FOOD_DELIVERY = 5
-EVENT_ROAD_WORK = 6
-EVENT_ROBBERY = 7
-EVENT_DRUNK_DRIVER = 8
-EVENT_BUS_PASSENGER = 9
-EVENT_ZOMBIE = 10
-EVENT_TIME_BOMB = 11
-
+local CurrentVote = 0
+local YesVotes = 0
+local TotalAsked = 0
 function IsEventActive( event )
 	return ActiveEvents[event]
 end
@@ -146,3 +137,48 @@ function GiveReward( ply, money )
 	SpawnBlueprint( ply, 3 )
 	ply:addMoney( money )
 end
+
+util.AddNetworkString( "EventVote" )
+local function StartEventVote()
+	local rand = math.random( 1, #EventList )
+	if IsEventActive( rand ) then return end
+
+	local min = EventList[rand].Min or 1
+	local count = 0
+	for _,v in pairs( EventList[rand].Teams ) do
+		count = count + #team.GetPlayers( v )
+	end
+	if count < min then return end
+
+	local players = {}
+	for _,v in pairs( EventList[rand].Teams ) do
+		for _,b in pairs( team.GetPlayers( v ) ) do
+			table.insert( players, b )
+			TotalAsked = TotalAsked + 1
+		end
+	end
+	net.Start( "EventVote" )
+	net.WriteUInt( rand, 4 )
+	net.Send( players )
+	CurrentVote = rand
+end
+
+timer.Create( "EventLoop", 600, 0, StartEventVote )
+concommand.Add( "eventvote", StartEventVote  )
+
+net.Receive( "EventVote", function( len, ply )
+	local vote = net.ReadBool()
+	local ev = EventList[CurrentVote]
+	local perc = math.Round( TotalAsked * 0.65 )
+	if CurrentVote == 0 then return end
+	if vote then
+		YesVotes = YesVotes + 1
+	end
+	if YesVotes >= perc then
+		ev.Func()
+		ActiveEvents[CurrentVote] = true
+		CurrentVote = 0
+		YesVotes = 0
+		TotalAsked = 0
+	end
+end )
