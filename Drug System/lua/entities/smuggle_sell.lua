@@ -79,14 +79,6 @@ function ENT:Use( ply )
 			DarkRP.notify( ply, 0, 6, "You have sold a box of drugs for "..DarkRP.formatMoney( payout ).."." )
 			v:Remove()
 			return
-		elseif v.SmuggleTruck then
-			if !ply:IsCivilian() then
-				DarkRP.notify( ply, 1, 6, "Only civilians can smuggle things!" )
-				return
-			end
-			SmuggleEnd( ply )
-			v:Remove()
-			return
 		elseif v:GetClass() == "custom_shipment" and v.Ready and v:GetOwner() != ply then
 			local amt = math.Round( v:GetAmount() * 0.5 )
 			for i=1,amt do
