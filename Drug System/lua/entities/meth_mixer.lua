@@ -143,6 +143,7 @@ if CLIENT then
 	local offset = Vector( 0, 0, 60 )
 	function ENT:Draw()
 		local ing = self:GetNumIngredients()
-		self:DrawNPCText( "Meth Mixer\nIngredients: "..ing.."/10", offset )
+		self:DrawModel()
+		self:DrawOverheadText( "Meth Mixer\nIngredients: "..ing.."/10", offset )
 	end
 end

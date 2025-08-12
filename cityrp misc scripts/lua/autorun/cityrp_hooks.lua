@@ -119,17 +119,9 @@ if CLIENT then
 			ent.PhotonAlertedMissingRequirements = true
 		end
 	end )
-
-	--Draw text on item NPCs
-	hook.Add( "ItemNPC_OnDraw", "ItemNPCDraw", function( npc )
-		local type = npc:GetNPCType()
-		local name = ItemNPCType[type].Name
-		npc:DrawNPCText( name )
-	end )
 end
 
 --Fish stove initializer
-util.PrecacheModel( "models/props_interiors/pot02a.mdl" )
 hook.Add( "OnPlayerChangedTeam", "CookInit", function( ply, before, after )
 	if after == TEAM_COOK then ply.CookFish = 0 end
 	if after != TEAM_COOK then ply.CookFish = nil end

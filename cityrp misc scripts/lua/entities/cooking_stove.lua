@@ -119,7 +119,8 @@ end
 if CLIENT then
 	local offset = Vector( 0, 0, 65 )
 	function ENT:Draw()
-		self:DrawNPCText( "Cooking Stove", offset )
+		self:DrawModel()
+		self:DrawOverheadText( "Cooking Stove", offset )
 	end
 
 	net.Receive( "CookingStove", function()

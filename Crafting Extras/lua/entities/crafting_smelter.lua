@@ -96,6 +96,7 @@ if CLIENT then
 	local offset = Vector( 0, 10, 90 )
 	function ENT:Draw()
 		local smelt = self:GetSmelt()
-		self:DrawNPCText( "Currently Smelting: "..smelt, offset )
+		self:DrawModel()
+		self:DrawOverheadText( "Currently Smelting: "..smelt, offset )
 	end
 end

@@ -47,6 +47,7 @@ end
 if CLIENT then
 	local offset = Vector( 0, 0, 60 )
 	function ENT:Draw()
-		self:DrawNPCText( "Drug Box", offset )
+		self:DrawModel()
+		self:DrawOverheadText( "Drug Box", offset )
 	end
 end

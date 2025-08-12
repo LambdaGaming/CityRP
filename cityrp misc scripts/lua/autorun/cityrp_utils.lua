@@ -142,18 +142,15 @@ if SERVER then
 		e:Fire( "Explode", 0, 0 )
 	end
 else
-	--NPC text drawing function, modified from https://github.com/Bhoonn/bh_accessories/blob/main/lua/entities/bh_acc_vendor/cl_init.lua
 	local ent = FindMetaTable( "Entity" )
 	local offset = Vector( 0, 0, 80 )
-	surface.CreateFont( "NPCOverheadText", {
+	surface.CreateFont( "OverheadText", {
 		font = "Circular Std Bold",
 		size = 200,
 		weight = 800
 	} )
 
-	function ent:DrawNPCText( text, override )
-		self:DrawModel()
-
+	function ent:DrawOverheadText( text, override )
 		local origin = self:GetPos()
 		local ply = LocalPlayer()
 		if ply:GetPos():DistToSqr( origin ) >= 589824 then return end
@@ -165,7 +162,7 @@ else
 		ang:RotateAroundAxis( ang:Up(), 90 )
 		ang:RotateAroundAxis( ang:Forward(), 180 )
 		cam.Start3D2D( pos, ang, 0.035 )
-			draw.DrawText( text, "NPCOverheadText", 0, 0, color_white, TEXT_ALIGN_CENTER )
+			draw.SimpleText( text, "OverheadText", 0, 0, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP )
 		cam.End3D2D()
 	end
 end

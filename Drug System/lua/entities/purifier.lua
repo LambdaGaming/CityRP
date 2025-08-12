@@ -120,6 +120,7 @@ if CLIENT then
 		else
 			txt = txt.."Insert raw cocaine to start purifying"
 		end
-		self:DrawNPCText( txt, offset )
+		self:DrawModel()
+		self:DrawOverheadText( txt, offset )
 	end
 end

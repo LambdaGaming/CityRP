@@ -18,7 +18,7 @@ function ENT:Initialize()
 		self:SetNPCState( NPC_STATE_SCRIPT )
 	end
  
-    local phys = self:GetPhysicsObject()
+	local phys = self:GetPhysicsObject()
 	if phys:IsValid() then
 		phys:Wake()
 		phys:EnableMotion( false )
@@ -31,6 +31,7 @@ end
 
 if CLIENT then
     function ENT:Draw()
-        self:DrawNPCText( "Farmer" )
+		self:DrawModel()
+		self:DrawOverheadText( "Farmer" )
     end
 end

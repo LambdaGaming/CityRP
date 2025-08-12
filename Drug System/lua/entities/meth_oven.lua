@@ -124,6 +124,7 @@ if CLIENT then
 	local offset = Vector( 0, 0, 65 )
 	function ENT:Draw()
 		local fuel = self:GetFuel()
-		self:DrawNPCText( "Meth Oven\nFuel: "..fuel.."%", offset )
+		self:DrawModel()
+		self:DrawOverheadText( "Meth Oven\nFuel: "..fuel.."%", offset )
 	end
 end

@@ -100,6 +100,7 @@ end
 
 if CLIENT then
 	function ENT:Draw()
-		self:DrawNPCText( "Smuggler" )
+		self:DrawModel()
+		self:DrawOverheadText( "Smuggler" )
 	end
 end
