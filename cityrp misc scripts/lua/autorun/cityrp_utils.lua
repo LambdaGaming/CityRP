@@ -141,6 +141,15 @@ if SERVER then
 		e:SetKeyValue( "iMagnitude", tostring( magnitude ) )
 		e:Fire( "Explode", 0, 0 )
 	end
+
+	function GiveNpcRandomWeapon( npc )
+		local weaponList = {
+			"weapon_pistol", "weapon_shotgun",
+			"weapon_smg1", "weapon_357",
+			"weapon_crossbow", "weapon_crowbar"
+		}
+		npc:Give( table.Random( weaponList ) )
+	end
 else
 	local ent = FindMetaTable( "Entity" )
 	local offset = Vector( 0, 0, 80 )

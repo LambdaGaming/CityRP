@@ -29,12 +29,7 @@ function Robbery()
 		for k,v in ipairs( player.GetAll() ) do
 			shooter:AddEntityRelationship( v, D_HT, 99 )
 		end
-		for k,v in pairs( list.GetForEdit( "Weapon" ) ) do
-			if string.find( k, "arc9" ) then
-				table.insert( weps, k )
-			end
-		end
-		shooter:Give( table.Random( weps ) )
+		GiveNpcRandomWeapon( shooter )
 		shooter.IsRobber = true
 		RobberyEventStats.RobberCount = RobberyEventStats.RobberCount + 1
 	end

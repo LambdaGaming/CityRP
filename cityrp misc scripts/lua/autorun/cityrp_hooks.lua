@@ -5,7 +5,6 @@ if SERVER then
 	hook.Add( "InitPostEntity", "PrecacheModels", function()
 		print( "Precaching vehicles..." )
 		local vehicles = list.Get( "Vehicles" )
-		local weps = weapons.GetList()
 		for k,v in pairs( vehicles ) do
 			local model = v.Model
 			util.PrecacheModel( model )
