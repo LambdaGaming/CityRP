@@ -109,6 +109,13 @@ if SERVER then
 			AddVaultFunds( salesTax )
 		end
 	end )
+
+	--Clear decals when players go in water
+	hook.Add( "OnEntityWaterLevelChanged", "WaterClearDecals", function( ent, old, new )
+		if ent:IsPlayer() and new == 3 then
+			ent:RemoveAllDecals()
+		end
+	end )
 end
 
 if CLIENT then
@@ -122,8 +129,11 @@ end
 
 --Fish stove initializer
 hook.Add( "OnPlayerChangedTeam", "CookInit", function( ply, before, after )
-	if after == TEAM_COOK then ply.CookFish = 0 end
-	if after != TEAM_COOK then ply.CookFish = nil end
+	if after == TEAM_COOK then
+		ply.CookFish = 0
+	else
+		ply.CookFish = nil
+	end
 end )
 
 hook.Add( "ItemNPC_ModifyPrice", "ItemNPCModifyPrice", function( ply, npc, item )
