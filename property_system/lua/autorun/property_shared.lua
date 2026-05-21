@@ -25,19 +25,6 @@ if CLIENT then
 			ply.ViewingProperties = true
 		end
 	end )
-
-	function PropertyBlacklisted( ent )
-		local blacklist = { ["prop_vehicle_jeep"] = true, ["prop_vehicle_airboat"] = true }
-		local class = ent:GetClass()
-		if blacklist[class] then return true end
-		return false
-	end
-
-	hook.Add( "CanProperty", "CheckSavingEnabled", function( ply, property, ent )
-		if property == "propertysave" and !savingEnabled:GetBool() then
-			return false
-		end
-	end )
 end
 
 if SERVER then
@@ -55,11 +42,24 @@ if SERVER then
 	end
 end
 
+function PropertyBlacklisted( ent )
+	local blacklist = { prop_vehicle_jeep = true, prop_vehicle_airboat = true }
+	local class = ent:GetClass()
+	return blacklist[class] or false
+end
+
+hook.Add( "CanProperty", "CheckSavingEnabled", function( ply, property, ent )
+	if property == "propertysave" and !savingEnabled:GetBool() then
+		return false
+	end
+end )
+
 properties.Add( "propertysave", {
 	MenuLabel = "Save To Property",
 	Order = 1,
 	MenuIcon = "icon16/database_save.png",
 	Filter = function( self, ent, ply )
+		if hook.Run( "CanProperty", ply, "propertysave", ent ) == false then return end
 		local owner = IsValid( ent:GetOwner() ) and ent:GetOwner() or ent:CPPIGetOwner() or ent:GetNWEntity( "Owner" )
 		if IsValid( owner ) and owner == ply and !PropertyBlacklisted( ent ) then
 			local onproperty = false
@@ -75,7 +75,7 @@ properties.Add( "propertysave", {
 					break
 				end
 			end
-			return hook.Run( "CanProperty", ply, "propertysave", ent ) and ent:GetNWString( "SavedProperty" ) == "" and onproperty
+			return ent:GetNWString( "SavedProperty" ) == "" and onproperty
 		end
 		return false
 	end,
@@ -88,7 +88,7 @@ properties.Add( "propertysave", {
 	Receive = function( self, len, ply )
 		local ent = net.ReadEntity()
 		local index = net.ReadString()
-		if !savingEnabled:GetBool() then return end
+		if !self:Filter( ent, ply ) then return end
 		ent:SetNWString( "SavedProperty", index )
 		FreezePropertyEnt( ent )
 		PropertySystemSaveEnts()
@@ -101,9 +101,10 @@ properties.Add( "propertyremovesave", {
 	Order = 1,
 	MenuIcon = "icon16/database_delete.png",
 	Filter = function( self, ent, ply )
+		if hook.Run( "CanProperty", ply, "propertyremovesave", ent ) == false then return end
 		local owner = IsValid( ent:GetOwner() ) and ent:GetOwner() or ent:CPPIGetOwner() or ent:GetNWEntity( "Owner" )
 		if IsValid( owner ) and owner == ply then
-			return hook.Run( "CanProperty", ply, "propertyremovesave", ent ) and ent:GetNWString( "SavedProperty" ) != ""
+			return ent:GetNWString( "SavedProperty" ) != ""
 		end
 		return false
 	end,
@@ -114,7 +115,7 @@ properties.Add( "propertyremovesave", {
 	end,
 	Receive = function( self, len, ply )
 		local ent = net.ReadEntity()
-		if !savingEnabled:GetBool() then return end
+		if !self:Filter( ent, ply ) then return end
 		ent:SetNWString( "SavedProperty", "" )
 		UnfreezePropertyEnt( ent )
 		PropertySystemSaveEnts()
