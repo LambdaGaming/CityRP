@@ -116,6 +116,85 @@ if SERVER then
 			ent:RemoveAllDecals()
 		end
 	end )
+
+	--Vote to fire the mayor
+	local TotalVotes = {}
+	local VoteCooldown = 0
+	SetGlobalBool( "MayorFireVoteActive", false )
+	hook.Add( "PlayerSay", "FireMayorCommand", function( ply, text, team )
+		if text == "!firemayor" then
+			local availableply = player.GetCount()
+			local mayor = TEAM_MAYOR
+			local minvotes = math.Round( availableply * 0.75 ) - 1 --Subtract 1 for the mayor
+
+			if ply:Team() == mayor then
+				DarkRP.notify( ply, 1, 6, "Why do you wanna fire yourself?" )
+				return ""
+			end
+			if team.NumPlayers( mayor ) == 0 then
+				DarkRP.notify( ply, 1, 6, "There isn't a mayor to fire!" )
+				return ""
+			end
+			if TotalVotes[ply:SteamID64()] then
+				DarkRP.notify( ply, 1, 6, "Your vote is already counted!" )
+				return ""
+			end
+			if VoteCooldown > CurTime() then
+				DarkRP.notify( ply, 1, 6, "Wait for the cooldown to end before starting another vote." )
+				return ""
+			end
+
+			TotalVotes[ply:SteamID64()] = true
+			local numvotes = table.Count( TotalVotes )
+			if numvotes == minvotes then
+				for k,v in ipairs( team.GetPlayers( TEAM_MAYOR ) ) do
+					v:teamBan( mayor, 1800 )
+					v:changeTeam( GAMEMODE.DefaultTeam, true, false )
+					DarkRP.notifyAll( 0, 6, "The mayor has been voted out of office!" )
+					SetGlobalBool( "MayorFireVoteActive", false )
+					timer.Remove( "FireMayorTimer" )
+					TotalVotes = {}
+					VoteCooldown = CurTime() + 600
+					return ""
+				end
+			else
+				if GetGlobalBool( "MayorFireVoteActive" ) then
+					DarkRP.notifyAll( 0, 6, ply:Nick().." has cast their vote to fire the mayor. "..minvotes - numvotes.." more vote(s) needed to pass." )
+				else
+					SetGlobalBool( "MayorFireVoteActive", true )
+					DarkRP.notifyAll( 0, 12, ply:Nick().." has initialized a vote to fire the mayor. Type !firemayor to cast your vote. "..minvotes - numvotes.." more vote(s) needed to pass." )
+					timer.Create( "FireMayorTimer", 300, 1, function()
+						SetGlobalBool( "MayorFireVoteActive", false )
+						DarkRP.notifyAll( 1, 6, "Not enough people voted. The mayor gets to remain in office." )
+						VoteCooldown = CurTime() + 300
+					end )
+				end
+			end
+			return ""
+		end
+	end )
+
+	--Misc chat commands
+	hook.Add( "PlayerSay", "MiscChatCommands", function( ply, text, team )
+		if text == "!addons" then
+			ply:SendLua( [[gui.OpenURL( "https://steamcommunity.com/sharedfiles/filedetails/?id=629442313" )]] )
+			return ""
+		elseif text == "!help" then
+			ply:SendLua( [[gui.OpenURL( "https://lambdagaming.github.io/cityrp/" )]] )
+			return ""
+		elseif text == "!discord" then
+			ply:ChatPrint( "https://discord.gg/9RGdUS2" )
+			return ""
+		elseif text == "!fireoff" then
+			if !ply:IsSuperAdmin() then
+				DarkRP.notify( ply, 1, 6, "This command is superadmin only." )
+				return ""
+			end
+			RunConsoleCommand( "vfire_remove_all" )
+			DarkRP.notifyAll( 0, 6, ply:Nick().." turned off all fires." )
+			return ""
+		end
+	end )
 end
 
 if CLIENT then
