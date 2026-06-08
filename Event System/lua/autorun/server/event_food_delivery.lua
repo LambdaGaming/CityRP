@@ -43,14 +43,14 @@ function FoodDelivery()
 		PizzaEventStats.SetNPC = randnpc
 		npcname = ents.FindByClass( randnpc )[1].PrintName
 	end
-	for k,v in pairs( team.GetPlayers( TEAM_COOK ) ) do
+	for k,v in ipairs( team.GetPlayers( TEAM_COOK ) ) do
 		v:ChatPrint( "Deliver a "..PizzaEventStats.SetPizza.." pizza to the "..npcname )
 	end
 end
 
 function FoodDeliveryEnd()
 	ActiveEvents[EVENT_FOOD_DELIVERY] = false
-	for k,v in pairs( team.GetPlayers( TEAM_COOK ) ) do
+	for k,v in ipairs( team.GetPlayers( TEAM_COOK ) ) do
 		v:ChatPrint( "Thanks. Here's $3,000 and a crafting blueprint." )
 		GiveReward( v, 3000 )
 	end

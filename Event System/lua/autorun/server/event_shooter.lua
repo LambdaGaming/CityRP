@@ -29,7 +29,7 @@ end
 
 local function ActiveShooterRelationship( ply )
 	if IsEventActive( EVENT_ACTIVE_SHOOTER ) or IsEventActive( EVENT_ROBBERY ) then
-		for k,v in pairs( ents.FindByClass( "npc_citizen" ) ) do
+		for k,v in ipairs( ents.FindByClass( "npc_citizen" ) ) do
 			if v.IsEventNPC or v.IsRobber then
 				v:AddEntityRelationship( ply, D_HT, 99 )
 			end

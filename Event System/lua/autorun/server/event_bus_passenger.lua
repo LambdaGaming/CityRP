@@ -56,7 +56,7 @@ BusDestinations = {
 
 function BusPassenger()
 	local count = 1
-	for k,v in pairs( ents.FindByModel( "models/rp_koski/busstop.mdl" ) ) do
+	for k,v in ipairs( ents.FindByModel( "models/rp_koski/busstop.mdl" ) ) do
 		if v:CreatedByMap() or v.IsPermaProp then
 			local e = ents.Create( "bus_passenger" )
 			e:SetPos( v:LocalToWorld( Vector( -47, 15, -32 ) ) )
@@ -74,7 +74,7 @@ end
 
 function EndBusPassenger()
 	ActiveEvents[EVENT_BUS_PASSENGER] = false
-	for k,v in pairs( ents.FindByClass( "bus_passenger" ) ) do
+	for k,v in ipairs( ents.FindByClass( "bus_passenger" ) ) do
 		v:Remove()
 	end
 	BusPassengerEventStats = {

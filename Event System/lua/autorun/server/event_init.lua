@@ -152,7 +152,7 @@ local function StartEventVote()
 
 	local players = {}
 	for _,v in pairs( EventList[rand].Teams ) do
-		for _,b in pairs( team.GetPlayers( v ) ) do
+		for _,b in ipairs( team.GetPlayers( v ) ) do
 			table.insert( players, b )
 			TotalAsked = TotalAsked + 1
 		end

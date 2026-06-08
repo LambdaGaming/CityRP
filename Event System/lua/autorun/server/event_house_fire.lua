@@ -24,7 +24,7 @@ function HouseFire()
 end
 
 function HouseFireEnd()
-    for k,v in pairs( ents.FindInSphere( FirePos, 800 ) ) do
+    for k,v in ipairs( ents.FindInSphere( FirePos, 800 ) ) do
     	if v:IsEMS() then
     		DarkRP.notify( v, 0, 10, "You have been rewarded with $4,000 and a crafting blueprint for helping extinguish a building fire." )
 			GiveReward( v, 4000 )

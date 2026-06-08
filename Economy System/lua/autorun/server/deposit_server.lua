@@ -2,7 +2,7 @@ CreateConVar( "BankLoanRate", 0.005, FCVAR_UNLOGGED, "Percentage of the loan tha
 
 util.AddNetworkString( "Deposit_DeleteOwner" )
 local function DeleteAllOwners()
-	for k,v in pairs( ents.FindByClass( "deposit_box" ) ) do
+	for k,v in ipairs( ents.FindByClass( "deposit_box" ) ) do
 		if v.MoneyOwner then
 			v.MoneyOwner:addMoney( v.MoneyAmount )
 			DarkRP.notify( v.MoneyOwner, 0, 6, "The banker has either disconnected or changed jobs. Your deposit box money has been added to your wallet." )

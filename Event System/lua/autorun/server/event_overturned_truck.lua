@@ -3,7 +3,7 @@ local cooldown = 0
 local event_truck
 
 local function OverturnedTruckThink()
-	for k,v in pairs( ents.FindByModel( "models/tdmcars/trucks/gmc_c5500.mdl" ) ) do
+	for k,v in ipairs( ents.FindByModel( "models/tdmcars/trucks/gmc_c5500.mdl" ) ) do
 		if v.IsEventTruck then
 			if !v.FlippedOver and math.Round( v:GetAngles().x ) == 0 then
 				v.FlippedOver = true
@@ -43,7 +43,7 @@ end
 function OverturnedTruckEnd()
 	if cooldown > CurTime() then return end
 	if IsValid( event_truck ) then event_truck:Remove() end
-	for k,v in pairs( team.GetPlayers( TEAM_TOWER ) ) do
+	for k,v in ipairs( team.GetPlayers( TEAM_TOWER ) ) do
 		DarkRP.notify( v, 0, 10, "You have been given $4500 and a crafting blueprint for clearing the overturned truck." )
 		GiveReward( v, 4500 )
 	end

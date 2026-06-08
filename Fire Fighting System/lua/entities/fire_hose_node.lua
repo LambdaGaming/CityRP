@@ -38,7 +38,7 @@ if SERVER then
 			return
 		end
 		if int == 1 then
-			for k,v in pairs( ents.FindInSphere( ent:GetPos(), 200 ) ) do
+			for k,v in ipairs( ents.FindInSphere( ent:GetPos(), 200 ) ) do
 				if v:IsVehicle() and v:GetModel() == "models/noble/engine_32.mdl" then
 					local constr, rope = constraint.Rope( v, ent, 0, 0, Vector( 55, -6, 45 ), Vector( 9, 0, 20 ), 400, 500, 1000, 10, "cable/cable2", false, color_white )
 					ent.Connection = rope
@@ -50,7 +50,7 @@ if SERVER then
 				DarkRP.notify( ply, 1, 6, "No fire truck detected." )
 			end
 		elseif int == 2 then
-			for k,v in pairs( ents.FindInSphere( ent:GetPos(), 200 ) ) do
+			for k,v in ipairs( ents.FindInSphere( ent:GetPos(), 200 ) ) do
 				if v:GetClass() == "fire_hose_node" and v != ent then
 					if !IsValid( v.HostTruck ) then continue end
 					local constr, rope = constraint.Rope( v, ent, 0, 0, Vector( 9, 0, 20 ), Vector( 9, 0, 20 ), 400, 500, 1000, 10, "cable/cable2", false, color_white )

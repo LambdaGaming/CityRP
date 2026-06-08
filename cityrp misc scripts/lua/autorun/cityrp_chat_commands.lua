@@ -29,7 +29,7 @@ if SERVER then
 			TotalVotes[ply:SteamID64()] = true
 			local numvotes = table.Count( TotalVotes )
 			if numvotes == minvotes then
-				for k,v in pairs( team.GetPlayers( TEAM_MAYOR ) ) do
+				for k,v in ipairs( team.GetPlayers( TEAM_MAYOR ) ) do
 					v:teamBan( mayor, 1800 )
 					v:changeTeam( GAMEMODE.DefaultTeam, true, false )
 					DarkRP.notifyAll( 0, 6, "The mayor has been voted out of office!" )

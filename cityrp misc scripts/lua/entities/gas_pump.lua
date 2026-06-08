@@ -27,9 +27,8 @@ function ENT:Use( ply )
 		return
 	end
 	local pos = self:GetPos()
-	local findveh = ents.FindInSphere( pos, 300 )
 	local foundveh = false
-	for k,v in pairs( findveh ) do
+	for k,v in ipairs( ents.FindInSphere( pos, 300 ) ) do
 		if v:GetClass() == "prop_vehicle_jeep" and v:GetNWEntity( "VehicleOwner" ) == ply then
 			local tax = GetGlobalInt( "MAYOR_SalesTax" )
 			local required = 100 - v:GetNWInt( "GAuto_FuelAmount" )

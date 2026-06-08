@@ -36,7 +36,7 @@ local function HandleDoorSell( ply, ent )
 			e:setKeysTitle( nil )
 			DarkRP.storeDoorData( e )
 		end
-		for k,v in pairs( ents.FindInBox( upper, lower ) ) do
+		for k,v in ipairs( ents.FindInBox( upper, lower ) ) do
 			if v:GetNWString( "SavedProperty" ) != "" then
 				v:SetNWString( "SavedProperty", "" )
 			end

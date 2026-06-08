@@ -14,7 +14,7 @@ function ENT:Initialize()
 end
 
 function ENT:Use( ply )
-	for k,v in pairs( ents.FindInSphere( self:GetPos(), 200 ) ) do
+	for k,v in ipairs( ents.FindInSphere( self:GetPos(), 200 ) ) do
 		if v:GetClass() == "npc_farmer" then
 			if self.Empty then
 				DarkRP.notify( ply, 1, 6, "There isn't any food in the crate!" )

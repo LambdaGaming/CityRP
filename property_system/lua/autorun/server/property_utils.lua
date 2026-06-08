@@ -6,7 +6,7 @@ function PropertySystemSaveEnts( id )
 	for k,v in pairs( OwnedProperties ) do
 		v.Saved = {}
 		if IsValid( player.GetBySteamID64( id or v.Owner ) ) then
-			for a,b in pairs( ents.FindInBox( PropertyTable[k].BoundaryUpper, PropertyTable[k].BoundaryLower ) ) do
+			for a,b in ipairs( ents.FindInBox( PropertyTable[k].BoundaryUpper, PropertyTable[k].BoundaryLower ) ) do
 				if b:GetNWString( "SavedProperty" ) != "" then
 					table.insert( v.Saved, duplicator.CopyEntTable( b ) )
 				end

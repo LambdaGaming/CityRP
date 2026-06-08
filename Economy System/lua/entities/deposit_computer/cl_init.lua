@@ -16,7 +16,7 @@ local function DrawDepositMenu()
 
 	local depositPanel = vgui.Create( "DScrollPanel", sheet )
 	depositPanel:Dock( FILL )
-	for k,v in pairs( ents.FindByClass( "deposit_box" ) ) do
+	for k,v in ipairs( ents.FindByClass( "deposit_box" ) ) do
 		local mainlist = vgui.Create( "DPanelList" )
 		mainlist:SetSpacing( 5 )
 		mainlist:EnableHorizontal( false )
