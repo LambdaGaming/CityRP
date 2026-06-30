@@ -31,7 +31,7 @@ if SERVER then
 		elseif self.Robber then
 			DarkRP.notify( ply, 1, 6, "Someone is already robbing the bank!" )
 			return
-		elseif ply:isArrested() or ply:IsHandcuffed() then
+		elseif ply:isArrested() or ply:HasWeapon( "st_cuffed" ) then
 			DarkRP.notify( ply, 1, 6, "You can't start a robbery while arrested!" )
 			return
 		elseif self.Cooldown > CurTime() then

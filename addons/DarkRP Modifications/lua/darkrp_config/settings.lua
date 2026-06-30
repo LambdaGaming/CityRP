@@ -64,7 +64,8 @@ GM.Config.DisallowDrop = {
 	["weapon_physgun"] = true,
 	["itemstore_pickup"] = true,
 	["weapon_vfire_gascan"] = true,
-	["rphands"] = true
+	["rphands"] = true,
+	["st_cuffed"] = true
 }
 
 GM.Config.DefaultWeapons = {

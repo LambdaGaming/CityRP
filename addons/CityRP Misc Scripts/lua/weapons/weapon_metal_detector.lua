@@ -33,7 +33,7 @@ local allowed = {
 	["weapon_hl2pickaxe"] = true,
 	["weapon_hl2axe"] = true,
 	["rphands"] = true,
-	["weapon_handcuffed"] = true,
+	["st_cuffed"] = true,
 	["fish_finder"] = true,
 	["fishing_rod_physics"] = true,
 	["weapon_extinguisher"] = true,
@@ -48,7 +48,7 @@ local allowed = {
 
 local function CanConfiscateFrom( ply, target )
 	if !target:IsPlayer() or ply:GetPos():DistToSqr( target:GetPos() ) > 10000 then return false end
-	if !target:IsHandcuffed() then
+	if !target:HasWeapon( "st_cuffed" ) then
 		DarkRP.notify( ply, 1, 6, "You need to cuff this person before you can search them." )
 		return false
 	end

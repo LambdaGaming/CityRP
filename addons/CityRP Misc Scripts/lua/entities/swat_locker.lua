@@ -21,7 +21,7 @@ if SERVER then
 		"arc9_fas_p226",
 		"door_ram",
 		"weapon_metal_detector",
-		"weapon_leash_police",
+		"st_police_cuffs",
 		"policebadge",
 		"stungun",
 		"ershield_swat"
@@ -33,7 +33,7 @@ if SERVER then
 		"arc9_fas_p226",
 		"door_ram",
 		"weapon_metal_detector",
-		"weapon_leash_police",
+		"st_police_cuffs",
 		"policebadge",
 		"stungun",
 		"arc9_fas_m84",

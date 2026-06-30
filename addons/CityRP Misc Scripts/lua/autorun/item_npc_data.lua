@@ -428,18 +428,11 @@ ItemNPC = {
         Give = "weapon_molotov"
     },
     {
-        Name = "Shackles",
-        Description = "Used to tie players up to make them walk slower and prevent them from using weapons. Moderately strong.",
-        Price = 900,
+        Name = "Elastic Handcuffs",
+        Description = "Weaker variant of police handcuffs. Allows the user to blind, gag, and drag people.",
+        Price = 1000,
         Type = 2,
-        Give = "weapon_cuff_shackles"
-    },
-    {
-        Name = "Rope Leash",
-        Description = "Similar to shackles, but players can be dragged with them.",
-        Price = 800,
-        Type = 2,
-        Give = "weapon_leash_rope"
+        Give = "st_elastic_cuffs"
     },
     {
         Name = "Flashbang",
