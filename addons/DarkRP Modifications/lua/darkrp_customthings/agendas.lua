@@ -1,0 +1,1 @@
+DarkRP.createAgenda( "Police Agenda", { TEAM_MAYOR }, { TEAM_OFFICER, TEAM_POLICEBOSS, TEAM_UNDERCOVER } )

@@ -100,7 +100,7 @@ if SERVER then
 		self.TotalCooking = self.TotalCooking + 1
 		timer.Simple( 30, function()
 			if !IsValid( self ) then return end
-			local e = ents.Create( "food" )
+			local e = ents.Create( "vending_food" )
 			e:SetPos( self:LocalToWorld( Vector( -5, -14, 55 ) ) )
 			e:Spawn()
 			e:SetModel( fd.Model )
