@@ -15,7 +15,6 @@ As stated above, the server uses modified versions of proprietary content that c
 - [DarkRP C4](https://steamcommunity.com/sharedfiles/filedetails/?id=272099348) - Changed the timer config and probably fixed bugs. Will likely be replaced with Enhanced C4.
 - DarkRP News - Paid news addon that's been heavily modified over the years. Will likely be replaced with a custom version at some point.
 - DarkRP Advanced Mayor System - Paid addon used for managing the economy. Heavily modified with new features that will likely be merged with the economy system at some point.
-- DarkRP Modification - This isn't proprietary but it's a mess that needs looked over and cleaned up, so it's being left out for now.
 - Defibrillator - Replaced the death screen. I can't find the original addon but it will likely be replaced with a custom version.
 - Detective System - Paid detective system with various features added and changed. Will likely be replaced with a custom version.
 - [Advanced Disguise SWEP](https://steamcommunity.com/sharedfiles/filedetails/?id=687912749) - Fixed bugs. Will likely be replaced with a custom version.
@@ -47,5 +46,6 @@ All content in this repo is licensed under the MIT License unless otherwise stat
 - TCB Car Dealer is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
 
 # Credits
+- [DarkRP Developers](https://github.com/FPtje/DarkRP) - Original versions of modified DarkRP content
 - [TheCodingBeast](https://github.com/TheCodingBeast/TCB_CarDealer) - Original car dealer addon
 - OPGman - Everything else
