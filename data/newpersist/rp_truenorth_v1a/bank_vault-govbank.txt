@@ -1,0 +1,1 @@
+["[6211.3784 2046.0007 8.3431]","{0.0016 -0.0383 -0.0136}","models/props/cs_assault/moneypallet03a.mdl"]

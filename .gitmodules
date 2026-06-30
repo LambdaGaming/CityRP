@@ -1,0 +1,6 @@
+[submodule "addons/Pointshop"]
+	path = addons/Pointshop
+	url = https://github.com/LambdaGaming/pointshop-darkrp
+[submodule "addons/Item NPC"]
+	path = addons/Item NPC
+	url = https://github.com/LambdaGaming/Item_NPC

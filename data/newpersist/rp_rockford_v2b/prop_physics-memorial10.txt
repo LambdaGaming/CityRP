@@ -1,0 +1,1 @@
+["[-4840.4146 -7728.6821 35.8965]","{-0.1412 -3.9999 -89.9303}","models/hunter/blocks/cube05x105x05.mdl","phoenix_storms/mat/mat_phx_plastic",{"r":29.0,"b":255.0,"a":255.0,"g":0.0}]

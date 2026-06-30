@@ -1,0 +1,1 @@
+["[-1573.4132 2538.1663 -55.4796]","{0.054 -90 -0.0013}","models/props_interiors/vendingmachinesoda01a.mdl"]

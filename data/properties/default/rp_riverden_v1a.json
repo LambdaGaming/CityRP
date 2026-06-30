@@ -1,0 +1,581 @@
+{
+	"2853": {
+		"BoundaryUpper": "[-13426 11890 11386]",
+		"SubDoors": [
+			2856.0
+		],
+		"Price": 600.0,
+		"Name": "Hyatt Place Room 1411",
+		"BoundaryLower": "[-13062 11534 11270]"
+	},
+	"2872": {
+		"BoundaryUpper": "[-13446 11122 11386]",
+		"SubDoors": [
+			2875.0
+		],
+		"Price": 600.0,
+		"Name": "Hyatt Place Room 1413",
+		"BoundaryLower": "[-13810 10758 11270]"
+	},
+	"2834": {
+		"BoundaryUpper": "[-13426 11506 11386]",
+		"SubDoors": [
+			2837.0
+		],
+		"Price": 600.0,
+		"Name": "Hyatt Place Room 1412",
+		"BoundaryLower": "[-13062 11150 11270]"
+	},
+	"2891": {
+		"BoundaryUpper": "[-13626 12110 11386]",
+		"SubDoors": [
+			2894.0
+		],
+		"Price": 600.0,
+		"Name": "Hyatt Place Room 1410",
+		"BoundaryLower": "[-13262 12474 11270]"
+	},
+	"3148": {
+		"BoundaryUpper": "[-11622 9958 11394]",
+		"SubDoors": [
+			3149.0
+		],
+		"Price": 1300.0,
+		"Name": "Utopia Tower Office",
+		"BoundaryLower": "[-12602 10714 11270]"
+	},
+	"3631": {
+		"BoundaryUpper": "[-11206 6414 -70]",
+		"SubDoors": [
+			3630.0
+		],
+		"Price": 900.0,
+		"Name": "The Tavern",
+		"BoundaryLower": "[-11954 6778 -202]"
+	},
+	"2036": {
+		"BoundaryUpper": "[-10689 8181 -113]",
+		"SubDoors": [
+			2038.0,
+			2055.0
+		],
+		"Price": 1300.0,
+		"Name": "Edward's Steakhouse",
+		"BoundaryLower": "[-11706 7558 -242]"
+	},
+	"3258": {
+		"BoundaryUpper": "[-8968 6414 154]",
+		"SubDoors": [
+			3257.0
+		],
+		"Price": 1400.0,
+		"Name": "Church",
+		"BoundaryLower": "[-10410 7338 -170]"
+	},
+	"3668": {
+		"BoundaryUpper": "[-14010 6598 -262]",
+		"SubDoors": [
+			3669.0
+		],
+		"Price": 1800.0,
+		"Name": "Club",
+		"BoundaryLower": "[-12690 7348 -378]"
+	},
+	"3629": {
+		"BoundaryUpper": "[-13170 4794 -102]",
+		"SubDoors": [
+			3600.0
+		],
+		"Price": 1500.0,
+		"Name": "Aziz's Hamburger & Kebab",
+		"BoundaryLower": "[-12686 4302 -250]"
+	},
+	"3603": {
+		"BoundaryUpper": "[-14586 4046 -102]",
+		"SubDoors": [
+			3589.0,
+			1531.0
+		],
+		"Price": 1600.0,
+		"Name": "Whitaker's Gun Shop",
+		"BoundaryLower": "[-13832 4538 -250]"
+	},
+	"3211": {
+		"BoundaryUpper": "[-14558 1486 176]",
+		"SubDoors": [
+			3205.0,
+			3216.0,
+			3217.0
+		],
+		"Price": 1200.0,
+		"Name": "Warehouse B",
+		"BoundaryLower": "[-15282 2371 -250]"
+	},
+	"3209": {
+		"BoundaryUpper": "[-15229 3547 63]",
+		"SubDoors": [
+			3206.0,
+			3208.0,
+			3207.0
+		],
+		"Price": 1300.0,
+		"Name": "Warehouse A",
+		"BoundaryLower": "[-14542 2446 -250]"
+	},
+	"3471": {
+		"BoundaryUpper": "[-11826 4814 186]",
+		"SubDoors": [
+			3475.0,
+			3476.0
+		],
+		"Price": 700.0,
+		"Name": "Apartment 3",
+		"BoundaryLower": "[-11470 5170 70]"
+	},
+	"3460": {
+		"BoundaryUpper": "[-11826 4430 26]",
+		"SubDoors": [
+			3463.0,
+			3464.0
+		],
+		"Price": 700.0,
+		"Name": "Apartment 2",
+		"BoundaryLower": "[-11826 4430 26]"
+	},
+	"3373": {
+		"BoundaryUpper": "[-11566 3570 58]",
+		"SubDoors": [
+			3378.0,
+			3379.0,
+			3374.0
+		],
+		"Price": 800.0,
+		"Name": "Apartment B-2",
+		"BoundaryLower": "[-11954 3022 -58]"
+	},
+	"3420": {
+		"BoundaryUpper": "[-11826 4814 26]",
+		"SubDoors": [
+			3422.0,
+			3421.0
+		],
+		"Price": 700.0,
+		"Name": "Apartment 1",
+		"BoundaryLower": "[-11470 5170 -90]"
+	},
+	"3308": {
+		"BoundaryUpper": "[-11090 3022 202]",
+		"SubDoors": [
+			3312.0,
+			3313.0,
+			3311.0
+		],
+		"Price": 800.0,
+		"Name": "Apartment C-2",
+		"BoundaryLower": "[-10702 3570 86]"
+	},
+	"3272": {
+		"BoundaryUpper": "[-11090 3022 -86]",
+		"SubDoors": [
+			3271.0,
+			3269.0,
+			3270.0
+		],
+		"Price": 800.0,
+		"Name": "Apartment A-1",
+		"BoundaryLower": "[-10702 3570 -202]"
+	},
+	"3359": {
+		"BoundaryUpper": "[-11566 3022 202]",
+		"SubDoors": [
+			3360.0,
+			3361.0,
+			3362.0
+		],
+		"Price": 800.0,
+		"Name": "Apartment C-1",
+		"BoundaryLower": "[-11954 3570 86]"
+	},
+	"3273": {
+		"BoundaryUpper": "[-11566 3022 -86]",
+		"SubDoors": [
+			4981.0,
+			3275.0,
+			3274.0
+		],
+		"Price": 800.0,
+		"Name": "Apartment A-2",
+		"BoundaryLower": "[-11954 3570 -202]"
+	},
+	"3483": {
+		"BoundaryUpper": "[-11826 4430 186]",
+		"SubDoors": [
+			3487.0,
+			3488.0
+		],
+		"Price": 700.0,
+		"Name": "Apartment 4",
+		"BoundaryLower": "[-11470 4794 70]"
+	},
+	"3342": {
+		"BoundaryUpper": "[-11090 3570 58]",
+		"SubDoors": [
+			3343.0,
+			3344.0,
+			3345.0
+		],
+		"Price": 800.0,
+		"Name": "Apartment B-1",
+		"BoundaryLower": "[-10702 3022 -58]"
+	},
+	"3927": {
+		"BoundaryUpper": "[-5434 15226 250]",
+		"SubDoors": [
+			3926.0
+		],
+		"Price": 1900.0,
+		"Name": "The Skagit Casino",
+		"BoundaryLower": "[-3194 14404 6]"
+	},
+	"4203": {
+		"BoundaryUpper": "[-5966 4410 -70]",
+		"SubDoors": [
+			4202.0,
+			4219.0
+		],
+		"Price": 1100.0,
+		"Name": "Sweet Suite Furnishings",
+		"BoundaryLower": "[-6706 3910 -250]"
+	},
+	"4207": {
+		"BoundaryUpper": "[-4594 4922 -70]",
+		"SubDoors": [
+			4206.0,
+			4284.0,
+			4282.0
+		],
+		"Price": 1500.0,
+		"Name": "Osmo Olut",
+		"BoundaryLower": "[-3854 4166 -250]"
+	},
+	"4200": {
+		"BoundaryUpper": "[-5966 5178 -70]",
+		"SubDoors": [
+			4199.0,
+			4210.0
+		],
+		"Price": 1000.0,
+		"Name": "General Store",
+		"BoundaryLower": "[-6706 4678 -250]"
+	},
+	"4130": {
+		"BoundaryUpper": "[-5966 8698 122]",
+		"SubDoors": [
+			4131.0
+		],
+		"Price": 900.0,
+		"Name": "Zales Diamond Store",
+		"BoundaryLower": "[-6714 7942 6]"
+	},
+	"3996": {
+		"BoundaryUpper": "[-5966 9722 186]",
+		"SubDoors": [
+			3995.0,
+			3989.0,
+			3990.0
+		],
+		"Price": 2000.0,
+		"Name": "Goldie Cinema",
+		"BoundaryLower": "[-6874 9222 6]"
+	},
+	"3881": {
+		"BoundaryUpper": "[-249 12345 258]",
+		"SubDoors": [
+			3880.0,
+			3885.0,
+			3884.0,
+			3887.0,
+			3886.0
+		],
+		"Price": 2800.0,
+		"Name": "Cedar Creek Nuclear Power Plant",
+		"BoundaryLower": "[1466 9350 -122]"
+	},
+	"4670": {
+		"BoundaryUpper": "[-4535 947 147]",
+		"SubDoors": [
+			4661.0,
+			4662.0,
+			4664.0,
+			4671.0,
+			4674.0,
+			4663.0,
+			4672.0,
+			4678.0,
+			4665.0,
+			4666.0,
+			4675.0,
+			4667.0,
+			4669.0,
+			4676.0,
+			4668.0
+		],
+		"Price": 2500.0,
+		"Name": "01 Lakewood Lane",
+		"BoundaryLower": "[-3300 -281 -250]"
+	},
+	"4520": {
+		"BoundaryUpper": "[-1884 -314 257]",
+		"SubDoors": [
+			4521.0,
+			4522.0,
+			4523.0,
+			4530.0,
+			4524.0,
+			4527.0,
+			4526.0,
+			4528.0
+		],
+		"Price": 2300.0,
+		"Name": "02 Lakewood Lane",
+		"BoundaryLower": "[-3253 950 -226]"
+	},
+	"4818": {
+		"BoundaryUpper": "[-1854 -1916 170]",
+		"SubDoors": [
+			4824.0,
+			4827.0,
+			4817.0,
+			4816.0,
+			4815.0,
+			4814.0,
+			4809.0,
+			4820.0,
+			4823.0,
+			4822.0,
+			4821.0
+		],
+		"Price": 2400.0,
+		"Name": "03 Lakewood Lane",
+		"BoundaryLower": "[-586 -778 -226]"
+	},
+	"4744": {
+		"BoundaryUpper": "[-2128 -3382 159]",
+		"SubDoors": [
+			4736.0,
+			4735.0,
+			4746.0,
+			4747.0,
+			4738.0,
+			4745.0,
+			4737.0,
+			4752.0,
+			4739.0,
+			4740.0,
+			4749.0,
+			4741.0,
+			4743.0,
+			4750.0,
+			4742.0
+		],
+		"Price": 2500.0,
+		"Name": "04 Lakewood Lane",
+		"BoundaryLower": "[-3384 -2145 -250]"
+	},
+	"4903": {
+		"BoundaryUpper": "[-4729 -3381 153]",
+		"SubDoors": [
+			4909.0,
+			4899.0,
+			4894.0,
+			4900.0,
+			4901.0,
+			4912.0,
+			4905.0,
+			4908.0,
+			4907.0,
+			4906.0
+		],
+		"Price": 2400.0,
+		"Name": "05 Lakewood Lane",
+		"BoundaryLower": "[-3452 -2177 -250]"
+	},
+	"4591": {
+		"BoundaryUpper": "[-4737 -776 162]",
+		"SubDoors": [
+			4592.0,
+			4978.0,
+			4593.0,
+			4599.0,
+			4594.0,
+			4595.0,
+			4596.0,
+			4598.0,
+			4597.0
+		],
+		"Price": 2300.0,
+		"Name": "06 Lakewood Lane",
+		"BoundaryLower": "[-5302 -3382 -226]"
+	},
+	"5048": {
+		"BoundaryUpper": "[-8006 -12998 49]",
+		"SubDoors": [
+			5020.0,
+			5015.0,
+			5018.0,
+			5019.0,
+			5021.0,
+			5032.0,
+			5034.0,
+			5035.0,
+			5033.0,
+			5053.0,
+			5056.0,
+			5055.0,
+			5057.0,
+			5068.0,
+			5070.0,
+			5071.0,
+			5069.0,
+			5129.0,
+			5131.0,
+			5132.0,
+			5130.0,
+			5114.0,
+			5117.0,
+			5116.0,
+			5118.0,
+			5083.0,
+			5085.0,
+			5086.0,
+			5087.0,
+			5098.0,
+			5101.0,
+			5100.0,
+			5099.0
+		],
+		"Price": 2900.0,
+		"Name": "Motel",
+		"BoundaryLower": "[-10226 -14322 -250]"
+	},
+	"5171": {
+		"BoundaryUpper": "[-4116 -6077 71]",
+		"SubDoors": [
+			5172.0,
+			5173.0,
+			1752.0
+		],
+		"Price": 2200.0,
+		"Name": "Sherman Ranch",
+		"BoundaryLower": "[-778 -8682 -258]"
+	},
+	"5409": {
+		"BoundaryUpper": "[5708 5492 114]",
+		"SubDoors": [
+			5398.0,
+			5413.0,
+			5410.0
+		],
+		"Price": 2200.0,
+		"Name": "Scrap Yard",
+		"BoundaryLower": "[7921 4385 -257]"
+	},
+	"5228": {
+		"BoundaryUpper": "[207 -9696 395]",
+		"SubDoors": [
+			5197.0
+		],
+		"Price": 2500.0,
+		"Name": "Lumber Mill",
+		"BoundaryLower": "[3769 -12018 -242]"
+	},
+	"5386": {
+		"BoundaryUpper": "[7227 8791 -107]",
+		"Price": 500.0,
+		"Name": "Trailer 2",
+		"BoundaryLower": "[7778 8311 -258]"
+	},
+	"5393": {
+		"BoundaryUpper": "[7707 8901 -112]",
+		"Price": 500.0,
+		"Name": "Trailer 3",
+		"BoundaryLower": "[7111 9382 -258]"
+	},
+	"5372": {
+		"BoundaryUpper": "[7963 9177 -97]",
+		"Price": 500.0,
+		"Name": "Trailer 4",
+		"BoundaryLower": "[8339 9751 -258]"
+	},
+	"5365": {
+		"BoundaryUpper": "[7788 9469 -113]",
+		"Price": 500.0,
+		"Name": "Trailer 5",
+		"BoundaryLower": "[7230 9761 -258]"
+	},
+	"5379": {
+		"BoundaryUpper": "[8054 8472 -95]",
+		"Price": 500.0,
+		"Name": "Trailer 1",
+		"BoundaryLower": "[8352 9052 -258]"
+	},
+	"5897": {
+		"BoundaryUpper": "[12587 8864 1167]",
+		"SubDoors": [
+			5899.0,
+			5898.0
+		],
+		"Price": 2200.0,
+		"Name": "Cabin 1",
+		"BoundaryLower": "[14089 7663 761]"
+	},
+	"5877": {
+		"BoundaryUpper": "[9782 2644 1176]",
+		"SubDoors": [
+			5878.0,
+			5879.0
+		],
+		"Price": 2200.0,
+		"Name": "Cabin 2",
+		"BoundaryLower": "[11448 3879 773]"
+	},
+	"5857": {
+		"BoundaryUpper": "[8706 -852 1150]",
+		"SubDoors": [
+			5858.0,
+			5859.0
+		],
+		"Price": 2200.0,
+		"Name": "Cabin 3",
+		"BoundaryLower": "[10247 616 774]"
+	},
+	"5783": {
+		"BoundaryUpper": "[6251 -1044 1254]",
+		"SubDoors": [
+			5784.0,
+			5785.0,
+			5818.0,
+			5781.0,
+			5814.0,
+			5816.0,
+			5801.0,
+			5803.0,
+			5802.0,
+			5804.0
+		],
+		"Price": 3000.0,
+		"Name": "Whitetail Ranger Station",
+		"BoundaryLower": "[3094 -5098 774]"
+	},
+	"5835": {
+		"BoundaryUpper": "[12822 -5134 1063]",
+		"SubDoors": [
+			5838.0,
+			5836.0,
+			5837.0
+		],
+		"Price": 1700.0,
+		"Name": "Radio Station",
+		"BoundaryLower": "[15267 -7768 779]"
+	}
+}

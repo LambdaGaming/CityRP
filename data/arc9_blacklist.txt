@@ -1,0 +1,5 @@
+fas_ammo_grenade_buck
+fas_ammo_shotgun_frag
+fas_ammo_ubgl_grenade_3gl
+fas_ammo_ubgl_grenade_buck
+fas_ammo_grenade_3gl

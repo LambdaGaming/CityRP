@@ -1,0 +1,701 @@
+{
+	"2414": {
+		"BoundaryUpper": "[-5782 14202 294]",
+		"SubDoors": [
+			2410.0,
+			4873.0,
+			4876.0,
+			2409.0,
+			2239.0
+		],
+		"Price": 1600,
+		"Name": "6 Maple Rd.",
+		"BoundaryLower": "[-6929 12825 134]"
+	},
+	"2237": {
+		"BoundaryUpper": "[4074 10134 334]",
+		"SubDoors": [
+			2240.0,
+			2243.0,
+			2244.0,
+			2246.0,
+			2236.0
+		],
+		"Price": 1600.0,
+		"Name": "1 Maple Rd.",
+		"BoundaryLower": "[2825 11258 135]"
+	},
+	"2268": {
+		"BoundaryUpper": "[-2650 14154 302]",
+		"SubDoors": [
+			2271.0,
+			2272.0,
+			2269.0,
+			2270.0,
+			2267.0
+		],
+		"Price": 1600.0,
+		"Name": "3 Maple Rd.",
+		"BoundaryLower": "[-1847 12626 134]"
+	},
+	"2261": {
+		"BoundaryUpper": "[-1626 14154 302]",
+		"SubDoors": [
+			2264.0,
+			2265.0,
+			2262.0,
+			2263.0,
+			2245.0
+		],
+		"Price": 1600.0,
+		"Name": "2 Maple Rd.",
+		"BoundaryLower": "[-825 12619 134]"
+	},
+	"2534": {
+		"BoundaryUpper": "[-5722 10662 302]",
+		"SubDoors": [
+			2304.0,
+			2305.0,
+			2306.0,
+			2307.0,
+			2303.0
+		],
+		"Price": 1600.0,
+		"Name": "8 Maple Rd.",
+		"BoundaryLower": "[-4861 11895 134]"
+	},
+	"2509": {
+		"BoundaryUpper": "[-5783 10505 292]",
+		"SubDoors": [
+			2417.0,
+			4874.0,
+			2416.0,
+			4877.0,
+			2415.0
+		],
+		"Price": 1600.0,
+		"Name": "9 Maple Rd.",
+		"BoundaryLower": "[-7034 11896 134]"
+	},
+	"2286": {
+		"BoundaryUpper": "[-4698 10662 302]",
+		"SubDoors": [
+			2288.0,
+			2289.0,
+			2290.0,
+			2291.0,
+			2287.0
+		],
+		"Price": 1600.0,
+		"Name": "7 Maple Rd.",
+		"BoundaryLower": "[-3720 11896 134]"
+	},
+	"2313": {
+		"BoundaryUpper": "[-5738 14234 302]",
+		"SubDoors": [
+			2316.0,
+			2317.0,
+			2319.0,
+			2318.0,
+			2314.0
+		],
+		"Price": 1600.0,
+		"Name": "5 Maple Rd.",
+		"BoundaryLower": "[-4859 12624 134]"
+	},
+	"2238": {
+		"BoundaryUpper": "[-4714 14234 302]",
+		"SubDoors": [
+			2276.0,
+			4875.0,
+			2278.0,
+			2277.0,
+			2274.0
+		],
+		"Price": 1600.0,
+		"Name": "4 Maple Rd.",
+		"BoundaryLower": "[-3720 12808 134]"
+	},
+	"2712": {
+		"BoundaryUpper": "[4566 8618 298]",
+		"SubDoors": [
+			2733.0,
+			2742.0,
+			2744.0,
+			2771.0,
+			2779.0
+		],
+		"Price": 2100.0,
+		"Name": "Leprechauns Winklepicker",
+		"BoundaryLower": "[5490 7046 -86]"
+	},
+	"2630": {
+		"BoundaryUpper": "[-964 11222 290]",
+		"SubDoors": [
+			2627.0,
+			2628.0
+		],
+		"Price": 1600.0,
+		"Name": "Bits & PCs",
+		"BoundaryLower": "[-138 11897 134]"
+	},
+	"1310": {
+		"BoundaryUpper": "[3796 8634 282]",
+		"SubDoors": [
+			2594.0,
+			2593.0,
+			2599.0,
+			2595.0
+		],
+		"Price": 1600.0,
+		"Name": "Pawn Shop",
+		"BoundaryLower": "[4202 7526 142]"
+	},
+	"2219": {
+		"BoundaryUpper": "[243 11457 358]",
+		"SubDoors": [
+			2218.0,
+			2664.0,
+			2667.0,
+			2668.0,
+			2663.0,
+			2670.0
+		],
+		"Price": 1500.0,
+		"Name": "Diner",
+		"BoundaryLower": "[1706 9926 134]"
+	},
+	"2563": {
+		"BoundaryUpper": "[-3370 8810 541]",
+		"SubDoors": [
+			2564.0,
+			2567.0,
+			2566.0
+		],
+		"Price": 1400.0,
+		"Name": "Church",
+		"BoundaryLower": "[-1750 7430 134]"
+	},
+	"2608": {
+		"BoundaryUpper": "[-1514 10134 290]",
+		"SubDoors": [
+			2610.0,
+			2609.0,
+			2612.0,
+			2613.0,
+			2611.0,
+			2617.0,
+			2616.0
+		],
+		"Price": 1900.0,
+		"Name": "Quick Guns",
+		"BoundaryLower": "[-406 10730 142]"
+	},
+	"2048": {
+		"BoundaryUpper": "[796 6862 161]",
+		"SubDoors": [
+			2381.0,
+			2053.0
+		],
+		"Price": 1000.0,
+		"Name": "13th St. Shop #2",
+		"BoundaryLower": "[294 7706 22]"
+	},
+	"2707": {
+		"BoundaryUpper": "[-4618 6986 194]",
+		"SubDoors": [
+			2706.0,
+			3742.0,
+			2708.0
+		],
+		"Price": 1500.0,
+		"Name": "Alley Workshop",
+		"BoundaryLower": "[-3862 5990 54]"
+	},
+	"2047": {
+		"BoundaryUpper": "[1820 6670 162]",
+		"SubDoors": [
+			2380.0,
+			2054.0
+		],
+		"Price": 1000.0,
+		"Name": "13th St. Shop #1",
+		"BoundaryLower": "[1318 7546 22]"
+	},
+	"1958": {
+		"BoundaryUpper": "[4750 4646 98]",
+		"SubDoors": [
+			2372.0,
+			2363.0
+		],
+		"Price": 1000.0,
+		"Name": "Central Square Shop #3",
+		"BoundaryLower": "[5176 5114 -42]"
+	},
+	"2046": {
+		"BoundaryUpper": "[4092 6286 162]",
+		"SubDoors": [
+			2376.0,
+			2055.0
+		],
+		"Price": 1000.0,
+		"Name": "Central Square Shop #1",
+		"BoundaryLower": "[3622 6714 22]"
+	},
+	"2044": {
+		"BoundaryUpper": "[4750 5220 98]",
+		"SubDoors": [
+			2373.0,
+			2364.0
+		],
+		"Price": 1000.0,
+		"Name": "Central Square Shop #2",
+		"BoundaryLower": "[5178 5690 -42]"
+	},
+	"2001": {
+		"BoundaryUpper": "[6246 -1062 325]",
+		"SubDoors": [
+			2002.0
+		],
+		"Price": 2000.0,
+		"Name": "Haviture Way Warehouse",
+		"BoundaryLower": "[7193 -2522 -98]"
+	},
+	"2045": {
+		"BoundaryUpper": "[4454 3250 98]",
+		"SubDoors": [
+			2056.0,
+			2057.0
+		],
+		"Price": 1000.0,
+		"Name": "New Life St. Shop #1",
+		"BoundaryLower": "[4922 2822 -42]"
+	},
+	"2021": {
+		"BoundaryUpper": "[6846 -4857 -28]",
+		"SubDoors": [
+			2022.0,
+			2023.0,
+			2024.0
+		],
+		"Price": 1800.0,
+		"Name": "Bayside Cabin",
+		"BoundaryLower": "[5702 -4104 -314]"
+	},
+	"3596": {
+		"BoundaryUpper": "[7610 2366 922]",
+		"SubDoors": [
+			3595.0,
+			3573.0,
+			3572.0,
+			3569.0,
+			3574.0,
+			3600.0,
+			3577.0,
+			3571.0,
+			3601.0,
+			3583.0,
+			3602.0,
+			3581.0,
+			3570.0,
+			3591.0,
+			3590.0,
+			3604.0,
+			3565.0,
+			3603.0,
+			3560.0
+		],
+		"Price": 3200.0,
+		"Name": "Le Grande Hotel",
+		"BoundaryLower": "[6227 390 -97]"
+	},
+	"2020": {
+		"BoundaryUpper": "[5294 -842 393]",
+		"SubDoors": [
+			2004.0,
+			2005.0,
+			2220.0,
+			2221.0
+		],
+		"Price": 2500.0,
+		"Name": "Salvage Yard",
+		"BoundaryLower": "[2198 -2537 -224]"
+	},
+	"1358": {
+		"BoundaryUpper": "[1702 2406 566]",
+		"SubDoors": [
+			1359.0,
+			1360.0
+		],
+		"Price": 600.0,
+		"Name": "Union Square Apartment F",
+		"BoundaryLower": "[1978 2634 438]"
+	},
+	"3135": {
+		"BoundaryUpper": "[2234 2950 302]",
+		"SubDoors": [
+			3137.0,
+			3136.0
+		],
+		"Price": 600.0,
+		"Name": "Union Square Apartment A",
+		"BoundaryLower": "[1830 3410 174]"
+	},
+	"2997": {
+		"BoundaryUpper": "[2234 2950 830]",
+		"SubDoors": [
+			3001.0,
+			3000.0
+		],
+		"Price": 600.0,
+		"Name": "Union Square Apartment I",
+		"BoundaryLower": "[1830 3410 702]"
+	},
+	"1367": {
+		"BoundaryUpper": "[742 2918 830]",
+		"SubDoors": [
+			1368.0,
+			2958.0
+		],
+		"Price": 600.0,
+		"Name": "Union Square Apartment L",
+		"BoundaryLower": "[1114 3426 702]"
+	},
+	"3130": {
+		"BoundaryUpper": "[742 2918 302]",
+		"SubDoors": [
+			3131.0,
+			2956.0
+		],
+		"Price": 600.0,
+		"Name": "Union Square Apartment D",
+		"BoundaryLower": "[1114 3426 174]"
+	},
+	"3132": {
+		"BoundaryUpper": "[1034 2406 302]",
+		"SubDoors": [
+			3133.0,
+			3134.0
+		],
+		"Price": 600.0,
+		"Name": "Union Square Apartment C",
+		"BoundaryLower": "[1306 2634 174]"
+	},
+	"1356": {
+		"BoundaryUpper": "[742 2918 566]",
+		"SubDoors": [
+			1357.0,
+			2957.0
+		],
+		"Price": 600.0,
+		"Name": "Union Square Apartment H",
+		"BoundaryLower": "[1114 3426 438]"
+	},
+	"2049": {
+		"BoundaryUpper": "[1190 -1046 42]",
+		"SubDoors": [
+			2571.0,
+			2570.0
+		],
+		"Price": 1600.0,
+		"Name": "Hardware Store",
+		"BoundaryLower": "[1786 -1946 -90]"
+	},
+	"3138": {
+		"BoundaryUpper": "[1702 2634 302]",
+		"SubDoors": [
+			3139.0,
+			3140.0
+		],
+		"Price": 600.0,
+		"Name": "Union Square Apartment B",
+		"BoundaryLower": "[1974 2406 174]"
+	},
+	"3002": {
+		"BoundaryUpper": "[2234 2950 566]",
+		"SubDoors": [
+			3004.0,
+			3003.0
+		],
+		"Price": 600.0,
+		"Name": "Union Square Apartment E",
+		"BoundaryLower": "[1830 3410 438]"
+	},
+	"2050": {
+		"BoundaryUpper": "[-214 538 42]",
+		"SubDoors": [
+			2195.0,
+			2059.0
+		],
+		"Price": 1600.0,
+		"Name": "Richman Jewelers",
+		"BoundaryLower": "[-506 -58 -90]"
+	},
+	"1361": {
+		"BoundaryUpper": "[1702 2634 830]",
+		"SubDoors": [
+			1362.0,
+			1363.0
+		],
+		"Price": 600.0,
+		"Name": "Union Square Apartment J",
+		"BoundaryLower": "[1974 2406 702]"
+	},
+	"1364": {
+		"BoundaryUpper": "[1034 2406 830]",
+		"SubDoors": [
+			1365.0,
+			1366.0
+		],
+		"Price": 600.0,
+		"Name": "Union Square Apartment K",
+		"BoundaryLower": "[1306 2634 702]"
+	},
+	"1353": {
+		"BoundaryUpper": "[1034 2406 566]",
+		"SubDoors": [
+			1354.0,
+			1355.0
+		],
+		"Price": 600.0,
+		"Name": "Union Square Apartment G",
+		"BoundaryLower": "[1306 2634 438]"
+	},
+	"1977": {
+		"BoundaryUpper": "[1022 4666 706]",
+		"SubDoors": [
+			1978.0,
+			1294.0
+		],
+		"Price": 600.0,
+		"Name": "13th Street Apartment 7",
+		"BoundaryLower": "[1386 4390 566]"
+	},
+	"1971": {
+		"BoundaryUpper": "[1514 5030 706]",
+		"SubDoors": [
+			1297.0,
+			1973.0
+		],
+		"Price": 600.0,
+		"Name": "13th Street Apartment 8",
+		"BoundaryLower": "[982 5546 566]"
+	},
+	"2257": {
+		"BoundaryUpper": "[1022 4666 370]",
+		"SubDoors": [
+			2258.0,
+			1295.0
+		],
+		"Price": 600.0,
+		"Name": "13th Street Apartment 3",
+		"BoundaryLower": "[1386 4390 230]"
+	},
+	"1964": {
+		"BoundaryUpper": "[1514 5030 202]",
+		"SubDoors": [
+			1965.0,
+			1300.0
+		],
+		"Price": 600.0,
+		"Name": "13th Street Apartment 1",
+		"BoundaryLower": "[982 5546 62]"
+	},
+	"1970": {
+		"BoundaryUpper": "[1514 5030 538]",
+		"SubDoors": [
+			1298.0,
+			1972.0
+		],
+		"Price": 600.0,
+		"Name": "13th Street Apartment 6",
+		"BoundaryLower": "[982 5546 398]"
+	},
+	"2256": {
+		"BoundaryUpper": "[1022 4666 538]",
+		"SubDoors": [
+			2255.0,
+			1293.0
+		],
+		"Price": 600.0,
+		"Name": "13th Street Apartment 5",
+		"BoundaryLower": "[1383 4390 398]"
+	},
+	"1969": {
+		"BoundaryUpper": "[1514 5030 370]",
+		"SubDoors": [
+			1299.0,
+			1968.0
+		],
+		"Price": 600.0,
+		"Name": "13th Street Apartment 4",
+		"BoundaryLower": "[982 5546 230]"
+	},
+	"2259": {
+		"BoundaryUpper": "[1022 4666 202]",
+		"SubDoors": [
+			2260.0,
+			1296.0
+		],
+		"Price": 600.0,
+		"Name": "13th Street Apartment 2",
+		"BoundaryLower": "[1386 4390 62]"
+	},
+	"2016": {
+		"BoundaryUpper": "[-3690 -1042 286]",
+		"SubDoors": [
+			2011.0,
+			2010.0,
+			2052.0,
+			2013.0,
+			2051.0,
+			2017.0
+		],
+		"Price": 2800.0,
+		"Name": "Any Way Warehouses",
+		"BoundaryLower": "[-230 -2522 -90]"
+	},
+	"2019": {
+		"BoundaryUpper": "[1139 -3499 104]",
+		"SubDoors": [
+			2018.0,
+			2008.0,
+			2007.0,
+			2555.0
+		],
+		"Price": 2000.0,
+		"Name": "River Rd. Warehouse",
+		"BoundaryLower": "[-746 -7210 -314]"
+	},
+	"3298": {
+		"BoundaryUpper": "[-502 5134 1882]",
+		"SubDoors": [
+			3290.0,
+			3288.0,
+			3305.0
+		],
+		"Price": 2800.0,
+		"Name": "World Corp Office",
+		"BoundaryLower": "[-1962 4566 1774]"
+	},
+	"2108": {
+		"BoundaryUpper": "[-2964 1840 278]",
+		"SubDoors": [
+			3852.0,
+			3866.0,
+			3867.0,
+			3849.0,
+			3860.0,
+			3861.0,
+			3848.0,
+			3858.0,
+			3859.0,
+			3840.0,
+			3843.0,
+			3844.0,
+			3845.0,
+			3853.0,
+			2341.0,
+			3851.0,
+			3864.0,
+			3865.0,
+			3850.0,
+			3862.0,
+			3863.0,
+			3847.0,
+			3856.0,
+			3857.0,
+			3839.0,
+			3841.0,
+			3842.0,
+			3846.0,
+			3854.0,
+			3855.0
+		],
+		"Price": 3100.0,
+		"Name": "Motel",
+		"BoundaryLower": "[-5098 -106 -94]"
+	},
+	"2026": {
+		"BoundaryUpper": "[-5210 2982 306]",
+		"SubDoors": [
+			2025.0,
+			2027.0,
+			2170.0
+		],
+		"Price": 1200.0,
+		"Name": "North Street Warehouse",
+		"BoundaryLower": "[-4182 3930 -25]"
+	},
+	"2231": {
+		"BoundaryUpper": "[-13807 -9242 183]",
+		"SubDoors": [
+			1291.0,
+			1290.0,
+			1288.0,
+			1289.0
+		],
+		"Price": 2000.0,
+		"Name": "Remote Warehouse",
+		"BoundaryLower": "[-11350 -11242 -311]"
+	},
+	"2699": {
+		"BoundaryUpper": "[-8726 3754 346]",
+		"SubDoors": [
+			2698.0,
+			3741.0,
+			2700.0
+		],
+		"Price": 1500.0,
+		"Name": "Alley Workshop 2",
+		"BoundaryLower": "[-9370 2966 6]"
+	},
+	"2166": {
+		"BoundaryUpper": "[-6810 3754 106]",
+		"SubDoors": [
+			2582.0,
+			2167.0
+		],
+		"Price": 1600.0,
+		"Name": "Central Pharmacy",
+		"BoundaryLower": "[-6166 3014 -26]"
+	},
+	"2101": {
+		"BoundaryUpper": "[-8218 6778 378]",
+		"SubDoors": [
+			2100.0,
+			3505.0,
+			3468.0,
+			3481.0,
+			3539.0,
+			3466.0,
+			3551.0,
+			3545.0,
+			3540.0,
+			3546.0,
+			3465.0
+		],
+		"Price": 3300.0,
+		"Name": "Club",
+		"BoundaryLower": "[-7174 5510 6]"
+	},
+	"2038": {
+		"BoundaryUpper": "[12980 -12237 -151]",
+		"SubDoors": [
+			2043.0,
+			2041.0,
+			2042.0,
+			2209.0,
+			2210.0,
+			2205.0,
+			2206.0,
+			2207.0,
+			2208.0,
+			2203.0,
+			2204.0
+		],
+		"Price": 1600.0,
+		"Name": "Boat",
+		"BoundaryLower": "[12357 -13630 -518]"
+	}
+}

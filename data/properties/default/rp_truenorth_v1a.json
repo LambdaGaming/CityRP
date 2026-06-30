@@ -1,0 +1,502 @@
+{
+	"3655":{
+		"Name":"10 River Rd. #1",
+		"Price":600,
+		"SubDoors":[3653, 3654],
+		"BoundaryUpper":"[6002 6626 130]",
+		"BoundaryLower":"[5134 6286 14]"
+	},
+	"3667":{
+		"Name":"10 River Rd. #2",
+		"Price":600,
+		"SubDoors":[3663, 3665],
+		"BoundaryUpper":"[6002 6986 130]",
+		"BoundaryLower":"[5134 6646 14]"
+	},
+	"3675":{
+		"Name":"10 River Rd. #3",
+		"Price":600,
+		"SubDoors":[3671, 3673],
+		"BoundaryUpper":"[6002 7346 130]",
+		"BoundaryLower":"[5134 7006 14]"
+	},
+	"3683":{
+		"Name":"10 River Rd. #4",
+		"Price":600,
+		"SubDoors":[3679, 3681],
+		"BoundaryUpper":"[6002 7706 130]",
+		"BoundaryLower":"[5134 7366 14]"
+	},
+	"3691":{
+		"Name":"10 River Rd. #5",
+		"Price":600,
+		"SubDoors":[3687, 3689],
+		"BoundaryUpper":"[6002 8066 130]",
+		"BoundaryLower":"[5134 7726 14]"
+	},
+	"3699":{
+		"Name":"10 River Rd. #6",
+		"Price":600,
+		"SubDoors":[3695, 3697],
+		"BoundaryUpper":"[6002 8426 130]",
+		"BoundaryLower":"[5134 8086 14]"
+	},
+	"3707":{
+		"Name":"10 River Rd. #7",
+		"Price":600,
+		"SubDoors":[3703, 3705],
+		"BoundaryUpper":"[6002 8786 130]",
+		"BoundaryLower":"[5134 8446 14]"
+	},
+	"3715":{
+		"Name":"10 River Rd. #8",
+		"Price":600,
+		"SubDoors":[3711, 3713],
+		"BoundaryUpper":"[6002 9146 130]",
+		"BoundaryLower":"[5134 8806 14]"
+	},
+	"3410":{
+		"Name":"Mexi Grill",
+		"Price":1400,
+		"SubDoors":[3411, 3450, 3449, 3416, 3413],
+		"BoundaryUpper":"[7527 10602 226]",
+		"BoundaryLower":"[5286 9486 6]"
+	},
+	"2616":{
+		"Name":"150 Main St.",
+		"Price":1300,
+		"SubDoors":[2617, 2067],
+		"BoundaryUpper":"[8990 10546 186]",
+		"BoundaryLower":"[9426 9614 14]"
+	},
+	"2619":{
+		"Name":"166 Main St.",
+		"Price":1300,
+		"SubDoors":[2618, 2068],
+		"BoundaryUpper":"[9446 10546 186]",
+		"BoundaryLower":"[9890 9614 14]"
+	},
+	"2621":{
+		"Name":"190 Main St.",
+		"Price":1300,
+		"SubDoors":[2620, 2069],
+		"BoundaryUpper":"[9910 10546 186]",
+		"BoundaryLower":"[10354 9614 14]"
+	},
+	"2518":{
+		"Name":"202 Main St.",
+		"Price":2100,
+		"SubDoors":[2517, 2519],
+		"BoundaryUpper":"[11406 10226 194]",
+		"BoundaryLower":"[12154 9358 14]"
+	},
+	"4362":{
+		"Name":"199 Railway Ave.",
+		"Price":800,
+		"BoundaryUpper":"[11790 8546 130]",
+		"BoundaryLower":"[12154 8366 14]"
+	},
+	"2647":{
+		"Name":"165 Railway Ave.",
+		"Price":900,
+		"SubDoors":[1356],
+		"BoundaryUpper":"[12658 7794 130]",
+		"BoundaryLower":"[11790 7566 14]"
+	},
+	"1366":{
+		"Name":"155 Railway Ave.",
+		"Price":1300,
+		"SubDoors":[1365, 1367],
+		"BoundaryUpper":"[12658 7538 130]",
+		"BoundaryLower":"[11790 7182 14]"
+	},
+	"4364":{
+		"Name":"139 Railway Ave.",
+		"Price":800,
+		"BoundaryUpper":"[11790 6882 130]",
+		"BoundaryLower":"[12154 6702 14]"
+	},
+	"1771":{
+		"Name":"131 Railway Ave. #1",
+		"Price":600,
+		"SubDoors":[1763, 1761],
+		"BoundaryUpper":"[11790 6414 394]",
+		"BoundaryLower":"[12174 6898 278]"
+	},
+	"1772":{
+		"Name":"131 Railway Ave. #2",
+		"Price":600,
+		"SubDoors":[1767, 1769],
+		"BoundaryUpper":"[12658 6414 394]",
+		"BoundaryLower":"[12274 6898 278]"
+	},
+	"4363":{
+		"Name":"129 Railway Ave.",
+		"Price":800,
+		"BoundaryUpper":"[11790 6370 130]",
+		"BoundaryLower":"[12154 6190 14]"
+	},
+	"1385":{
+		"Name":"123 Railway Ave.",
+		"Price":1300,
+		"SubDoors":[1384, 1386],
+		"BoundaryUpper":"[12658 5874 130]",
+		"BoundaryLower":"[11790 5518 14]"
+	},
+	"4365":{
+		"Name":"119 Railway Ave.",
+		"Price":800,
+		"BoundaryUpper":"[11790 5474 130]",
+		"BoundaryLower":"[12154 5294 14]"
+	},
+	"2649":{
+		"Name":"115 Railway Ave.",
+		"Price":900,
+		"SubDoors":[1422],
+		"BoundaryUpper":"[12658 4622 130]",
+		"BoundaryLower":"[11790 4850 14]"
+	},
+	"1404":{
+		"Name":"111 Railway Ave.",
+		"Price":1300,
+		"SubDoors":[1403, 1405],
+		"BoundaryUpper":"[12658 4594 130]",
+		"BoundaryLower":"[11790 4238 14]"
+	},
+	"4366":{
+		"Name":"109 Railway Ave.",
+		"Price":800,
+		"BoundaryUpper":"[11790 4194 130]",
+		"BoundaryLower":"[12154 4014 14]"
+	},
+	"1757":{
+		"Name":"103 Railway Ave. #1",
+		"Price":600,
+		"SubDoors":[1749, 1747],
+		"BoundaryUpper":"[12173 4209 393]",
+		"BoundaryLower":"[11790 3726 278]"
+	},
+	"1758":{
+		"Name":"103 Railway Ave. #2",
+		"Price":600,
+		"SubDoors":[1753, 1755],
+		"BoundaryUpper":"[12658 3726 394]",
+		"BoundaryLower":"[12274 4210 278]"
+	},
+	"4367":{
+		"Name":"100 Railway Ave.",
+		"Price":800,
+		"BoundaryUpper":"[10226 3743 130]",
+		"BoundaryLower":"[9862 3922 14]"
+	},
+	"2648":{
+		"Name":"106 Railway Ave.",
+		"Price":900,
+		"SubDoors":[1275],
+		"BoundaryUpper":"[9358 4722 130]",
+		"BoundaryLower":"[10226 4494 14]"
+	},
+	"4368":{
+		"Name":"112 Railway Ave.",
+		"Price":800,
+		"BoundaryUpper":"[10226 4766 130]",
+		"BoundaryLower":"[9862 4946 14]"
+	},
+	"1785":{
+		"Name":"116 Railway Ave. #1",
+		"Price":600,
+		"SubDoors":[1774, 1773],
+		"BoundaryUpper":"[10226 5233 391]",
+		"BoundaryLower":"[9842 4750 278]"
+	},
+	"1786":{
+		"Name":"116 Railway Ave. #2",
+		"Price":600,
+		"SubDoors":[1781, 1783],
+		"BoundaryUpper":"[9358 5234 394]",
+		"BoundaryLower":"[9742 4750 278]"
+	},
+	"4369":{
+		"Name":"120 Railway Ave.",
+		"Price":800,
+		"BoundaryUpper":"[10226 5278 130]",
+		"BoundaryLower":"[9862 5458 14]"
+	},
+	"1277":{
+		"Name":"122 Railway Ave.",
+		"Price":1300,
+		"SubDoors":[1276, 1278],
+		"BoundaryUpper":"[9358 5874 130]",
+		"BoundaryLower":"[10226 5518 14]"
+	},
+	"4370":{
+		"Name":"126 Railway Ave.",
+		"Price":800,
+		"BoundaryUpper":"[10226 6174 129]",
+		"BoundaryLower":"[9862 6354 14]"
+	},
+	"2646":{
+		"Name":"130 Railway Ave.",
+		"Price":900,
+		"SubDoors":[1314],
+		"BoundaryUpper":"[9358 7026 130]",
+		"BoundaryLower":"[10226 6798 14]"
+	},
+	"1296":{
+		"Name":"136 Railway Ave.",
+		"Price":1300,
+		"SubDoors":[1295, 1297],
+		"BoundaryUpper":"[9358 7410 130]",
+		"BoundaryLower":"[10226 7054 14]"
+	},
+	"4371":{
+		"Name":"150 Railway Ave.",
+		"Price":800,
+		"BoundaryUpper":"[10226 7454 130]",
+		"BoundaryLower":"[9862 7634 14]"
+	},
+	"1354":{
+		"Name":"162 Railway Ave. #1",
+		"Price":600,
+		"SubDoors":[1346, 1344],
+		"BoundaryUpper":"[10226 7922 394]",
+		"BoundaryLower":"[9842 7438 278]"
+	},
+	"1355":{
+		"Name":"162 Railway Ave. #2",
+		"Price":600,
+		"SubDoors":[1350, 1352],
+		"BoundaryUpper":"[9358 7922 394]",
+		"BoundaryLower":"[9742 7438 278]"
+	},
+	"1324":{
+		"Name":"192 Railway Ave.",
+		"Price":1300,
+		"SubDoors":[1323, 1325],
+		"BoundaryUpper":"[9358 8562 130]",
+		"BoundaryLower":"[10226 8206 14]"
+	},
+	"3357":{
+		"Name":"Mel's Diner",
+		"Price":1400,
+		"SubDoors":[3356, 3384],
+		"BoundaryUpper":"[9042 1918 130]",
+		"BoundaryLower":"[8104 2680 14]"
+	},
+	"3127":{
+		"Name":"69 Railway Ave.",
+		"Price":1300,
+		"BoundaryUpper":"[8050 12302 130]",
+		"BoundaryLower":"[7566 12786 14]"
+	},
+	"3150":{
+		"Name":"Blu Cinema",
+		"Price":2600,
+		"SubDoors":[3151, 3149],
+		"BoundaryUpper":"[3726 9870 650]",
+		"BoundaryLower":"[4978 11762 142 ]"
+	},
+	"1541":{
+		"Name":"50 Spruce Cres.",
+		"Price":1600,
+		"SubDoors":[1544, 1543, 1545, 1542, 1941],
+		"BoundaryUpper":"[8 8580 417]",
+		"BoundaryLower":"[-1749 7504 142]"
+	},
+	"1590":{
+		"Name":"32 Spruce Cres.",
+		"Price":1800,
+		"SubDoors":[1591, 1592, 1593, 1589, 3718, 1594, 1787],
+		"BoundaryUpper":"[382 9720 415]",
+		"BoundaryLower":"[-1561 8595 143]"
+	},
+	"1574":{
+		"Name":"16 Spruce Cres.",
+		"Price":1900,
+		"SubDoors":[1576, 1577, 1578, 1575, 1579, 1789, 1788],
+		"BoundaryUpper":"[370 11496 418]",
+		"BoundaryLower":"[-1531 9729 142]"
+	},
+	"1546":{
+		"Name":"2 Spruce Cres.",
+		"Price":2600,
+		"SubDoors":[1547, 1556, 1555, 1552, 1553, 1554, 1548, 1550, 1549, 1551, 3719, 3717],
+		"BoundaryUpper":"[324 14053 469]",
+		"BoundaryLower":"[-1587 11858 142]"
+	},
+	"1659":{
+		"Name":"9 River Rd.",
+		"Price":1800,
+		"SubDoors":[1660, 1661, 1662, 1658, 3742, 1663, 3729],
+		"BoundaryUpper":"[-3960 12750 449]",
+		"BoundaryLower":"[-1964 14519 142]"
+	},
+	"1676":{
+		"Name":"13 River Rd.",
+		"Price":1600,
+		"SubDoors":[1679, 1680, 1678, 1677, 3741],
+		"BoundaryUpper":"[-3968 11213 372]",
+		"BoundaryLower":"[-1991 12725 142]"
+	},
+	"1617":{
+		"Name":"35 River Rd.",
+		"Price":2600,
+		"SubDoors":[1618, 1619, 1627, 1626, 1623, 1624, 1625, 1621, 1620, 1622, 3740, 3725],
+		"BoundaryUpper":"[-3960 8885 520]",
+		"BoundaryLower":"[-2171 11185 142]"
+	},
+	"1602":{
+		"Name":"69 River Rd.",
+		"Price":1900,
+		"SubDoors":[1604, 1605, 1606, 1603, 1607, 3724, 3739],
+		"BoundaryUpper":"[-3944 7303 444]",
+		"BoundaryLower":"[-2099 8872 143]"
+	},
+	"1646":{
+		"Name":"56 River Rd.",
+		"Price":1800,
+		"SubDoors":[1647, 1648, 1649, 1645, 3735, 1650, 3727],
+		"BoundaryUpper":"[-4757 9008 453]",
+		"BoundaryLower":"[-6552 7248 142]"
+	},
+	"1681":{
+		"Name":"22 River Rd.",
+		"Price":1900,
+		"SubDoors":[1683, 1684, 1685, 1682, 1686, 3731, 3736],
+		"BoundaryUpper":"[-4745 10789 497]",
+		"BoundaryLower":"[-6555 9051 142]"
+	},
+	"1706":{
+		"Name":"10 River Rd.",
+		"Price":2600,
+		"SubDoors":[1707, 1708, 1716, 1715, 1712, 1713, 1714, 1710, 1709, 1711, 3738, 3733],
+		"BoundaryUpper":"[-4757 12990 516]",
+		"BoundaryLower":"[-6405 10832 142]"
+	},
+	"1701":{
+		"Name":"2 River Rd.",
+		"Price":1600,
+		"SubDoors":[1704, 1705, 1703, 1702, 3737],
+		"BoundaryUpper":"[-4751 14452 429]",
+		"BoundaryLower":"[-6491 13125 142]"
+	},
+	"2460":{
+		"Name":"Richardson Atlantic Warehouse",
+		"Price":2300,
+		"SubDoors":[2461, 2462, 2440, 2441, 2439, 4083],
+		"BoundaryUpper":"[15218 -1038 247]",
+		"BoundaryLower":"[12422 -2170 6]"
+	},
+	"2394":{
+		"Name":"Northern Steel Mill",
+		"Price":4600,
+		"SubDoors":[2395, 2399, 2396, 2398, 2397, 2340, 2335, 2334, 2351, 2352, 2354, 2353, 2372, 2371, 2379, 2378, 2377, 2373],
+		"BoundaryUpper":"[15837 -8177 1216]",
+		"BoundaryLower":"[12371 -2323 6]"
+	},
+	"2210":{
+		"Name":"Metro International Warehouse",
+		"Price":2300,
+		"SubDoors":[2213, 2216, 2215, 2214, 2198, 2200, 2202, 2211, 2204, 2206, 2208, 2212],
+		"BoundaryUpper":"[15722 -8270 410]",
+		"BoundaryLower":"[12355 -10685 6]"
+	},
+	"2289":{
+		"Name":"Ducatel Sugar Co.",
+		"Price":3700,
+		"SubDoors":[2291, 2290, 2288],
+		"BoundaryUpper":"[2037 -15709 535]",
+		"BoundaryLower":"[12105 -13202 12]"
+	},
+	"2087":{
+		"Name":"Truenorth Farmer Co-Op",
+		"Price":3700,
+		"SubDoors":[2086, 2084, 2179, 2085],
+		"BoundaryUpper":"[-7991 -15697 2040]",
+		"BoundaryLower":"[1770 -13550 6]"
+	},
+	"1792":{
+		"Name":"Cabin #1 I-84",
+		"Price":2100,
+		"SubDoors":[1798, 1791],
+		"BoundaryUpper":"[9839 -6046 372]",
+		"BoundaryLower":"[8670 -4612 7]"
+	},
+	"1800":{
+		"Name":"Cabin #2 I-84",
+		"Price":2100,
+		"SubDoors":[1806, 1799],
+		"BoundaryUpper":"[4785 -10020 329]",
+		"BoundaryLower":"[5854 -11627 8]"
+	},
+	"1808":{
+		"Name":"Cabin #3 I-84",
+		"Price":2100,
+		"SubDoors":[1814, 1807],
+		"BoundaryUpper":"[925 -3118 367]",
+		"BoundaryLower":"[2350 -4975 6]"
+	},
+	"1883":{
+		"Name":"Cabin #1 Valley Dr.",
+		"Price":2300,
+		"SubDoors":[1886, 1885, 1884, 1887, 1238, 1828],
+		"BoundaryUpper":"[1477 -3870 4914]",
+		"BoundaryLower":"[-418 -1604 4417]"
+	},
+	"1894":{
+		"Name":"Cabin #1 Granite Hill Rd.",
+		"Price":2300,
+		"SubDoors":[1897, 1896, 1895, 1898, 1259, 1921],
+		"BoundaryUpper":"[-658 -10738 5016]",
+		"BoundaryLower":"[-3778 -7567 4104]"
+	},
+	"1903":{
+		"Name":"Cabin #2 Granite Hill Rd.",
+		"Price":2200,
+		"SubDoors":[1906, 1905, 1904, 1246, 1912],
+		"BoundaryUpper":"[3323 -12736 5399]",
+		"BoundaryLower":"[1388 -9804 4872]"
+	},
+	"1841":{
+		"Name":"Cabin #1 Beach Rd.",
+		"Price":2100,
+		"SubDoors":[1847, 1848],
+		"BoundaryUpper":"[7442 -8500 5720]",
+		"BoundaryLower":"[8496 -7308 5382]"
+	},
+	"1833":{
+		"Name":"Cabin #2 Beach Rd.",
+		"Price":2100,
+		"SubDoors":[1839, 1840],
+		"BoundaryUpper":"[6311 -11918 5725]",
+		"BoundaryLower":"[8312 -10205 5328]"
+	},
+	"1857":{
+		"Name":"Cabin #1 US-18",
+		"Price":2100,
+		"SubDoors":[1863, 1864],
+		"BoundaryUpper":"[14938 -11215 5727]",
+		"BoundaryLower":"[13447 -12739 5333]"
+	},
+	"1849":{
+		"Name":"Cabin #2 US-18",
+		"Price":2100,
+		"SubDoors":[1855, 1856],
+		"BoundaryUpper":"[14859 -10227 5650]",
+		"BoundaryLower":"[13176 -11046 5365]"
+	},
+	"1878":{
+		"Name":"Cabin #3 US-18",
+		"Price":2500,
+		"SubDoors":[1880, 1879, 1876, 1877, 1881, 1882],
+		"BoundaryUpper":"[13700 3901 6850]",
+		"BoundaryLower":"[15473 5477 6385]"
+	},
+	"1936":{
+		"Name":"Cabin #2 Valley Dr.",
+		"Price":2500,
+		"SubDoors":[1938, 1937, 1934, 1935, 1939, 1940],
+		"BoundaryUpper":"[10790 7262 5893]",
+		"BoundaryLower":"[12595 10531 5179]"
+	}
+}

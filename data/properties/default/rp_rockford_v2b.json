@@ -1,0 +1,378 @@
+{
+	"1236":{
+		"Name":"102 Cosmos St. #1",
+		"Price":600,
+		"SubDoors":[1237, 1238],
+		"BoundaryUpper":"[-2646 -7410 113]",
+		"BoundaryLower":"[-3210 -7190 9]"
+	},
+	"1239":{
+		"Name":"102 Cosmos St. #2",
+		"Price":600,
+		"SubDoors":[1240, 1241],
+		"BoundaryUpper":"[-2646 -7410 233]",
+		"BoundaryLower":"[-3210 -7190 130]"
+	},
+	"1242":{
+		"Name":"102 Cosmos St. #3",
+		"Price":600,
+		"SubDoors":[1243, 1244],
+		"BoundaryUpper":"[-2646 -7410 353]",
+		"BoundaryLower":"[-3210 -7190 250]"
+	},
+	"1251":{
+		"Name":"106 Cosmos St. #1",
+		"Price":600,
+		"SubDoors":[1252, 1253],
+		"BoundaryUpper":"[-4458 -7410 113]",
+		"BoundaryLower":"[-3894 -7190 9]"
+	},
+	"1245":{
+		"Name":"106 Cosmos St. #2",
+		"Price":600,
+		"SubDoors":[1246, 1247],
+		"BoundaryUpper":"[-4458 -7410 233]",
+		"BoundaryLower":"[-3894 -7190 130]"
+	},
+	"1248":{
+		"Name":"106 Cosmos St. #3",
+		"Price":600,
+		"SubDoors":[1249, 1250],
+		"BoundaryUpper":"[-4458 -7410 353]",
+		"BoundaryLower":"[-3894 -7190 250]"
+	},
+	"2507":{
+		"Name":"103 Cosmos St. #1",
+		"Price":1000,
+		"SubDoors":[2506, 2513, 2512],
+		"BoundaryUpper":"[-3250 -5234 442]",
+		"BoundaryLower":"[-2782 -4574 70]"
+	},
+	"2509":{
+		"Name":"103 Cosmos St. #2",
+		"Price":1000,
+		"SubDoors":[2508, 2511, 2510],
+		"BoundaryUpper":"[-3768 -5233 442]",
+		"BoundaryLower":"[-3286 -4574 70]"
+	},
+	"1645":{
+		"Name":"190 Main St.",
+		"Price":800,
+		"BoundaryUpper":"[-7278 -2926 122]",
+		"BoundaryLower":"[-7634 -3410 14]"
+	},
+	"1637":{
+		"Name":"169 Cosmos St.",
+		"Price":800,
+		"SubDoors":[1636],
+		"BoundaryUpper":"[-8046 -4210 122]",
+		"BoundaryLower":"[-8658 -3534 14]"
+	},
+	"1635":{
+		"Name":"195 Cosmos St.",
+		"Price":1200,
+		"SubDoors":[1634],
+		"BoundaryUpper":"[-7790 -3506 186]",
+		"BoundaryLower":"[-8658 -2766 14]"
+	},
+	"4022":{
+		"Name":"Rockford Customs",
+		"Price":1200,
+		"BoundaryUpper":"[-7118 -1970 258]",
+		"BoundaryLower":"[-8881 -1038 14]"
+	},
+	"2327":{
+		"Name":"Club Catalyst",
+		"Price":1800,
+		"SubDoors":[2326],
+		"BoundaryUpper":"[-7950 -1522 -38]",
+		"BoundaryLower":"[-9586 -270 -282]"
+	},
+	"1641":{
+		"Name":"223 Cosmos St.",
+		"Price":1300,
+		"SubDoors":[1640, 1970, 1969],
+		"BoundaryUpper":"[-7790 546 122]",
+		"BoundaryLower":"[-8658 -450 14]"
+	},
+	"1639":{
+		"Name":"239 Cosmos St.",
+		"Price":800,
+		"SubDoors":[1638, 1968],
+		"BoundaryUpper":"[-8046 574 122]",
+		"BoundaryLower":"[-8658 1314 14]"
+	},
+	"1644":{
+		"Name":"255 Cosmos St.",
+		"Price":800,
+		"SubDoors":[1967],
+		"BoundaryUpper":"[-8302 1826 122]",
+		"BoundaryLower":"[-8658 1342 14]"
+	},
+	"1568":{
+		"Name":"121 Grant Ave.",
+		"Price":2000,
+		"SubDoors":[1588],
+		"BoundaryUpper":"[-8882 3406 258]",
+		"BoundaryLower":"[-7118 4594 14]"
+	},
+	"1570":{
+		"Name":"327 Cosmos St.",
+		"Price":2900,
+		"SubDoors":[1569, 1578, 1577, 1986, 1987, 1988, 1989],
+		"BoundaryUpper":"[-8858 5398 242]",
+		"BoundaryLower":"[-6998 8682 6]"
+	},
+	"3177":{
+		"Name":"330 Main St.",
+		"Price":2100,
+		"SubDoors":[3178],
+		"BoundaryUpper":"[-6434 6158 378]",
+		"BoundaryLower":"[-4926 8306 6]"
+	},
+	"3798":{
+		"Name":"Rockford Transit Authority",
+		"Price":1000,
+		"SubDoors":[3797],
+		"BoundaryUpper":"[-2229 4701 734]",
+		"BoundaryLower":"[-654 3732 542]"
+	},
+	"3804":{
+		"Name":"Rockford Dreams Cinema",
+		"Price":1800,
+		"SubDoors":[3803, 3806, 3805, 3807, 3808],
+		"BoundaryUpper":"[-846 1166 1146]",
+		"BoundaryLower":"[-2105 2674 550]"
+	},
+	"1631":{
+		"Name":"Taco Bell",
+		"Price":1400,
+		"SubDoors":[1630, 1721, 1720],
+		"BoundaryUpper":"[262 1462 730]",
+		"BoundaryLower":"[874 2282 550]"
+	},
+	"3850":{
+		"Name":"Pacific Standard Tavern",
+		"Price":1400,
+		"SubDoors":[3849],
+		"BoundaryUpper":"[-782 5326 762]",
+		"BoundaryLower":"[-1368 6202 582]"
+	},
+	"1491":{
+		"Name":"Quarantine Realty",
+		"Price":1000,
+		"SubDoors":[1490, 1965],
+		"BoundaryUpper":"[-1354 6230 658]",
+		"BoundaryLower":"[-694 6826 550]"
+	},
+	"2846":{
+		"Name":"210 Grif Dr.",
+		"Price":800,
+		"SubDoors":[2847],
+		"BoundaryUpper":"[2226 1782 730]",
+		"BoundaryLower":"[1547 1420 551]"
+	},
+	"2849":{
+		"Name":"220 Grif Dr.",
+		"Price":800,
+		"SubDoors":[2848],
+		"BoundaryUpper":"[2226 2166 728]",
+		"BoundaryLower":"[1546 1802 550]"
+	},
+	"2851":{
+		"Name":"230 Grif Dr.",
+		"Price":800,
+		"SubDoors":[2850],
+		"BoundaryUpper":"[2226 2550 730]",
+		"BoundaryLower":"[1546 2186 550]"
+	},
+	"2853":{
+		"Name":"250 Grif Dr.",
+		"Price":800,
+		"SubDoors":[2852],
+		"BoundaryUpper":"[2226 2934 730]",
+		"BoundaryLower":"[1546 2570 550]"
+	},
+	"2855":{
+		"Name":"260 Grif Dr.",
+		"Price":800,
+		"SubDoors":[2854],
+		"BoundaryUpper":"[2226 3318 730]",
+		"BoundaryLower":"[1546 2954 550]"
+	},
+	"2857":{
+		"Name":"290 Grif Dr.",
+		"Price":800,
+		"SubDoors":[2856],
+		"BoundaryUpper":"[2226 3702 730]",
+		"BoundaryLower":"[1546 3338 550]"
+	},
+	"1681":{
+		"Name":"315 Grif Dr. #1",
+		"Price":1000,
+		"SubDoors":[1674, 1678, 1675],
+		"BoundaryUpper":"[-370 8434 738]",
+		"BoundaryLower":"[242 7630 622]"
+	},
+	"1680":{
+		"Name":"315 Grif Dr. #2",
+		"Price":1000,
+		"SubDoors":[1676, 1679, 1677],
+		"BoundaryUpper":"[1138 8434 737]",
+		"BoundaryLower":"[526 7630 622]"
+	},
+	"1689":{
+		"Name":"315 Grif Dr. #3",
+		"Price":1000,
+		"SubDoors":[1682, 1686, 1683],
+		"BoundaryUpper":"[-370 8434 874]",
+		"BoundaryLower":"[242 7630 758]"
+	},
+	"1688":{
+		"Name":"315 Grif Dr. #4",
+		"Price":1000,
+		"SubDoors":[1684, 1687, 1685],
+		"BoundaryUpper":"[1138 8434 874]",
+		"BoundaryLower":"[526 7630 758]"
+	},
+	"1699":{
+		"Name":"315 Grif Dr. #5",
+		"Price":1000,
+		"SubDoors":[1692, 1696, 1693],
+		"BoundaryUpper":"[-370 8434 1010]",
+		"BoundaryLower":"[242 7630 894]"
+	},
+	"1698":{
+		"Name":"315 Grif Dr. #6",
+		"Price":1000,
+		"SubDoors":[1694, 1697, 1695],
+		"BoundaryUpper":"[1138 8434 1010]",
+		"BoundaryLower":"[526 7630 894]"
+	},
+	"1673":{
+		"Name":"325 Grif Dr. #1",
+		"Price":1000,
+		"SubDoors":[1666, 1670, 1667],
+		"BoundaryUpper":"[-654 8974 738]",
+		"BoundaryLower":"[-1266 9778 622]"
+	},
+	"1672":{
+		"Name":"325 Grif Dr. #2",
+		"Price":1000,
+		"SubDoors":[1668, 1671, 1669],
+		"BoundaryUpper":"[-2162 8974 738]",
+		"BoundaryLower":"[-1550 9778 622]"
+	},
+	"1663":{
+		"Name":"325 Grif Dr. #3",
+		"Price":1000,
+		"SubDoors":[1656, 1660, 1657],
+		"BoundaryUpper":"[-654 8974 874]",
+		"BoundaryLower":"[-1266 9778 758]"
+	},
+	"1662":{
+		"Name":"325 Grif Dr. #4",
+		"Price":1000,
+		"SubDoors":[1658, 1661, 1659],
+		"BoundaryUpper":"[-2162 8974 874]",
+		"BoundaryLower":"[-1550 9778 758]"
+	},
+	"1653":{
+		"Name":"325 Grif Dr. #5",
+		"Price":1000,
+		"SubDoors":[1646, 1650, 1647],
+		"BoundaryUpper":"[-654 8974 1010]",
+		"BoundaryLower":"[-1266 9778 894]"
+	},
+	"1652":{
+		"Name":"325 Grif Dr. #6",
+		"Price":1000,
+		"SubDoors":[1648, 1651, 1649],
+		"BoundaryUpper":"[-1550 9778 1010]",
+		"BoundaryLower":"[-2162 8974 894]"
+	},
+	"1319":{
+		"Name":"3 Richard Dr.",
+		"Price":2600,
+		"SubDoors":[1713, 1322, 1320, 1321, 1625, 1328, 1327, 1330, 1323, 1324, 1329, 1331, 1325, 1326, 1707],
+		"BoundaryUpper":"[7675 4997 1842]",
+		"BoundaryLower":"[9514 6546 1408]"
+	},
+	"1297":{
+		"Name":"1 Richard Dr.",
+		"Price":1700,
+		"SubDoors":[1298, 1296, 1299, 1705],
+		"BoundaryUpper":"[7696 8167 1753]",
+		"BoundaryLower":"[9513 6566 1550]"
+	},
+	"1293":{
+		"Name":"6 Richard Dr.",
+		"Price":1700,
+		"SubDoors":[1295, 1289, 1287, 1288, 1291, 1292, 1290, 1294, 1714],
+		"BoundaryUpper":"[7099 1924 1797]",
+		"BoundaryLower":"[10161 428 1408]"
+	},
+	"1300":{
+		"Name":"8 Richard Dr.",
+		"Price":1700,
+		"SubDoors":[1304, 1305, 1307, 1303, 1306, 1301, 1302, 1711],
+		"BoundaryUpper":"[11998 3090 1763]",
+		"BoundaryLower":"[10182 426 1550]"
+	},
+	"1308":{
+		"Name":"10 Richard Dr.",
+		"Price":2700,
+		"SubDoors":[1715, 1311, 1310, 1309, 1312, 1313, 1314, 1316, 1315, 1317, 1318, 1709],
+		"BoundaryUpper":"[12267 6129 1878]",
+		"BoundaryLower":"[10454 3126 1550]"
+	},
+	"1623":{
+		"Name":"11 Richard Dr.",
+		"Price":1200,
+		"SubDoors":[1286, 1624, 1285, 1703, 1285, 1280, 1283, 1282, 1284, 1281],
+		"BoundaryUpper":"[9548 6735 1791]",
+		"BoundaryLower":"[11793 8185 1550]"
+	},
+	"3011":{
+		"Name":"Big Red",
+		"Price":1300,
+		"SubDoors":[3021],
+		"BoundaryUpper":"[-2007 11695 936]",
+		"BoundaryLower":"[-491 12701 536]"
+	},
+	"3023":{
+		"Name":"Yellow Warehouse",
+		"Price":800,
+		"SubDoors":[3024],
+		"BoundaryUpper":"[-13390 12078 766]",
+		"BoundaryLower":"[-14130 12562 518]"
+	},
+	"2940":{
+		"Name":"26153 Outskirts Rd.",
+		"Price":2800,
+		"SubDoors":[2939, 2938, 2937, 1451, 2942, 1446, 1447, 1448, 1449, 1444, 1445, 1450, 2941, 3556, 3558],
+		"BoundaryUpper":"[-6708 -15199 380]",
+		"BoundaryLower":"[-9903 -12534 -125]"
+	},
+	"3036":{
+		"Name":"Blue Warehouse",
+		"Price":800,
+		"SubDoors":[3048],
+		"BoundaryUpper":"[7532 -12255 722]",
+		"BoundaryLower":"[7038 -13610 342]"
+	},
+	"1462":{
+		"Name":"1 Outskirts Rd.",
+		"Price":2400,
+		"SubDoors":[1463, 1467, 1466, 1465, 1464, 1468, 1469],
+		"BoundaryUpper":"[12309 -9747 816]",
+		"BoundaryLower":"[10764 -8330 332]"
+	},
+	"1454":{
+		"Name":"2 Outskirts Rd.",
+		"Price":2400,
+		"SubDoors":[1455, 1459, 1458, 1457, 1456, 1460, 1461],
+		"BoundaryUpper":"[13069 -4635 824]",
+		"BoundaryLower":"[11442 -6960 326]"
+	}
+}

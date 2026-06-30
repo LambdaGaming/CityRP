@@ -1,0 +1,1 @@
+["[922.6263 7728.6045 89.6661]","{-0.1299 0 0}","models/props_junk/trashdumpster01a.mdl"]
