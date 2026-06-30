@@ -24,22 +24,21 @@ As stated above, the server uses modified versions of proprietary content that c
 - Shrun's HUD - Old version of Galactic HUD with a modified theme. Will likely be replaced with the workshop version.
 - Itemstore - Paid inventory system. No plans to replace it for now.
 - Keg - Leftover from old drug system, can probably be rewritten and integrated with the current drug system.
-- Material URL Tool - Fixed script errors that appeared when clients first joined the server.
+- [Material URL Tool](https://steamcommunity.com/sharedfiles/filedetails/?id=2559426779) - Fixed script error that every client saw when they first joined.
 - Mayor Voting System - Paid system for hosting mayor elections. Will likely be replaced with a custom version.
 - [Metal Detector](https://steamcommunity.com/sharedfiles/filedetails/?id=2076528349) - Config updated with weapons from the server.
 - Advanced Money Printer - Highly modified version of an unknown money printer addon. Will likely be replaced with a custom version.
 - Party System - Paid group system that highlights group members and prevents team killing. Can probably be replaced with a workshop version.
 - Photon Stuff - Collection of various Photon vehicles from the workshop. Some have been modified to reduce the number of required dependencies.
 - Police Radio - This might be open source and can be included here.
-- Premium Lockpick - Workshop addon. Not sure why it was modified.
-- SGM Veneno - Fixed an error that every client sees when they first join.
-- Slot Machine - DarkRP slot machine addon. Probably modified to change the payouts.
+- Premium Lockpick - Fixed various script errors.
+- [SGM Lamborghini Veneno](https://steamcommunity.com/sharedfiles/filedetails/?id=653745983) - Fixed script error that every client saw when they first joined.
+- [DarkRP Slot Machine](https://steamcommunity.com/sharedfiles/filedetails/?id=647401973) - DarkRP slot machine addon modified to fix bugs. Might replace with [ARCSlots.](https://github.com/ARitz-Cracker/ARCSlots/)
 - Speed Radar - Ancient addon that I don't remember where it came from. Can probably be replaced with a custom version.
-- Taser - Workshop addon, probably modified to fix bugs.
+- [The Ultimate Taser](https://steamcommunity.com/sharedfiles/filedetails/?id=1729622779) - Reduced the range, increase the player freeze time, and made the taser use a custom ammo type. These changes might be able to be moved to a separate file.
 - Tow Truck Systems - Combination of two highly modified paid towing addons. No plans to replace it for now.
 - Truefishing - Paid fishing system. Might replace with [Fishing Mod.](https://github.com/Metastruct/fishingmod)
-- Turtle - Modified version of the jumping turtle addon.
-- Vending Machine - Use HLU RP version.
+- [Turtle](https://steamcommunity.com/sharedfiles/filedetails/?id=172301587) - Modified to allow players to change the hopping sound. Can probably be replaced with a custom version.
 - VFire Hose - Modified to fix bugs and improve particle effects.
 - Zero's Pizzamaker - Paid pizza addon. No plans to replace it for now.
 

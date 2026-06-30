@@ -1,7 +1,7 @@
 AddCSLuaFile()
 
 local physblacklist = { --Entities that can't be physgunned by anyone but superadmins
-	["rp_vendingmachine"] = true,
+	["vending_machine"] = true,
 	["ucs_mineable"] = true,
 	["dumpser"] = true,
 	["ent_speedtrapsensor"] = true,
