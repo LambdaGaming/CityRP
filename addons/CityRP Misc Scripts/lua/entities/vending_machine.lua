@@ -35,7 +35,6 @@ function ENT:Use( ply )
 		local e = ents.Create( "vending_soda" )
 		e:SetPos( pos )
 		e:SetAngles( ang )
-		e:SetModel( model )
 		e:Spawn()
 		self.Used = false
 	end )
