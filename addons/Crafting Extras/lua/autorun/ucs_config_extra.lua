@@ -420,10 +420,10 @@ CraftingRecipe["factory_lockpick"] = {
 	Materials = { ["ucs_iron"] = 20 }
 }
 
-CraftingRecipe["usm_c4"] = {
+CraftingRecipe["weapon_c4_enhanced"] = {
 	Name = "Timed C4",
 	Description = "Plastic explosive with adjustable timer. Needs 8 iron, 2 steel, and a blueprint.",
-	Blueprint = "usm_c4",
+	Blueprint = "weapon_c4_enhanced",
 	Category = "Explosives",
 	Types = { ["default"] = true },
 	Materials = { ["ucs_iron"] = 8, ["ucs_steel"] = 2 }

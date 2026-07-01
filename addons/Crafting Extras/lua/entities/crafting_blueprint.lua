@@ -8,7 +8,7 @@ ENT.Spawnable = false
 ENT.AdminOnly = true
 
 BLUEPRINT_TABLE = {
-	{ "usm_c4", "Timed C4" },
+	{ "weapon_c4_enhanced", "Timed C4" },
 	{ "weapon_slam", "SLAM Remote Explosive" },
 	{ "arc9_fas_m249", "M249" },
 	{ "arc9_fas_m60", "M60" },
